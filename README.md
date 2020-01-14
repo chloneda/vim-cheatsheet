@@ -329,7 +329,7 @@ esc                 # 按esc键就会全部注释了
 **取消多行注释**
 
 ```bash
-ctrl+v              # 进入命令行模式，按ctrl + v进入 visual block模式，按字母l横向选中列的个数，例如 // 需要选中2列
+ctrl+v              # 进入命令行模式，按ctrl + v进入可视模式，按字母l横向选中列的个数，例如#、//（需要选中2列）
 j 或 k              # 按字母j，或者k选中注释符号
 d                   # 按d键就可全部取消注释
 ```
@@ -782,7 +782,6 @@ yaa                 # 复制函数参数（包括逗号分隔）
 - 最新版本            https://github.com/vim/vim   
 - Windows 最新版      https://github.com/vim/vim-win32-installer/releases
 - 插件浏览            http://vimawesome.com
-- reddit            https://www.reddit.com/r/vim/
 - 正确设置 ALT/BS 键   http://www.skywind.me/blog/archives/2021
 - 视频教程            http://vimcasts.org/
 - 中文帮助            http://vimcdoc.sourceforge.net/doc/help.html
