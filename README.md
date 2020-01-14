@@ -711,7 +711,7 @@ gc                  # 在 Visual Mode 下面按 gc 注释选中区域
 
 
 
-# 插件 - [vim-easy-align](https://github.com/junegunn/vim-easy-align)
+## 插件 - [vim-easy-align](https://github.com/junegunn/vim-easy-align)
 
 ```bash
 :EasyAlign =        # # 以第一个匹配的=为中心对齐
@@ -754,7 +754,7 @@ gc                  # 在 Visual Mode 下面按 gc 注释选中区域
 
 
 
-# 插件 - [asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)
+## 插件 - [asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)
 
 ```bash
 :AsyncRun ls        # 异步运行命令 ls 结果输出到 quickfix 使用 :copen 查看
@@ -823,18 +823,18 @@ yaa                 # 复制函数参数（包括逗号分隔）
 
 # 参考
 
-https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt
-https://github.com/groenewege/vimrc/blob/master/vim_cheat_sheet.txt
-http://blog.g-design.net/post/4789778607/vim-cheat-sheet
-http://www.keyxl.com/aaa8263/290/VIM-keyboard-shortcuts.htm
-http://jmcpherson.org/editing.html
-http://www.fprintf.net/vimCheatSheet.html
-http://www.ouyaoxiazai.com/article/24/654.html
-http://bbs.it-home.org/thread-80794-1-1.html
-http://www.lpfrx.com/wp-content/uploads/2008/09/vi.jpg
-http://michael.peopleofhonoronly.com/vim/
-https://github.com/hobbestigrou/vimtips-fortune/blob/master/fortunes/vimtips
-https://github.com/glts/vim-cottidie/blob/master/autoload/cottidie/tips
+- https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt
+- https://github.com/groenewege/vimrc/blob/master/vim_cheat_sheet.txt
+- http://blog.g-design.net/post/4789778607/vim-cheat-sheet
+- http://www.keyxl.com/aaa8263/290/VIM-keyboard-shortcuts.htm
+- http://jmcpherson.org/editing.html
+- http://www.fprintf.net/vimCheatSheet.html
+- http://www.ouyaoxiazai.com/article/24/654.html
+- http://bbs.it-home.org/thread-80794-1-1.html
+- http://www.lpfrx.com/wp-content/uploads/2008/09/vi.jpg
+- http://michael.peopleofhonoronly.com/vim/
+- https://github.com/hobbestigrou/vimtips-fortune/blob/master/fortunes/vimtips
+- https://github.com/glts/vim-cottidie/blob/master/autoload/cottidie/tips
 
 
 
