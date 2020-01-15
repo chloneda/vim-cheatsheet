@@ -8,7 +8,7 @@
 
 ## 光标移动
 
-**注：移动操作一般可以在前面加上数字，例如：10j 表示光标下移10行！ **
+**注：移动操作一般可以在前面加上数字，例如：10j 表示光标下移10行！**
 
 ```bash
 h                   # 光标左移，同 <Left> 键
@@ -404,9 +404,9 @@ gf                  # 打开名称为光标下文件名的文件
 :q!                 # 强制退出
 :qa！               # 关闭所有窗口(不保存)
 :qall               # 放弃所有操作并退出
+:wa                 # 保存所有文件
 :wall               # 保存所有
 :wqall              # 保存所有并退出。
-:wa                 # 保存所有文件
 :cd <path>          # 切换 Vim 当前路径
 :pwd                # 显示 Vim 当前路径
 :new                # 打开一个新的窗口编辑新文件
@@ -420,6 +420,10 @@ gf                  # 打开名称为光标下文件名的文件
 ## 打开文件
 
 ```bash
+vim filename        # 打开或新建文件，并将光标置于第一行首
+vim + filename      # 打开文件，并将光标置于最后一行首
+vim +n filename     # 打开文件，并将光标置于第 n行首
+vim -r filename     # 在上次正用 vim编辑时发生系统崩溃，恢复文件
 vim -R file         # 以只读形式打开文件，但是仍然可以使用 :wq! 写入
 vim -M file         # 强制性关闭修改功能，无法使用 :wq! 写入 
 vim -o file1 file2  # 终端中要打开vim文件时，横向分割显示多个文件
@@ -698,7 +702,7 @@ Ctrl-X Ctrl-O       # 插入下 Omnifunc 补全
 Ctrl-X Ctrl-N       # 插入模式下关键字补全
 Ctrl-X Ctrl-E       # 插入模式下向上滚屏
 Ctrl-X Ctrl-Y       # 插入模式下向下滚屏
-Ctrl-G              # 显示正在编辑的文件名，以及大小和位置信息
+Ctrl+G              # 显示正在编辑的文件名，以及大小和位置信息
 g Ctrl-G            # 显示文件的：大小，字符数，单词数和行数，可视模式下也可用
 zz                  # 调整光标所在行到屏幕中央
 zt                  # 调整光标所在行到屏幕上部
@@ -823,7 +827,7 @@ yaa                 # 复制函数参数（包括逗号分隔）
 ## Vim模式
 
 ```bash
-正常模式	    # 按Esc或Ctrl+[ 进入，左下角显示文件名或为空
+正常模式	    # 按 Esc 或 Ctrl+[ 进入，左下角显示文件名或为空
 插入模式            # 按i进入，左下角显示 --INSERT--
 可视模式            # 按v进入，左下角显示 --VISUAL--
 替换模式            # 按r或R开始，左下角显示 --REPLACE--
@@ -894,7 +898,14 @@ yaa                 # 复制函数参数（包括逗号分隔）
 
 ## 书籍
 
-[Vim实用技巧.pdf](https://pan.baidu.com/s/1tocUYzByGDzKxEqYTFH7ug)
+[Vim实用技巧](https://pan.baidu.com/s/1tocUYzByGDzKxEqYTFH7ug)
+
+
+
+
+## Vim键盘图
+
+![vim](https://github.com/chloneda/vim-cheatsheet/blob/master/vim.png)
 
 
 
