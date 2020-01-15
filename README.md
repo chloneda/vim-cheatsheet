@@ -664,7 +664,6 @@ zO                  # 打开光标下所有代码折叠
 
 ## 文档加密解密
 
-
 **文档加密**
 
 ```bash
@@ -879,7 +878,19 @@ yaa                 # 复制函数参数（包括逗号分隔）
 
 
 
-# 参考
+## 书籍
+
+[Vim实用技巧](https://pan.baidu.com/s/1tocUYzByGDzKxEqYTFH7ug)
+
+
+
+## Vim键盘图
+
+![vim](https://github.com/chloneda/vim-cheatsheet/blob/master/vim.png)
+
+
+
+## 参考
 
 - https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt
 - https://github.com/groenewege/vimrc/blob/master/vim_cheat_sheet.txt
@@ -893,20 +904,6 @@ yaa                 # 复制函数参数（包括逗号分隔）
 - http://michael.peopleofhonoronly.com/vim/
 - https://github.com/hobbestigrou/vimtips-fortune/blob/master/fortunes/vimtips
 - https://github.com/glts/vim-cottidie/blob/master/autoload/cottidie/tips
-
-
-
-## 书籍
-
-[Vim实用技巧](https://pan.baidu.com/s/1tocUYzByGDzKxEqYTFH7ug)
-
-
-
-
-## Vim键盘图
-
-![vim](https://github.com/chloneda/vim-cheatsheet/blob/master/vim.png)
-
 
 
 
