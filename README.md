@@ -8,15 +8,19 @@
 
 ## 光标移动
 
+**注：移动操作一般可以在前面加上数字，例如：10j 表示光标下移10行！ **
+
 ```bash
 h                   # 光标左移，同 <Left> 键
 j                   # 光标下移，同 <Down> 键
 k                   # 光标上移，同 <Up> 键
 l                   # 光标右移，同 <Right> 键
-Ctrl+f              # 下一页 --> move forward one full screen
-Ctrl+b              # 上一页 --> move back one full screen
-Ctrl+u              # 上移半屏 --> move up 1/2 a screen
-Ctrl+d              # 下移半屏 --> move down 1/2 a screen
+Ctrl+e              # 向上滚动一行
+Ctrl+y              # 向下滚动一行
+Ctrl+u              # 向上滚动半屏 --> move up 1/2 a screen
+Ctrl+d              # 向下滚动半屏 --> move down 1/2 a screen
+Ctrl+f              # 向下滚动一屏 --> move forward one full screen
+Ctrl+b              # 向上滚动一屏 --> move back one full screen
 0                   # 跳到行首（是数字零，不是字母O），效用等同于 <Home> 键
 ^                   # 跳到从行首开始第一个非空白字符
 $                   # 跳到行尾，效用等同于 <End> 键
@@ -71,7 +75,7 @@ o                   # 在下一行插入新行并进入插入模式
 O                   # 在上一行插入新行并进入插入模式
 gi                  # 进入到上一次插入模式的位置
 <esc>               # 退出插入模式
-Ctrl-[              # 退出插入模式（等价于 ESC）
+Ctrl-[              # 退出插入模式（等价于 esc 键）
 ```
 
 
@@ -399,6 +403,9 @@ gf                  # 打开名称为光标下文件名的文件
 :q                  # 关闭光标所在的窗口并退出
 :q!                 # 强制退出
 :qa！               # 关闭所有窗口(不保存)
+:qall               # 放弃所有操作并退出
+:wall               # 保存所有
+:wqall              # 保存所有并退出。
 :wa                 # 保存所有文件
 :cd <path>          # 切换 Vim 当前路径
 :pwd                # 显示 Vim 当前路径
@@ -406,6 +413,17 @@ gf                  # 打开名称为光标下文件名的文件
 :enew               # 在当前窗口创建新文件
 :vnew               # 在左右切分的新窗口中编辑新文件
 :tabnew             # 在新的标签页中编辑新文件
+```
+
+
+
+## 打开文件
+
+```bash
+vim -R file         # 以只读形式打开文件，但是仍然可以使用 :wq! 写入
+vim -M file         # 强制性关闭修改功能，无法使用 :wq! 写入 
+vim -o file1 file2  # 终端中要打开vim文件时，横向分割显示多个文件
+vim -O file1 file2  # 终端中要打开vim文件时，纵向分割显示多个文件
 ```
 
 
@@ -434,8 +452,6 @@ n Ctrl-^            # 切换缓存，先输入数字的缓存编号，再按 Ctr
 :vs <filename>      # 左右切分窗口并在新窗口打开文件 filename
 :split              # 将当前窗口再复制一个纵向窗口出来，内容同步，游标可以不同
 :vsplit             # 将当前窗口再复制一个横向窗口出来，内容同步，游标可以不同
-vim -o file1 file2  # 终端中要打开vim文件时，横向分割显示多个文件
-vim -O file1 file2  # 终端中要打开vim文件时，纵向分割显示多个文件
 Ctrl-W s            # 上下切分窗口
 Ctrl-W v            # 左右切分窗口
 Ctrl-W w            # 循环切换到下一个窗口
@@ -539,6 +555,8 @@ ma                  # 保存当前位置到书签 a ，书签名小写字母为�
 :set incsearch      # 查找输入时动态增量显示查找结果
 :set insertmode     # Vim 始终处于插入模式下，使用 Ctrl-o 临时执行命令
 :set all            # 列出所有选项设置情况
+:syntax             # 列出已经定义的语法项
+:syntax clear       # 清除已定义的语法规则
 :syntax on          # 允许语法高亮
 :syntax off         # 禁止语法高亮
 ```
@@ -571,9 +589,10 @@ ma                  # 保存当前位置到书签 a ，书签名小写字母为�
 
 
 
-# 外部命令
+## 外部命令
 
 ```bash
+:!command           # 执行shell命令，如下命令：:!pwd
 :!ls                # 运行外部命令 ls，并等待返回
 :r !ls              # 将外部命令 ls 的输出捕获，并插入到光标后
 :w !sudo tee %      # sudo以后保存当前文件
@@ -679,8 +698,6 @@ Ctrl-X Ctrl-O       # 插入下 Omnifunc 补全
 Ctrl-X Ctrl-N       # 插入模式下关键字补全
 Ctrl-X Ctrl-E       # 插入模式下向上滚屏
 Ctrl-X Ctrl-Y       # 插入模式下向下滚屏
-Ctrl-E              # 向上滚屏
-Ctrl-Y              # 向下滚屏
 Ctrl-G              # 显示正在编辑的文件名，以及大小和位置信息
 g Ctrl-G            # 显示文件的：大小，字符数，单词数和行数，可视模式下也可用
 zz                  # 调整光标所在行到屏幕中央
@@ -803,6 +820,18 @@ yaa                 # 复制函数参数（包括逗号分隔）
 
 
 
+## Vim模式
+
+```bash
+正常模式	    # 按Esc或Ctrl+[ 进入，左下角显示文件名或为空
+插入模式            # 按i进入，左下角显示 --INSERT--
+可视模式            # 按v进入，左下角显示 --VISUAL--
+替换模式            # 按r或R开始，左下角显示 --REPLACE--
+命令行模式          # 按 : 或者 / 或者 ? 开始
+```
+
+
+
 ## 网络资源
 
 - 最新版本            https://github.com/vim/vim   
@@ -860,6 +889,13 @@ yaa                 # 复制函数参数（包括逗号分隔）
 - http://michael.peopleofhonoronly.com/vim/
 - https://github.com/hobbestigrou/vimtips-fortune/blob/master/fortunes/vimtips
 - https://github.com/glts/vim-cottidie/blob/master/autoload/cottidie/tips
+
+
+
+## 书籍
+
+[Vim实用技巧.pdf](https://pan.baidu.com/s/1tocUYzByGDzKxEqYTFH7ug)
+
 
 
 

@@ -1,5 +1,7 @@
 " Vim定制化配置文件
 
+" Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
+
 " 设置外观 -------------------------------------
 set number                      " 显示行号 
 set showtabline=0               " 隐藏顶部标签栏
@@ -10,7 +12,7 @@ set cursorline                  " 突出显示当前行
 set cursorcolumn                " 突出显示当前列
 set langmenu=zh_CN.UTF-8        " 显示中文菜单
 
-" 变成辅助 -------------------------------------
+" 辅助配置 -------------------------------------
 syntax on                       " 开启语法高亮
 set nowrap                      " 设置代码不折行
 set fileformat=unix             " 设置以unix的格式保存文件
@@ -22,7 +24,7 @@ set showmatch                   " 显示匹配的括号
 set scrolloff=5                 " 距离顶部和底部5行
 set laststatus=2                " 命令行为两行
 
-" 其他杂项 -------------------------------------
+" 其他配置 -------------------------------------
 set mouse=a                     " 启用鼠标
 set selection=exclusive
 set selectmode=mouse,key
