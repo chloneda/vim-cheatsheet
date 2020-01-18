@@ -23,7 +23,7 @@ set tabstop=4                   " tab 显示多少个空格，默认 8
 set shiftwidth=4                " 每一级缩进是多少个空格
 set backspace+=indent,eol,start " set backspace&可以对其重置
 set showmatch                   " 显示匹配的括号
-set scrolloff=5                 " 距离顶部和底部5行
+set scrolloff=5                 " 光标距离顶部和底部5行
 set laststatus=2                " 命令行为两行
 set t_Co=256			" 指定配色方案是256色
 set autoindent			" 启用自动对齐功能，把上一行的对齐格式应用到下一行
