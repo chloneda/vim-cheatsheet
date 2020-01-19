@@ -14,8 +14,8 @@ set langmenu=zh_CN.UTF-8        " 显示中文菜单
 
 " 辅助配置 -------------------------------------
 syntax on                       " 开启语法高亮
-set showcmd			" 输入的命令显示出来
-set hlsearch		 	" 高亮搜索的字符串
+set showcmd			            " 输入的命令显示出来
+set hlsearch		 	        " 高亮搜索的字符串
 set nowrap                      " 设置代码不折行
 set fileformat=unix             " 设置以unix的格式保存文件
 set cindent                     " 设置C样式的缩进格式
@@ -25,8 +25,8 @@ set backspace+=indent,eol,start " set backspace&可以对其重置
 set showmatch                   " 显示匹配的括号
 set scrolloff=5                 " 光标距离顶部和底部5行
 set laststatus=2                " 命令行为两行
-set t_Co=256			" 指定配色方案是256色
-set autoindent			" 启用自动对齐功能，把上一行的对齐格式应用到下一行
+set t_Co=256			        " 指定配色方案是256色
+set autoindent			        " 启用自动对齐功能，把上一行的对齐格式应用到下一行
 
 " 其他配置 -------------------------------------
 set mouse=a                     " 启用鼠标
@@ -39,5 +39,5 @@ set noexpandtab                 " 不允许扩展table
 set whichwrap+=<,>,h,l
 set autorea
 
-
-
+" Vim 重新打开文件时，回到上次历史所编辑文件的位置
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif

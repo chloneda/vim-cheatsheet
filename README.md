@@ -2,7 +2,7 @@
 
 > 个人vim命令速查表。
 
-[vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim官网](https://www.vim.org/) | [Github](https://github.com/vim/vim)
+[vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim官网](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 
 
 
@@ -183,6 +183,7 @@ d{                  # 删除上一段
 u                   # 撤销
 U                   # 撤销整行操作
 Ctrl+r              # 撤销上一次 u 命令
+Ctrl+R              # 回退前一个命令
 J                   # 链接多行为一行
 .                   # 重复上一次操作
 ~                   # 替换大小写
@@ -196,7 +197,6 @@ gUU                 # 全行转为大写
 ==                  # 自动缩进
 Ctrl-A              # 增加数字
 Ctrl-X              # 减少数字
-:Ctrl+p             # 插入模式下文字自动补全
 ```
 
 
@@ -284,6 +284,19 @@ a"                  # 双引号内（包含双引号本身）
 
 
 ## 查找替换
+
+一般模式下输入替换命令： 
+
+```bash
+:[range]s/pattern/string/[flags]
+```
+
+参数说明：
+- pattern：就是要被替换掉的字串，可以用 regexp 來表示
+- stringL：將 pattern 由 string 所取代
+- [range]：有以下一些取值：
+
+
 
 ```bash
 /pattern            # 从光标处向文件尾搜索 pattern
@@ -448,9 +461,39 @@ vim -O file1 file2  # 终端中要打开vim文件时，纵向分割显示多个�
 :b 1                # 切换到1号缓存
 :b abc              # 切换到文件名为 abc 开头的缓存
 :badd <filename>    # 将文件添加到缓存列表
+:r 文件路径         # 通过 r 读取其他文件的内容到当前光标所在的位置
 :set hidden         # 设置隐藏模式（未保存的缓存可以被切换走，或者关闭）
 :set nohidden       # 关闭隐藏模式（未保存的缓存不能被切换走，或者关闭）
 n Ctrl-^            # 切换缓存，先输入数字的缓存编号，再按 Ctrl + 6
+```
+
+
+
+## 自动补全
+
+在插入模式下直接按： 最常用的补全
+
+```bash
+Ctrl+n              # 插入模式下文字自动补全 
+Ctrl+p              # 插入模式下文字自动补全
+```
+
+**智能补全**
+
+```bash
+Ctrl+X              # 进入补全模式
+Ctrl+X Ctrl+L       # 整行补全
+Ctrl+X Ctrl+N       # 插入模式下，根据当前文件里关键字补全
+Ctrl+X Ctrl+K       # 根据字典补全
+Ctrl+X Ctrl+T       # 根据同义词字典补全
+Ctrl+X Ctrl+F       # 插入模式下补全文件名
+Ctrl+X Ctrl+I       # 根据头文件内关键字补全
+Ctrl+X Ctrl+]       # 根据标签补全
+Ctrl+X Ctrl+D       # 补全宏定义
+Ctrl+X Ctrl+V       # 补全vim命令
+Ctrl+X Ctrl+U       # 用户自定义补全方式
+Ctrl+X Ctrl+S       # 拼写建议，例如：一个英文单词
+Ctrl+X Ctrl+O       # 插入下 Omnifunc 补全
 ```
 
 
@@ -702,9 +745,6 @@ q                   # 结束录制宏
 ## 其他命令
 
 ```bash
-Ctrl+X Ctrl+F       # 插入模式下文件路径补全
-Ctrl+X Ctrl+O       # 插入下 Omnifunc 补全
-Ctrl+X Ctrl+N       # 插入模式下关键字补全
 Ctrl+X Ctrl-E       # 插入模式下向上滚屏
 Ctrl+X Ctrl+Y       # 插入模式下向下滚屏
 Ctrl+G              # 显示正在编辑的文件名，以及大小和位置信息
