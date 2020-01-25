@@ -9,11 +9,11 @@ set guioptions-=r               " 隐藏右侧滚动条
 set guioptions-=L               " 隐藏左侧滚动条
 set guioptions-=b               " 隐藏底部滚动条
 set cursorline                  " 突出显示当前行
-set cursorcolumn                " 突出显示当前列
 set langmenu=zh_CN.UTF-8        " 显示中文菜单
 
-" 辅助配置 -------------------------------------
+" 主要配置 -------------------------------------
 syntax on                       " 开启语法高亮
+set history=200                 " 记录 200 条历史命令
 set showcmd			            " 输入的命令显示出来
 set hlsearch		 	        " 高亮搜索的字符串
 set nowrap                      " 设置代码不折行
@@ -37,7 +37,15 @@ set ignorecase                  " 忽略大小写
 set incsearch
 set noexpandtab                 " 不允许扩展table
 set whichwrap+=<,>,h,l
-set autorea
 
 " Vim 重新打开文件时，回到上次历史所编辑文件的位置
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+" 插件安装 ------------------------------------ 
+call plug#begin('~/.vim/plugged')
+Plug 'mhinz/vim-startify'
+Plug 'preservim/nerdtree'
+" Initialize plugin system
+call plug#end()
+
+
