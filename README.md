@@ -73,7 +73,7 @@ o                   # 在下一行插入新行并进入插入模式
 O                   # 在上一行插入新行并进入插入模式
 gi                  # 进入到上一次插入模式的位置
 <esc>               # 退出插入模式
-Ctrl-[              # 退出插入模式（等价于 esc 键）
+Ctrl+[              # 退出插入模式（等价于 esc 键）
 ```
 
 
@@ -87,10 +87,10 @@ Ctrl-[              # 退出插入模式（等价于 esc 键）
 <Down>              # 光标向下移动
 <Left>              # 光标向左移动
 <Right>             # 光标向右移动
-<S-Left>            # 按住 SHIFT 按左键，向左移动一个单词
-<S-Right>           # 按住 SHIFT 按右键，向右移动一个单词
-<S-Up>              # 按住 SHIFT 按上键，向上翻页
-<S-Down>            # 按住 SHIFT 按下键，向下翻页
+<S+Left>            # 按住 SHIFT 按左键，向左移动一个单词
+<S+Right>           # 按住 SHIFT 按右键，向右移动一个单词
+<S+Up>              # 按住 SHIFT 按上键，向上翻页
+<S+Down>            # 按住 SHIFT 按下键，向下翻页
 <PageUp>            # 上翻页
 <PageDown>          # 下翻页
 <Delete>            # 删除光标处字符
@@ -221,8 +221,8 @@ gUU                 # 全行转为大写
 <<                  # 减少缩进
 >>                  # 增加缩进
 ==                  # 自动缩进
-Ctrl-A              # 增加数字
-Ctrl-X              # 减少数字
+Ctrl+A              # 增加数字
+Ctrl+X              # 减少数字
 ```
 
 
@@ -257,7 +257,6 @@ va)                 # 选中小括号内的东西（包含小括号本身）
 va]                 # 选中中括号内的东西（包含中括号本身）
 vaB                 # 选中大括号内的东西（包含大括号本身）
 va}                 # 选中大括号内的东西（包含大括号本身）
-gv                  # 重新选择上一次选中的文字
 :set paste          # 允许粘贴模式（避免粘贴时自动缩进影响格式）
 :set nopaste        # 禁止粘贴模式
 "?yy                # 复制当前行到寄存器 ? ，问号代表 0-9 的寄存器名称
@@ -427,7 +426,7 @@ O                   # 跳转到标记块的另外一端
 u                   # 标记区转换为小写
 U                   # 标记区转换为大写
 gv                  # 重选上次的高亮选区
-g Ctrl-G            # 显示所选择区域的统计信息
+g Ctrl+G            # 显示所选择区域的统计信息
 ggVG                # 选择全文
 esc                 # 按esc键退出可视模式
 ```
@@ -474,9 +473,9 @@ d                   # 按d键就可全部取消注释
 ## 位置跳转
 
 ```bash
-Ctrl-O              # 跳转到上一个位置
-Ctrl-I              # 跳转到下一个位置
-Ctrl-^              # 跳转到 alternate file (当前窗口的上一个文件）
+Ctrl+O              # 跳转到上一个位置
+Ctrl+I              # 跳转到下一个位置
+Ctrl+^              # 跳转到 alternate file (当前窗口的上一个文件）
 %                   # 跳转到 {} () [] 的匹配
 gd                  # 跳转到局部定义（光标下的单词的定义）
 gD                  # 跳转到全局定义（光标下的单词的定义）
@@ -526,6 +525,7 @@ gf                  # 打开名称为光标下文件名的文件
 :enew               # 在当前窗口创建新文件
 :vnew               # 在左右切分的新窗口中编辑新文件
 :tabnew             # 在新的标签页中编辑新文件
+:version            # 查看Vim版本
 ZZ                  # 保存文件（如果有改动的话），并关闭窗口
 ZQ                  # 不保存文件关闭窗口
 ```
@@ -559,7 +559,7 @@ vim -O file1 file2  # 终端中要打开vim文件时，纵向分割显示多个�
 :badd <filename>    # 将文件添加到缓存列表
 :set hidden         # 设置隐藏模式（未保存的缓存可以被切换走，或者关闭）
 :set nohidden       # 关闭隐藏模式（未保存的缓存不能被切换走，或者关闭）
-n Ctrl-^            # 切换缓存，先输入数字的缓存编号，再按 Ctrl + 6
+n Ctrl+^            # 切换缓存，先输入数字的缓存编号，再按 Ctrl + 6
 ```
 
 
@@ -571,35 +571,35 @@ n Ctrl-^            # 切换缓存，先输入数字的缓存编号，再按 Ctr
 :vs <filename>      # 左右切分窗口并在新窗口打开文件 filename
 :split              # 将当前窗口再复制一个纵向窗口出来，内容同步，游标可以不同
 :vsplit             # 将当前窗口再复制一个横向窗口出来，内容同步，游标可以不同
-Ctrl-W s            # 上下切分窗口
-Ctrl-W v            # 左右切分窗口
-Ctrl-W w            # 循环切换到下一个窗口
-Ctrl-W W            # 循环切换到上一个窗口
+Ctrl+W s            # 上下切分窗口
+Ctrl+W v            # 左右切分窗口
+Ctrl+W w            # 循环切换到下一个窗口
+Ctrl+W W            # 循环切换到上一个窗口
 Ctrl-W p            # 跳到上一个访问过的窗口
 Ctrl-W c            # 关闭当前窗口
 Ctrl-W o            # 关闭其他窗口
 Ctrl-W h            # 跳到左边的窗口
-Ctrl-W j            # 跳到下边的窗口
-Ctrl-W k            # 跳到上边的窗口
-Ctrl-W l            # 跳到右边的窗口
-Ctrl-W +            # 增加当前窗口的行高，前面可以加数字
-Ctrl-W -            # 减少当前窗口的行高，前面可以加数字
-Ctrl-W <            # 减少当前窗口的列宽，前面可以加数字
-Ctrl-W >            # 增加当前窗口的列宽，前面可以加数字
-Ctrl-W =            # 让所有窗口宽高相同
-Ctrl-W H            # 将当前窗口移动到最左边
-Ctrl-W J            # 将当前窗口移动到最下边
-Ctrl-W K            # 将当前窗口移动到最上边
-Ctrl-W L            # 将当前窗口移动到最右边
-Ctrl-W x            # 交换窗口
-Ctrl-W f            # 在新窗口中打开名为光标下文件名的文件
-Ctrl-W gf           # 在新标签页中打开名为光标下文件名的文件
-Ctrl-W R            # 旋转窗口
-Ctrl-W T            # 将当前窗口移到新的标签页中
-Ctrl-W P            # 跳转到预览窗口
-Ctrl-W z            # 关闭预览窗口
-Ctrl-W _            # 纵向最大化当前窗口
-Ctrl-W |            # 横向最大化当前窗口
+Ctrl+W j            # 跳到下边的窗口
+Ctrl+W k            # 跳到上边的窗口
+Ctrl+W l            # 跳到右边的窗口
+Ctrl+W +            # 增加当前窗口的行高，前面可以加数字
+Ctrl+W -            # 减少当前窗口的行高，前面可以加数字
+Ctrl+W <            # 减少当前窗口的列宽，前面可以加数字
+Ctrl+W >            # 增加当前窗口的列宽，前面可以加数字
+Ctrl+W =            # 让所有窗口宽高相同
+Ctrl+W H            # 将当前窗口移动到最左边
+Ctrl+W J            # 将当前窗口移动到最下边
+Ctrl+W K            # 将当前窗口移动到最上边
+Ctrl+W L            # 将当前窗口移动到最右边
+Ctrl+W x            # 交换窗口
+Ctrl+W f            # 在新窗口中打开名为光标下文件名的文件
+Ctrl+W gf           # 在新标签页中打开名为光标下文件名的文件
+Ctrl+W R            # 旋转窗口
+Ctrl+W T            # 将当前窗口移到新的标签页中
+Ctrl+W P            # 跳转到预览窗口
+Ctrl+W z            # 关闭预览窗口
+Ctrl+W _            # 纵向最大化当前窗口
+Ctrl+W |            # 横向最大化当前窗口
 ```
 
 
@@ -654,8 +654,8 @@ ma                  # 保存当前位置到书签 a ，书签名小写字母为�
 :h quickref         # 快速帮助
 :h index            # 查询 Vim 所有键盘命令定义
 :h summary          # 帮助你更好的使用内置帮助系统
-:h Ctrl-H           # 查询普通模式下 Ctrl-H 是干什么的
-:h i_Ctrl-H         # 查询插入模式下 Ctrl-H 是干什么的
+:h Ctrl+H           # 查询普通模式下 Ctrl-H 是干什么的
+:h i_Ctrl+H         # 查询插入模式下 Ctrl-H 是干什么的
 :h i_<Up>           # 查询插入模式下方向键上是干什么的
 :h pattern.txt      # 正则表达式帮助
 :h eval             # 脚本编写帮助
@@ -777,19 +777,19 @@ q                   # 结束录制宏
 ## 其他命令
 
 ```bash
-Ctrl+X Ctrl-E       # 插入模式下向上滚屏
+Ctrl+X Ctrl+E       # 插入模式下向上滚屏
 Ctrl+X Ctrl+Y       # 插入模式下向下滚屏
 Ctrl+G              # 显示正在编辑的文件名，以及大小和位置信息
-g Ctrl-G            # 显示文件的：大小，字符数，单词数和行数，可视模式下也可用
+g Ctrl+G            # 显示文件的：大小，字符数，单词数和行数，可视模式下也可用
 ga                  # 显示光标下字符的 ascii 码或者 unicode 编码
 g8                  # 显示光标下字符的 utf-8 编码字节序
 gi                  # 回到上次进入插入的地方，并切换到插入模式
 K                   # 查询光标下单词的帮助
-Ctrl-PgUp           # 上个标签页，GVim OK，部分终端软件需设置对应键盘码
-Ctrl-PgDown         # 下个标签页，GVim OK，部分终端软件需设置对应键盘码
-Ctrl-R Ctrl-W       # 命令模式下插入光标下单词
-Ctrl-INSERT         # 复制到系统剪贴板（GVIM）
-SHIFT-INSERT        # 粘贴系统剪贴板的内容（GVIM）
+Ctrl+PgUp           # 上个标签页，GVim OK，部分终端软件需设置对应键盘码
+Ctrl+PgDown         # 下个标签页，GVim OK，部分终端软件需设置对应键盘码
+Ctrl+R Ctrl+W       # 命令模式下插入光标下单词
+Ctrl+Insert         # 复制到系统剪贴板（GVIM）
+Shift+Insert        # 粘贴系统剪贴板的内容（GVIM）
 :set ff=unix        # 设置换行为 unix
 :set ff=dos         # 设置换行为 dos
 :set ff?            # 查看换行设置
@@ -836,19 +836,21 @@ q:                  # 查看命令行历史
 
 ## 寄存器
 
-**VIM有两个地方可以保存临时数据：**
-- 操作系统级别-剪切板
-- Vim级别-寄存器
-
-
 **查看寄存器值**
-- 查看所有寄存器值：:reg
-- 查看指定寄存器值：:reg "{register_name}
+
+```bash
+:reg                   # 查看所有寄存器值
+:reg "{register_name}  # 查看指定寄存器值
+```
+
 
 **调取寄存器值**
-- 普通模式："{register_name}
-- 命令模式：<C-r>+"寄存器名称（输入<C-r>后VIM会自动打出"寄存器引用符号。
-- 插入模式：<C-r>+寄存器名称（无需输入寄存器引用符号"）
+
+```bash
+"{register_name}        # 普通模式下调取寄存器值
+:Ctrl+r "寄存器名称      # 命令模式下（输入 Ctrl+r 后Vim会自动打出"寄存器引用符号）
+Ctrl+r 寄存器名称        # 插入模式下（无需输入寄存器引用符号"）
+```
 
 **Vim寄存器分类**
 
@@ -865,48 +867,49 @@ q:                  # 查看命令行历史
 
 
 
-
 ## Vim设置
 
-Vim文件配置：
+编辑Vim配置文件：
 
 ```bash
 :edit $MYVIMRC      # 在Vim的命令模式下使用该命令打开 vim 配置文件
 :source $MYVIMRC    # Vim 配置文件的改动后，使用该命令为vim配置文件加载新的配置选项，如果vimrc文件恰好是当前活动的缓冲区，则可把此命令简化为:so %。
 ```
 
-配置说明：
+Vim配置说明：
+
+**注：Vim配置可以在命令模式下单个设置，只在当前窗口生效！**
 ```bash
-:set nocompatible   # 设置不兼容原始 vi 模式（必须设置在最开头）
-:set history=200    # 记录 200 条历史命令
-:set bs=?           #  设置BS键模式，现代编辑器为 :set bs=eol,start,indent
-:set sw=4           # 设置缩进宽度为 4
-:set ts=4           # 设置制表符宽度为 4
-:set noet           # 设置不展开 tab 成空格
-:set et             # 设置展开 tab 成空格
-:set winaltkeys=no  # 设置 GVim 下正常捕获 ALT 键
-:set nowrap         # 关闭自动换行
-:set ttimeout       # 允许终端按键检测超时（终端下功能键为一串ESC开头的扫描码）
-:set ttm=100        # 设置终端按键检测超时为100毫秒
-:set term=?         # 设置终端类型，比如常见的 xterm
-:set ignorecase     # 设置搜索是否忽略大小写
-:set smartcase      # 智能大小写，默认忽略大小写，除非搜索内容里包含大写字母
-:set list           # 设置显示制表符和换行符
-:set nu             # 设置显示行号，禁止显示行号可以用 :set nonu
-:set number         # 设置显示行号，禁止显示行号可以用 :set nonumber
-:set relativenumber # 设置显示相对行号（其他行与当前行的距离）
-:set paste          # 进入粘贴模式（粘贴时禁用缩进等影响格式的东西）
-:set nopaste        # 结束粘贴模式
-:set spell          # 允许拼写检查
-:set hlsearch       # 设置高亮查找
-:set ruler          # 总是显示光标位置
-:set incsearch      # 查找输入时动态增量显示查找结果
-:set insertmode     # Vim 始终处于插入模式下，使用 Ctrl-o 临时执行命令
-:set all            # 列出所有选项设置情况
-:syntax             # 列出已经定义的语法项
-:syntax clear       # 清除已定义的语法规则
-:syntax on          # 允许语法高亮
-:syntax off         # 禁止语法高亮
+syntax              # 列出已经定义的语法项
+syntax clear        # 清除已定义的语法规则
+syntax on           # 允许语法高亮
+syntax off          # 禁止语法高亮
+set history=200     # 记录 200 条历史命令
+set bs=?            #  设置BS键模式，现代编辑器为 :set bs=eol,start,indent
+set sw=4            # 设置缩进宽度为 4
+set ts=4            # 设置制表符宽度为 4
+set noet            # 设置不展开 tab 成空格
+set et              # 设置展开 tab 成空格
+set winaltkeys=no   # 设置 GVim 下正常捕获 ALT 键
+set nowrap          # 关闭自动换行
+set ttimeout        # 允许终端按键检测超时（终端下功能键为一串ESC开头的扫描码）
+set ttm=100         # 设置终端按键检测超时为100毫秒
+set term=?          # 设置终端类型，比如常见的 xterm
+set ignorecase      # 设置搜索是否忽略大小写
+set smartcase       # 智能大小写，默认忽略大小写，除非搜索内容里包含大写字母
+set list            # 设置显示制表符和换行符
+set nu              # 设置显示行号，禁止显示行号可以用 :set nonu
+set number          # 设置显示行号，禁止显示行号可以用 :set nonumber
+set relativenumber  # 设置显示相对行号（其他行与当前行的距离）
+set paste           # 进入粘贴模式（粘贴时禁用缩进等影响格式的东西）
+set nopaste         # 结束粘贴模式
+set spell           # 允许拼写检查
+set hlsearch        # 设置高亮查找
+set ruler           # 总是显示光标位置
+set nocompatible    # 设置不兼容原始 vi 模式（必须设置在最开头）
+set incsearch       # 查找输入时动态增量显示查找结果
+set insertmode      # Vim 始终处于插入模式下，使用 Ctrl+o 临时执行命令
+set all             # 列出所有选项设置情况
 ```
 
 
@@ -960,60 +963,11 @@ A                   # 全屏显示NERDTree，或者关闭全屏
 
 
 
-## 插件 - [vim-unimpaired](https://github.com/tpope/vim-unimpaired)
-
-```bash
-[space              # 向上插入空行
-]space              # 向下插入空行
-[e                  # 替换当前行和上一行
-]e                  # 替换当前行和下一行
-[x                  # XML 编码
-]x                  # XML 解码
-[u                  # URL 编码
-]u                  # URL 解码
-[y                  # C 字符串编码
-]y                  # C 字符串解码
-[q                  # 上一个 quickfix 错误
-]q                  # 下一个 quickfix 错误
-[Q                  # 第一个 quickfix 错误
-]Q                  # 最后一个 quickfix 错误
-[f                  # 切换同目录里上一个文件
-]f                  # 切换同目录里下一个文件
-[os                 # 设置 :set spell
-]os                 # 设置 :set nospell
-=os                 # 设置 :set invspell
-[on                 # 显示行号
-]on                 # 关闭行号
-[ol                 # 显示回车和制表符 :set list
-]ol                 # 不显示回车和制表符 :set nolist
-[b                  # 缓存切换到上一个文件，即 :bp
-]b                  # 缓存切换到下一个文件，即 :bn
-[B                  # 缓存切换到第一个文件，即 :bfirst
-]B                  # 缓存切换到最后一个文件，即 :blast
-```
-
-
-
 ## 插件 - [asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)
 
 ```bash
 :AsyncRun ls        # 异步运行命令 ls 结果输出到 quickfix 使用 :copen 查看
 :AsyncRun -raw ls   # 异步运行命令 ls 结果不匹配 errorformat
-```
-
-
-
-## 插件 - [vim-textobj-argument](https://github.com/gaving/vim-textobj-argument)
-
-```bash
-cia                 # 改写函数参数
-caa                 # 改写函数参数（包括逗号分隔）
-dia                 # 删除函数参数
-daa                 # 删除函数参数（包括逗号分隔）
-via                 # 选取函数参数
-vaa                 # 选取函数参数（包括逗号分隔）
-yia                 # 复制函数参数
-yaa                 # 复制函数参数（包括逗号分隔）
 ```
 
 
@@ -1041,7 +995,6 @@ yaa                 # 复制函数参数（包括逗号分隔）
 - 中文版入门到精通    https://github.com/wsdjeg/vim-galore-zh_cn
 - 五分钟脚本入门      http://www.skywind.me/blog/archives/2193
 - 脚本精通            http://learnvimscriptthehardway.stevelosh.com/
-- 中文脚本帮助        vimcdoc.sourceforge.net/doc/eval.html
 - 十六年使用经验      http://zzapper.co.uk/vimtips.html
 - 配色方案            http://vimcolors.com/
 
@@ -1049,26 +1002,26 @@ yaa                 # 复制函数参数（包括逗号分隔）
 
 ## TIPS
 
-- 永远不要用 Ctrl-C 代替 <ESC> 完全不同的含义，容易错误中断运行的后台脚本
-- 很多人使用 Ctrl-[ 代替 <ESC>，左手小指 Ctrl，右手小指 [ 熟练后很方便
+- 永远不要用 Ctrl+C 代替 <Esc> 完全不同的含义，容易错误中断运行的后台脚本
+- 很多人使用 Ctrl+[ 代替 <Esc>，左手小指 Ctrl，右手小指 [ 熟练后很方便
 - 某些终端中使用 Vim 8 内嵌终端如看到奇怪字符，使用 :set t_RS= t_SH= 解决
 - 某些终端中使用 NeoVim 如看到奇怪字符，使用 :set guicursor= 解决
 - 多使用 ciw, ci[, ci", ci( 以及 diw, di[, di", di( 命令来快速改写/删除文本
 - 在行内左右移动光标时，多使用w b e或W B E，而不是h l或方向键，这样会快很多
-- SHIFT 相当于移动加速键， w b e 移动光标很慢，但是 W B E 走的很快
+- Shift 相当于移动加速键， w b e 移动光标很慢，但是 W B E 走的很快
 - 自己要善于总结新技巧，比如移动到行首非空字符时用 0w 命令比 ^ 命令更容易输入
 - 在空白行使用 dip 命令可以删除所有临近的空白行，viw 可以选择连续空白
-- 缩进时使用 >8j  >}  <ap  >ap  =i}  == 会方便很多
-- 插入模式下，当你发现一个单词写错了，应该多用 Ctrl-W 这比 <BackSpace> 快
+- 缩进时使用 >8j >} <ap >ap =i} == 会方便很多
+- 插入模式下，当你发现一个单词写错了，应该多用 Ctrl+W 这比 <BackSpace> 快
 - y d c 命令可以很好结合 f t 和 /X 比如 dt) 和 y/end<cr>
 - c d x 命令会自动填充寄存器 "1 到 "9 , y 命令会自动填充 "0 寄存器
 - 用 v 命令选择文本时，可以用 o 掉头选择，有时很有用
 - 写文章时，可以写一段代码块，然后选中后执行 :!python 代码块就会被替换成结果
 - 搜索后经常使用 :nohl 来消除高亮，使用很频繁，可以 map 到 <BackSpace> 上
-- 搜索时可以用 Ctrl-R Ctrl-W 插入光标下的单词，命令模式也能这么用
+- 搜索时可以用 Ctrl+R Ctrl+W 插入光标下的单词，命令模式也能这么用
 - 映射按键时，应该默认使用 noremap ，只有特别需要的时候使用 map
-- 当你觉得做某事很低效时，你应该停下来，u u u u 然后思考正确的高效方式来完成
-- 用 y复制文本后，命令模式中 Ctrl-R 然后按双引号 0 可以插入之前复制内容
+- 当你觉得做某事很低效时，你应该停下来，然后思考正确的高效方式来完成
+- 用 y 复制文本后，命令模式中 Ctrl+R 然后按双引号 0 可以插入之前复制内容
 - Windows 下的 GVim 可以设置 set rop=type:directx,renmode:5 增强显示
 
 
