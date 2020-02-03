@@ -117,6 +117,16 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
+" 编辑vimrc相关配置文件
+nnoremap <leader>e :edit $MYVIMRC<cr>
+" 重新加载vimrc文件,leader 即前缀键默认为“\”
+nnoremap <leader>s :source $MYVIMRC<cr>
+
+" 安装、更新、删除插件
+nnoremap <leader><leader>i :PlugInstall<cr>
+nnoremap <leader><leader>u :PlugUpdate<cr>
+nnoremap <leader><leader>c :PlugClean<cr>
+
 nnoremap U <C-r>                " 取消撤销操作，减少按键操作
 nnoremap <F1> :nohls<CR>        " 取消 Vim 查找高亮显示
 nnoremap <F2> :set nu! nu?<CR>  " 普通模式下按 F2 打开(或关闭)显示行号 
