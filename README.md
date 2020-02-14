@@ -1,10 +1,12 @@
-# vim命令速查表
+# Vim命令速查表
 
-> 个人vim命令速查表。
+> 个人Vim命令速查表。
 
 [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim官网](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 
-另外介绍一款浏览器插件：[Chrome神级插件-Vimium](https://github.com/chloneda/vim-cheatsheet/blob/master/vimium.md)
+[Chrome浏览器神级插件 - Vimium](https://github.com/chloneda/vim-cheatsheet/blob/master/vimium.md)
+
+
 
 ## 光标移动
 
