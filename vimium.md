@@ -170,7 +170,7 @@ Shift+/              # 显示命令的帮助提示
 
 ## 快捷键对照表
 
-![edb21a0ad48ce24bc9ed2059fc404b3b.png](evernotecid://3DE434F9-D5F0-4CFD-8D52-88357B8E6092/appyinxiangcom/12841638/ENResource/p1203)
+![vimium.png](https://github.com/chloneda/vim-cheatsheet/blob/master/vimium.png)
 
 
 
