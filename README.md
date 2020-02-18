@@ -4,7 +4,8 @@
 
 [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim官网](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 
-[Chrome浏览器神级插件 - Vimium](https://github.com/chloneda/vim-cheatsheet/blob/master/vimium.md)
+- [Vim自定义配置文件 - vimrc](https://github.com/chloneda/vim-cheatsheet/blob/master/vimrc)
+- [Chrome浏览器神级插件 - Vimium](https://github.com/chloneda/vim-cheatsheet/blob/master/vimium.md)
 
 
 
