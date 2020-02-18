@@ -625,10 +625,10 @@ Ctrl+W s            # 上下切分窗口
 Ctrl+W v            # 左右切分窗口
 Ctrl+W w            # 循环切换到下一个窗口
 Ctrl+W W            # 循环切换到上一个窗口
-Ctrl-W p            # 跳到上一个访问过的窗口
-Ctrl-W c            # 关闭当前窗口
-Ctrl-W o            # 关闭其他窗口
-Ctrl-W h            # 跳到左边的窗口
+Ctrl+W p            # 跳到上一个访问过的窗口
+Ctrl+W c            # 关闭当前窗口
+Ctrl+W o            # 关闭其他窗口
+Ctrl+W h            # 跳到左边的窗口
 Ctrl+W j            # 跳到下边的窗口
 Ctrl+W k            # 跳到上边的窗口
 Ctrl+W l            # 跳到右边的窗口
