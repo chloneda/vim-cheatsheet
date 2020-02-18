@@ -94,6 +94,7 @@ imap <C-s> <Esc>:w<CR>a
 imap <C-f> <Esc>^
 imap <C-e> <Esc>$
 
+inoremap <Leader>p <ESC>pa      " 插入模式粘贴
 inoremap vv <esc>               " 映射插入模式下的 vv 键为 esc 键
 
 " 插入模式上下左右
@@ -136,6 +137,12 @@ nnoremap <F5> :g/^\s*$/d<CR>    " 去空行
 " 普通模式下按 F6 打开(或关闭) 语法高亮
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 
+" 预览 markdown-preview 快捷键-----------------
+nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式打开md预览
+imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式打开md预览
+nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式关闭md预览
+imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭md预览
+
 " 文件保存退出命令映射
 :command W w
 :command WQ wq
@@ -144,16 +151,23 @@ nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 :command Qa qa
 :command QA qa
 
-"unmap <F10>                     " 取消一个映射 
+"unmap <F10>                      " 取消一个映射 
+"mapclear                         " 对应取消所有:map绑定的，慎用
 
 " 插件安装 ------------------------------------ 
+" 需要提前安装 vim-plug 管理插件
 call plug#begin('~/.vim/plugged')
 Plug 'mhinz/vim-startify'        " Vim启动插件
 Plug 'preservim/nerdtree'        " 显示Vim目录树插件
+Plug 'iamcco/mathjax-support-for-mkdp'   " 用于markdown预览数学公式
+Plug 'iamcco/markdown-preview.vim'       " markdown预览工具
 " Initialize plugin system
 call plug#end()
 
 " 自定义函数 ----------------------------------
+" 自动识别Markdown文件
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
 " 新建.sh,.java文件，自动插入文件头 -----------
 autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
 " 定义函数SetTitle，自动插入文件头
