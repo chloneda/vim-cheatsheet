@@ -115,7 +115,8 @@ T                   # 搜索当前浏览器已打开的所有标签
 配置自定义搜索引擎，通过快捷键 o/O 调起搜索框，输入搜索引擎简写，再输入空格，再输入搜索词回车，则会调用对应的搜索引擎进行搜索。
 
 > 搜索引擎简写 搜索引擎地址 搜索引擎名字
-  例如：BZ https://search.bilibili.com/all?keyword=%s b站
+
+例如：以下为个人自定义搜索引擎！
 
 ```bash
 g: https://www.google.com/search?q=%s Google
