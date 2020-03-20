@@ -233,6 +233,7 @@ Ctrl+X              # 减少数字
 ## 复制粘贴
 
 **copy 命令的格式为**：
+
 ```bash
 :[range]copy{address}
 ```
@@ -254,6 +255,7 @@ Ctrl+X              # 减少数字
 ```
 
 **常用复制粘贴命令**：
+
 ```bash
 p                   # 粘贴到光标后
 P                   # 粘贴到光标前
@@ -968,8 +970,10 @@ set all             # 列出所有选项设置情况
 ```
 
 
+## Vim插件
 
-## 插件 - [vim-commentary](https://github.com/tpope/vim-commentary)
+### 插件 - [vim-commentary](https://github.com/tpope/vim-commentary)
+
 **vim-commentary**：批量注释工具, 可以注释多行和去除多行注释。
 
 ```bash
@@ -982,7 +986,7 @@ gc                  # 在 Visual Mode 下面按 gc 注释选中区域
 
 
 
-## 插件 - [nerdtree](https://github.com/preservim/nerdtree)
+### 插件 - [nerdtree](https://github.com/preservim/nerdtree)
 
 **nerdtree**：该插件用于列出当前路径的目录树。
 
@@ -1018,7 +1022,7 @@ A                   # 全屏显示NERDTree，或者关闭全屏
 
 
 
-## 插件 - [asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)
+### 插件 - [asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)
 
 ```bash
 :AsyncRun ls        # 异步运行命令 ls 结果输出到 quickfix 使用 :copen 查看
@@ -1112,8 +1116,5 @@ A                   # 全屏显示NERDTree，或者关闭全屏
 
 
 ---
-
-
-
 
 
