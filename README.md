@@ -970,11 +970,9 @@ set all             # 列出所有选项设置情况
 ```
 
 
-## Vim插件
+## 常用Vim插件
 
-### [vim-commentary插件](https://github.com/tpope/vim-commentary)
-
-**vim-commentary**：批量注释工具, 可以注释多行和去除多行注释。
+**[vim-commentary](https://github.com/tpope/vim-commentary)**：批量注释工具, 可以注释多行和去除多行注释。
 
 ```bash
 gcc                 # 注释当前行
@@ -986,9 +984,7 @@ gc                  # 在 Visual Mode 下面按 gc 注释选中区域
 
 
 
-### [nerdtree插件](https://github.com/preservim/nerdtree)
-
-**nerdtree**：该插件用于列出当前路径的目录树。
+**[nerdtree](https://github.com/preservim/nerdtree)**：该插件用于列出当前路径的目录树。
 
 ```bash
 ?                   # 快速帮助文档
@@ -1022,7 +1018,7 @@ A                   # 全屏显示NERDTree，或者关闭全屏
 
 
 
-### [asyncrun.vim插件](https://github.com/skywind3000/asyncrun.vim)
+**[asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)**：该插件使用 Vim 8 / NeoVim 的异步机制，让你在后台运行 shell 命令，并将结果实时显示到 Vim 的 Quickfix 窗口中。
 
 ```bash
 :AsyncRun ls        # 异步运行命令 ls 结果输出到 quickfix 使用 :copen 查看
