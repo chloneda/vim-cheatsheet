@@ -973,7 +973,7 @@ set all             # 列出所有选项设置情况
 
 ## 常用Vim插件
 
-**[vim-commentary](https://github.com/tpope/vim-commentary)**：批量注释工具, 可以注释多行和去除多行注释。
+**[vim-commentary](https://github.com/tpope/vim-commentary)**：该插件是批量注释工具, 可以注释多行和去除多行注释。
 
 ```bash
 gcc                 # 注释当前行
