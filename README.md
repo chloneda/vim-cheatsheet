@@ -1093,7 +1093,7 @@ A                   # 全屏显示NERDTree，或者关闭全屏
 
 ## Vim命令键盘图
 
-![vim命令键盘图](./vim.png)
+![vim命令键盘图](vim.png)
 
 
 
