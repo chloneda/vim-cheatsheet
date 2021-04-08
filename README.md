@@ -4,8 +4,7 @@
 
 > Vim命令速查表，经典Vim命令键盘图，实用Vim书籍，Markdown格式，目录化检索，快速熟悉使用！
 
-[vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim官网](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
-
+- [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim官网](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 - [Vim自定义配置文件 - vimrc](./vimrc)
 - [Chrome浏览器神级插件 - Vimium](./vimium.md)
 
