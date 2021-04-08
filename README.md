@@ -1,11 +1,11 @@
 # Vim命令速查表
 
-> 个人Vim命令速查表。
+> Vim命令速查表，经典Vim命令键盘图，实用Vim书籍，Markdown格式，目录化检索，快速熟悉使用！
 
 [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim官网](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 
-- [Vim自定义配置文件 - vimrc](https://github.com/chloneda/vim-cheatsheet/blob/master/vimrc)
-- [Chrome浏览器神级插件 - Vimium](https://github.com/chloneda/vim-cheatsheet/blob/master/vimium.md)
+- [Vim自定义配置文件 - vimrc](./vimrc)
+- [Chrome浏览器神级插件 - Vimium](./vimium.md)
 
 
 
@@ -920,11 +920,11 @@ Ctrl+r 寄存器名称        # 插入模式下（无需输入寄存器引用符
 | 黑洞寄存器 | "_ | 几乎所有的操作涉及的数据都会被复制到寄存器，如果想让操作的数据不经过寄存器，可以指定黑洞寄存器，数据到该寄存器就会消失掉，不能显示，也不存在 |
 | 系统剪切板 | "+ 或"* | 与Vim外部的GUI交互数据时，需要使用专用的系统剪切板 |
 | 表达式寄存器 | "= | 所有寄存器里最特殊的一个，用于计算表达式。输入完该寄存器应用后，会在命令行里提示“=”，按需输入表达式，结果将会显示到光标处 |
-| 其他寄存器 |  |  |
+| 其他寄存器 | - | - |
 
 
 
-## Vim设置
+## Vim配置文件
 
 编辑Vim配置文件：
 
@@ -972,7 +972,7 @@ set all             # 列出所有选项设置情况
 
 ## Vim插件
 
-### 插件 - [vim-commentary](https://github.com/tpope/vim-commentary)
+### [vim-commentary插件](https://github.com/tpope/vim-commentary)
 
 **vim-commentary**：批量注释工具, 可以注释多行和去除多行注释。
 
@@ -986,7 +986,7 @@ gc                  # 在 Visual Mode 下面按 gc 注释选中区域
 
 
 
-### 插件 - [nerdtree](https://github.com/preservim/nerdtree)
+### [nerdtree插件](https://github.com/preservim/nerdtree)
 
 **nerdtree**：该插件用于列出当前路径的目录树。
 
@@ -1022,7 +1022,7 @@ A                   # 全屏显示NERDTree，或者关闭全屏
 
 
 
-### 插件 - [asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)
+### [asyncrun.vim插件](https://github.com/skywind3000/asyncrun.vim)
 
 ```bash
 :AsyncRun ls        # 异步运行命令 ls 结果输出到 quickfix 使用 :copen 查看
@@ -1091,9 +1091,9 @@ A                   # 全屏显示NERDTree，或者关闭全屏
 
 
 
-## Vim键盘图
+## Vim命令键盘图
 
-![vim](https://github.com/chloneda/vim-cheatsheet/blob/master/vim.png)
+![vim命令键盘图](./vim.png)
 
 
 
