@@ -182,7 +182,7 @@ Shift+/              # 显示命令的帮助提示
 
 ## 快捷键对照表
 
-![vimium.png](https://github.com/chloneda/vim-cheatsheet/blob/master/vimium.png)
+![vimium.png](./vimium.png)
 
 
 
