@@ -303,7 +303,7 @@ va}                 # 选中大括号内的东西（包含大括号本身）
 :[range]y           # 复制范围，比如 :20,30y 是复制 20 到 30 行，:10y 是复制第十行
 :[range]d           # 删除范围，比如 :20,30d 是删除 20 到 30 行，:10d 是删除第十行
 "_[command]         # 使用 [command] 删除内容，并且不进行复制（不会污染寄存器）
-"*[command]         # 使用 [command] 复制内容到系统剪贴板（需要 vim 版本有 clipboard 支持）
+"*[command]         # 使用 [command] 复制内容到系统剪贴板（需要 Vim 版本有 clipboard 支持）
 ```
 
 **文本编辑、复制粘贴中的内容可以简单总结为：**
@@ -599,11 +599,11 @@ vim +n filename     # 打开文件，并将光标置于第 n 行首
 vim -c cmd file     # 在打开文件 file 前，先执行指定的 Vim 命令 cmd
 vim -b file         # 以二进制模式打开文件，该模式某些特殊字符 (如换行符 ^M) 都可以显示出来
 vim -d file1 file2  # 使用 Vim 同时打开 file1 和 file2 文件并 diff 两个文件的差异
-vim -r filename     # 在上次正用 vim 编辑时发生系统崩溃，恢复文件
+vim -r filename     # 在上次正用 Vim 编辑时发生系统崩溃，恢复文件
 vim -R file         # 以只读形式打开文件，但是仍然可以使用 :wq! 写入
 vim -M file         # 强制性关闭修改功能，无法使用 :wq! 写入 
-vim -o file1 file2  # 终端中要打开 vim 文件时，横向分割显示多个文件
-vim -O file1 file2  # 终端中要打开 vim 文件时，纵向分割显示多个文件
+vim -o file1 file2  # 终端中要打开 Vim 文件时，横向分割显示多个文件
+vim -O file1 file2  # 终端中要打开 Vim 文件时，纵向分割显示多个文件
 vim -x file         # 以加密方式打开文件
 vim +/target file   # 打开 file 并将光标移动到找到的第一个 target 字符串上
 ```
@@ -746,9 +746,9 @@ ma                  # 保存当前位置到书签 a ，书签名小写字母为�
 :r !ls              # 将外部命令 ls 的输出捕获，并插入到光标后
 :w !sudo tee %      # sudo以后保存当前文件
 :call system('ls')  # 调用 ls 命令，但是不显示返回内容
-:!start notepad     # Windows 下启动 notepad，最前面可以加 silent
+:!start notepad     # Windows 下启动 Notepad，最前面可以加 silent
 :sil !start cmd     # Windows 下当前目录打开 cmd
-:%!prog             # 运行文字过滤程序，如整理 json 格式 :%!python -m json.tool
+:%!prog             # 运行文字过滤程序，如整理 JSON 格式 :%!python -m json.tool
 ```
 
 
@@ -837,7 +837,7 @@ qa                  # 开始录制名字为 a 的宏
 q                   # 结束录制宏
 @a                  # 播放名字为 a 的宏
 @@                  # 播放上一个宏
-@:                  # 重复上一个ex命令（即冒号命令）
+@:                  # 重复上一个 ex 命令（即冒号命令）
 ```
 
 宏 举例：需要将如下多行文本的行首键入一个 Tab 键进行行首缩进。
@@ -868,7 +868,7 @@ syntax on
 - Normal 模式下将光标移动到第二行，按下 @a，再使用了一次宏 a。
 - 多次操作按下 N@a，其中 N 为正整数，代表执行 N 次宏。例如将光标移动到第 3 行，对余下的 5 行操作宏 a，按下 5@a。
 
-以上 录制宏、使用宏 两个共同操作，完成多行文本的行首键入一个 Tab 键进行行首缩进！
+以上 **录制宏、使用宏** 两个共同操作，完成多行文本的行首键入一个 Tab 键进行行首缩进！
 
 
 ## 其他命令
@@ -877,9 +877,9 @@ syntax on
 Ctrl+X Ctrl+E       # 插入模式下向上滚屏
 Ctrl+X Ctrl+Y       # 插入模式下向下滚屏
 Ctrl+G              # 显示正在编辑的文件名，以及大小和位置信息
-g Ctrl+G            # 显示文件的：大小，字符数，单词数和行数，可视模式下也可用
-ga                  # 显示光标下字符的 ascii 码或者 unicode 编码
-g8                  # 显示光标下字符的 utf-8 编码字节序
+g Ctrl+G            # 显示文件的大小、字符数、单词数和行数，可视模式下也可用
+ga                  # 显示光标下字符的 Ascii 码或者 Unicode 编码
+g8                  # 显示光标下字符的 UTF-8 编码字节序
 gi                  # 回到上次进入插入的地方，并切换到插入模式
 K                   # 查询光标下单词的帮助
 Ctrl+PgUp           # 上个标签页，GVim OK，部分终端软件需设置对应键盘码
@@ -902,7 +902,7 @@ Shift+Insert        # 粘贴系统剪贴板的内容（GVIM）
 :.!date             # 在当前窗口插入时间
 :%!xxd              # 开始二进制编辑
 :%!xxd -r           # 保存二进制编辑
-:r !curl -sL {URL}  # 读取 url 内容添加到光标后
+:r !curl -sL {URL}  # 读取 URL 内容添加到光标后
 :g/^\s*$/d          # 删除空行
 :g/green/d          # 删除所有包含 green 的行
 :v/green/d          # 删除所有不包含 green 的行
@@ -972,8 +972,8 @@ Ctrl+r 寄存器名称        # 插入模式下（无需输入寄存器引用符
 编辑 Vim 配置文件：
 
 ```bash
-:edit $MYVIMRC      # 在 Vim 的命令模式下使用该命令打开 vim 配置文件
-:source $MYVIMRC    # Vim 配置文件的改动后，使用该命令为vim配置文件加载新的配置选项，如果 vimrc 文件恰好是当前活动的缓冲区，则可把此命令简化为:so %。
+:edit $MYVIMRC      # 在 Vim 的命令模式下使用该命令打开 Vim 配置文件
+:source $MYVIMRC    # Vim 配置文件的改动后，使用该命令为 Vim 配置文件加载新的配置选项，如果 vimrc 文件恰好是当前活动的缓冲区，则可把此命令简化为:so %。
 ```
 
 **Vim 配置说明。注意：Vim 配置可以在命令模式下单个设置，只在当前窗口生效！**
@@ -1068,7 +1068,7 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 
 
 
-## Vim模式
+## Vim 模式
 
 ```bash
 普通模式            # 按 Esc 或 Ctrl+[ 进入，左下角显示文件名或为空
