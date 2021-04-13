@@ -61,10 +61,10 @@ n<enter>            # 光标向下移动 n 行
 H                   # 移动到屏幕上部
 M                   # 移动到屏幕中部
 L                   # 移动到屏幕下部
-<S+Left>            # 按住 SHIFT 按左键，向左移动一个单词
-<S+Right>           # 按住 SHIFT 按右键，向右移动一个单词
-<S+Up>              # 按住 SHIFT 按上键，向上翻页
-<S+Down>            # 按住 SHIFT 按下键，向下翻页
+<S+Left>            # 按住 Shift 按左键，向左移动一个单词
+<S+Right>           # 按住 Shift 按右键，向右移动一个单词
+<S+Up>              # 按住 Shift 按上键，向上翻页
+<S+Down>            # 按住 Shift 按下键，向下翻页
 gm                  # 移动到行中
 gj                  # 光标向下移动一个屏幕行（忽略自动换行）
 gk                  # 光标向上移动一个屏幕行（忽略自动换行）
@@ -100,10 +100,10 @@ Ctrl+[              # 退出插入模式（等价于 Esc 键）
 <Down>              # 光标向下移动
 <Left>              # 光标向左移动
 <Right>             # 光标向右移动
-<S+Left>            # 按住 SHIFT 按左键，向左移动一个单词
-<S+Right>           # 按住 SHIFT 按右键，向右移动一个单词
-<S+Up>              # 按住 SHIFT 按上键，向上翻页
-<S+Down>            # 按住 SHIFT 按下键，向下翻页
+<S+Left>            # 按住 Shift 按左键，向左移动一个单词
+<S+Right>           # 按住 Shift 按右键，向右移动一个单词
+<S+Up>              # 按住 Shift 按上键，向上翻页
+<S+Down>            # 按住 Shift 按下键，向下翻页
 <PageUp>            # 上翻页
 <PageDown>          # 下翻页
 <Delete>            # 删除光标处字符
@@ -124,12 +124,12 @@ Ctrl+R =            # 插入表达式计算结果，等号后面跟表达式
 Ctrl+R :            # 插入上一次命令行命令
 Ctrl+R /            # 插入上一次搜索的关键字
 Ctrl+v {char}       # 插入非数字的字面量
-Ctrl+v {code}       # 插入用三位数字表示的 ascii/unicode 字符编码，如 Ctrl+v 065
-Ctrl+v 065          # 插入 10 进制 ascii 字符（两数字） 065 即 A 字符
-Ctrl+v x41          # 插入 16 进制 ascii 字符（三数字） x41 即 A 字符
-Ctrl+v o101         # 插入 8 进制 ascii 字符（三数字） o101 即 A 字符
-Ctrl+v u1234        # 插入 16 进制 unicode 字符（四数字）
-Ctrl+v U12345678    # 插入 16 进制 unicode 字符（八数字）
+Ctrl+v {code}       # 插入用三位数字表示的 ASCII/Unicode 字符编码，如 Ctrl+v 065
+Ctrl+v 065          # 插入 10 进制 ASCII 字符（两数字） 065 即 A 字符
+Ctrl+v x41          # 插入 16 进制 ASCII 字符（三数字） x41 即 A 字符
+Ctrl+v o101         # 插入 8 进制 ASCII 字符（三数字） o101 即 A 字符
+Ctrl+v u1234        # 插入 16 进制 Unicode 字符（四数字）
+Ctrl+v U12345678    # 插入 16 进制 Unicode 字符（八数字）
 Ctrl+K {ch1} {ch2}  # 插入 digraph（见 :h digraph），快速输入日文或符号等
 ```
 
@@ -391,7 +391,7 @@ Ctrl+R              # 回退前一个命令
 ?pattern            # 从光标处向文件头搜索 pattern
 n                   # 向同一方向执行上一次搜索
 N                   # 向相反方向执行上一次搜索
-%                   # 匹配括号移动，包括 (, {, [。结合以下两个命令对程序员来说是相当强大（前提：需要把光标先移到括号上）
+%                   # 匹配括号移动，包括 (), {}, []。结合以下两个命令对程序员来说是相当强大（前提：需要把光标先移到括号上）
 *                   # 向下搜索光标所在的单词
 #                   # 向前搜索光标所在的单词
 f<char>             # 向后搜索当前行第一个为 <char> 的字符，2fv 可以找到第二个 v 字符
@@ -469,7 +469,7 @@ fx                  # 搜索当前行到指定 字符串 之处
 ```bash
 v                   # 切换到面向字符的可视模式
 V                   # 切换到面向行的可视模式
-Ctrl-V              # 切换到面向列块的可视模式
+Ctrl+V              # 切换到面向列块的可视模式
 >                   # 增加缩进
 <                   # 减少缩进
 d                   # 删除高亮选中的文字
@@ -488,7 +488,7 @@ ggVG                # 选择全文
 esc                 # 按 Esc 键退出可视模式
 ```
 
-此外： Vim normal 命令可以在命令行模式执行普通模式下的命令，当 normal 命令与 Vim 可视化模式结合时，只需很少的操作就能完成大量重复性工作。
+此外： Vim Normal 命令可以在命令行模式执行普通模式下的命令，当 Normal 命令与 Vim 可视化模式结合时，只需很少的操作就能完成大量重复性工作。
 
 
 
@@ -676,7 +676,7 @@ Ctrl+W |            # 横向最大化当前窗口
 :tabp               # 上一个标签页
 :tabc               # 关闭当前标签页
 :tabo               # 关闭其他标签页
-:tabn n             # 切换到第 n 个标签页，比如 :tabn 3 切换到第三个标签页
+:tabn n             # 切换到第 n 个标签页，比如：tabn 3 切换到第三个标签页
 :tabm n             # 标签移动
 :tabfirst           # 切换到第一个标签页
 :tablast            # 切换到最后一个标签页
@@ -740,7 +740,7 @@ ma                  # 保存当前位置到书签 a ，书签名小写字母为�
 ## 外部命令
 
 ```bash
-:!command           # 执行一次性 shell 命令，如下命令：:!pwd
+:!command           # 执行一次性 Shell 命令，如下命令：:!pwd，当前 Vim 模式下改变目录
 :shell              # 启动一个交互的 shell 执行多个命令，exit 命令退出并返回 Vim
 :!ls                # 运行外部命令 ls，并等待返回
 :r !ls              # 将外部命令 ls 的输出捕获，并插入到光标后
@@ -800,7 +800,7 @@ zr                  # 所有代码打开一层
 zM                  # 折叠所有代码，设置 foldlevel=0，设置 foldenable
 zR                  # 打开所有代码，设置 foldlevel 为最大值
 zn                  # 折叠 none，重置 foldenable 并打开所有代码
-zN                  # 折叠 normal，重置 foldenable 并恢复所有折叠
+zN                  # 折叠 Normal，重置 foldenable 并恢复所有折叠
 zo                  # 打开一层代码
 zO                  # 打开光标下所有代码折叠
 ```
@@ -986,9 +986,9 @@ set history=200     # 记录 200 条历史命令
 set bs=?            # 设置 BS 键模式，现代编辑器为 :set bs=eol,start,indent
 set sw=4            # 设置缩进宽度为 4
 set ts=4            # 设置制表符宽度为 4
-set noet            # 设置不展开 tab 成空格
-set et              # 设置展开 tab 成空格
-set winaltkeys=no   # 设置 GVim 下正常捕获 ALT 键
+set noet            # 设置不展开 Tab 成空格
+set et              # 设置展开 Tab 成空格
+set winaltkeys=no   # 设置 GVim 下正常捕获 Alt 键
 set nowrap          # 关闭自动换行
 set ttimeout        # 允许终端按键检测超时（终端下功能键为一串 Esc 开头的扫描码）
 set ttm=100         # 设置终端按键检测超时为 100 毫秒
@@ -1085,7 +1085,7 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 - 最新版本            https://github.com/vim/vim   
 - Windows 最新版      https://github.com/vim/vim-win32-installer/releases
 - 插件浏览            http://vimawesome.com
-- 正确设置 ALT/BS 键  http://www.skywind.me/blog/archives/2021
+- 正确设置 Alt/BS 键  http://www.skywind.me/blog/archives/2021
 - 视频教程            http://vimcasts.org/
 - 中文帮助            http://vimcdoc.sourceforge.net/doc/help.html
 - 中文版入门到精通    https://github.com/wsdjeg/vim-galore-zh_cn
@@ -1109,7 +1109,7 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 - 在空白行使用 dip 命令可以删除所有临近的空白行，viw 可以选择连续空白
 - 缩进时使用 >8j >} <ap >ap =i} == 会方便很多
 - 插入模式下，当你发现一个单词写错了，应该多用 Ctrl+W 这比 <BackSpace> 快
-- y d c 命令可以很好结合 f t 和 /X 比如 dt) 和 y/end<cr>
+- y d c 命令可以很好结合 f t 和 /X 比如 dt) 和 y/End<cr>
 - c d x 命令会自动填充寄存器 "1 到 "9 , y 命令会自动填充 "0 寄存器
 - 用 v 命令选择文本时，可以用 o 掉头选择，有时很有用
 - 写文章时，可以写一段代码块，然后选中后执行 :!python 代码块就会被替换成结果
@@ -1130,7 +1130,9 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 
 ## Vim 命令键盘图
 
-![vim 命令键盘图](./vim.png)
+![vim 命令键盘图](vim-commands.png)
+
+![vim 跳转命令图](vim-movement-cmd.png)
 
 
 
