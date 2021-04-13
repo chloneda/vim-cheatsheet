@@ -627,7 +627,7 @@ n Ctrl+^            # 切换缓存，先输入数字的缓存编号，再按 Ctr
 
 
 
-## 窗口操作
+## 多窗口操作
 
 ```bash
 :sp <filename>      # 上下切分窗口并在新窗口打开文件 filename
@@ -730,7 +730,7 @@ ma                  # 保存当前位置到书签 a ，书签名小写字母为�
 :h :!               # 查看如何运行外部命令
 :h tips             # 查看 Vim 内置的常用技巧文档
 :h set-termcap      # 查看如何设置按键扫描码
-:viusage            # NORMAL 模式帮助
+:viusage            # Nornal 模式帮助
 :exusage            # EX 命令帮助
 :version            # 显示当前 Vim 的版本号和特性
 ```
@@ -830,7 +830,7 @@ vim -x file_name	# 输入加密密码 -> 确认密码! 注意：不修改内容�
 
 ## 宏录制
 
-**宏是录制和播放功能。 当它与 Vim 命令结合使用时，它就变成了非常强大的组合。**
+**宏是录制和播放功能，是一系列 Vim 命令操作的集成，利用宏可以实现很多重复的劳动。**
 
 ```bash
 qa                  # 开始录制名字为 a 的宏
@@ -1045,7 +1045,7 @@ P                   # 大写，跳转到当前根路径
 p                   # 小写，跳转到光标所在的上一级路径
 K                   # 跳转到第一个子路径
 J                   # 跳转到最后一个子路径
-Ctrl+j和Ctrl+k      # 在同级目录和文件间移动，忽略子目录和子文件
+Ctrl+j Ctrl+k       # 在同级目录和文件间移动，忽略子目录和子文件
 C                   # 将根路径设置为光标所在的目录
 u                   # 设置上级目录为根路径
 U                   # 设置上级目录为跟路径，但是维持原来目录打开的状态
@@ -1130,27 +1130,21 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 
 ## Vim 命令键盘图
 
-![vim 命令键盘图](vim-commands.png)
-
-![vim 跳转命令图](vim-movement-cmd.png)
+![vim 命令键盘图](vim-commands_CN.png)
 
 
 
 ## 参考
 
 - https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt
-- https://github.com/groenewege/vimrc/blob/master/vim_cheat_sheet.txt
 - http://blog.g-design.net/post/4789778607/vim-cheat-sheet
-- http://www.keyxl.com/aaa8263/290/VIM-keyboard-shortcuts.htm
-- http://jmcpherson.org/editing.html
 - http://www.fprintf.net/vimCheatSheet.html
 - http://www.ouyaoxiazai.com/article/24/654.html
 - http://bbs.it-home.org/thread-80794-1-1.html
 - http://www.lpfrx.com/wp-content/uploads/2008/09/vi.jpg
-- http://michael.peopleofhonoronly.com/vim/
 - https://github.com/hobbestigrou/vimtips-fortune/blob/master/fortunes/vimtips
 - https://github.com/glts/vim-cottidie/blob/master/autoload/cottidie/tips
-
+- http://michael.peopleofhonoronly.com/vim/
 
 
 
