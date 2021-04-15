@@ -85,7 +85,7 @@ A                   # 在行尾进入插入模式
 o                   # 在下一行插入新行并进入插入模式
 O                   # 在上一行插入新行并进入插入模式
 gi                  # 进入到上一次插入模式的位置
-<esc>               # 退出插入模式
+<Esc>               # 退出插入模式
 Ctrl+[              # 退出插入模式（等价于 Esc 键）
 ```
 
@@ -118,7 +118,7 @@ Ctrl+o              # 临时退出插入模式，执行单条命令又返回插�
 Ctrl+u              # 当前行删除到行首所有字符
 Ctrl+w              # 删除光标前的一个单词
 Ctrl+\ Ctrl+O       # 临时退出插入模式（光标保持），执行单条命令又返回插入模式
-Ctrl+R 0            # 插入寄存器（内部 0号剪贴板）内容，Ctrl+R 后可跟寄存器名
+Ctrl+R 0            # 插入寄存器（内部 0 号剪贴板）内容，Ctrl+R 后可跟寄存器名
 Ctrl+R "            # 插入匿名寄存器内容，相当于插入模式下 p 粘贴
 Ctrl+R =            # 插入表达式计算结果，等号后面跟表达式
 Ctrl+R :            # 插入上一次命令行命令
@@ -341,9 +341,9 @@ cit、dit、yit、vit，分别操作一对标签之间的内容，编辑 HTML、
 ## 文本对象
 
 ```bash
-$                   # 到行尾
 0                   # 到行首，数字 0
-^                   # 到行首非空字符
+^                   # 到行首非空字符，可以使用 0w 代替 ^，按键更方便
+$                   # 到行尾
 iw                  # 整个单词（不包括分隔符）
 aw                  # 整个单词（包括分隔符）
 iW                  # 整个 WORD（不包括分隔符）
@@ -485,7 +485,7 @@ U                   # 标记区转换为大写
 gv                  # 重选上次的高亮选区
 g Ctrl+G            # 显示所选择区域的统计信息
 ggVG                # 选择全文
-esc                 # 按 Esc 键退出可视模式
+<Esc>               # 按 Esc 键退出可视模式
 ```
 
 此外： Vim Normal 命令可以在命令行模式执行普通模式下的命令，当 Normal 命令与 Vim 可视化模式结合时，只需很少的操作就能完成大量重复性工作。
@@ -498,13 +498,13 @@ esc                 # 按 Esc 键退出可视模式
 ```bash
 Ctrl+v              # 进入命令行模式，按 Ctrl + v 进入可视模式，然后按 j, 或者 k 选中多行，把需要注释的行标记起来
 I                   # 按大写字母 I，再插入注释符，例如#、//
-esc                 # 按 Esc 键就会全部注释了
+<Esc>               # 按 Esc 键就会全部注释了
 ```
 
 **取消多行注释**
 
 ```bash
-Ctrl+v              # 进入命令行模式，按 Ctrl + v 进入可视模式，按字母 l 横向选中列的个数，例如#、//（需要选中 2 列）
+Ctrl+v              # 进入命令行模式，按 Ctrl + v 进入可视模式，按字母 l 横向选中列的个数，例如 #、//（需要选中 2 列）
 j 或 k              # 按字母 j，或者 k 选中注释符号
 d                   # 按 d 键就可全部取消注释
 ```
@@ -807,22 +807,20 @@ zO                  # 打开光标下所有代码折叠
 
 
 
-## 文档加密解密
+## 文档加/解密
 
-**文档加密**
-
-加密方式打开文件时，并在屏幕左下角提示输入密码两次才可进行操作，保存文件退出后必须输入正常密码才能正确打开文件，否则会显示乱码。
+**文档加密**：加密方式打开文件时，并在屏幕左下角提示输入密码两次才可进行操作，保存文件退出后必须输入正常密码才能正确打开文件，否则会显示乱码。
 
 ```bash
 vim -x file_name	# 输入加密密码 -> 确认密码! 注意：不修改内容也要保存。:wq，不然密码设定不会生效。
-:X 			# 命令行模式下，输入加密密码 -> 确认密码! 注意：不修改内容也要保存。:wq，不然密码设定不会生效。
+:X 			        # 命令行模式下，输入加密密码 -> 确认密码! 注意：不修改内容也要保存。:wq，不然密码设定不会生效。
 :set key=密码		# 命令行模式下，输入加密密码 -> 确认密码! 注意：不修改内容也要保存。:wq，不然密码设定不会生效。
 ```
 
 **文档解密**
 
 ```bash
-:X 			# 命令行模式下，提示输入密码，不输入而是按 Enter。注意：不修改内容也要保存。:wq，不然解密设定不会生效。
+:X 			    # 命令行模式下，提示输入密码，不输入而是按 Enter。注意：不修改内容也要保存。:wq，不然解密设定不会生效。
 :set key=		# 命令行模式下，设置 key 的密码为空。注意：不修改内容也要保存。:wq，不然密码设定不会生效。
 ```
 
@@ -1013,7 +1011,7 @@ set all             # 列出所有选项设置情况
 
 ## 常用 Vim 插件
 
-**[vim-commentary](https://github.com/tpope/vim-commentary)**：该插件是批量注释工具, 可以注释多行和去除多行注释。
+**[vim-commentary](https://github.com/tpope/vim-commentary)**：Vim 批量注释工具，可以注释多行和去除多行注释。
 
 ```bash
 gcc                 # 注释当前行
@@ -1025,7 +1023,7 @@ gc                  # 在 Visual Mode 下面按 gc 注释选中区域
 
 
 
-**[nerdtree](https://github.com/preservim/nerdtree)**：该插件用于列出当前路径的目录树。
+**[NERDTree](https://github.com/preservim/nerdtree)**：该插件用于列出当前路径的目录树。
 
 ```bash
 ?                   # 快速帮助文档
@@ -1082,48 +1080,48 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 
 ## 网络资源
 
-- 最新版本            https://github.com/vim/vim   
-- Windows 最新版      https://github.com/vim/vim-win32-installer/releases
-- 插件浏览            http://vimawesome.com
-- 正确设置 Alt/BS 键  http://www.skywind.me/blog/archives/2021
-- 视频教程            http://vimcasts.org/
-- 中文帮助            http://vimcdoc.sourceforge.net/doc/help.html
-- 中文版入门到精通    https://github.com/wsdjeg/vim-galore-zh_cn
-- 五分钟脚本入门      http://www.skywind.me/blog/archives/2193
-- 脚本精通            http://learnvimscriptthehardway.stevelosh.com/
-- 十六年使用经验      http://zzapper.co.uk/vimtips.html
-- 配色方案            http://vimcolors.com/
+- 最新版本：https://github.com/vim/vim   
+- Windows 版：https://github.com/vim/vim-win32-installer/releases
+- 插件浏览：http://vimawesome.com
+- 正确设置 Alt 键：http://www.skywind.me/blog/archives/2021
+- 视频教程：http://vimcasts.org/
+- 中文帮助：http://vimcdoc.sourceforge.net/doc/help.html
+- 中文版入门到精通：https://github.com/wsdjeg/vim-galore-zh_cn
+- 五分钟脚本入门：http://www.skywind.me/blog/archives/2193
+- 脚本精通：http://learnvimscriptthehardway.stevelosh.com/
+- 十六年使用经验：http://zzapper.co.uk/vimtips.html
+- 配色方案：http://vimcolors.com/
 
 
 
 ## Vim 使用建议
 
-- 永远不要用 Ctrl+C 代替 <Esc> 完全不同的含义，容易错误中断运行的后台脚本
-- 很多人使用 Ctrl+[ 代替 <Esc>，左手小指 Ctrl，右手小指 [ 熟练后很方便
-- 某些终端中使用 Vim 8 内嵌终端如看到奇怪字符，使用 :set t_RS= t_SH= 解决
-- 某些终端中使用 NeoVim 如看到奇怪字符，使用 :set guicursor= 解决
-- 多使用 ciw, ci[, ci", ci( 以及 diw, di[, di", di( 命令来快速改写/删除文本
-- 在行内左右移动光标时，多使用 w b e 或 W B E，而不是 h l 或方向键，这样会快很多
-- Shift 相当于移动加速键， w b e 移动光标很慢，但是 W B E 走的很快
-- 自己要善于总结新技巧，比如移动到行首非空字符时用 0w 命令比 ^ 命令更容易输入
-- 在空白行使用 dip 命令可以删除所有临近的空白行，viw 可以选择连续空白
-- 缩进时使用 >8j >} <ap >ap =i} == 会方便很多
-- 插入模式下，当你发现一个单词写错了，应该多用 Ctrl+W 这比 <BackSpace> 快
-- y d c 命令可以很好结合 f t 和 /X 比如 dt) 和 y/End<cr>
-- c d x 命令会自动填充寄存器 "1 到 "9 , y 命令会自动填充 "0 寄存器
-- 用 v 命令选择文本时，可以用 o 掉头选择，有时很有用
-- 写文章时，可以写一段代码块，然后选中后执行 :!python 代码块就会被替换成结果
-- 搜索后经常使用 :nohl 来消除高亮，使用很频繁，可以 map 到 <BackSpace> 上
-- 搜索时可以用 Ctrl+R Ctrl+W 插入光标下的单词，命令模式也能这么用
-- 映射按键时，应该默认使用 noremap ，只有特别需要的时候使用 map
-- 用 y 复制文本后，命令模式中 Ctrl+R 然后按双引号 0 可以插入之前复制内容
-- Windows 下的 GVim 可以设置 set rop=type:directx,renmode:5 增强显示
-- 当你觉得做某事很低效时，你应该停下来，然后思考正确的高效方式来完成
+- 永远不要用 Ctrl+C 代替 <Esc> 完全不同的含义，容易错误中断运行的后台脚本。
+- 很多人使用 Ctrl+[ 代替 <Esc>，左手小指 Ctrl，右手小指 [ 熟练后很方便。
+- 某些终端中使用 Vim 8 内嵌终端如看到奇怪字符，使用 :set t_RS= t_SH= 解决。
+- 某些终端中使用 NeoVim 如看到奇怪字符，使用 :set guicursor= 解决。
+- 多使用 ciw, ci[, ci", ci( 以及 diw, di[, di", di( 命令来快速改写/删除文本。
+- 在行内左右移动光标时，多使用 w b e 或 W B E，而不是 h l 或方向键，这样会快很多。
+- Shift 相当于移动加速键， w b e 移动光标很慢，但是 W B E 走的很快。
+- 自己要善于总结新技巧，比如移动到行首非空字符时用 0w 命令比 ^ 命令更容易输入。
+- 在空白行使用 dip 命令可以删除所有临近的空白行，viw 可以选择连续空白。
+- 缩进时使用 >8j >} <ap >ap =i} == 会方便很多。
+- 插入模式下，当你发现一个单词写错了，应该多用 Ctrl+W 这比 <Backspace> 快。
+- y d c 命令可以很好结合 f t 和 /X 比如 dt) 和 y/End<cr>。
+- c d x 命令会自动填充寄存器 "1 到 "9 , y 命令会自动填充 "0 寄存器。
+- 用 v 命令选择文本时，可以用 o 掉头选择，有时很有用。
+- 写文章时，可以写一段代码块，然后选中后执行 :!python 代码块就会被替换成结果。
+- 搜索后经常使用 :nohl 来消除高亮，使用很频繁，可以 map 到 <Backspace> 上。
+- 搜索时可以用 Ctrl+R Ctrl+W 插入光标下的单词，命令模式也能这么用。
+- 映射按键时，应该默认使用 noremap ，只有特别需要的时候使用 map。
+- 用 y 复制文本后，命令模式中 Ctrl+R 然后按双引号 0 可以插入之前复制内容。
+- Windows 下的 GVim 可以设置 set rop=type:directx,renmode:5 增强显示。
+- 当你觉得做某事很低效时，你应该停下来，然后思考正确的高效方式来完成。
 
 
 ## 相关书籍
 
-[Vim 实用技巧](https://pan.baidu.com/s/1tocUYzByGDzKxEqYTFH7ug)
+[Vim 实用技巧（第2版）](https://book.douban.com/subject/26967597/)
 
 
 
@@ -1141,8 +1139,8 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 - http://www.ouyaoxiazai.com/article/24/654.html
 - http://bbs.it-home.org/thread-80794-1-1.html
 - http://www.lpfrx.com/wp-content/uploads/2008/09/vi.jpg
-- https://github.com/hobbestigrou/vimtips-fortune/blob/master/fortunes/vimtips
 - https://github.com/glts/vim-cottidie/blob/master/autoload/cottidie/tips
+- https://github.com/hobbestigrou/vimtips-fortune/blob/master/fortunes/vimtips
 - http://michael.peopleofhonoronly.com/vim/
 
 

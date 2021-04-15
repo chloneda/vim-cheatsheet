@@ -8,7 +8,7 @@
 ## 页面导航
 
 ```bash
-?                   # 显示 help，查询 vimium 的使用方法
+?                   # 显示 help，查询 Vimium 的使用方法
 j                   # 当前页面向下移动
 k                   # 当前页面向上移动
 h                   # 向左移动
@@ -191,7 +191,7 @@ Shift+/              # 显示命令的帮助提示
 - [vimium.github.io](https://vimium.github.io/)
 - [Vimium 成神之路-键盘党的胜利](https://zhuanlan.zhihu.com/p/64533566)
 - [15分钟入门 Chrome神器 Vimium](https://www.jianshu.com/p/849d6b21e02e)
-- [神器 vimium：比同级程序员成长更快](https://zhuanlan.zhihu.com/p/38179086)
+- [神器 Vimium：比同级程序员成长更快](https://zhuanlan.zhihu.com/p/38179086)
 
 
 

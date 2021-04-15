@@ -87,7 +87,7 @@ map <C-j> <C-W>j                " 切换到下面的分割窗口
 map <C-k> <C-W>k                " 切换到上面的分割窗口
 map <C-l> <C-W>l                " 切换到右边的分割窗口
 
-" 无论是 Normal 模式 / Insert模式，按 Crtl+s 保存文件
+" 无论是 Normal 模式 / Insert 模式，按 Crtl+s 保存文件
 nmap <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>a
 " 在插入模式下快速进行行首/行尾跳转
