@@ -5,7 +5,7 @@
 " Email: chloneda@gmail.com
 " Blog: https://www.cnblogs.com/chloneda
 " LastModify: 2020-02-01
-" Desc:  Vim个人定制化配置文件
+" Desc:  Vim 个人定制化配置文件
 " ==============================================
 
 " Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
@@ -18,14 +18,14 @@ set guioptions-=L               " 隐藏左侧滚动条
 set guioptions-=b               " 隐藏底部滚动条
 set cursorline                  " 突出显示当前行
 set cursorcolumn                " 突出显示当前列
-set t_Co=256			        " 指定配色方案是256色
+set t_Co=256			        " 指定配色方案是 256 色
 
 " 主要配置 -------------------------------------
 syntax on                       " 开启语法高亮
 set history=200                 " 记录 200 条历史命令
-set encoding=utf-8              " Vim 内部buffer (缓冲区)、菜单文本等使用的编码方式
+set encoding=utf-8              " Vim 内部 buffer (缓冲区)、菜单文本等使用的编码方式
 set fileencoding=utf-8          " 当前编辑文件的字符编码方式
-set fileencodings=uft-8,gbk     " 使用utf-8或gbk打开文件
+set fileencodings=uft-8,gbk     " 使用 UTF-8 或 GBK 打开文件
 set termencoding=utf-8          " Vim 所工作的终端的字符编码方式
 set langmenu=zh_CN.UTF-8        " 显示中文菜单
 set helplang=cn                 " 帮助系统设置为中文
@@ -33,15 +33,15 @@ set showcmd                     " 输入的命令显示出来
 set hlsearch                    " 高亮搜索的字符串
 set incsearch                   " 即时搜索
 set nowrap                      " 设置代码不折行
-set fileformat=unix             " 设置以unix的格式保存文件
-set cindent                     " 设置C样式的缩进格式
-set tabstop=4                   " tab 显示多少个空格，默认 8
-set softtabstop=4               " 统一缩进为4
+set fileformat=unix             " 设置以 UNIX 的格式保存文件
+set cindent                     " 设置 C 样式的缩进格式
+set tabstop=4                   " Tab 显示多少个空格，默认 8
+set softtabstop=4               " 统一缩进为 4
 set shiftwidth=4                " 每一级缩进是多少个空格
 set smartindent                 " 开启智能缩进
 set autoindent                  " 开启自动缩进
-set backspace+=indent,eol,start " set backspace&可以对其重置
-set scrolloff=5                 " 光标距离顶部和底部5行
+set backspace+=indent,eol,start " set backspace& 可以对其重置
+set scrolloff=5                 " 光标距离顶部和底部 5 行
 set laststatus=2                " 命令行为两行
 set cmdheight=2                 " 总是显示状态行
 set autoindent                  " 启用自动对齐功能，把上一行的对齐格式应用到下一行
@@ -62,21 +62,21 @@ set nofoldenable                " 启动 Vim 时关闭折叠
 set selection=exclusive         " 指定在选择文本时光标所在位置也属于被选中的范围
 set selectmode=mouse,key        " 使鼠标和键盘都可以控制光标选择文本
 set ignorecase                  " 搜索忽略大小写
-set smartcase                   " 智能大小写敏感, 只要有一个字母大写, 就大小写敏感, 否则不敏感
-set noexpandtab                 " 不允许扩展table
-set whichwrap+=<,>,h,l          " 允许backspace和光标键跨越行边界
+set smartcase                   " 智能大小写敏感，只要有一个字母大写，就大小写敏感，否则不敏感
+set noexpandtab                 " 不允许扩展 Table
+set whichwrap+=<,>,h,l          " 允许 Backspace 和光标键跨越行边界
 set confirm                     " 在处理未保存或只读文件的时候，弹出确认
 set nobackup                    " 禁止备份
 set noswapfile                  " 禁止生成临时文件
 set noundofile                  " 不生成 undo 文件
-set report=0                    " 通过使用: commands命令，告诉我们文件的哪一行被改变过
+set report=0                    " 通过使用: commands 命令，告诉我们文件的哪一行被改变过
 set equalalways                 " 分割窗口时保持相等的宽/高
-set splitright                  " 竖直split时,在右边开启
-set splitbelow                  " 水平split时,在下边开启
+set splitright                  " 竖直 split 时，在右边开启
+set splitbelow                  " 水平 split 时，在下边开启
 
 " Vim 重新打开文件时，回到上次历史所编辑文件的位置
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-" 让vimrc配置变更立即生效
+" 让 vimrc 配置变更立即生效
 "autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 " 按键映射 -----------------------------------
@@ -87,15 +87,15 @@ map <C-j> <C-W>j                " 切换到下面的分割窗口
 map <C-k> <C-W>k                " 切换到上面的分割窗口
 map <C-l> <C-W>l                " 切换到右边的分割窗口
 
-" 无论是 normal模式 / Insert模式，按 Crtl+s 保存文件
+" 无论是 Normal 模式 / Insert模式，按 Crtl+s 保存文件
 nmap <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>a
-"在插入模式下快速进行行首/行尾跳转
+" 在插入模式下快速进行行首/行尾跳转
 imap <C-f> <Esc>^
 imap <C-e> <Esc>$
 
 inoremap <Leader>p <ESC>pa      " 插入模式粘贴
-inoremap vv <esc>               " 映射插入模式下的 vv 键为 esc 键
+inoremap vv <esc>               " 映射插入模式下的 vv 键为 Esc 键
 
 " 插入模式上下左右
 " inoremap <C-h> <left>
@@ -111,16 +111,16 @@ inoremap < <><ESC>i
 inoremap " ""<ESC>i
 inoremap ' ''<Esc>i
 
-" Vim搜索结果居中展示，silien 命令用于安静地执行命令，既不显示正常的消息，也不会把它加进消息历史
+" Vim 搜索结果居中展示，silien 命令用于安静地执行命令，既不显示正常的消息，也不会把它加进消息历史
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
-" 编辑vimrc相关配置文件
+" 编辑 vimrc 相关配置文件
 nnoremap <leader>e :edit $MYVIMRC<cr>
-" 重新加载vimrc文件,leader 即前缀键默认为“\”
+" 重新加载 vimrc 文件,leader 即前缀键默认为“\”
 nnoremap <leader>s :source $MYVIMRC<cr>
 
 " 安装、更新、删除插件
@@ -138,10 +138,10 @@ nnoremap <F5> :g/^\s*$/d<CR>    " 去空行
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 
 " 预览 markdown-preview 快捷键-----------------
-nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式打开md预览
-imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式打开md预览
-nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式关闭md预览
-imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭md预览
+nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式打开 md 预览
+imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式打开 md 预览
+nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式关闭 md 预览
+imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭 md 预览
 
 " 文件保存退出命令映射
 :command W w
@@ -152,27 +152,27 @@ imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭md预览
 :command QA qa
 
 "unmap <F10>                      " 取消一个映射 
-"mapclear                         " 对应取消所有:map绑定的，慎用
+"mapclear                         " 对应取消所有:map 绑定的，慎用
 
 " 插件安装 ------------------------------------ 
 " 需要提前安装 vim-plug 管理插件
 call plug#begin('~/.vim/plugged')
-Plug 'mhinz/vim-startify'        " Vim启动插件
-Plug 'preservim/nerdtree'        " 显示Vim目录树插件
-Plug 'iamcco/mathjax-support-for-mkdp'   " 用于markdown预览数学公式
-Plug 'iamcco/markdown-preview.vim'       " markdown预览工具
+Plug 'mhinz/vim-startify'        " Vim 启动插件
+Plug 'preservim/nerdtree'        " 显示 Vim 目录树插件
+Plug 'iamcco/mathjax-support-for-mkdp'   " 用于 Markdown 预览数学公式
+Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
 " Initialize plugin system
 call plug#end()
 
 " 自定义函数 ----------------------------------
-" 自动识别Markdown文件
+" 自动识别 Markdown 文件
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" 新建.sh,.java文件，自动插入文件头 -----------
+" 新建 .sh，.java 文件，自动插入文件头 -----------
 autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
-" 定义函数SetTitle，自动插入文件头
+" 定义函数 SetTitle，自动插入文件头
 func SetTitle()
-	"如果文件类型为.sh文件
+	"如果文件类型为 .sh 文件
 	if &filetype == 'sh'
 		call setline(1,"\#########################################################################")
 		call append(line("."), "\# File Name: ".expand("%"))
