@@ -212,7 +212,7 @@ di]                 # 删除中括号中内容
 diB                 # 删除大括号中内容
 di}                 # 删除大括号中内容
 daB                 # 删除大括号内的内容（包含大括号本身）
-dit                 # 删除 xml tag 中的内容
+dit                 # 删除 XML 中 tag 中的内容
 dis                 # 删除当前句子
 d2w                 # 删除下两个单词
 dt(                 # 删除到小括号前
@@ -1009,7 +1009,7 @@ set all             # 列出所有选项设置情况
 ```
 
 
-## 常用 Vim 插件
+## Vim 常用插件
 
 **[vim-commentary](https://github.com/tpope/vim-commentary)**：Vim 批量注释工具，可以注释多行和去除多行注释。
 
