@@ -10,6 +10,12 @@
 
 " Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
 
+" 环境设置 -------------------------------------
+" 关闭兼容 vi 模式
+set nocompatible                " 首先必须设定的选项，避免 vi 以前版本bug和局限，从而产生副作用
+" Change shell
+set shell=bash                  " Vim 需要一个符合 POSIX 的 Shell
+
 " 设置外观 -------------------------------------
 set number                      " 显示行号
 set relativenumber              " 行号以相对当前行的方式显示，方便跳转
@@ -48,6 +54,7 @@ set cmdheight=2                 " 总是显示状态行
 set autoindent                  " 启用自动对齐功能，把上一行的对齐格式应用到下一行
 set clipboard+=unnamed          " 共享剪贴板   
 set showmatch                   " 高亮显示匹配的括号
+set showmode                    " 显示我们当前正在编辑的模式
 set matchtime=1                 " 匹配括号高亮的时间（单位是十分之一秒） 
 set autoread                    " 设置当文件被改动时自动载入
 set autowrite                   " 自动保存
@@ -57,7 +64,7 @@ filetype on                     " 检测文件类型
 filetype indent on
 set mouse=a                     " 启用鼠标
 set ruler                       " 显示光标当前位置
-set title                       " show file in titlebar
+set title                       " Show file in titlebar
 set foldmethod=indent           " 基于缩进进行代码折叠
 set nofoldenable                " 启动 Vim 时关闭折叠
 set selection=exclusive         " 指定在选择文本时光标所在位置也属于被选中的范围
@@ -94,40 +101,45 @@ imap <C-s> <Esc>:w<CR>a
 " 在插入模式下快速进行行首/行尾跳转
 imap <C-f> <Esc>^
 imap <C-e> <Esc>$
-
-inoremap <Leader>p <ESC>pa      " 插入模式粘贴
-inoremap vv <ESC>               " 映射插入模式下的 vv 键为 Esc 键
+" <Leader> 为用户自定义命令的名字空间，<Leader> 键是 \
+inoremap <Leader>p <Esc>pa      " 插入模式粘贴
+inoremap vv <Esc>               " 插入模式下的 vv 键为 Esc 键
 
 " 插入模式上下左右
-" inoremap <C-h> <left>
-" inoremap <C-j> <down>
-" inoremap <C-k> <up>
-" inoremap <C-l> <right>
+" inoremap <C-h> <Left>
+" inoremap <C-j> <Down>
+" inoremap <C-k> <Up>
+" inoremap <C-l> <Right>
 
 " 括号等自动补全
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap { {}<ESC>i
-inoremap < <><ESC>i
-inoremap " ""<ESC>i
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
+inoremap < <><Esc>i
+inoremap " ""<Esc>i
 inoremap ' ''<Esc>i
 
-" Vim 搜索结果居中展示，silien 命令用于安静地执行命令，既不显示正常的消息，也不会把它加进消息历史
+" Vim 搜索结果居中展示，silien 命令（sil[ent][!] {command}）用于安静地执行命令，既不显示正常的消息，也不会把它加进消息历史
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
-" 编辑 vimrc 相关配置文件
-nnoremap <leader>e :edit $MYVIMRC<cr>
-" 重新加载 vimrc 文件,leader 即前缀键默认为“\”
-nnoremap <leader>s :source $MYVIMRC<cr>
+" 加快视口的滚动速度
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
-" 安装、更新、删除插件
-nnoremap <leader><leader>i :PlugInstall<cr>
-nnoremap <leader><leader>u :PlugUpdate<cr>
-nnoremap <leader><leader>c :PlugClean<cr>
+" 戒掉使用光标键的习惯，善用 h、j、k 及 l 移动光标
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+" 编辑 vimrc 相关配置文件
+nnoremap <Leader>e :edit $MYVIMRC<cr>
+" 重新加载 vimrc 文件，Leader 即前缀键默认为“\”
+nnoremap <Leader>s :source $MYVIMRC<cr>
 
 nnoremap U <C-r>                " 取消撤销操作，减少按键操作
 nnoremap <F1> :nohls<CR>        " 取消 Vim 查找高亮显示
@@ -137,12 +149,6 @@ nnoremap <F4> :set wrap! wrap?<CR>
 nnoremap <F5> :g/^\s*$/d<CR>    " 去空行
 " 普通模式下按 F6 打开(或关闭) 语法高亮
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
-
-" 预览 markdown-preview 快捷键-----------------
-nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式打开 md 预览
-imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式打开 md 预览
-nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式关闭 md 预览
-imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭 md 预览
 
 " 文件保存退出命令映射
 :command W w
@@ -155,11 +161,29 @@ imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭 md 预览
 "unmap <F10>                      " 取消一个映射 
 "mapclear                         " 对应取消所有:map 绑定的，慎用
 
+" 插件相关映射按键设置 ----------------------------
+" 查看、安装、更新、删除插件 命令映射
+nnoremap <Leader><Leader>s :PlugStatus<cr>
+nnoremap <Leader><Leader>i :PlugInstall<cr>
+nnoremap <Leader><Leader>u :PlugUpdate<cr>
+nnoremap <Leader><Leader>c :PlugClean<cr>
+
+" 预览插件 markdown-preview 快捷键 -------------------
+nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式打开 md 预览
+imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式打开 md 预览
+nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式关闭 md 预览
+imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭 md 预览
+
+" 插件 NERDTree 设置
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+nnoremap <leader>N :NERDTreeClose<CR>
+
 " 插件安装 ------------------------------------ 
 " 需要提前安装 vim-plug 管理插件
 call plug#begin('~/.vim/plugged')
-Plug 'mhinz/vim-startify'        " Vim 启动插件
-Plug 'preservim/nerdtree'        " 显示 Vim 目录树插件
+Plug 'mhinz/vim-startify'         " Vim 启动插件
+Plug 'preservim/nerdtree'         " 显示 Vim 目录树插件
 Plug 'iamcco/mathjax-support-for-mkdp'   " 用于 Markdown 预览数学公式
 Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
 " Initialize plugin system
