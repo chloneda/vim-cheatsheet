@@ -53,7 +53,7 @@ set background=dark             " Theme 主题
 set t_Co=256			        " 指定配色方案是 256 色
 
 " 主要配置 -------------------------------------
-syntax enable
+syntax enable                   " 启用语法高亮度
 syntax on                       " 开启语法高亮
 set history=200                 " 记录 200 条历史命令
 set encoding=utf-8              " Vim 内部 buffer (缓冲区)、菜单文本等使用的编码方式
@@ -117,7 +117,6 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " 按键映射，尽量使用 nnoremap 代理 nmap，比如 ----------------------
 " nmap j k                      " nmap 是递归映射，会出现不可预期的问题
 " nmap k G                      " 当按下 j 键时，实际上执行的是 G 键
-
 map Y y$                        " 复制 从光标到行尾 所在范围的文本
 map <C-A> ggVG                  " 全选
 nnoremap <Leader>h <C-W>h       " 切换到左边的分割窗口
