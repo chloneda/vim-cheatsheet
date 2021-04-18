@@ -2,7 +2,7 @@
 
 ## 简介
 
-> Vim 命令速查表，经典 Vim 命令键盘图，实用 Vim 书籍，Markdown 格式，目录化检索，快速熟悉使用！
+> Vim 命令速查表，注释化 vimrc 配置文件，经典 Vim 键盘图，实用 Vim 书籍，Markdown 格式，目录化检索，快速熟悉使用！
 
 - [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim 官网](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 - [Vim 自定义配置文件 - vimrc](./vimrc)
@@ -58,9 +58,9 @@ ge                  # 跳到前一个单词结尾
 n<Enter>            # 光标向下移动 n 行
 +                   # 移动到下一行首个非空字符（同回车键）
 -                   # 移动到上一行首个非空字符
-H                   # 移动到屏幕上部
-M                   # 移动到屏幕中部
-L                   # 移动到屏幕下部
+H                   # 移动到屏幕上部（H: High）
+M                   # 移动到屏幕中部（M: Middle）
+L                   # 移动到屏幕下部（L: Low）
 <S+Left>            # 按住 Shift 按左键，向左移动一个单词
 <S+Right>           # 按住 Shift 按右键，向右移动一个单词
 <S+Up>              # 按住 Shift 按上键，向上翻页

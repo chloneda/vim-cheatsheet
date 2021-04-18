@@ -7,6 +7,30 @@
 " LastModify: 2020-02-01
 " Desc:  Vim 个人定制化配置文件
 " =======================================================
+"
+" To use it, copy it to
+"     for Unix and OS/2:  ~/.vimrc
+"	      for Amiga:  s:.vimrc
+"  for MS-DOS and Win32:  $VIM\_vimrc
+"	    for OpenVMS:  sys$login:.vimrc
+"
+" +----------+---------------------+
+" | Key      | Function            |
+" +----------+---------------------+
+" | F1       | 取消 Vim 查找高亮显示  |
+" | F2       | 打开(或关闭)显示行号   |
+" | F3       | 显示非可见字符        |
+" | F4       | 设置代码自动折行      |
+" | F5       | 去空行              |
+" | F6       | 打开(或关闭) 语法高亮 |
+" | F7       | 自动补全代码         |
+" | F8       | 普通模式打开 md 预览  |
+" | F9       | 普通模式关闭 md 预览  |
+" | F10      |                    |
+" | F12      |                    |
+" | <Ctrl+c> | 快速推出 Vim（:qall!）|
+" +----------+---------------------+
+" =======================================================
 
 " Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
 
@@ -14,7 +38,7 @@
 " 关闭兼容 vi 模式
 set nocompatible                " 首先必须设定的选项，避免 vi 以前版本bug和局限，从而产生副作用
 " Change shell
-set shell=bash                  " Vim 需要一个符合 POSIX 的 Shell
+set shell=/bin/bash             " Vim 需要一个符合 POSIX 的 Shell
 
 " 设置外观 -------------------------------------
 set number                      " 显示行号
@@ -25,6 +49,7 @@ set guioptions-=L               " 隐藏左侧滚动条
 set guioptions-=b               " 隐藏底部滚动条
 set cursorline                  " 突出显示当前行
 set cursorcolumn                " 突出显示当前列
+set background=dark             " Theme 主题
 set t_Co=256			        " 指定配色方案是 256 色
 
 " 主要配置 -------------------------------------
@@ -85,9 +110,12 @@ set splitbelow                  " 水平 split 时，在下边开启
 " Vim 重新打开文件时，回到上次历史所编辑文件的位置
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 " 让 vimrc 配置变更立即生效
-"autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
-" 按键映射 -----------------------------------
+" 按键映射，尽量使用 nnoremap 代理 nmap，比如 ----------------------
+" nmap j k                      " nmap 是递归映射，会出现不可预期的问题
+" nmap k G                      " 当按下 j 键时，实际上执行的是 G 键
+
 map Y y$                        " 复制 从光标到行尾 所在范围的文本
 map <C-A> ggVG                  " 全选
 map <C-h> <C-W>h                " 切换到左边的分割窗口
@@ -96,14 +124,15 @@ map <C-k> <C-W>k                " 切换到上面的分割窗口
 map <C-l> <C-W>l                " 切换到右边的分割窗口
 
 " 无论是 Normal/Insert 模式，按 Ctrl+s 保存文件
-nmap <C-s> :w<CR>
-imap <C-s> <Esc>:w<CR>a
+nnoremap <C-s> :w!<CR>
+inoremap <C-s> <Esc>:w<CR>a
 " 在插入模式下快速进行行首/行尾跳转
-imap <C-f> <Esc>^
-imap <C-e> <Esc>$
+inoremap <C-f> <Esc>^
+inoremap <C-e> <Esc>$
 " <Leader> 为用户自定义命令的名字空间，<Leader> 键是 \
 inoremap <Leader>p <Esc>pa      " 插入模式粘贴
 inoremap vv <Esc>               " 插入模式下的 vv 键为 Esc 键
+vnoremap vv <Esc>               " 可视模式下的 vv 键为 Esc 键
 
 " 插入模式上下左右
 " inoremap <C-h> <Left>
@@ -136,19 +165,27 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-" 编辑 vimrc 相关配置文件
-nnoremap <Leader>e :edit $MYVIMRC<cr>
-" 重新加载 vimrc 文件，Leader 即前缀键默认为“\”
-nnoremap <Leader>s :source $MYVIMRC<cr>
-
-nnoremap U <C-r>                " 取消撤销操作，减少按键操作
-nnoremap <F1> :nohls<CR>        " 取消 Vim 查找高亮显示
-nnoremap <F2> :set nu! nu?<CR>  " 普通模式下按 F2 打开(或关闭)显示行号 
+nnoremap U <C-r>                   " 取消撤销操作，减少按键操作
+nnoremap <F1> :nohls<CR>           " 取消 Vim 查找高亮显示
+nnoremap <F2> :set nu! nu?<CR>     " 普通模式下按 F2 打开(或关闭)显示行号
 nnoremap <F3> :set list! list?<CR>
-nnoremap <F4> :set wrap! wrap?<CR>
-nnoremap <F5> :g/^\s*$/d<CR>    " 去空行
+nnoremap <F4> :set wrap! wrap?<CR> " 设置代码自动折行
+nnoremap <F5> :g/^\s*$/d<CR>       " 去空行
 " 普通模式下按 F6 打开(或关闭) 语法高亮
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映射语句后不能有其他字符，包括 Tab；否则按下F3会自动补全一些乱码
+
+" 标签页导航
+noremap <Leader>1 1gt
+noremap <Leader>2 2gt
+noremap <Leader>3 3gt
+noremap <Leader>4 4gt
+noremap <Leader>5 5gt
+noremap <Leader>6 6gt
+noremap <Leader>7 7gt
+noremap <Leader>8 8gt
+noremap <Leader>9 9gt
+noremap <Leader>0 :tablast<CR>
 
 " 文件保存退出命令映射
 :command W w
@@ -157,16 +194,26 @@ nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 :command Q q
 :command Qa qa
 :command QA qa
+nnoremap <Leader>q :q!<CR>         " Quickly close the current window
+nnoremap <Leader>w :w!<CR>         " Quickly save the current file
+nnoremap <C-c> :qall!<CR>          " 快速退出 Vim
 
-"unmap <F10>                      " 取消一个映射 
-"mapclear                         " 对应取消所有:map 绑定的，慎用
+"unmap <F10>                       " 取消一个映射
+"mapclear                          " 对应取消所有 :map 绑定的，慎用
 
-" 插件相关映射按键设置 ----------------------------
+" 编辑 vimrc 相关配置文件 ----------------------------
+" nnoremap <Leader>e :edit $MYVIMRC<CR>
+" nnoremap <silent> <Leader>s :so $MYVIMRC<CR>
+nnoremap <Leader>e :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
+nnoremap <Leader>s :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，Leader 即前缀键默认为“\”
+
+" 插件相关映射按键设置 --------------------------------
 " 查看、安装、更新、删除插件 命令映射
-nnoremap <Leader><Leader>s :PlugStatus<cr>
-nnoremap <Leader><Leader>i :PlugInstall<cr>
-nnoremap <Leader><Leader>u :PlugUpdate<cr>
-nnoremap <Leader><Leader>c :PlugClean<cr>
+nnoremap <Leader><Leader>s :PlugStatus<CR>
+nnoremap <Leader><Leader>i :PlugInstall<CR>
+nnoremap <Leader><Leader>u :PlugUpdate<CR>
+nnoremap <Leader><Leader>g :PlugUpgrade<CR>     " 升级 vim-plug 本身
+nnoremap <Leader><Leader>c :PlugClean<CR>
 
 " 预览插件 markdown-preview 快捷键 -------------------
 nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式打开 md 预览
@@ -175,25 +222,27 @@ nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式关闭 md 预览
 imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭 md 预览
 
 " 插件 NERDTree 设置
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nnoremap <leader>N :NERDTreeClose<CR>
+nnoremap <Leader>n :NERDTreeFocus<CR>
+nnoremap <Leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+nnoremap <Leader>N :NERDTreeClose<CR>
 
-" 插件安装 ------------------------------------ 
+" 插件安装 -----------------------------------------
 " 需要提前安装 vim-plug 管理插件
 call plug#begin('~/.vim/plugged')
-Plug 'mhinz/vim-startify'         " Vim 启动插件
-Plug 'preservim/nerdtree'         " 显示 Vim 目录树插件
+
+Plug 'mhinz/vim-startify'                " Vim 启动插件
+Plug 'preservim/nerdtree'                " 显示 Vim 目录树插件
 Plug 'iamcco/mathjax-support-for-mkdp'   " 用于 Markdown 预览数学公式
 Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
+
 " Initialize plugin system
 call plug#end()
 
-" 自定义函数 ----------------------------------
+" 自定义函数 ---------------------------------------
 " 自动识别 Markdown 文件
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" 新建 .sh，.java 文件，自动插入文件头 -----------
+" 新建 .sh，.java 文件，自动插入文件头 ----------------
 autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
 " 定义函数 SetTitle，自动插入文件头
 func SetTitle()
@@ -215,6 +264,5 @@ func SetTitle()
 	" 新建文件后，自动定位到文件末尾
 	autocmd BufNewFile * normal G
 endfunc
-
 
 
