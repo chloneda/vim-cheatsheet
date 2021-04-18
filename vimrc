@@ -53,6 +53,7 @@ set background=dark             " Theme 主题
 set t_Co=256			        " 指定配色方案是 256 色
 
 " 主要配置 -------------------------------------
+syntax enable
 syntax on                       " 开启语法高亮
 set history=200                 " 记录 200 条历史命令
 set encoding=utf-8              " Vim 内部 buffer (缓冲区)、菜单文本等使用的编码方式
@@ -119,27 +120,26 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 
 map Y y$                        " 复制 从光标到行尾 所在范围的文本
 map <C-A> ggVG                  " 全选
-map <C-h> <C-W>h                " 切换到左边的分割窗口
-map <C-j> <C-W>j                " 切换到下面的分割窗口
-map <C-k> <C-W>k                " 切换到上面的分割窗口
-map <C-l> <C-W>l                " 切换到右边的分割窗口
+nnoremap <Leader>h <C-W>h       " 切换到左边的分割窗口
+nnoremap <Leader>j <C-W>j       " 切换到下面的分割窗口
+nnoremap <Leader>k <C-W>k       " 切换到上面的分割窗口
+nnoremap <Leader>l <C-W>l       " 切换到右边的分割窗口
+
+" 分割窗口后通过 "\" 和方向键 调整窗口大小
+nnoremap <Leader><Right> :vertical resize +5<CR>
+nnoremap <Leader><Left>  :vertical resize -5<CR>
+nnoremap <Leader><Up>    :resize +5<CR>
+nnoremap <Leader><Down>  :resize -5<CR>
 
 " 无论是 Normal/Insert 模式，按 Ctrl+s 保存文件
-nnoremap <C-s> :w!<CR>
-inoremap <C-s> <Esc>:w<CR>a
-" 在插入模式下快速进行行首/行尾跳转
-inoremap <C-f> <Esc>^
+nnoremap <C-s> :wq!<CR>         " Normal 模式，按 Ctrl+s 保存文件并退出
+inoremap <C-s> <Esc>:w<CR>
+inoremap <C-f> <Esc>^           " 在插入模式下快速进行行首/行尾跳转
 inoremap <C-e> <Esc>$
-" <Leader> 为用户自定义命令的名字空间，<Leader> 键是 \
+" <Leader> 为用户自定义命令的名字空间，<Leader> 键是 "\"
 inoremap <Leader>p <Esc>pa      " 插入模式粘贴
 inoremap vv <Esc>               " 插入模式下的 vv 键为 Esc 键
 vnoremap vv <Esc>               " 可视模式下的 vv 键为 Esc 键
-
-" 插入模式上下左右
-" inoremap <C-h> <Left>
-" inoremap <C-j> <Down>
-" inoremap <C-k> <Up>
-" inoremap <C-l> <Right>
 
 " 括号等自动补全
 inoremap ( ()<Esc>i
@@ -160,20 +160,31 @@ nnoremap <silent> g* g*zz
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" 戒掉使用光标键的习惯，善用 h、j、k 及 l 移动光标
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+" 戒掉使用方向键的习惯，善用 h、j、k 及 l 移动光标
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+
+" 插入模式禁用方向键，解决办法呢？ 1、退出插入模式使用 h j k l。 2、重新映射方向键，如下
+inoremap <Left> <nop>
+inoremap <Right> <nop>
+inoremap <Up> <nop>
+inoremap <Down> <nop>
+
+" 插入模式上下左右
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
 
 nnoremap U <C-r>                   " 取消撤销操作，减少按键操作
 nnoremap <F1> :nohls<CR>           " 取消 Vim 查找高亮显示
 nnoremap <F2> :set nu! nu?<CR>     " 普通模式下按 F2 打开(或关闭)显示行号
-nnoremap <F3> :set list! list?<CR>
+nnoremap <F3> :set list! list?<CR> " 显示非可见字符，如制表符被显示为 “^I”，而行尾则标识为 “$”。
 nnoremap <F4> :set wrap! wrap?<CR> " 设置代码自动折行
 nnoremap <F5> :g/^\s*$/d<CR>       " 去空行
-" 普通模式下按 F6 打开(或关闭) 语法高亮
-nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>      " 普通模式下按 F6 打开(或关闭) 语法高亮
 inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映射语句后不能有其他字符，包括 Tab；否则按下F3会自动补全一些乱码
 
 " 标签页导航
@@ -189,9 +200,11 @@ noremap <Leader>9 9gt
 noremap <Leader>0 :tablast<CR>
 
 " 文件保存退出命令映射
-:command W w
+" :command W w!                    " 映射为 为超级用户权限保存文件
 :command WQ wq
 :command Wq wq
+" :W 以超级用户权限保存文件
+command W w !sudo tee % > /dev/null
 :command Q q
 :command Qa qa
 :command QA qa
@@ -199,14 +212,14 @@ nnoremap <Leader>q :q!<CR>         " Quickly close the current window
 nnoremap <Leader>w :w!<CR>         " Quickly save the current file
 nnoremap <C-c> :qall!<CR>          " 快速退出 Vim
 
-"unmap <F10>                       " 取消一个映射
-"mapclear                          " 对应取消所有 :map 绑定的，慎用
+" unmap <F10>                      " 取消一个映射
+" mapclear                         " 对应取消所有 :map 绑定的，慎用
 
 " 编辑 vimrc 相关配置文件 ----------------------------
 " nnoremap <Leader>e :edit $MYVIMRC<CR>
 " nnoremap <silent> <Leader>s :so $MYVIMRC<CR>
 nnoremap <Leader>e :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
-nnoremap <Leader>s :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，Leader 即前缀键默认为“\”
+nnoremap <Leader>s :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，Leader 即前缀键默认为 “\”
 
 " 插件相关映射按键设置 --------------------------------
 " 查看、安装、更新、删除插件 命令映射
@@ -242,14 +255,12 @@ Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
 call plug#end()
 
 " 自定义函数 ---------------------------------------
-" 自动识别 Markdown 文件
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown   " 自动识别 Markdown 文件
 
 " 新建 .sh，.java 文件，自动插入文件头 ----------------
 autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
-" 定义函数 SetTitle，自动插入文件头
-func SetTitle()
-	"如果文件类型为 .sh 文件
+func SetTitle()                          " 定义函数 SetTitle，自动插入文件头
+	" 如果文件类型为 .sh 文件
 	if &filetype == 'sh'
 		call setline(1,"\#########################################################################")
 		call append(line("."), "\# File Name: ".expand("%"))
