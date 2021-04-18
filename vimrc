@@ -35,8 +35,8 @@
 " Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
 
 " 环境设置 -------------------------------------
-" 关闭兼容 vi 模式
-set nocompatible                " 首先必须设定的选项，避免 vi 以前版本bug和局限，从而产生副作用
+" 关闭兼容 vi 键盘模式，而使用 Vim 自己的
+set nocompatible                " 首先必须设定的选项，避免 vi 以前版本 Bug 和局限，从而产生副作用
 " Change shell
 set shell=/bin/bash             " Vim 需要一个符合 POSIX 的 Shell
 
@@ -86,7 +86,8 @@ set autowrite                   " 自动保存
 
 " 其他配置 -------------------------------------
 filetype on                     " 检测文件类型
-filetype indent on
+filetype indent on              " 为特定文件类型载入相关缩进文件
+filetype plugin on              " 允许载入文件类型插件
 set mouse=a                     " 启用鼠标
 set ruler                       " 显示光标当前位置
 set title                       " Show file in titlebar
@@ -96,7 +97,7 @@ set selection=exclusive         " 指定在选择文本时光标所在位置也�
 set selectmode=mouse,key        " 使鼠标和键盘都可以控制光标选择文本
 set ignorecase                  " 搜索忽略大小写
 set smartcase                   " 智能大小写敏感，只要有一个字母大写，就大小写敏感，否则不敏感
-set noexpandtab                 " 不允许扩展 Table
+set noexpandtab                 " 不允许用空格代替制表符
 set whichwrap+=<,>,h,l          " 允许 Backspace 和光标键跨越行边界
 set confirm                     " 在处理未保存或只读文件的时候，弹出确认
 set nobackup                    " 禁止备份
@@ -231,6 +232,8 @@ nnoremap <Leader>N :NERDTreeClose<CR>
 call plug#begin('~/.vim/plugged')
 
 Plug 'mhinz/vim-startify'                " Vim 启动插件
+Plug 'vim-airline/vim-airline'           " Vim 状态栏提供更优秀的显示功能
+Plug 'morhetz/gruvbox'                   " 界面配色方案
 Plug 'preservim/nerdtree'                " 显示 Vim 目录树插件
 Plug 'iamcco/mathjax-support-for-mkdp'   " 用于 Markdown 预览数学公式
 Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
