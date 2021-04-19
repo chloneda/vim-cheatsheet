@@ -737,7 +737,7 @@ ma                  # 保存当前位置到书签 a ，书签名小写字母为�
 :h :!               # 查看如何运行外部命令
 :h tips             # 查看 Vim 内置的常用技巧文档
 :h set-termcap      # 查看如何设置按键扫描码
-:viusage            # Nornal 模式帮助
+:viusage            # Normal 模式帮助
 :exusage            # EX 命令帮助
 :version            # 显示当前 Vim 的版本号和特性
 ```

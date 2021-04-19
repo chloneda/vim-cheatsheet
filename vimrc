@@ -38,7 +38,7 @@
 " 关闭兼容 vi 键盘模式，而使用 Vim 自己的
 set nocompatible                " 首先必须设定的选项，避免 vi 以前版本 Bug 和局限，从而产生副作用
 " Change shell
-set shell=/bin/bash             " Vim 需要一个符合 POSIX 的 Shell
+set shell=/bin/bash             " Vim 需要一个符合 Posix 的 Shell
 
 " 设置外观 -------------------------------------
 set number                      " 显示行号
@@ -49,19 +49,16 @@ set guioptions-=L               " 隐藏左侧滚动条
 set guioptions-=b               " 隐藏底部滚动条
 set cursorline                  " 突出显示当前行
 set cursorcolumn                " 突出显示当前列
+set shortmess=atI               " 启动的时候不显示那个援助乌干达儿童的提示
+set go=                         " 不要图形按钮
 set background=dark             " Theme 主题
 set t_Co=256			        " 指定配色方案是 256 色
 
 " 主要配置 -------------------------------------
 syntax enable                   " 启用语法高亮度
 syntax on                       " 开启语法高亮
-set history=200                 " 记录 200 条历史命令
-set encoding=utf-8              " Vim 内部 buffer (缓冲区)、菜单文本等使用的编码方式
-set fileencoding=utf-8          " 当前编辑文件的字符编码方式
-set fileencodings=uft-8,gbk     " 使用 UTF-8 或 GBK 打开文件
-set termencoding=utf-8          " Vim 所工作的终端的字符编码方式
-set langmenu=zh_CN.UTF-8        " 显示中文菜单
-set helplang=cn                 " 帮助系统设置为中文
+set history=1000                " 记录 1000 条历史命令
+set magic                       " 设置魔术
 set showcmd                     " 输入的命令显示出来
 set hlsearch                    " 高亮搜索的字符串
 set incsearch                   " 即时搜索
@@ -85,11 +82,19 @@ set matchtime=1                 " 匹配括号高亮的时间（单位是十分�
 set autoread                    " 设置当文件被改动时自动载入
 set autowrite                   " 自动保存
 
+set helplang=cn                 " 帮助系统设置为中文
+set langmenu=zh_CN.UTF-8        " 显示中文菜单
+set encoding=utf-8              " Vim 内部 buffer (缓冲区)、菜单文本等使用的编码方式
+set fileencoding=utf-8          " 当前编辑文件的字符编码方式
+set fileencodings=uft-8,gbk,gb2312,gb18030     " 使用 UTF-8、GBK 等打开文件
+set termencoding=utf-8          " Vim 所工作的终端的字符编码方式
+
 " 其他配置 -------------------------------------
 filetype on                     " 检测文件类型
 filetype indent on              " 为特定文件类型载入相关缩进文件
 filetype plugin on              " 允许载入文件类型插件
 set mouse=a                     " 启用鼠标
+set noeb                        " 去掉输入错误的提示声音
 set ruler                       " 显示光标当前位置
 set title                       " Show file in titlebar
 set foldmethod=indent           " 基于缩进进行代码折叠
@@ -108,11 +113,15 @@ set report=0                    " 通过使用 :commands 命令，告诉我们�
 set equalalways                 " 分割窗口时保持相等的宽/高
 set splitright                  " 竖直 split 时，在右边开启
 set splitbelow                  " 水平 split 时，在下边开启
+set viminfo+=!                  " 保存全局变量
+set iskeyword+=_,$,@,%,#,-      " 带有如下符号的单词不要被换行分割
 
 " Vim 重新打开文件时，回到上次历史所编辑文件的位置
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 " 让 vimrc 配置变更立即生效
 " autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" 设置在状态行显示的信息
+" set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
 
 " 按键映射，尽量使用 nnoremap 代理 nmap，比如 ----------------------
 " nmap j k                      " nmap 是递归映射，会出现不可预期的问题
@@ -254,7 +263,10 @@ Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
 call plug#end()
 
 " 自定义函数 ---------------------------------------
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown   " 自动识别 Markdown 文件
+" autocmd BufNewFile,BufReadPost *.md set filetype=markdown                           " 自动识别 Markdown 文件
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown   " 自动识别 Markdown 文件
+au BufRead,BufNewFile *.{go}   set filetype=go
+au BufRead,BufNewFile *.{js}   set filetype=javascript
 
 " 新建 .sh，.java 文件，自动插入文件头 ----------------
 autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
