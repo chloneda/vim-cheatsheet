@@ -132,7 +132,7 @@ nnoremap <Leader><Down>  :resize -5<CR>
 
 " 无论是 Normal/Insert 模式，按 Ctrl+s 保存文件
 nnoremap <C-s> :wq!<CR>         " Normal 模式，按 Ctrl+s 保存文件并退出
-inoremap <C-s> <Esc>:w<CR>
+inoremap <C-s> <Esc>:w<CR>a
 inoremap <C-f> <Esc>^           " 在插入模式下快速进行行首/行尾跳转
 inoremap <C-e> <Esc>$
 " <Leader> 为用户自定义命令的名字空间，<Leader> 键是 "\"
