@@ -93,6 +93,8 @@ set termencoding=utf-8          " Vim 所工作的终端的字符编码方式
 filetype on                     " 检测文件类型
 filetype indent on              " 为特定文件类型载入相关缩进文件
 filetype plugin on              " 允许载入文件类型插件
+filetype plugin indent on       " Vim 对不同类型的文件进行补全时，设置不同文件类型的补全函数，需要打开文件类型检测
+set completeopt=longest,menu    " 打开预览窗口会导致下拉菜单抖动，一般都去掉预览窗口的显示
 set mouse=a                     " 启用鼠标
 set noeb                        " 去掉输入错误的提示声音
 set ruler                       " 显示光标当前位置
