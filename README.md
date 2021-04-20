@@ -625,7 +625,7 @@ vim +/target file   # 打开 file 并将光标移动到找到的第一个 target
 :badd <filename>    # 将文件添加到缓存列表
 :set hidden         # 设置隐藏模式（未保存的缓存可以被切换走，或者关闭）
 :set nohidden       # 关闭隐藏模式（未保存的缓存不能被切换走，或者关闭）
-n Ctrl+^            # 切换缓存，先输入数字的缓存编号，再按 Ctrl + 6
+n Ctrl+^            # 切换缓存，先输入数字的缓存编号，再按 Ctrl+6
 ```
 
 
