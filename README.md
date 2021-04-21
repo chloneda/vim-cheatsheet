@@ -585,7 +585,7 @@ gf                  # 打开名称为光标下文件名的文件
 :enew               # 在当前窗口创建新文件
 :vnew               # 在左右切分的新窗口中编辑新文件
 :tabnew             # 在新的标签页中编辑新文件
-:version            # 查看 Vim 版本
+:version            # 查看 Vim 版本，同时也查看 Vim 载入配置文件的优先顺序
 ZZ                  # 保存文件（如果有改动的话），并关闭窗口
 ZQ                  # 不保存文件关闭窗口
 ```
@@ -926,14 +926,14 @@ Shift+Insert        # 粘贴系统剪贴板的内容（GVIM）
 
 命令行模式下：
 ```bash
-:history                # 查看所有命令行模式下输入的命令历史
-:history search或 / 或？ # 查看搜索历史
+:history                  # 查看所有命令行模式下输入的命令历史
+:history search 或 / 或 ？ # 查看搜索历史
 ```
 
 普通模式下：
 ```bash
-q/                  # 查看使用/输入的搜索历史
-q?                  # 查看使用？输入的搜索历史
+q/                  # 查看使用 / 输入的搜索历史
+q?                  # 查看使用 ？输入的搜索历史
 q:                  # 查看命令行历史
 ```
 
@@ -1128,7 +1128,7 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 
 ## 相关书籍
 
-[Vim 实用技巧（英文版）](https://www.amazon.com/Practical-Vim-Edit-Speed-Thought-ebook-dp-B018T6ZVPK/dp/B018T6ZVPK/ref=mt_other?_encoding=UTF8&me=&qid=) | [Vim 实用技巧（中文版）](https://book.douban.com/subject/26967597/)
+[Vim 实用技巧（英文版）](https://www.amazon.com/Practical-Vim-Edit-Speed-Thought-ebook-dp-B018T6ZVPK/dp/B018T6ZVPK/ref=mt_other?_encoding=UTF8&me=&qid=) |  [Vim 实用技巧（中文版）](https://book.douban.com/subject/26967597/)
 
 
 
