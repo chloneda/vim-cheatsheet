@@ -977,11 +977,11 @@ Ctrl+r 寄存器名称        # 插入模式下（无需输入寄存器引用符
 编辑 Vim 配置文件：
 
 ```bash
-:edit $MYVIMRC      # 在 Vim 的命令模式下使用该命令打开 Vim 配置文件
+:edit $MYVIMRC      # Vim 命令模式下使用该命令打开 Vim 配置文件
 :source $MYVIMRC    # Vim 配置文件改动后，使用该命令加载新的配置选项，若 vimrc 文件恰好是当前活动的缓冲区，则此命令可简化为:so %。
 ```
 
-**Vim 配置说明。注意：Vim 配置可以在命令模式下单个设置，只在当前窗口生效！**
+**Vim 配置说明，详情请查看 [vimrc 配置文件](./vimrc)。注意：Vim 配置可以在命令模式下单个设置，只在当前窗口生效！**
 ```bash
 syntax              # 列出已经定义的语法项
 syntax clear        # 清除已定义的语法规则
@@ -1128,7 +1128,7 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 
 ## 相关书籍
 
-[Vim 实用技巧（第2版）](https://book.douban.com/subject/26967597/)
+[Vim 实用技巧（英文版）](https://www.amazon.com/Practical-Vim-Edit-Speed-Thought-ebook-dp-B018T6ZVPK/dp/B018T6ZVPK/ref=mt_other?_encoding=UTF8&me=&qid=) | [Vim 实用技巧（中文版）](https://book.douban.com/subject/26967597/)
 
 
 
