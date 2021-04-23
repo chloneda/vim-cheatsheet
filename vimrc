@@ -14,22 +14,22 @@
 "  for MS-DOS and Win32:  $VIM\_vimrc
 "	    for OpenVMS:  sys$login:.vimrc
 "
-" +----------+---------------------+
-" | Key      | Function            |
-" +----------+---------------------+
-" | F1       | 取消 Vim 查找高亮显示  |
-" | F2       | 打开(或关闭)显示行号   |
+" +----------+-----------------------+
+" | Key      | Function              |
+" +----------+-----------------------+
+" | F1       | 取消 Vim 查找高亮显示 |
+" | F2       | 打开(或关闭)显示行号  |
 " | F3       | 显示非可见字符        |
 " | F4       | 设置代码自动折行      |
-" | F5       | 去空行              |
+" | F5       | 去空行                |
 " | F6       | 打开(或关闭) 语法高亮 |
-" | F7       | 自动补全代码         |
+" | F7       | 自动补全代码          |
 " | F8       | 普通模式打开 md 预览  |
 " | F9       | 普通模式关闭 md 预览  |
-" | F10      |                    |
-" | F12      |                    |
+" | F10      |                       |
+" | F12      |                       |
 " | <Ctrl+c> | 快速推出 Vim（:qall!）|
-" +----------+---------------------+
+" +----------+-----------------------+
 " =======================================================
 
 " Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
@@ -126,6 +126,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
 
 " 按键映射，尽量使用 nnoremap 代理 nmap，比如 ----------------------
+" :map 递归映射，可以映射的模式：normal, visual, operator-pending
 " nmap j k                      " nmap 是递归映射，会出现不可预期的问题
 " nmap k G                      " 当按下 j 键时，实际上执行的是 G 键
 map Y y$                        " 复制 从光标到行尾 所在范围的文本
@@ -165,6 +166,13 @@ nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
+
+nnoremap }   }zz
+nnoremap {   {zz
+nnoremap ]]  ]]zz
+nnoremap [[  [[zz
+nnoremap []  []zz
+nnoremap ][  ][zz
 
 " 加快视口的滚动速度
 nnoremap <C-e> 3<C-e>
@@ -208,6 +216,10 @@ noremap <Leader>7 7gt
 noremap <Leader>8 8gt
 noremap <Leader>9 9gt
 noremap <Leader>0 :tablast<CR>
+
+" 可视模式选中行时，可以用 < 或 > 来调整缩进，同时连续按下 g v 来重新选中他们，避免调整后不会保持选中状态
+xnoremap <  <gv
+xnoremap >  >gv
 
 " 文件保存退出命令映射
 " :command W w!                    " 映射为 为超级用户权限保存文件
@@ -269,6 +281,9 @@ call plug#end()
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown   " 自动识别 Markdown 文件
 au BufRead,BufNewFile *.{go}   set filetype=go
 au BufRead,BufNewFile *.{js}   set filetype=javascript
+" 当前行高亮（请参阅 :h cursorline）功能，该设置会让效果出现在当前窗口，但在插入模式中关闭这个效果
+autocmd InsertLeave,WinEnter * set cursorline
+autocmd InsertEnter,WinLeave * set nocursorline
 
 " 新建 .sh，.java 文件，自动插入文件头 ----------------
 autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
