@@ -1142,8 +1142,7 @@ Command line mode  # Press : or / or ? To start
 ## Reference
 
 - https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt                                                                                                                   
-- http://blog.g-design.net/post/4789778607/vim-cheat-sheet
-- https://yuweijun.github.io/vim-zh/usr_toc.html                                                                                                                                       
+- http://blog.g-design.net/post/4789778607/vim-cheat-sheet                                                                                                                                       
 - http://www.fprintf.net/vimCheatSheet.html                                                                                                                                                        
 - http://www.ouyaoxiazai.com/article/24/654.html                                                                                                                                                   
 - http://bbs.it-home.org/thread-80794-1-1.html                                                                                                                                                     
