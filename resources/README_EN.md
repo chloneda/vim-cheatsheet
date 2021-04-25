@@ -5,9 +5,9 @@
 > Vim command cheat sheet, annotated vimrc configuration file, classic Vim keyboard map, practical Vim books, Markdown format, catalog search, quick and familiar use!
 
 - [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim official website](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)  
-- [Vim custom configuration file - vimrc](./vimrc)        
-- [God-level plugin for Chrome browser - Vimium](./vimium.md)
-- [Chinese](./README.md) | [English](./README_EN.md)   
+- [Vim custom configuration file - vimrc](../vimrc)        
+- [God-level plugin for Chrome browser - Vimium](vimium.md)
+- [Chinese](../README.md) | [English](./README_EN.md)   
 
 
 
@@ -982,7 +982,7 @@ Edit the Vim configuration file:
 :source $MYVIMRC    # After the Vim configuration file is changed, use this command to load the new configuration options. If the vimrc file happens to be the currently active buffer, this command can be simplified to: so %.                                                                                                               
 ```
 
-**Vim configuration instructions, please refer to [vimrc configuration file](./vimrc) for details. Note: Vim configuration can be set individually in command mode and only takes effect in the current window！**                                                                                                                           
+**Vim configuration instructions, please refer to [vimrc configuration file](../vimrc) for details. Note: Vim configuration can be set individually in command mode and only takes effect in the current window！**                                                                                                                           
 ```bash                                                                                                                                                                                            
 syntax              # List the defined grammar items                                                                                                                                                                   
 syntax clear        # Clear defined grammar rules                                                                                                                                                                   

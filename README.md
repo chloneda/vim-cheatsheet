@@ -5,9 +5,9 @@
 > Vim 命令速查表，注释化 vimrc 配置文件，经典 Vim 键盘图，实用 Vim 书籍，Markdown 格式，目录化检索，快速熟悉使用！
 
 - [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim 官网](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
-- [Vim 自定义配置文件 - vimrc](./vimrc)
-- [Chrome 浏览器神级插件 - Vimium](./vimium.md)
-- [简体中文](./README.md) | [English](./README_EN.md) 
+- [Vim 自定义配置文件 - vimrc](./resources/vimrc)
+- [Chrome 浏览器神级插件 - Vimium](./resources/vimium.md)
+- [简体中文](./README.md) | [English](./resources/README_EN.md) 
 
 
 
@@ -1135,7 +1135,7 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 
 ## Vim 键盘图
 
-![vim 命令键盘图](vim-commands_CN.png)
+![vim 命令键盘图](resources/vim-commands_CN.png)
 
 
 
