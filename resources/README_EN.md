@@ -1,8 +1,8 @@
-# Vim command cheat sheet
+<div align='center'>
+    <h1>Vim command cheat sheet</h1>
+</div>
 
-## Introduction
-
-> Vim command cheat sheet, annotated vimrc configuration file, classic Vim keyboard map, practical Vim books, Markdown format, catalog search, quick and familiar use!
+> Introduction: Vim command cheat sheet, annotated vimrc configuration file, classic Vim keyboard map, practical Vim books, Markdown format, catalog search, quick and familiar use!
 
 - [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim official website](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)  
 - [Vim custom configuration file - vimrc](../vimrc)        
@@ -586,7 +586,6 @@ gf                  # Open the file whose name is the file name under the cursor
 :enew               # Create a new file in the current window                                                                                                                                                                   
 :vnew               # Edit the new file in a new window divided into left and right                                                                                                                                                              
 :tabnew             # Edit the new file in a new tab                                                                                                                                                                 
-:version            # Check the Vim version, and also check the priority order of Vim loading configuration files                                                                                                                                              
 ZZ                  # Save the changed file, and close the exit window                                                                                                                                                          
 ZQ                  # Close the window without saving the file                                                                                                                                                                    
 ```
@@ -975,11 +974,15 @@ Ctrl+r register_name   # In insert mode (no need to enter register reference sym
                                                                                                                                                                                                    
 ## Vim configuration file
 
-Edit the Vim configuration file:
+> Note: Vim configuration files are available in global and user versions, and user configuration files take precedence over global system configuration files.
 
-```bash                                                                                                                                                                                            
+```bash
+:version            # Check the Vim version, and also check the priority order and location of Vim loading configuration files
+:echo $MYVIMRC      # Use this command in Vim command mode to output the location of the Vim configuration file                                                                                                                                                                                       
 :edit $MYVIMRC      # Use this command to open the Vim configuration file in Vim command mode                                                                                                                                                    
 :source $MYVIMRC    # After the Vim configuration file is changed, use this command to load the new configuration options. If the vimrc file happens to be the currently active buffer, this command can be simplified to: so %.                                                                                                               
+:echo $VIM          # Output the location of the global vimrc configuration file, stored in the Vim installation directory
+:echo $HOME         # Output the location of the user vimrc configuration file, stored in the user's home directory
 ```
 
 **Vim configuration instructions, please refer to [vimrc configuration file](../vimrc) for details. Note: Vim configuration can be set individually in command mode and only takes effect in the current window！**                                                                                                                           

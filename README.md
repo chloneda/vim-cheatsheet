@@ -1,10 +1,8 @@
 <div align='center'>
-  <h1>Vim 命令速查表</h1>
+    <h1>Vim 命令速查表</h1>
 </div>
 
-## 简介
-
-> Vim 命令速查表，注释化 vimrc 配置文件，经典 Vim 键盘图，实用 Vim 书籍，Markdown 格式，目录化检索，快速熟悉使用！
+> 简介：Vim 命令速查表，注释化 vimrc 配置文件，经典 Vim 键盘图，实用 Vim 书籍，Markdown 格式，目录化检索，快速熟悉使用！
 
 - [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim 官网](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 - [Vim 自定义配置文件 - vimrc](./vimrc)
@@ -588,7 +586,6 @@ gf                  # 打开名称为光标下文件名的文件
 :enew               # 在当前窗口创建新文件
 :vnew               # 在左右切分的新窗口中编辑新文件
 :tabnew             # 在新的标签页中编辑新文件
-:version            # 查看 Vim 版本，同时也查看 Vim 载入配置文件的优先顺序
 ZZ                  # 保存已改动的文件，并关闭退出窗口
 ZQ                  # 不保存文件关闭窗口
 ```
@@ -681,7 +678,7 @@ Ctrl+W |            # 横向最大化当前窗口
 
 ```bash
 :tabs               # 显示所有标签页
-:tabe <filename>    # 在新标签页中打开文件 filename
+:tabe <filename>    # 在新标签页中打开并编辑文件 filename
 :tabn               # 下一个标签页
 :tabp               # 上一个标签页
 :tabc               # 关闭当前标签页
@@ -741,8 +738,8 @@ ma                  # 保存当前位置到书签 a ，书签名小写字母为�
 :h tips             # 查看 Vim 内置的常用技巧文档
 :h set-termcap      # 查看如何设置按键扫描码
 :viusage            # Normal 模式帮助
-:exusage            # EX 命令帮助
-:version            # 显示当前 Vim 的版本号和特性
+:exusage            # Ex 命令帮助
+:version            # 查看 Vim 版本，同时也查看 Vim 载入配置文件的优先顺序及所在位置
 ```
 
 
@@ -977,11 +974,15 @@ Ctrl+r 寄存器名称        # 插入模式下（无需输入寄存器引用符
 
 ## Vim 配置文件
 
-编辑 Vim 配置文件：
+> 注意：Vim 配置文件有全局和用户两种版本，且用户配置文件优先于全局系统配置文件。
 
 ```bash
+:version            # 查看 Vim 版本，同时也查看 Vim 载入配置文件的优先顺序及所在位置
+:echo $MYVIMRC      # Vim 命令模式下使用该命令输出 Vim 配置文件的位置
 :edit $MYVIMRC      # Vim 命令模式下使用该命令打开 Vim 配置文件
 :source $MYVIMRC    # Vim 配置文件改动后，使用该命令加载新的配置选项，若 vimrc 文件恰好是当前活动的缓冲区，则此命令可简化为:so %。
+:echo $VIM          # 输出全局 vimrc 配置文件位置，存放在 Vim 的安装目录中
+:echo $HOME         # 输出用户 vimrc 配置文件位置，存放在用户主目录中
 ```
 
 **Vim 配置说明，详情请查看 [vimrc 配置文件](./vimrc)。注意：Vim 配置可以在命令模式下单个设置，只在当前窗口生效！**

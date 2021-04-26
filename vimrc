@@ -40,6 +40,15 @@ set nocompatible                " 首先必须设定的选项，避免 vi 以前
 " Change shell
 set shell=/bin/bash             " Vim 需要一个符合 Posix 的 Shell
 
+set viminfo=<100,'100,/50,:100,h,r$TEMP:,s10
+"           |    |    |   |    | |       + 不保存超过10KB寄存器
+"           |    |    |   |    | + 不保存TEMP目录下文件的相关信息
+"           |    |    |   |    + 载入viminfo文件时关闭hlsearch高亮
+"           |    |    |   + 保存命令历史条数
+"           |    |    + 保存搜索历史条数
+"           |    + 保存最近100个文件中的标记
+"           + 每个寄存器中保存的行数
+
 " 设置外观 -------------------------------------
 set number                      " 显示行号
 set relativenumber              " 行号以相对当前行的方式显示，方便跳转
@@ -88,8 +97,10 @@ set fileencoding=utf-8          " 当前编辑文件的字符编码方式，保�
 set fileencodings=uft-8,gbk,gb2312,gb18030     " Vim 启动时逐一按顺序使用第一个匹配到的编码方式打开文件
 set termencoding=utf-8          " Vim 所工作的终端的字符编码方式
 set helplang=cn                 " 帮助系统设置为中文
-set langmenu=zh_CN.UTF-8        " 显示中文菜单语言
-language messages zh_CN.utf-8   " 设置提示信息语言
+"set langmenu=zh_CN.UTF-8       " 显示中文菜单语言
+set langmenu=en_US.UTF-8        " 显示英文菜单语言
+"language messages zh_CN.utf-8  " 设置提示信息为中文
+language messages en_US.UTF-8   " 设置提示信息为英文
 source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单
 source $VIMRUNTIME/menu.vim     " 导入正常的菜单脚本
 
@@ -210,20 +221,40 @@ nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>      " 普通
 inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映射语句后不能有其他字符，包括 Tab；否则按下F3会自动补全一些乱码
 
 " 标签页导航
-noremap <Leader>1 1gt
-noremap <Leader>2 2gt
-noremap <Leader>3 3gt
-noremap <Leader>4 4gt
-noremap <Leader>5 5gt
-noremap <Leader>6 6gt
-noremap <Leader>7 7gt
-noremap <Leader>8 8gt
-noremap <Leader>9 9gt
-noremap <Leader>0 :tablast<CR>
+nnoremap <Leader>1 1gt
+nnoremap <Leader>2 2gt
+nnoremap <Leader>3 3gt
+nnoremap <Leader>4 4gt
+nnoremap <Leader>5 5gt
+nnoremap <Leader>6 6gt
+nnoremap <Leader>7 7gt
+nnoremap <Leader>8 8gt
+nnoremap <Leader>9 9gt
+nnoremap <Leader>0 :tablast<CR>
+nnoremap <C-Insert> :tabnew<CR>
+nnoremap <C-Delete> :tabclose<CR>
+nnoremap <silent><Tab>m :tabnew<CR>
+nnoremap <silent><Tab>e :tabclose<CR>
+nnoremap <silent><Tab>n :tabn<CR>
+nnoremap <silent><Tab>p :tabp<CR>
+nnoremap <silent><s-tab> :tabnext<CR>
+nnoremap <silent><Tab>m :tabnew<CR>
+nnoremap <silent><Tab>e :tabclose<CR>
+nnoremap <silent><Tab>n :tabn<CR>
+nnoremap <silent><Tab>p :tabp<CR>
+nnoremap <silent><s-tab> :tabnext<CR>
+inoremap <silent><s-tab> <ESC>:tabnext<CR>
 
 " 可视模式选中行时，可以用 < 或 > 来调整缩进，同时连续按下 g v 来重新选中他们，避免调整后不会保持选中状态
 xnoremap <  <gv
 xnoremap >  >gv
+
+" Set current directory to current file with ,cd
+nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
+" open windows command prompt in the current file's directory
+nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<cr>
+" open explorer in the current file's directory
+nnoremap <Leader>ce :!start explorer %:p:h:8<cr>
 
 " 文件保存退出命令映射
 " :command W w!                    " 映射为 为超级用户权限保存文件
@@ -244,6 +275,7 @@ nnoremap <C-c> :qall!<CR>          " 快速退出 Vim
 " 编辑 vimrc 相关配置文件 ----------------------------
 " nnoremap <Leader>e :edit $MYVIMRC<CR>
 " nnoremap <silent> <Leader>s :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>tv :tabe $MYVIMRC<CR>
 nnoremap <Leader>ev :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
 nnoremap <Leader>sv :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，Leader 即前缀键默认为 “\”
 
