@@ -82,12 +82,16 @@ set matchtime=1                 " 匹配括号高亮的时间（单位是十分�
 set autoread                    " 设置当文件被改动时自动载入
 set autowrite                   " 自动保存
 
-set helplang=cn                 " 帮助系统设置为中文
-set langmenu=zh_CN.UTF-8        " 显示中文菜单
+" 编码方式及菜单设置 -------------------------------
 set encoding=utf-8              " Vim 内部 buffer (缓冲区)、菜单文本等使用的编码方式
-set fileencoding=utf-8          " 当前编辑文件的字符编码方式
-set fileencodings=uft-8,gbk,gb2312,gb18030     " 使用 UTF-8、GBK 等打开文件
+set fileencoding=utf-8          " 当前编辑文件的字符编码方式，保存文件也使用这种编码方式
+set fileencodings=uft-8,gbk,gb2312,gb18030     " Vim 启动时逐一按顺序使用第一个匹配到的编码方式打开文件
 set termencoding=utf-8          " Vim 所工作的终端的字符编码方式
+set helplang=cn                 " 帮助系统设置为中文
+set langmenu=zh_CN.UTF-8        " 显示中文菜单语言
+language messages zh_CN.utf-8   " 设置提示信息语言
+source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单
+source $VIMRUNTIME/menu.vim     " 导入正常的菜单脚本
 
 " 其他配置 -------------------------------------
 filetype on                     " 检测文件类型
@@ -240,8 +244,8 @@ nnoremap <C-c> :qall!<CR>          " 快速退出 Vim
 " 编辑 vimrc 相关配置文件 ----------------------------
 " nnoremap <Leader>e :edit $MYVIMRC<CR>
 " nnoremap <silent> <Leader>s :so $MYVIMRC<CR>
-nnoremap <Leader>e :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
-nnoremap <Leader>s :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，Leader 即前缀键默认为 “\”
+nnoremap <Leader>ev :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
+nnoremap <Leader>sv :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，Leader 即前缀键默认为 “\”
 
 " 插件相关映射按键设置 --------------------------------
 " 查看、安装、更新、删除插件 命令映射
