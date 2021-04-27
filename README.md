@@ -2,7 +2,7 @@
     <h1>Vim 命令速查表</h1>
 </div>
 
-> 简介：Vim 命令速查表，注释化 vimrc 配置文件，经典 Vim 键盘图，实用 Vim 书籍，Markdown 格式，目录化检索，快速熟悉使用！
+> 简介：Vim 命令速查表，注释化 vimrc 配置文件，经典 Vim 键盘图，实用 Vim 书籍，Markdown 格式，目录化检索，系统化学习，快速熟悉使用！
 
 - [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim 官网](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 - [Vim 自定义配置文件 - vimrc](./vimrc)
