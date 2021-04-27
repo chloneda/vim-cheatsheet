@@ -43,7 +43,7 @@ G                   # Jump to the last line, the effect is equivalent to Ctrl+<E
 NG                  # Jump to the Nth row, for example 10G is to move to the tenth row                                        
 :N                  # Jump to the Nth line, for example: 10<Enter> is to move to the tenth line                                 
 10%                 # Move to 10% of the file                                                   
-15|                 # Move to 15 columns of the current row                                                  
+N|                  # Move to N columns of the current row                                                  
 w                   # Skip to the beginning of the next word (word: words separated by punctuation or spaces)                                    
 W                   # Skip to the beginning of the next word (Word: words separated by spaces)                                       
 e                   # Jump to the end of the next word (word: words separated by punctuation or spaces)                                    
@@ -221,8 +221,8 @@ dgg                 # Delete to the head of the file
 dG                  # Delete to the end of the file                                                                                                                                                                      
 d}                  # Delete the next paragraph                                                                                                                                                                       
 d{                  # Delete the previous paragraph                                                                                                                                                                      
-10d                 # Delete 10 lines from the beginning of the current line                                                                                                                                                                
-:10d                # Delete line 10                                                                                                                                                                     
+Nd                  # Delete N lines from the beginning of the current line                                                                                                                                                                
+:Nd                 # Delete line N                                                                                                                                                                     
 :1,10d              # Delete 1-10 lines                                                                                                                                                                    
 J                   # Combine multiple lines into one line                                                                                                                                                                      
 .                   # Repeat the last operation                                                                                                                                                                      

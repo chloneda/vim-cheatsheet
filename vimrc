@@ -26,8 +26,8 @@
 " | F7       | 自动补全代码          |
 " | F8       | 普通模式打开 md 预览  |
 " | F9       | 普通模式关闭 md 预览  |
-" | F10      |                       |
-" | F12      |                       |
+" | F10      | F10 键来新建标签页   |
+" | F12      |                     |
 " | <Ctrl+c> | 快速推出 Vim（:qall!）|
 " +----------+-----------------------+
 " =======================================================
@@ -217,6 +217,7 @@ nnoremap <F4> :set wrap! wrap?<CR> " 设置代码自动折行
 nnoremap <F5> :g/^\s*$/d<CR>       " 去空行
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>      " 普通模式下按 F6 打开(或关闭) 语法高亮
 inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映射语句后不能有其他字符，包括 Tab；否则按下F3会自动补全一些乱码
+nnoremap <F10> <Esc>:tabnew<CR>    " 指定F10键来新建标签页
 
 " 标签页导航
 nnoremap <Leader>1 1gt
@@ -241,9 +242,9 @@ nnoremap <silent><Tab>e :tabclose<CR>
 nnoremap <silent><Tab>n :tabn<CR>
 nnoremap <silent><Tab>p :tabp<CR>
 nnoremap <silent><s-tab> :tabnext<CR>
-inoremap <silent><s-tab> <ESC>:tabnext<CR>
+inoremap <silent><s-tab> <Esc>:tabnext<CR>
 
-" 可视模式选中行时，可以用 < 或 > 来调整缩进，同时连续按下 g v 来重新选中他们，避免调整后不会保持选中状态
+" 缩进后依然保持选中
 xnoremap <  <gv
 xnoremap >  >gv
 
