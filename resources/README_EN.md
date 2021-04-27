@@ -4,7 +4,8 @@
 
 > Introduction: Vim command cheat sheet, annotated vimrc configuration file, classic Vim keyboard map, practical Vim books, Markdown format, catalog search, quick and familiar use!
 
-- [vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Vim official website](https://www.vim.org/) | [Github](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)  
+- [Vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Gitee](https://gitee.com/chloneda/vim-cheatsheet)
+- [Vim official website](https://www.vim.org/) | [Vim](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)  
 - [Vim custom configuration file - vimrc](../vimrc)        
 - [God-level plugin for Chrome browser - Vimium](vimium.md)
 - [Chinese](../README.md) | [English](./README_EN.md)   
