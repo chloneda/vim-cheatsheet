@@ -135,8 +135,6 @@ set iskeyword+=_,$,@,%,#,-      " 带有如下符号的单词不要被换行分�
 
 " Vim 重新打开文件时，回到上次历史所编辑文件的位置
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-" 让 vimrc 配置变更立即生效
-" autocmd BufWritePost $MYVIMRC source $MYVIMRC
 " 设置在状态行显示的信息
 " set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
 
@@ -249,12 +247,17 @@ inoremap <silent><s-tab> <ESC>:tabnext<CR>
 xnoremap <  <gv
 xnoremap >  >gv
 
-" Set current directory to current file with ,cd
-nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
-" open windows command prompt in the current file's directory
-nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<cr>
-" open explorer in the current file's directory
-nnoremap <Leader>ce :!start explorer %:p:h:8<cr>
+" Using very magic mode
+nnoremap / /\v
+vnoremap / /\v
+cnoremap %s/ %s/\v
+nnoremap :g/ :g/\v
+
+nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>           " Set current directory to current file with ,cd
+nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<CR>   " open windows command prompt in the current file's directory
+nnoremap <Leader>ce :!start explorer %:p:h:8<CR>    " open explorer in the current file's directory
+nnoremap <space> za                                 " Space 空格键切换折叠
+nnoremap <Leader>W :%s/\s\+$//<cr>:let @/=''<CR>    " 删除当前文件中所有的行尾多余空格
 
 " 文件保存退出命令映射
 " :command W w!                    " 映射为 为超级用户权限保存文件
@@ -278,6 +281,7 @@ nnoremap <C-c> :qall!<CR>          " 快速退出 Vim
 nnoremap <silent> <Leader>tv :tabe $MYVIMRC<CR>
 nnoremap <Leader>ev :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
 nnoremap <Leader>sv :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，Leader 即前缀键默认为 “\”
+autocmd BufWritePost $MYVIMRC source $MYVIMRC    " 让 vimrc 配置变更立即生效
 
 " 插件相关映射按键设置 --------------------------------
 " 查看、安装、更新、删除插件 命令映射

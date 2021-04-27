@@ -748,6 +748,7 @@ ma                  # Save the current position to bookmark a, the lowercase let
 
 ```bash                                                                                                                                                                                            
 :!command           # Execute a one-time Shell command, the following command: :!pwd, change the directory in the current Vim mode                                                                                                                                     
+:!!                 # Re-execute the most recently run command
 :shell              # Start an interactive Shell to execute multiple commands, the exit command exits and returns to Vim                                                                                                                                        
 :!ls                # Run the external command ls and wait for the return                                                                                                                                                              
 :r !ls              # Capture the output of the external command ls and insert it after the cursor                                                                                                                                                       

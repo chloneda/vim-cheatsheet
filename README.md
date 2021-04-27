@@ -25,10 +25,10 @@ N<command>          # 重复某个命令 N 次，例如：10k，光标上移 10 
 **注：一般模式下，任意一个动作都可以重复。**
 
 ```bash
-h                   # 光标左移，同 <Left> 键
-j                   # 光标下移，同 <Down> 键
-k                   # 光标上移，同 <Up> 键
-l                   # 光标右移，同 <Right> 键
+h                   # 光标左移，同 <Left> 方向键
+j                   # 光标下移，同 <Down> 方向键
+k                   # 光标上移，同 <Up> 方向键
+l                   # 光标右移，同 <Right> 方向键
 Ctrl+e              # 向上滚动一行
 Ctrl+y              # 向下滚动一行
 Ctrl+u              # 向上滚动半屏 --> Move up 1/2 a screen
@@ -748,7 +748,8 @@ ma                  # 保存当前位置到书签 a ，书签名小写字母为�
 
 ```bash
 :!command           # 执行一次性 Shell 命令，如下命令：:!pwd，当前 Vim 模式下改变目录
-:shell              # 启动一个交互的 Shell 执行多个命令，exit 命令退出并返回 Vim
+:!!                 # 重新执行最近一次运行过的命令
+:shell              # 启动一个交互的 Shell 执行多个命令，不需要退出Vim。exit 命令退出并返回 Vim
 :!ls                # 运行外部命令 ls，并等待返回
 :r !ls              # 将外部命令 ls 的输出捕获，并插入到光标后
 :w !sudo tee %      # sudo 以后保存当前文件，也可以这样 :w !sudo tee % > /dev/null
