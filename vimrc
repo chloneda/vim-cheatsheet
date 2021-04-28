@@ -24,7 +24,7 @@
 " | F7       | 自动补全代码
 " | F8       | 普通模式打开 md 预览
 " | F9       | 普通模式关闭 md 预览
-" | F10      | 新建标签页 
+" | F10      | 新建标签页
 " | F12      |
 " | <Ctrl+c> | 快速推出 Vim（:qall!）
 " +----------+------------------------------------------------------
@@ -211,10 +211,10 @@ nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 
 " 插入模式禁用方向键，解决办法呢？ 1、退出插入模式使用 h j k l。 2、重新映射方向键，如下
-inoremap <Left> <nop>
-inoremap <Right> <nop>
-inoremap <Up> <nop>
-inoremap <Down> <nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
 
 " 插入模式上下左右 按键映射
 inoremap <C-h> <Left>
