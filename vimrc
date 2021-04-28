@@ -352,8 +352,8 @@ autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
 func SetTitle()                          " 定义函数 SetTitle，自动插入文件头
 	" 如果文件类型为 .sh 文件
 	if &filetype == 'sh'
-		call setline(1,"\#########################################################################")
-		call append(line("."), "\# File Name: ".expand("%"))
+		call setline(1,          "\#########################################################################")
+		call append(line("."),   "\# File Name: ".expand("%"))
 		call append(line(".")+1, "\# Author: chloneda")
 		call append(line(".")+2, "\# mail: chloneda@gmail.com")
 		call append(line(".")+3, "\# Created Time: ".strftime("%c"))
