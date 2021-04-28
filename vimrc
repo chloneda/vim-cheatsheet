@@ -371,12 +371,11 @@ func SetTitle()                          " 定义函数 SetTitle，自动插入�
 	if &filetype == 'sh'
 		call setline(1,          "\#########################################################################")
 		call append(line("."),   "\# File Name: ".expand("%"))
-		call append(line(".")+1, "\# Author: chloneda")
-		call append(line(".")+2, "\# mail: chloneda@gmail.com")
-		call append(line(".")+3, "\# Created Time: ".strftime("%c"))
-		call append(line(".")+4, "\#########################################################################")
-		call append(line(".")+5, "\#!/usr/bin/env bash")
-		call append(line(".")+6, "")
+		call append(line(".")+1, "\# Author: chloneda <chloneda@gmail.com>")
+		call append(line(".")+2, "\# Created Time: ".strftime("%c"))
+		call append(line(".")+3, "\#########################################################################")
+		call append(line(".")+4, "\#!/usr/bin/env bash")
+		call append(line(".")+5, "")
 	endif
 	if &filetype == 'java'
 		call append(line(".")+6,"public class ".expand("%:r"))
