@@ -1070,7 +1070,7 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 
 
 
-**[asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)**：该插件使用 Vim 8 / NeoVim 的异步机制，让你在后台运行 shell 命令，并将结果实时显示到 Vim 的 Quickfix 窗口中。
+**[asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)**：该插件使用 Vim 8 / NeoVim 的异步机制，让你在后台运行 Shell 命令，并将结果实时显示到 Vim 的 Quickfix 窗口中。
 
 ```bash
 :AsyncRun ls        # 异步运行命令 ls 结果输出到 quickfix 使用 :copen 查看

@@ -28,14 +28,15 @@
 " | F12      |
 " | <Ctrl+c> | 快速推出 Vim（:qall!）
 " +----------+------------------------------------------------------
+"
+" Notes:
+"   1、Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
 " ==================================================================
-
-" Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 环境设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible                " 必须先设定的选项，关闭兼容 vi 键盘模式，而使用 Vim 自己的，避免 vi 以前版本 Bug 和局限而产生副作用
+set nocompatible                " 必须先设定的选项，关闭兼容 vi 模式，使用 Vim 自身的
 set shell=/bin/bash             " Vim 需要一个符合 Posix 的 Shell
 set viminfo=<100,'100,/50,:100,h,r$TEMP:,s10
 "           |    |    |   |    | |       + 不保存超过10KB寄存器
@@ -47,7 +48,7 @@ set viminfo=<100,'100,/50,:100,h,r$TEMP:,s10
 "           + 每个寄存器中保存的行数
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 设置外观
+" 外观设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number                      " 显示行号
 set relativenumber              " 行号以相对当前行的方式显示，方便跳转
@@ -80,7 +81,7 @@ set softtabstop=4               " 统一缩进为 4
 set shiftwidth=4                " 每一级缩进是多少个空格
 set smartindent                 " 开启智能缩进
 set autoindent                  " 开启自动缩进
-set backspace+=indent,eol,start " set backspace& 可以对其重置
+set backspace=2                 " 回车键正常处理indent,eol,start
 set scrolloff=5                 " 光标距离顶部和底部 5 行
 set laststatus=2                " 命令行为两行
 set cmdheight=2                 " 总是显示状态行
@@ -230,7 +231,7 @@ nnoremap <F4> :set wrap! wrap?<CR> " 设置代码自动折行
 nnoremap <F5> :g/^\s*$/d<CR>       " 去空行
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>      " 普通模式下按 F6 打开(或关闭) 语法高亮
 inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映射语句后不能有其他字符，包括 Tab；否则按下 F3 会自动补全一些乱码
-nnoremap <F10> <Esc>:tabnew<CR>    " 指定F10键来新建标签页
+nnoremap <F10> <Esc>:tabnew<CR>    " 指定 F10 键来新建标签页
 
 " 标签页导航 按键映射
 nnoremap <Leader>1 1gt
@@ -303,11 +304,12 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC    " 让 vimrc 配置变更立即�
 " 插件按键映射
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 查看、安装、更新、删除插件 按键映射
-nnoremap <Leader><Leader>s :PlugStatus<CR>
-nnoremap <Leader><Leader>i :PlugInstall<CR>
-nnoremap <Leader><Leader>u :PlugUpdate<CR>
+nnoremap <Leader><Leader>s :PlugStatus<CR>      " 查看插件状态
+nnoremap <Leader><Leader>i :PlugInstall<CR>     " 安装在配置文件中声明的插件
+nnoremap <Leader><Leader>u :PlugUpdate<CR>      " 更新插件
 nnoremap <Leader><Leader>g :PlugUpgrade<CR>     " 升级 vim-plug 本身
-nnoremap <Leader><Leader>c :PlugClean<CR>
+nnoremap <Leader><Leader>d :PlugDiff<CR>        " 查看插件的变化状态，简单地回滚有问题的插件
+nnoremap <Leader><Leader>c :PlugClean<CR>       " 删除插件
 
 " 预览插件 markdown-preview 按键映射
 nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式打开 md 预览
@@ -321,17 +323,32 @@ nnoremap <Leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
 nnoremap <Leader>N :NERDTreeClose<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 插件安装
+" 插件列表
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 需要提前安装 vim-plug 管理插件
 call plug#begin('~/.vim/plugged')
 
-Plug 'mhinz/vim-startify'                " Vim 启动插件
-Plug 'vim-airline/vim-airline'           " Vim 状态栏提供更优秀的显示功能
+" Apperance
 Plug 'morhetz/gruvbox'                   " 界面配色方案
+Plug 'vim-airline/vim-airline'           " Vim 状态栏提供更优秀的显示功能
+
+" Development
+Plug 'preservim/nerdcommenter'           " Vim 批量注释工具
+
+" File manage
+Plug 'mhinz/vim-startify'                " Vim 启动插件
 Plug 'preservim/nerdtree'                " 显示 Vim 目录树插件
+
+" Markdown
 Plug 'iamcco/mathjax-support-for-mkdp'   " 用于 Markdown 预览数学公式
 Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
+
+" Github
+Plug 'airblade/vim-gitgutter'
+
+" Search
+Plug 'Yggdroot/LeaderF'                  " 查找文件非常方便
+Plug 'easymotion/vim-easymotion'         " 快速定位
 
 " Initialize plugin system
 call plug#end()
