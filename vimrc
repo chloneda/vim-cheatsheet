@@ -299,9 +299,9 @@ nnoremap <Leader>ev :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文�
 nnoremap <Leader>sv :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，Leader 即前缀键默认为 “\”
 autocmd BufWritePost $MYVIMRC source $MYVIMRC    " 让 vimrc 配置变更立即生效
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件按键映射
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 查看、安装、更新、删除插件 按键映射
 nnoremap <Leader><Leader>s :PlugStatus<CR>
 nnoremap <Leader><Leader>i :PlugInstall<CR>
