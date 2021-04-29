@@ -69,8 +69,8 @@ L                   # 回到下一个历史页面（相当于浏览器的向右�
 ## 标记（锚点）
 
 ```bash
-ma                  # 设置当前页标记 a ，只能在当前tab页面跳转，m + 小写字母
-mA                  # 设置全局标记 A ，可以切换到其他tab的跳转过来，m + 大写字母
+ma                  # 设置当前页标记 a ，只能在当前 tab 页面跳转，m + 小写字母
+mA                  # 设置全局标记 A ，可以切换到其他 tab 的跳转过来，m + 大写字母
 `a                  # 跳转到本地标记 a
 `A                  # 跳转到 q 全局标记 a
 ``                  # 跳回到跳转之前的位置 (即在执行 gg，G，n，N，或/ a 之前的位置）
@@ -165,7 +165,7 @@ b                   # 取消选中上一个字符，字符和标点算一个字�
 ## 其他
 
 ```bash
-5t                   # 数字 num + t，打开 num 个 tab 页面
+Nt                   # 数字 N + t，打开 N 个 Tab 页面
 <Esc>                # Esc 按钮，可以从任意控制命令、任意模式中退出（例如插入模式、查找模式）
 ```
 
@@ -190,7 +190,7 @@ Shift+/              # 显示命令的帮助提示
 
 - [vimium.github.io](https://vimium.github.io/)
 - [Vimium 成神之路-键盘党的胜利](https://zhuanlan.zhihu.com/p/64533566)
-- [15分钟入门 Chrome神器 Vimium](https://www.jianshu.com/p/849d6b21e02e)
+- [15 分钟入门 Chrome 神器 Vimium](https://www.jianshu.com/p/849d6b21e02e)
 - [神器 Vimium：比同级程序员成长更快](https://zhuanlan.zhihu.com/p/38179086)
 
 

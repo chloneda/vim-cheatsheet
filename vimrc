@@ -81,7 +81,7 @@ set softtabstop=4               " 统一缩进为 4
 set shiftwidth=4                " 每一级缩进是多少个空格
 set smartindent                 " 开启智能缩进
 set autoindent                  " 开启自动缩进
-set backspace=2                 " 回车键正常处理indent,eol,start
+set backspace=2                 " 设置退格键可用，正常处理indent,eol,start
 set scrolloff=5                 " 光标距离顶部和底部 5 行
 set laststatus=2                " 命令行为两行
 set cmdheight=2                 " 总是显示状态行
@@ -153,8 +153,14 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " let mapleader = ","           " 定义 <Leader> 前缀键由 "\" 变为 ","
 map Y y$                        " 复制 从光标到行尾 所在范围的文本
 nmap <C-A> ggVG                 " 全选
-vnoremap <leader><leader>y "+y  " 复制当前选中到系统剪切板
-nnoremap <leader><leader>p "+p  " 将系统剪切板内容粘贴到 Vim
+
+" \v 从公共剪贴板粘贴。<Leader> 为用户自定义命令的名字空间，<Leader> 前缀键是 "\"
+inoremap <Leader>v <Esc>"+p
+nnoremap <Leader>v "+p
+vnoremap <Leader>v "+p
+inoremap <Leader>p <Esc>pa      " 插入模式粘贴
+nnoremap <Leader><Leader>p "+p  " 将系统剪切板内容粘贴到 Vim
+vnoremap <Leader><Leader>y "+y  " 复制当前选中到系统剪切板
 
 nnoremap <Leader>h <C-W>h       " 切换到左边的分割窗口
 nnoremap <Leader>j <C-W>j       " 切换到下面的分割窗口
@@ -174,8 +180,7 @@ inoremap <C-f> <Esc>^           " 在插入模式下快速进行行首跳转
 inoremap <C-e> <Esc>$           " 在插入模式下快速进行行尾跳转
 nnoremap gh ^                   " 在一般模式下快速进行行首跳转
 nnoremap gl $                   " 在一般模式下快速进行行尾跳转
-" <Leader> 为用户自定义命令的名字空间，<Leader> 前缀键是 "\"
-inoremap <Leader>p <Esc>pa      " 插入模式粘贴
+
 inoremap vv <Esc>               " 插入模式下的 vv 键为 Esc 键
 vnoremap vv <Esc>               " 可视模式下的 vv 键为 Esc 键
 
@@ -268,12 +273,6 @@ vnoremap / /\v
 cnoremap %s/ %s/\v
 nnoremap :g/ :g/\v
 
-nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>           " Set current directory to current file with ,cd
-nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<CR>   " open windows command prompt in the current file's directory
-nnoremap <Leader>ce :!start explorer %:p:h:8<CR>    " open explorer in the current file's directory
-nnoremap <space> za                                 " Space 空格键切换折叠
-nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>    " 删除当前文件中所有的行尾多余空格
-
 " 文件保存退出命令映射
 " :command W w!                    " 映射为 为超级用户权限保存文件
 :command WQ wq
@@ -287,13 +286,32 @@ nnoremap <Leader>q :q!<CR>         " Quickly close the current window
 nnoremap <Leader>w :w!<CR>         " Quickly save the current file
 nnoremap <C-c> :qall!<CR>          " 快速退出 Vim
 
+nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>           " Set current directory to current file with ,cd
+nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<CR>   " open windows command prompt in the current file's directory
+nnoremap <Leader>ce :!start explorer %:p:h:8<CR>    " open explorer in the current file's directory
+nnoremap <space> za                                 " Space 空格键切换折叠
+
+nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>    " 删除当前文件中所有的行尾多余空格
+" 一键去除全部尾部空白(\rb)
+inoremap <Leader>rb <Esc>:let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
+nnoremap <Leader>rb :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
+vnoremap <Leader>rb <Esc>:let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
+" 一键去除全部 ^M 字符(\rm)
+inoremap <Leader>rm <Esc>:%s/<c-v><c-m>//g<cr>
+nnoremap <Leader>rm :%s/<c-v><c-m>//g<cr>
+vnoremap <Leader>rm <Esc>:%s/<c-v><c-m>//g<cr>
+" 一键替换全部 Tab 为空格(\rt)
+nnoremap <Leader>rt <Esc>:retab<cr>
+" 一键清理当前代码文件(\d)
+nnoremap <Leader>d <Esc>ggVGd
+
 " unmap <F10>                      " 取消一个映射
 " mapclear                         " 对应取消所有 :map 绑定的，慎用
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vimrc 配置文件按键映射
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nnoremap <Leader>e :edit $MYVIMRC<CR>
+nnoremap <Leader>e <Esc>:edit $MYVIMRC<CR>       " 当前窗口编辑配置文件
 " nnoremap <silent> <Leader>s :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>tv :tabe $MYVIMRC<CR>  " 新标签页编辑配置文件
 nnoremap <Leader>ev :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
