@@ -417,11 +417,11 @@ Parameter Description：
 
 | [range] value | Description                                         |                                                                                                                                
 | ----------  | ----------------------------------------------------- |                                                                                                                             
-| 无          | Default cursor line                                   |                                                                                                                                  
-| .          | The current line where the cursor is                   |                                                                                                                                  
-| N          | Line N                                               |                                                                                                                               
-| $          | the last line                                        |                                                                                                                                
-| 'a         | Mark the line where a (has been marked with ma before) |                                                                                                                                        
+| null       | Default cursor line                                   |                                                                                                                                  
+| .          | The current line where the cursor is                  |                                                                                                                                  
+| N          | Line N                                                |                                                                                                                               
+| $          | the last line                                         |                                                                                                                                
+| 'a         | Mark the line where a (has been marked with ma before)|                                                                                                                                        
 | $-1        | The penultimate row, you can add or subtract a certain value to a certain row to obtain a certain row             |                                                                                                                                             
 | 1,10       | Line 1~10                                             |                                                                                                                              
 | 1,$        | First line to last line                               |                                                                                                                                  
@@ -443,7 +443,7 @@ Note that all the above representation methods for range can be used to set the 
 | c           | Ask the user to confirm before replacing (confirm)  |                                                                                                                                                      
 | e           | Ask the user to confirm before replacing (confirm)  |                                                                                                                                                    
 | i           | not case sensitive                           |                                                                                                                                                 
-| 无          | Only replace the first match in the specified range  |
+| null        | Only replace the first match in the specified range  |
 
 For example:
 
@@ -823,14 +823,14 @@ zO                  # Turn on all code folding under the cursor
 ```bash                                                                                                                                                                                            
 vim -x file_name	# Enter encryption password -> Confirm password! Note: Save the content if you don't modify it. :wq, otherwise the password setting will not take effect.                                                                                                                                 
 :X                  # In the command line mode, enter the encryption password -> confirm the password! Note: Save the content without modifying it. :wq, otherwise the password setting will not take effect.                                                                                                                          
-:set key=密码		# In the command line mode, enter the encryption password -> confirm the password! Note: Save the content without modifying it. :wq, otherwise the password setting will not take effect.                                                                                                                              
+:set key=password   # In the command line mode, enter the encryption password -> confirm the password! Note: Save the content without modifying it. :wq, otherwise the password setting will not take effect.                                                                                                                              
 ```
 
 **Document decryption**
 
 ```bash                                                                                                                                                                                            
 :X                  # In the command line mode, you are prompted to enter a password, press Enter instead of entering it. Note: Save the content without modifying it. :wq, otherwise the decryption setting will not take effect.                                                                                                                      
-:set key=		    # In the command line mode, set the key password to be empty. Note: Save the content without modifying it. :wq, otherwise the password setting will not take effect.                                                                                                                             
+:set key=           # In the command line mode, set the key password to be empty. Note: Save the content without modifying it. :wq, otherwise the password setting will not take effect.                                                                                                                             
 ```
 
                                                                                                                                                                                                    
@@ -961,16 +961,16 @@ Ctrl+r register_name   # In insert mode (no need to enter register reference sym
 
 **Vim register classification**
 
-| Register name   | Citation method            | Description                                                                |                                                                                           
-| --------------- | ------------------ | ------------------------------------------------------------------ |                                                                                      
-| Unnamed register        | ""                 | The default register, all copy and modify operations (x, s, d, c, y) will copy the data to the unnamed register   |                                                                                                                
-| Alphabet register        | "a - "z or "A - "Z | {register_name} can only be one of 26 English letters, from a-z, A-Z register contents will be merged into the corresponding lowercase letters |                                                                                               
-| Copy special register     | "0(Number 0)      | Only when the copy operation (y) is used, the data will be copied to the unnamed register and the copy special register at the same time        |                                                                                                                   
-| Step-by-step temporary cache register | "1 - "9  | All data without ranges ('(',')','{','}') and operations involving more than 1 line of delete and modify operations (x, s, d, c) will be copied to the stepwise temporary cache register , And when new data is added, it progresses step by step. The data of 1 is copied to 2, 2 to 3, and the contents of the last 9 registers will be deleted |                                        
-| Black hole register        | "_                 | Almost all the data involved in the operation will be copied to the register. If you want the data to be operated not to pass through the register, you can specify a black hole register. The data will disappear when the register arrives, and it cannot be displayed and does not exist. |                                                                                     
-| System clipboard        | "+ or "*            | When interacting with the GUI external to Vim, you need to use a special system clipboard                     |                                                                                                        
+| Register name            | Citation method    | Description                                                                |                                                                                           
+| ------------------------ | ------------------ | ------------------------------------------------------------------ |                                                                                      
+| Unnamed register         | ""                 | The default register, all copy and modify operations (x, s, d, c, y) will copy the data to the unnamed register   |                                                                                                                
+| Named register           | "a - "z or "A - "Z | {register_name} can only be one of 26 English letters, from a-z, A-Z register contents will be merged into the corresponding lowercase letters |                                                                                               
+| Copy special register    | "0(Number 0)       | Only when the copy operation (y) is used, the data will be copied to the unnamed register and the copy special register at the same time        |                                                                                                                   
+| Numbered register        | "1 - "9            | All data without ranges ('(',')','{','}') and operations involving more than 1 line of delete and modify operations (x, s, d, c) will be copied to the stepwise temporary cache register , And when new data is added, it progresses step by step. The data of 1 is copied to 2, 2 to 3, and the contents of the last 9 registers will be deleted |                                        
+| Black hole register      | "_                 | Almost all the data involved in the operation will be copied to the register. If you want the data to be operated not to pass through the register, you can specify a black hole register. The data will disappear when the register arrives, and it cannot be displayed and does not exist. |                                                                                     
+| System clipboard         | "+ or "*           | When interacting with the GUI external to Vim, you need to use a special system clipboard                     |                                                                                                        
 | Expression register      | "=                 | The most special one of all registers is used to calculate expressions. After entering the register application, it will prompt "=" in the command line, enter the expression as needed, and the result will be displayed at the cursor |                                                                                              
-| Other registers         | -                  | - |
+| Other registers          | -                  | - |
 
                                                                                                                                                                                                    
                                                                                                                                                                                                    
@@ -1070,7 +1070,7 @@ A                   # Show NERDTree in full screen, or close full screen
 
                                                                                                                                                                                                    
                                                                                                                                                                                                    
-**[asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)**：The plug-in uses the asynchronous mechanism of Vim 8 / NeoVim, allowing you to run shell commands in the background and display the results in Vim's Quickfix window in real time.
+**[asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)**：The plug-in uses the asynchronous mechanism of Vim 8 / NeoVim, allowing you to run Shell commands in the background and display the results in Vim's Quickfix window in real time.
 
 ```bash                                                                                                                                                                                            
 :AsyncRun ls        # Run the command ls asynchronously and output the result to quickfix. Use :copen to view                                                                                                                                        
