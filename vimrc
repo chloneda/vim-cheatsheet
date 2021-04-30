@@ -61,7 +61,7 @@ set cursorcolumn                " 突出显示当前列
 set shortmess=atI               " 启动的时候不显示那个援助乌干达儿童的提示
 set go=                         " 不要图形按钮
 set background=dark             " Theme 主题
-set t_Co=256			        " 指定配色方案是 256 色
+set t_Co=256                    " 指定配色方案是 256 色
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 主要配置
@@ -372,16 +372,47 @@ Plug 'easymotion/vim-easymotion'         " 快速定位
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 自定义函数
+" 根据后缀名指定文件类型
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" autocmd BufNewFile,BufReadPost *.md set filetype=markdown                           " 自动识别 Markdown 文件
+" autocmd BufNewFile,BufReadPost *.md set filetype=markdown                         " 自动识别 Markdown 文件
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown   " 自动识别 Markdown 文件
 au BufRead,BufNewFile *.{go}   set filetype=go
 au BufRead,BufNewFile *.{js}   set filetype=javascript
+
+au BufRead,BufNewFile *.h        set ft=c
+au BufRead,BufNewFile *.i        set ft=c
+au BufRead,BufNewFile *.m        set ft=objc
+au BufRead,BufNewFile *.di       set ft=d
+au BufRead,BufNewFile *.ss       set ft=scheme
+au BufRead,BufNewFile *.cl       set ft=lisp
+au BufRead,BufNewFile *.phpt     set ft=php
+au BufRead,BufNewFile *.inc      set ft=php
+au BufRead,BufNewFile *.cson     set ft=coffee
+au BufRead,BufNewFile *.sql      set ft=mysql
+au BufRead,BufNewFile *.tpl      set ft=smarty
+au BufRead,BufNewFile *.txt      set ft=txt
+au BufRead,BufNewFile *.log      set ft=conf
+au BufRead,BufNewFile hosts      set ft=conf
+au BufRead,BufNewFile *.conf     set ft=dosini
+au BufRead,BufNewFile http*.conf set ft=apache
+au BufRead,BufNewFile *.ini      set ft=dosini
+
+au BufRead,BufNewFile */nginx/*.conf        set ft=nginx
+au BufRead,BufNewFile */nginx/**/*.conf     set ft=nginx
+au BufRead,BufNewFile */openresty/*.conf    set ft=nginx
+au BufRead,BufNewFile */openresty/**/*.conf set ft=nginx
+
+au BufRead,BufNewFile *.yml.bak      set ft=yaml
+au BufRead,BufNewFile *.yml.default  set ft=yaml
+au BufRead,BufNewFile *.yml.example  set ft=yaml
+
 " 当前行高亮（请参阅 :h cursorline）功能，该设置会让效果出现在当前窗口，但在插入模式中关闭这个效果
 autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 自定义函数
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 新建 .sh，.java 文件，自动插入文件头
 autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
 func SetTitle()                          " 定义函数 SetTitle，自动插入文件头
