@@ -352,6 +352,8 @@ Plug 'vim-airline/vim-airline'           " Vim 状态栏提供更优秀的显示
 
 " Development
 Plug 'preservim/nerdcommenter'           " Vim 批量注释工具
+Plug 'tpope/vim-repeat'                  " 这个插件存在的意义就是重复
+Plug 'tpope/vim-surround'                " 添加，修改，删除括号、引号等成对的符号，甚至是 HTML 标签
 
 " File manage
 Plug 'mhinz/vim-startify'                " Vim 启动插件
@@ -388,6 +390,7 @@ au BufRead,BufNewFile *.cl       set ft=lisp
 au BufRead,BufNewFile *.phpt     set ft=php
 au BufRead,BufNewFile *.inc      set ft=php
 au BufRead,BufNewFile *.cson     set ft=coffee
+
 au BufRead,BufNewFile *.sql      set ft=mysql
 au BufRead,BufNewFile *.tpl      set ft=smarty
 au BufRead,BufNewFile *.txt      set ft=txt
@@ -401,7 +404,6 @@ au BufRead,BufNewFile */nginx/*.conf        set ft=nginx
 au BufRead,BufNewFile */nginx/**/*.conf     set ft=nginx
 au BufRead,BufNewFile */openresty/*.conf    set ft=nginx
 au BufRead,BufNewFile */openresty/**/*.conf set ft=nginx
-
 au BufRead,BufNewFile *.yml.bak      set ft=yaml
 au BufRead,BufNewFile *.yml.default  set ft=yaml
 au BufRead,BufNewFile *.yml.example  set ft=yaml
