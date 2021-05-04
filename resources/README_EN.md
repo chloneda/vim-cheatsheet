@@ -820,19 +820,19 @@ zO                  # Turn on all code folding under the cursor
                                                                                                                                                                                                    
 ## Document encryption/decryption
 
-**Document Encryption**: When opening a file in encrypted mode, you will be prompted to enter the password twice in the lower left corner of the screen before you can operate. After saving the file and exiting, you must enter the normal password to open the file correctly, otherwise garbled characters will be displayed.
+> The document is encrypted. When you open the file, you will be prompted to enter the password twice in the lower left corner of the screen before you can operate. After saving the file and exiting, you must enter the normal password to open the file correctly, otherwise garbled characters will be displayed.
 
 ```bash                                                                                                                                                                                            
-vim -x file_name	# Enter encryption password -> Confirm password! Note: Save the content if you don't modify it. :wq, otherwise the password setting will not take effect.                                                                                                                                 
-:X                  # In the command line mode, enter the encryption password -> confirm the password! Note: Save the content without modifying it. :wq, otherwise the password setting will not take effect.                                                                                                                          
-:set key=password   # In the command line mode, enter the encryption password -> confirm the password! Note: Save the content without modifying it. :wq, otherwise the password setting will not take effect.                                                                                                                              
+vim -x <filename>	# Enter the encryption password and confirm the password again. Note: Save the content without modifying it, otherwise the password setting will not take effect                                                                                                                                 
+:X                  # Enter the encryption password in command mode and confirm the password again. Note: Save the content without modifying it, otherwise the password setting will not take effect                                                                                                                          
+:set key=password   # Enter the encryption password in command mode and confirm the password again. Note: Save the content without modifying it, otherwise the password setting will not take effect                                                                                                                             
 ```
 
-**Document decryption**
+> Document decryption, set decryption by command mode.
 
 ```bash                                                                                                                                                                                            
-:X                  # In the command line mode, you are prompted to enter a password, press Enter instead of entering it. Note: Save the content without modifying it. :wq, otherwise the decryption setting will not take effect.                                                                                                                      
-:set key=           # In the command line mode, set the key password to be empty. Note: Save the content without modifying it. :wq, otherwise the password setting will not take effect.                                                                                                                             
+:X                  # In command mode, directly press Enter to indicate that the password is empty. Note: Save the content without modifying it, otherwise the decryption setting will not take effect                                                                                                                      
+:set key=           # Set the key password to be empty in command mode. Note: Save the content without modifying it, otherwise the password setting will not take effect                                                                                                                             
 ```
 
                                                                                                                                                                                                    
