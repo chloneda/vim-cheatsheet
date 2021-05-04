@@ -5,7 +5,7 @@
 > 简介：Vim 命令速查表，注释化 vimrc 配置文件，经典 Vim 键盘图，实用 Vim 书籍，Markdown 格式，目录化检索，系统化学习，快速熟悉使用！
 
 - [Vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Gitee](https://gitee.com/chloneda/vim-cheatsheet)
-- [Vim 官网](https://www.vim.org/) | [Vim](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
+- [Vim 官网](https://www.vim.org/) | [Vim Github](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 - [Vim 自定义配置文件 - vimrc](./vimrc)
 - [Chrome 浏览器神级插件 - Vimium](./resources/vimium.md)
 - [简体中文](./README.md) | [English](./resources/README_EN.md) 
@@ -18,6 +18,7 @@
 .                   # 小数点，即重复（Dot）命令，重复执行上一次命令
 N<command>          # 重复某个命令 N 次，例如：10k，光标上移 10 行
 ```
+**此外，发挥重复的威力也要善用宏和正则表达式，减少重复操作。**
 
 
 
@@ -41,9 +42,9 @@ Ctrl+b              # 向上滚动一屏 --> Move back one full screen
 $                   # 跳到行尾，效用等同于 <End> 键
 gg                  # 跳到第一行，效用等同于 Ctrl+<Home>
 G                   # 跳到最后一行，效用等同于 Ctrl+<End>
-NG                  # 跳到第 N 行，比如 10G 是移动到第 10 行
-:N                  # 跳到第 N 行，比如 :10<Enter> 是移动到第 10 行
-10%                 # 移动到文件 10% 处
+NG                  # 跳到第 N 行，例如 10G 是移动到第 10 行
+:N                  # 跳到第 N 行，例如 :10<Enter> 是移动到第 10 行
+N%                  # 移动到文件 N% 的位置，例如 10% 是移动到文件 10% 的位置
 N|                  # 移动到当前行的 N 列
 w                   # 跳到下一个单词开头（word：标点或空格分隔的单词）
 W                   # 跳到下一个单词开头（Word：空格分隔的单词）
@@ -63,10 +64,10 @@ N<Enter>            # 光标向下移动 N 行
 H                   # 移动到屏幕上部（H: High）
 M                   # 移动到屏幕中部（M: Middle）
 L                   # 移动到屏幕下部（L: Low）
-<S+Left>            # 按住 Shift 按左键，向左移动一个单词
-<S+Right>           # 按住 Shift 按右键，向右移动一个单词
 <S+Up>              # 按住 Shift 按上键，向上翻页
 <S+Down>            # 按住 Shift 按下键，向下翻页
+<S+Left>            # 按住 Shift 按左键，向左移动一个单词
+<S+Right>           # 按住 Shift 按右键，向右移动一个单词
 gm                  # 移动到的行中间
 gj                  # 光标向下移动一个屏幕行（忽略自动换行）
 gk                  # 光标向上移动一个屏幕行（忽略自动换行）
@@ -302,8 +303,8 @@ va}                 # 选中大括号内的内容（包含大括号本身）
 "?p                 # 将寄存器 ? 的内容粘贴到光标后
 "?P                 # 将寄存器 ? 的内容粘贴到光标前
 :registers          # 显示所有寄存器内容
-:[range]y           # 复制范围，比如 :20,30y 是复制 20 到 30 行，:10y 是复制第十行
-:[range]d           # 删除范围，比如 :20,30d 是删除 20 到 30 行，:10d 是删除第十行
+:[range]y           # 复制范围，例如 :20,30y 是复制 20 到 30 行，:10y 是复制第十行
+:[range]d           # 删除范围，例如 :20,30d 是删除 20 到 30 行，:10d 是删除第十行
 "_[command]         # 使用 [command] 删除内容，并且不进行复制（不会污染寄存器）
 "*[command]         # 使用 [command] 复制内容到系统剪贴板（需要 Vim 版本有 clipboard 支持）
 ```
@@ -537,8 +538,8 @@ Ctrl+^              # 跳转到 alternate file（当前窗口的上一个文件�
 gd                  # 跳转到局部定义（光标下的单词的定义）
 gD                  # 跳转到全局定义（光标下的单词的定义）
 gf                  # 打开名称为光标下文件名的文件
-[[                  # 跳转到上一个顶层函数（比如C语言以大括号分隔）
-]]                  # 跳转到下一个顶层函数（比如C语言以大括号分隔）
+[[                  # 跳转到上一个顶层函数（例如 C 语言以大括号分隔）
+]]                  # 跳转到下一个顶层函数（例如 C 语言以大括号分隔）
 [m                  # 跳转到上一个成员函数
 ]m                  # 跳转到下一个成员函数
 [{                  # 跳转到上一处未匹配的 {
@@ -684,7 +685,7 @@ Ctrl+W |            # 横向最大化当前窗口
 :tabp               # 上一个标签页
 :tabc               # 关闭当前标签页
 :tabo               # 关闭其他标签页
-:tabn N             # 切换到第 N 个标签页，比如：tabn 3 切换到第三个标签页
+:tabn N             # 切换到第 N 个标签页，例如：tabn 3 切换到第三个标签页
 :tabm n             # 标签移动
 :tabfirst           # 切换到第一个标签页
 :tablast            # 切换到最后一个标签页
@@ -693,7 +694,7 @@ Ctrl+W |            # 横向最大化当前窗口
 :tab split          # 在新的标签页中打开当前窗口里的文件
 :tab ball           # 将缓存中所有文件用标签页打开
 :set showtabline=?  # 设置为 0 就不显示标签页标签，1 会按需显示，2 会永久显示
-Ngt                 # 切换到第 N 个标签页，比如 2gt 将会切换到第二个标签页
+Ngt                 # 切换到第 N 个标签页，例如 2gt 将会切换到第二个标签页
 gt                  # 下一个标签页
 gT                  # 上一个标签页
 ```
@@ -1003,7 +1004,7 @@ set winaltkeys=no   # 设置 GVim 下正常捕获 Alt 键
 set nowrap          # 关闭自动换行
 set ttimeout        # 允许终端按键检测超时（终端下功能键为一串 Esc 开头的扫描码）
 set ttm=100         # 设置终端按键检测超时为 100 毫秒
-set term=?          # 设置终端类型，比如常见的 xterm
+set term=?          # 设置终端类型，例如常见的 xterm
 set ignorecase      # 设置搜索是否忽略大小写
 set smartcase       # 智能大小写，默认忽略大小写，除非搜索内容里包含大写字母
 set list            # 设置显示制表符和换行符
@@ -1028,7 +1029,7 @@ set all             # 列出所有选项设置情况
 
 ```bash
 gcc                 # 注释当前行
-gc{motion}          # 注释 {motion} 所标注的区域，比如 gcap 注释整段
+gc{motion}          # 注释 {motion} 所标注的区域，例如 gcap 注释整段
 gci{                # 注释大括号内的内容
 gc                  # 在 Visual Mode 下面按 gc 注释选中区域
 :7,17Commentary     # 注释 7 到 17 行
@@ -1116,11 +1117,11 @@ A                   # 全屏显示 NERDTree，或者关闭全屏
 - 多使用 ciw, ci[, ci", ci( 以及 diw, di[, di", di( 命令来快速改写/删除文本。
 - 在行内左右移动光标时，多使用 w b e 或 W B E，而不是 h l 或方向键，这样会快很多。
 - Shift 相当于移动加速键， w b e 移动光标很慢，但是 W B E 走的很快。
-- 自己要善于总结新技巧，比如移动到行首非空字符时用 0w 命令比 ^ 命令更容易输入。
+- 自己要善于总结新技巧，例如移动到行首非空字符时用 0w 命令比 ^ 命令更容易输入。
 - 在空白行使用 dip 命令可以删除所有临近的空白行，viw 可以选择连续空白。
 - 缩进时使用 >8j >} <ap >ap =i} == 会方便很多。
 - 插入模式下，当你发现一个单词写错了，应该多用 Ctrl+W 这比 <Backspace> 快。
-- y d c 命令可以很好结合 f t 和 /X 比如 dt) 和 y/End<cr>。
+- y d c 命令可以很好结合 f t 和 /X 例如 dt) 和 y/End<cr>。
 - c d x 命令会自动填充寄存器 "1 到 "9 ， y 命令会自动填充 "0 寄存器。
 - 用 v 命令选择文本时，可以用 0 掉头选择，有时很有用。
 - 写文章时，可以写一段代码块，然后选中后执行 :!python 代码块就会被替换成结果。

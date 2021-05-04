@@ -139,11 +139,6 @@ set splitbelow                  " 水平 split 时，在下边开启
 set viminfo+=!                  " 保存全局变量
 set iskeyword+=_,$,@,%,#,-      " 带有如下符号的单词不要被换行分割
 
-" Vim 重新打开文件时，回到上次历史所编辑文件的位置
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-" 设置在状态行显示的信息
-" set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 按键映射
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -154,7 +149,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 map Y y$                        " 复制 从光标到行尾 所在范围的文本
 nmap <C-A> ggVG                 " 全选
 
-" \v 从公共剪贴板粘贴。<Leader> 为用户自定义命令的名字空间，<Leader> 前缀键是 "\"
+" \v 从公共剪贴板粘贴。<Leader> 为用户自定义命令的名字空间，<Leader> 是前缀键即 "\"
 inoremap <Leader>v <Esc>"+p
 nnoremap <Leader>v "+p
 vnoremap <Leader>v "+p
@@ -168,10 +163,10 @@ nnoremap <Leader>k <C-W>k       " 切换到上面的分割窗口
 nnoremap <Leader>l <C-W>l       " 切换到右边的分割窗口
 
 " 分割窗口后通过前缀键 "\" 和方向键 调整窗口大小
-nnoremap <Leader><Right> :vertical resize +5<CR>
-nnoremap <Leader><Left>  :vertical resize -5<CR>
 nnoremap <Leader><Up>    :resize +5<CR>
 nnoremap <Leader><Down>  :resize -5<CR>
+nnoremap <Leader><Right> :vertical resize +5<CR>
+nnoremap <Leader><Left>  :vertical resize -5<CR>
 
 " 无论是 Normal/Insert 模式，按 Ctrl+s 保存文件
 nnoremap <C-s> :wq!<CR>         " Normal 模式，按 Ctrl+s 保存文件并退出
@@ -191,6 +186,7 @@ inoremap { {}<Esc>i
 inoremap < <><Esc>i
 inoremap " ""<Esc>i
 inoremap ' ''<Esc>i
+inoremap ` ``<ESC>i
 
 " Vim 搜索结果居中展示，silien 命令（sil[ent][!] {command}）用于安静地执行命令，既不显示正常的消息，也不会把它加进消息历史
 nnoremap <silent> n nzz
@@ -210,17 +206,17 @@ nnoremap ][  ][zz
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" 戒掉使用方向键的习惯，善用 h、j、k 及 l 移动光标
+" 戒掉使用方向键的习惯，善用 h j k l 移动光标
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 
 " 插入模式禁用方向键，解决办法呢？ 1、退出插入模式使用 h j k l。 2、重新映射方向键，如下
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
 
 " 插入模式上下左右 按键映射
 inoremap <C-h> <Left>
@@ -293,15 +289,15 @@ nnoremap <space> za                                 " Space 空格键切换折�
 
 nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>    " 删除当前文件中所有的行尾多余空格
 " 一键去除全部尾部空白(\rb)
-inoremap <Leader>rb <Esc>:let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
-nnoremap <Leader>rb :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
-vnoremap <Leader>rb <Esc>:let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
+inoremap <Leader>rb <Esc>:let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<CR>
+nnoremap <Leader>rb :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<CR>
+vnoremap <Leader>rb <Esc>:let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<CR>
 " 一键去除全部 ^M 字符(\rm)
-inoremap <Leader>rm <Esc>:%s/<c-v><c-m>//g<cr>
-nnoremap <Leader>rm :%s/<c-v><c-m>//g<cr>
-vnoremap <Leader>rm <Esc>:%s/<c-v><c-m>//g<cr>
+inoremap <Leader>rm <Esc>:%s/<c-v><c-m>//g<CR>
+nnoremap <Leader>rm :%s/<c-v><c-m>//g<CR>
+vnoremap <Leader>rm <Esc>:%s/<c-v><c-m>//g<CR>
 " 一键替换全部 Tab 为空格(\rt)
-nnoremap <Leader>rt <Esc>:retab<cr>
+nnoremap <Leader>rt <Esc>:retab<CR>
 " 一键清理当前代码文件(\d)
 nnoremap <Leader>d <Esc>ggVGd
 
@@ -311,11 +307,10 @@ nnoremap <Leader>d <Esc>ggVGd
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vimrc 配置文件按键映射
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Leader>e <Esc>:edit $MYVIMRC<CR>       " 当前窗口编辑配置文件
-" nnoremap <silent> <Leader>s :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>tv :tabe $MYVIMRC<CR>  " 新标签页编辑配置文件
+nnoremap <Leader>e <Esc>:edit $MYVIMRC<CR>       " 当前窗口编辑配置文件
 nnoremap <Leader>ev :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
-nnoremap <Leader>sv :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，Leader 即前缀键默认为 “\”
+nnoremap <Leader>sv :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，source 可缩写为 so
 autocmd BufWritePost $MYVIMRC source $MYVIMRC    " 让 vimrc 配置变更立即生效
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -329,7 +324,7 @@ nnoremap <Leader><Leader>g :PlugUpgrade<CR>     " 升级 vim-plug 本身
 nnoremap <Leader><Leader>d :PlugDiff<CR>        " 查看插件的变化状态，简单地回滚有问题的插件
 nnoremap <Leader><Leader>c :PlugClean<CR>       " 删除插件
 
-" 预览插件 markdown-preview 按键映射
+" 预览插件 Markdown-preview 按键映射
 nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式打开 md 预览
 imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式打开 md 预览
 nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式关闭 md 预览
@@ -412,6 +407,11 @@ au BufRead,BufNewFile *.yml.example  set ft=yaml
 autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
 
+" Vim 重新打开文件时，回到上次历史所编辑文件的位置
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+" 设置在状态行显示的信息
+" set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 自定义函数
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -439,5 +439,6 @@ endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " End
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 

@@ -5,7 +5,7 @@
 > Introduction: Vim command cheat sheet, annotated vimrc configuration file, classic Vim keyboard map, practical Vim books, Markdown format, catalog search, quick and familiar use!
 
 - [Vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Gitee](https://gitee.com/chloneda/vim-cheatsheet)
-- [Vim official website](https://www.vim.org/) | [Vim](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)  
+- [Vim official website](https://www.vim.org/) | [Vim Github](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)  
 - [Vim custom configuration file - vimrc](../vimrc)        
 - [God-level plugin for Chrome browser - Vimium](vimium.md)
 - [Chinese](../README.md) | [English](./README_EN.md)   
@@ -17,7 +17,9 @@
 ```bash                                                          
 .                   # Decimal point, repeat the last command                               
 N<command>          # Repeat a command N times, for example: 10k, move the cursor up 10 lines                
-```                                                              
+```
+
+**In addition, to play the power of repetition, macros and regular expressions should also be used to reduce repetitive operations.**
 
 
 
@@ -43,7 +45,7 @@ gg                  # Jump to the first line, the effect is equivalent to Ctrl+<
 G                   # Jump to the last line, the effect is equivalent to Ctrl+<End>                                       
 NG                  # Jump to the Nth row, for example 10G is to move to the tenth row                                        
 :N                  # Jump to the Nth line, for example: 10<Enter> is to move to the tenth line                                 
-10%                 # Move to 10% of the file                                                   
+N%                  # Move to the N% position of the file, for example 10% is moved to the 10% position of the file                                                    
 N|                  # Move to N columns of the current row                                                  
 w                   # Skip to the beginning of the next word (word: words separated by punctuation or spaces)                                    
 W                   # Skip to the beginning of the next word (Word: words separated by spaces)                                       
@@ -62,11 +64,11 @@ N<Enter>            # Move the cursor down N lines
 -                   # Move to the first non-blank character in the previous line                                                  
 H                   # Move to the upper part of the screen (H: High)                                              
 M                   # Move to the middle of the screen (M: Middle)                                            
-L                   # Move to the bottom of the screen (L: Low)                                               
+L                   # Move to the bottom of the screen (L: Low)                                          
+<S+Up>              # Hold Shift and press the up button to page up                                 
+<S+Down>            # Hold Shift and press the key to page down
 <S+Left>            # Hold Shift and press the left button to move one word to the left                                         
 <S+Right>           # Hold Shift and press the right button to move one word to the right                                         
-<S+Up>              # Hold Shift and press the up button to page up                                             
-<S+Down>            # Hold Shift and press the key to page down                                             
 gm                  # Move to the middle of the line                                                         
 gj                  # Move the cursor down one screen line (ignore automatic line wrapping)                                           
 gk                  # Move the cursor up one screen line (ignore auto-wrap)                                           
