@@ -949,7 +949,7 @@ q:                  # View command line history
 
 ```bash                                                                                                                                                                                            
 :reg                   # View all register values                                                                                                                                                                  
-:reg {register_name}   # View the specified register value                                                                                                                                                                  
+:reg {register}        # View the specified register value                                                                                                                                                                  
 ```
 
                                                                                                                                                                                                    
