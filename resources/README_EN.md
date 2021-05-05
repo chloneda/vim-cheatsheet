@@ -956,9 +956,9 @@ q:                  # View command line history
 **Recall register value.**
 
 ```bash                                                                                                                                                                                            
-"{register_name}       # Recall register value in normal mode                                                                                                                                                               
-:Ctrl+r "register_name # After entering Ctrl+r in command mode, Vim will automatically type "register reference symbol                                                                                                                                       
-Ctrl+r register_name   # In insert mode (no need to enter register reference symbol")                                                                                                                                                          
+"{register}            # Recall register value in normal mode                                                                                                                                                               
+:Ctrl+r "registerName  # After entering Ctrl+r in command mode, Vim will automatically type "register reference symbol                                                                                                                                       
+Ctrl+r registerName    # In insert mode (no need to enter register reference symbol ")                                                                                                                                                          
 ```
 
 **Vim register classification**
@@ -966,7 +966,7 @@ Ctrl+r register_name   # In insert mode (no need to enter register reference sym
 | Register name            | Citation method    | Description                                                                |                                                                                           
 | ------------------------ | ------------------ | ------------------------------------------------------------------ |                                                                                      
 | Unnamed register         | ""                 | The default register, all copy and modify operations (x, s, d, c, y) will copy the data to the unnamed register   |                                                                                                                
-| Named register           | "a - "z or "A - "Z | {register_name} can only be one of 26 English letters, from a-z, A-Z register contents will be merged into the corresponding lowercase letters |                                                                                               
+| Named register           | "a - "z or "A - "Z | {register} can only be one of 26 English letters, from a-z, A-Z register contents will be merged into the corresponding lowercase letters |                                                                                               
 | Copy special register    | "0(Number 0)       | Only when the copy operation (y) is used, the data will be copied to the unnamed register and the copy special register at the same time        |                                                                                                                   
 | Numbered register        | "1 - "9            | All data without ranges ('(',')','{','}') and operations involving more than 1 line of delete and modify operations (x, s, d, c) will be copied to the stepwise temporary cache register , And when new data is added, it progresses step by step. The data of 1 is copied to 2, 2 to 3, and the contents of the last 9 registers will be deleted |                                        
 | Black hole register      | "_                 | Almost all the data involved in the operation will be copied to the register. If you want the data to be operated not to pass through the register, you can specify a black hole register. The data will disappear when the register arrives, and it cannot be displayed and does not exist. |                                                                                     
