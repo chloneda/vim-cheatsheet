@@ -178,6 +178,8 @@ nnoremap gl $                   " 在一般模式下快速进行行尾跳转
 
 inoremap vv <Esc>               " 插入模式下的 vv 键为 Esc 键
 vnoremap vv <Esc>               " 可视模式下的 vv 键为 Esc 键
+inoremap jj <Esc>               " 插入模式下的 jj 键为 Esc 键
+inoremap jk <Esc>               " 插入模式下的 jk 键为 Esc 键
 
 " 括号等自动补全
 inoremap ( ()<Esc>i

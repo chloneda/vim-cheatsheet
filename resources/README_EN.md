@@ -87,17 +87,21 @@ I                   # Enter insert mode at the beginning of the line
 a                   # Enter insert mode after the cursor                                                                                                                                                                   
 A                   # Enter insert mode at the end of the line                                                                                                                                                                    
 o                   # Insert a new row in the next row and enter insert mode                                                                                                                                                              
-O                   # Insert a new row in the previous row and enter insert mode                                                                                                                                                              
-gi                  # Go to the position of the last insert mode                                                                                                                                                                
+O                   # Insert a new row in the previous row and enter insert mode   
+s                   # Delete the character under the cursor and insert text
+S                   # Delete the current line and insert text                                                                                                                                                           
+gi                  # Go to the position of the last insert mode 
+gI                  # Insert text at the start of line (column 1)                                                                                                                                                               
 <Esc>               # Exit insert mode                                                                                                                                                                       
-Ctrl+[              # Exit insert mode (equivalent to Esc key)                                                                                                                                                            
+Ctrl+[              # Exit insert mode (equivalent to Esc key)     
+Ctrl+C              # Like Ctrl-[ and <Esc>, but does not check for abbreviation                                                                                                                                                       
 ```
 
                                                                                                                                                                                                    
                                                                                                                                                                                                    
 ## Insert mode commands
 
-**Note: Enter insert mode by i, I, a, A, o, O command.**
+**Note: Enter insert mode by i, I, a, A, o, O, s, S command.**
 
 ```bash                                                                                                                                                                                            
 <Up>                # Cursor up                                                                                                                                                                       
