@@ -93,7 +93,7 @@ S                   # Delete the current line and insert text
 gi                  # Go to the position of the last insert mode 
 gI                  # Insert text at the start of line (column 1)                                                                                                                                                               
 <Esc>               # Exit insert mode                                                                                                                                                                       
-Ctrl+[              # Exit insert mode (equivalent to Esc key)     
+Ctrl+[              # Exit insert mode (equivalent to <Esc> key)     
 Ctrl+C              # Like Ctrl-[ and <Esc>, but does not check for abbreviation                                                                                                                                                       
 ```
 
@@ -177,7 +177,7 @@ Ctrl+X Ctrl+O       # Insert Omnifunc completion
 
 ```bash                                                                                                                                                                                            
 r                   # Replace the current character                                                                                                                                                                       
-R                   # Enter replacement mode until Esc leaves                                                                                                                                                             
+R                   # Enter replacement mode until <Esc> leaves                                                                                                                                                             
 s                   # Replace character (delete the character at the cursor and enter the insert mode, the number can be connected in front)                                                                                                                                                  
 S                   # Replace line (delete the current line and enter the insert mode, the number can be accessed before)                                                                                                                                                     
 cc                  # Rewrite the current line (delete the current line and enter insert mode), same as S                                                                                                                                                      
@@ -491,7 +491,7 @@ U                   # Convert marked area to uppercase
 gv                  # Reselect the last highlighted selection                                                                                                                                                                    
 g Ctrl+G            # Show statistics of the selected area                                                                                                                                                                 
 ggVG                # Select full text                                                                                                                                                                         
-<Esc>               # Press Esc to exit visual mode                                                                                                                                                                
+<Esc>               # Press <Esc> to exit visual mode                                                                                                                                                                
 ```
 
 In addition: The Vim Normal command can execute commands in the normal mode in the command line mode. When the Normal command is combined with the Vim visualization mode, a lot of repetitive tasks can be completed with few operations.
@@ -504,7 +504,7 @@ In addition: The Vim Normal command can execute commands in the normal mode in t
 ```bash                                                                                                                                                                                            
 Ctrl+v              # Enter the command line mode, press Ctrl+v to enter the visual mode, then press j or k to select multiple lines and mark the lines that need to be commented                                                                                                                          
 I                   # Press the capital letter I, and then insert the comment character, such as #, //                                                                                                                                                      
-<Esc>               # Press the Esc key to comment all                                                                                                                                                               
+<Esc>               # Press the <Esc> key to comment all                                                                                                                                                               
 ```
 
 **Uncomment multiple lines**
@@ -869,7 +869,7 @@ syntax on
 
 - Move the cursor to the first line first.                                                                                                                                                                                      
 - In Normal mode, press the q key and a letter to start recording. For example, press qa to register the macro as a.                                                                                                                                                     
-- Press I to insert at the beginning of the line, and press Tab in edit mode. Press Esc to return to Normal mode.                                                                                                                                                   
+- Press I to insert at the beginning of the line, and press Tab in edit mode. Press <Esc> to return to Normal mode.                                                                                                                                                   
 - Press the j key to move the cursor to the next line.                                                                                                                                                                                  
 - Press the q key to finish recording.
 
@@ -1088,7 +1088,7 @@ A                   # Show NERDTree in full screen, or close full screen
 ## Vim mode
 
 ```bash                                                                                                                                                                                            
-Normal mode        # Press Esc or Ctrl+[ to enter, the file name is displayed in the lower left corner or empty                                                                                                                                                    
+Normal mode        # Press <Esc> or Ctrl+[ to enter, the file name is displayed in the lower left corner or empty                                                                                                                                                    
 Insert mode        # Press i to enter, the lower left corner shows --INSERT--                                                                                                                                                          
 Visual mode        # Press v to enter, the lower left corner shows --VISUAL--                                                                                                                                                          
 Replacement mode   # Press r or R to start, the lower left corner shows --REPLACE--                                                                                                                                                     
