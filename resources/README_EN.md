@@ -65,10 +65,10 @@ N<Enter>            # Move the cursor down N lines
 H                   # Move to the upper part of the screen (H: High)                                              
 M                   # Move to the middle of the screen (M: Middle)                                            
 L                   # Move to the bottom of the screen (L: Low)                                          
-<S+Up>              # Hold Shift and press the up button to page up                                 
-<S+Down>            # Hold Shift and press the key to page down
-<S+Left>            # Hold Shift and press the left button to move one word to the left                                         
-<S+Right>           # Hold Shift and press the right button to move one word to the right                                         
+<S+Up>              # Hold down the <Shift> key and then press the <Up> arrow key to page up                                 
+<S+Down>            # Hold down the <Shift> key and then press the <Down> arrow key to page down
+<S+Left>            # Hold down the <Shift> key and press the <Left> arrow key to move one word to the left                                         
+<S+Right>           # Hold down the <Shift> key and press the <Right> arrow key to move one word to the right                                         
 gm                  # Move to the middle of the line                                                         
 gj                  # Move the cursor down one screen line (ignore automatic line wrapping)                                           
 gk                  # Move the cursor up one screen line (ignore auto-wrap)                                           
@@ -177,7 +177,8 @@ Ctrl+X Ctrl+O       # Insert Omnifunc completion
 
 ```bash                                                                                                                                                                                            
 r                   # Replace the current character                                                                                                                                                                       
-R                   # Enter replacement mode until <Esc> leaves                                                                                                                                                             
+R                   # Enter replacement mode until you press <Esc> to leave                                                                                                                                                             
+J                   # Combine multiple lines into one line 
 s                   # Replace character (delete the character at the cursor and enter the insert mode, the number can be connected in front)                                                                                                                                                  
 S                   # Replace line (delete the current line and enter the insert mode, the number can be accessed before)                                                                                                                                                     
 cc                  # Rewrite the current line (delete the current line and enter insert mode), same as S                                                                                                                                                      
@@ -230,9 +231,7 @@ d}                  # Delete the next paragraph
 d{                  # Delete the previous paragraph                                                                                                                                                                      
 Nd                  # Delete N lines from the beginning of the current line                                                                                                                                                                
 :Nd                 # Delete line N                                                                                                                                                                     
-:1,10d              # Delete 1-10 lines                                                                                                                                                                    
-J                   # Combine multiple lines into one line                                                                                                                                                                      
-.                   # Repeat the last operation                                                                                                                                                                      
+:1,10d              # Delete 1~10 lines                                                                                                                                                                                                                                                                                                                                  
 ~                   # Replace case                                                                                                                                                                        
 g~iw                # Replace the case of the current word                                                                                                                                                                   
 gUiw                # Convert words to uppercase                                                                                                                                                                      
@@ -562,6 +561,27 @@ gf                  # Open the file whose name is the file name under the cursor
 ```
 
                                                                                                                                                                                                    
+
+## Open file
+
+```bash                                                                                                                                                                                            
+vim .               # Open the file manager, display the catalog file, edit by selecting the file                                                                                                                                                      
+vim filename        # Open or create a new file, and place the cursor at the beginning of the first line                                                                                                                                                           
+vim + filename      # Open the file and place the cursor at the beginning of the last line                                                                                                                                                             
+vim +n filename     # Open the file and place the cursor at the beginning of line n                                                                                                                                                            
+vim -c cmd file     # Before opening the file file, execute the specified Vim command cmd                                                                                                                                               
+vim -b file         # Open the file in binary mode, some special characters (such as line break ^M) can be displayed in this mode                                                                                                                                         
+vim -d file1 file2  # Use Vim to open file1 and file2 at the same time and diff the difference between the two files                                                                                                                                   
+vim -r filename     # The system crashed the last time I was editing with Vim, restore the file                                                                                                                                                     
+vim -R file         # Open the file as read-only, but you can still use :wq! to write                                                                                                                                                   
+vim -M file         # The modification function is forcibly closed and cannot be used :wq! Write                                                                                                                                                       
+vim -o file1 file2  # When you want to open a Vim file in the terminal, split and display multiple files horizontally                                                                                                                                                    
+vim -O file1 file2  # When you want to open a Vim file in the terminal, split and display multiple files vertically                                                                                                                                                    
+vim -x file         # Open the file encrypted                                                                                                                                                                    
+vim +/target file   # Open file and move the cursor to the first target string found                                                                                                                                            
+```
+
+                                                                                                                                                                                                                                                                                                                                                                                        
                                                                                                                                                                                                    
 ## File operations
 
@@ -595,27 +615,6 @@ gf                  # Open the file whose name is the file name under the cursor
 :tabnew             # Edit the new file in a new tab                                                                                                                                                                 
 ZZ                  # Save the changed file, and close the exit window                                                                                                                                                          
 ZQ                  # Close the window without saving the file                                                                                                                                                                    
-```
-
-                                                                                                                                                                                                   
-                                                                                                                                                                                                   
-## Open file
-
-```bash                                                                                                                                                                                            
-vim .               # Open the file manager, display the catalog file, edit by selecting the file                                                                                                                                                      
-vim filename        # Open or create a new file, and place the cursor at the beginning of the first line                                                                                                                                                           
-vim + filename      # Open the file and place the cursor at the beginning of the last line                                                                                                                                                             
-vim +n filename     # Open the file and place the cursor at the beginning of line n                                                                                                                                                            
-vim -c cmd file     # Before opening the file file, execute the specified Vim command cmd                                                                                                                                               
-vim -b file         # Open the file in binary mode, some special characters (such as line break ^M) can be displayed in this mode                                                                                                                                         
-vim -d file1 file2  # Use Vim to open file1 and file2 at the same time and diff the difference between the two files                                                                                                                                   
-vim -r filename     # The system crashed the last time I was editing with Vim, restore the file                                                                                                                                                     
-vim -R file         # Open the file as read-only, but you can still use :wq! to write                                                                                                                                                   
-vim -M file         # The modification function is forcibly closed and cannot be used :wq! Write                                                                                                                                                       
-vim -o file1 file2  # When you want to open a Vim file in the terminal, split and display multiple files horizontally                                                                                                                                                    
-vim -O file1 file2  # When you want to open a Vim file in the terminal, split and display multiple files vertically                                                                                                                                                    
-vim -x file         # Open the file encrypted                                                                                                                                                                    
-vim +/target file   # Open file and move the cursor to the first target string found                                                                                                                                            
 ```
 
                                                                                                                                                                                                    
@@ -887,19 +886,22 @@ The above **recording macro, using macro** two common operations, complete the b
 ## Other commands
 
 ```bash                                                                                                                                                                                            
-Ctrl+X Ctrl+E       # Scroll up in insert mode                                                                                                                                                                    
-Ctrl+X Ctrl+Y       # Scroll down in insert mode                                                                                                                                                                    
-Ctrl+G              # Display the name of the file being edited, as well as size and location information                                                                                                                                                         
-g Ctrl+G            # Display file size, number of characters, number of words and number of lines, also available in visual mode                                                                                                                                                  
 ga                  # Display the ASCII code or Unicode code of the character under the cursor                                                                                                                                                
 g8                  # Display the UTF-8 encoding byte order of the character under the cursor                                                                                                                                                         
 gi                  # Go back to the place where you entered the insert last time, and switch to insert mode                                                                                                                                                         
 K                   # Query the help of the word under the cursor                                                                                                                                                                   
+Ctrl+G              # Display the name of the file being edited, as well as size and location information                                                                                                                                                         
+g Ctrl+G            # Display file size, number of characters, number of words and number of lines, also available in visual mode    
 Ctrl+PgUp           # On the last tab page, GVim OK, some terminal software needs to set the corresponding keyboard code                                                                                                                                                 
 Ctrl+PgDown         # The next tab page, GVim OK, some terminal software needs to set the corresponding keyboard code                                                                                                                                                 
 Ctrl+R Ctrl+W       # Insert the word under the cursor in command mode                                                                                                                                                                 
 Ctrl+Insert         # Copy to the system clipboard (GVIM)                                                                                                                                                               
 Shift+Insert        # Paste the contents of the system clipboard (GVIM)                                                                                                                                                             
+Ctrl+X Ctrl+E       # Scroll up in insert mode                                                                                                                                                                    
+Ctrl+X Ctrl+Y       # Scroll down in insert mode   
+:map                # To view the map shortcuts of the current Vim configuration                                                                                                                                                        
+:inoremap           # To view the inoremap shortcuts of the current Vim configuration                                                                                                                                                   
+:nnoremap           # To view the nnoremap shortcuts of the current Vim configuration 
 :set ff=unix        # Set change behavior unix                                                                                                                                                                   
 :set ff=dos         # Set change behavior dos                                                                                                                                                                    
 :set ff?            # View line break settings                                                                                                                                                                       
@@ -909,9 +911,6 @@ Shift+Insert        # Paste the contents of the system clipboard (GVIM)
 :set t_RS= t_SH=    # Solve the strange characters in the Vim8.0 terminal function in SecureCRT/PenguiNet                                                                                                                                     
 :set fo+=a          # Enable real-time automatic formatting of text segments                                                                                                                                                                
 :earlier 15m        # Go back to the contents of the file 15 minutes ago                                                                                                                                                              
-:map                # To view the map shortcuts of the current Vim configuration                                                                                                                                                        
-:inoremap           # To view the inoremap shortcuts of the current Vim configuration                                                                                                                                                   
-:nnoremap           # To view the nnoremap shortcuts of the current Vim configuration                                                                                                                                                   
 :.!date             # Insert time in current window                                                                                                                                                                    
 :%!xxd              # Start binary editing                                                                                                                                                                      
 :%!xxd -r           # Save binary edit                                                                                                                                                                      
@@ -1062,7 +1061,6 @@ P                   # Uppercase, jump to the current root path
 p                   # Lowercase, jump to the previous path where the cursor is located                                                                                                                                                             
 K                   # Jump to the first subpath                                                                                                                                                                    
 J                   # Jump to the last subpath                                                                                                                                                                   
-Ctrl+j Ctrl+k       # Move between directories and files at the same level, ignoring subdirectories and subfiles                                                                                                                                                        
 C                   # Set the root path to the directory where the cursor is                                                                                                                                                               
 u                   # Set the parent directory as the root path                                                                                                                                                                   
 U                   # Set the parent directory to follow the path, but keep the original directory open                                                                                                                                                     
@@ -1072,6 +1070,7 @@ I                   # Show or not show hidden files
 f                   # Turn file filters on and off                                                                                                                                                                   
 q                   # Close NERDTree                                                                                                                                                                  
 A                   # Show NERDTree in full screen, or close full screen                                                                                                                                                         
+Ctrl+j Ctrl+k       # Move between directories and files at the same level, ignoring subdirectories and subfiles 
 ```
 
                                                                                                                                                                                                    
@@ -1166,4 +1165,5 @@ Command line mode  # Press : or / or ? To start
                                                                                                                                                                                                    
 ---
 
+                                                                                                                                                                                                   
                                                                                                                                                                                                    
