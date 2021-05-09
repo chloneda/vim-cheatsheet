@@ -107,10 +107,10 @@ Ctrl+C              # 退出插入模式，类似于 <Esc> 和 Ctrl+[，但不�
 <Down>              # 光标向下移动
 <Left>              # 光标向左移动
 <Right>             # 光标向右移动
-<S+Left>            # 按住 <Shift> 按左键，向左移动一个单词
-<S+Right>           # 按住 <Shift> 按右键，向右移动一个单词
-<S+Up>              # 按住 <Shift> 按上键，向上翻页
-<S+Down>            # 按住 <Shift> 按下键，向下翻页
+<S+Up>              # 按住 <Shift> 键再按 <Up> 方向键，向上翻页
+<S+Down>            # 按住 <Shift> 键再按 <Down> 方向键，向下翻页
+<S+Left>            # 按住 <Shift> 键再按 <Left> 方向键，向左移动一个单词
+<S+Right>           # 按住 <Shift> 键再按 <Right> 方向键，向右移动一个单词
 <PageUp>            # 向上翻页
 <PageDown>          # 向下翻页
 <Delete>            # 删除光标处字符

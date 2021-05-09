@@ -108,10 +108,10 @@ Ctrl+C              # Like Ctrl-[ and <Esc>, but does not check for abbreviation
 <Down>              # Cursor down                                                                                                                                                                       
 <Left>              # Move the cursor to the left                                                                                                                                                                       
 <Right>             # Move the cursor to the right                                                                                                                                                                       
-<S+Left>            # Hold Shift and press the left button to move one word to the left                                                                                                                                                        
-<S+Right>           # Hold Shift and press the right button to move one word to the right                                                                                                                                                        
-<S+Up>              # Hold Shift and press the up button to page up                                                                                                                                                            
-<S+Down>            # Hold Shift and press the key to page down                                                                                                                                                            
+<S+Up>              # Hold down the <Shift> key and then press the <Up> arrow key to page up                                 
+<S+Down>            # Hold down the <Shift> key and then press the <Down> arrow key to page down
+<S+Left>            # Hold down the <Shift> key and press the <Left> arrow key to move one word to the left                                         
+<S+Right>           # Hold down the <Shift> key and press the <Right> arrow key to move one word to the right                                                                                                                                                             
 <PageUp>            # Page up                                                                                                                                                                          
 <PageDown>          # Page down                                                                                                                                                                          
 <Delete>            # Delete the character at the cursor                                                                                                                                                                      
