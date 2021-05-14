@@ -47,6 +47,8 @@ NG                  # Jump to the Nth row, for example 10G is to move to the ten
 :N                  # Jump to the Nth line, for example: 10<Enter> is to move to the tenth line                                 
 N%                  # Move to the N% position of the file, for example 10% is moved to the 10% position of the file                                                    
 N|                  # Move to N columns of the current row                                                  
+<Enter>             # Move to the first non-blank character in the next line                                                  
+N<Enter>            # Move the cursor down N lines  
 w                   # Skip to the beginning of the next word (word: words separated by punctuation or spaces)                                    
 W                   # Skip to the beginning of the next word (Word: words separated by spaces)                                       
 e                   # Jump to the end of the next word (word: words separated by punctuation or spaces)                                    
@@ -58,8 +60,6 @@ ge                  # Jump to the end of the previous word
 (                   # Move backward one sentence (period separated）                                                
 }                   # Move forward one paragraph (separated by blank lines)                                                
 {                   # Move backward one paragraph (separated by blank lines)                                                
-<Enter>             # Move to the first non-blank character in the next line                                                  
-N<Enter>            # Move the cursor down N lines                                                    
 +                   # Move to the first non-blank character in the next line (same as the Enter key)                                            
 -                   # Move to the first non-blank character in the previous line                                                  
 H                   # Move to the upper part of the screen (H: High)                                              
