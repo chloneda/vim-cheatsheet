@@ -33,10 +33,10 @@ k                   # 光标上移，同 <Up> 方向键
 l                   # 光标右移，同 <Right> 方向键
 Ctrl+e              # 向上滚动一行
 Ctrl+y              # 向下滚动一行
-Ctrl+u              # 向上滚动半屏 --> Move up 1/2 a screen
-Ctrl+d              # 向下滚动半屏 --> Move down 1/2 a screen
-Ctrl+f              # 向下滚动一屏 --> Move forward one full screen
-Ctrl+b              # 向上滚动一屏 --> Move back one full screen
+Ctrl+u              # 向上滚动半屏（Move up 1/2 a screen）
+Ctrl+d              # 向下滚动半屏（Move down 1/2 a screen）
+Ctrl+f              # 向下滚动一屏（Move forward one full screen）
+Ctrl+b              # 向上滚动一屏（Move back one full screen）
 0                   # 跳到行首，数字 0，效用等同于 <Home> 键
 ^                   # 跳到从行首开始第一个非空白字符
 $                   # 跳到行尾，效用等同于 <End> 键
@@ -114,13 +114,13 @@ Ctrl+C              # 退出插入模式，类似于 <Esc> 和 Ctrl+[，但不�
 <PageUp>            # 向上翻页
 <PageDown>          # 向下翻页
 <Delete>            # 删除光标处字符
-<Backspace>         # <Backspace> 键是向后删除字符
+<Backspace>         # 退格键 <Backspace> 向后删除字符
 <Home>              # 光标跳转行首
 <End>               # 光标跳转行尾
 Ctrl+d              # 减少缩进
 Ctrl+f              # 减少缩进
 Ctrl+t              # 增加缩进
-Ctrl+h              # 删除前一个字符，相当于回格键 <Backspace>
+Ctrl+h              # 删除前一个字符，相当于退格键 <Backspace>
 Ctrl+o              # 临时退出插入模式，执行单条命令又返回插入模式
 Ctrl+u              # 当前行删除到行首所有字符
 Ctrl+w              # 删除光标前的一个单词
@@ -596,7 +596,7 @@ vim +/target file   # 打开 file 并将光标移动到找到的第一个 target
 :qa！               # 放弃所有文件操作并强制退出
 :qall               # 放弃所有文件操作并退出
 :x                  # 保存文件并退出，不会修改文件的时间戳
-:edit <filename>    # 打开文件并编辑，缩写（:e file），通过文件的绝对或相对路径打开文件，Tab 键补全路径
+:edit <filename>    # 打开文件并编辑，缩写（:e file），通过文件的绝对或相对路径打开文件，<Tab> 制表键补全路径
 :edit .             # 打开文件管理器，缩写（:e .），浏览当前目录下的文件，选中并编辑   
 :Explore            # 打开文件管理器，缩写（:E），并显示活动缓冲区所在的目录
 :saveas <filename>  # 另存为指定文件
@@ -637,7 +637,7 @@ N Ctrl+^            # 切换缓存，先输入数字的缓存编号，再按 Ctr
 
 ## 多窗口操作
 
-> 分屏窗口是基于 Ctrl+W 快捷键的，Ctrl 是控制功能键，W 是代表 Windom，Ctrl+W 代表控制窗口的意思。
+> 分屏窗口是基于 Ctrl+W 快捷键的，<Ctrl> 是控制功能键，W 是代表 Windom，Ctrl+W 代表控制窗口的意思。
 
 ```bash
 :sp <filename>      # 上下横向切分（split）窗口并在新窗口打开文件 filename
@@ -833,7 +833,7 @@ vim -x <filename>	# 输入加密密码并再次确认密码。注意：不修改
 > **文档解密**，通过命令模式下设定解密。
 
 ```bash
-:X                  # 命令模式下直接按 Enter 键，表示密码为空。注意：不修改内容也要保存，否则解密设定不会生效
+:X                  # 命令模式下直接按 <Enter> 回车键，表示密码为空。注意：不修改内容也要保存，否则解密设定不会生效
 :set key=		    # 命令模式下设置 key 的密码为空。注意：不修改内容也要保存，否则密码设定不会生效
 ```
 
@@ -851,7 +851,7 @@ q                   # 结束录制宏
 @:                  # 重复上一个 ex 命令（即冒号命令）
 ```
 
-**宏 举例**：需要将如下多行文本的行首键入一个 Tab 键进行行首缩进。
+**宏 举例**：需要将如下多行文本的行首键入一个 <Tab> 制表键进行行首缩进。
 
 ```
 set nu
@@ -867,7 +867,7 @@ syntax on
 
 - 先将光标移动到第一行。
 - 在 Normal 模式下，按 q 键加一个字母开始录制。例如按下 qa，将该宏注册为 a。
-- 按下 I 在行首插入，在编辑模式按下 <Tab> 键。按 <Esc> 键返回到 Normal 模式。
+- 按下 I 在行首插入，在编辑模式按下 <Tab> 制表键。按 <Esc> 键返回到 Normal 模式。
 - 按下 j 键将光标移动到下一行。
 - 按下 q 键完成录制。
 
@@ -879,7 +879,7 @@ syntax on
 - Normal 模式下将光标移动到第二行，按下 @a，再使用了一次宏 a。
 - 多次操作按下 N@a，其中 N 为正整数，代表执行 N 次宏。例如将光标移动到第 3 行，对余下的 5 行操作宏 a，按下 5@a。
 
-以上 **录制宏、使用宏** 两个共同操作，完成多行文本的行首键入一个 Tab 键进行行首缩进！
+以上 **录制宏、使用宏** 两个共同操作，完成多行文本的行首键入一个 <Tab> 制表键进行行首缩进！
 
 
 ## 其他命令
@@ -998,11 +998,11 @@ syntax clear        # 清除已定义的语法规则
 syntax on           # 允许语法高亮
 syntax off          # 禁止语法高亮
 set history=200     # 记录 200 条历史命令
-set bs=?            # 设置 Backspace 键模式，现代编辑器为 :set bs=eol,start,indent
+set bs=?            # 设置 <Backspace> 退格键模式，现代编辑器为 :set bs=eol,start,indent
 set sw=4            # 设置缩进宽度为 4
 set ts=4            # 设置制表符宽度为 4
-set noet            # 设置不展开 Tab 成空格
-set et              # 设置展开 Tab 成空格
+set noet            # 设置不展开 <Tab> 制表键成空格
+set et              # 设置展开 <Tab> 制表键成空格
 set winaltkeys=no   # 设置 GVim 下正常捕获 Alt 键
 set nowrap          # 关闭自动换行
 set ttimeout        # 允许终端按键检测超时（终端下功能键为一串 Esc 开头的扫描码）
@@ -1119,11 +1119,11 @@ Ctrl+j Ctrl+k       # 在同级目录和文件间移动，忽略子目录和子�
 - 某些终端中使用 NeoVim 如看到奇怪字符，使用 :set guicursor= 解决。
 - 多使用 ciw, ci[, ci", ci( 以及 diw, di[, di", di( 命令来快速改写/删除文本。
 - 在行内左右移动光标时，多使用 w b e 或 W B E，而不是 h l 或方向键，这样会快很多。
-- <Shift> 键相当于移动加速键， w b e 移动光标很慢，但是 W B E 走的很快。
+- <Shift> 上档键相当于移动加速键， w b e 移动光标很慢，但是 W B E 走的很快。
 - 自己要善于总结新技巧，例如移动到行首非空字符时用 0w 命令比 ^ 命令更容易输入。
 - 在空白行使用 dip 命令可以删除所有临近的空白行，viw 可以选择连续空白。
 - 缩进时使用 >8j >} <ap >ap =i} == 会方便很多。
-- 插入模式下，当你发现一个单词写错了，应该多用 Ctrl+W 这比 <Backspace> 快。
+- 插入模式下，当你发现一个单词写错了，应该多用 Ctrl+W 这比 <Backspace> 退格键快。
 - y d c 命令可以很好结合 f t 和 /X 例如 dt) 和 y/End<cr>。
 - c d x 命令会自动填充寄存器 "1 到 "9 ， y 命令会自动填充 "0 寄存器。
 - 用 v 命令选择文本时，可以用 0 掉头选择，有时很有用。
