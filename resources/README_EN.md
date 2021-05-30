@@ -178,7 +178,7 @@ Ctrl+X Ctrl+O       # Insert Omnifunc completion
 ```bash                                                                                                                                                                                            
 r                   # Replace the current character                                                                                                                                                                       
 R                   # Enter replacement mode until you press <Esc> to leave                                                                                                                                                             
-J                   # Combine multiple lines into one line 
+J                   # Delete a newline character and merge multiple lines into one line 
 s                   # Replace character (delete the character at the cursor and enter the insert mode, the number can be connected in front)                                                                                                                                                  
 S                   # Replace line (delete the current line and enter the insert mode, the number can be accessed before)                                                                                                                                                     
 cc                  # Rewrite the current line (delete the current line and enter insert mode), same as S                                                                                                                                                      
@@ -370,8 +370,8 @@ i"                  # Double quotes
 a"                  # Double quotes                                                                                                                                                                
 2i)                 # Two outer parentheses                                                                                                                                                                     
 2a)                 # Two outer parentheses                                                                                                                                                            
-2f)                 # To the second parenthesis                                                                                                                                                                     
-2t)                 # To the second parenthesis                                                                                                                                                                     
+Nf)                 # Move to the Nth parenthesis                                                                                                                                                                     
+Nt)                 # Move to the Nth parenthesis                                                                                                                                                                     
 ```
 
                                                                                                                                                                                                    
@@ -407,7 +407,9 @@ T<char>             # Search forward before the first character in the current l
 ,                   # Reverse the direction to find the last character search command (f/t command)                                                                                                                                                       
 tx                  # Search the current line before the specified string                                                                                                                                                              
 fx                  # Search the current line to the specified string                                                                                                                                                              
+<Esc>               # Abandon the search. For example, after starting the f command, I found that I wanted to use the F command, and the <Esc> exit key gave up the search
 ```
+Note: The <Esc> key can abort most commands.
 
 **Replace command in normal mode** 
 

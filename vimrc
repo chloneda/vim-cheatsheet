@@ -88,7 +88,7 @@ set cmdheight=2                 " 总是显示状态行
 set autoindent                  " 启用自动对齐功能，把上一行的对齐格式应用到下一行
 set clipboard+=unnamed          " 共享剪贴板   
 set showmatch                   " 高亮显示匹配的括号
-set showmode                    " 显示我们当前正在编辑的模式
+set showmode                    " 显示我们当前所处的模式
 set matchtime=1                 " 匹配括号高亮的时间（单位是十分之一秒） 
 set autoread                    " 设置当文件被改动时自动载入
 set autowrite                   " 自动保存
