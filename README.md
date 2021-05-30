@@ -1102,7 +1102,7 @@ Ctrl+j Ctrl+k       # 在同级目录和文件间移动，忽略子目录和子�
 - 最新版本：https://github.com/vim/vim   
 - Windows 版：https://github.com/vim/vim-win32-installer/releases
 - 插件浏览：http://vimawesome.com
-- 正确设置 <Alt> 换挡键：http://www.skywind.me/blog/archives/2021
+- 正确设置 Alt 换挡键：http://www.skywind.me/blog/archives/2021
 - 视频教程：http://vimcasts.org/
 - 中文帮助：http://vimcdoc.sourceforge.net/doc/help.html
 - 中文版入门到精通：https://github.com/wsdjeg/vim-galore-zh_cn
