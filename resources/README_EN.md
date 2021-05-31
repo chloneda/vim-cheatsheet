@@ -16,7 +16,7 @@
 
 ```bash                                                          
 .                   # Decimal point, repeat the last command                               
-N<command>          # Repeat a command N times, for example: 10k, move the cursor up 10 lines                
+N{command}          # Repeat a command N times, for example: 10k, move the cursor up 10 lines                
 ```
 
 **In addition, to play the power of repetition, macros and regular expressions should also be used to reduce repetitive operations.**
@@ -49,13 +49,14 @@ N%                  # Move to the N% position of the file, for example 10% is mo
 N|                  # Move to N columns of the current row                                                  
 <Enter>             # Move to the first non-blank character in the next line                                                  
 N<Enter>            # Move the cursor down N lines  
-w                   # Skip to the beginning of the next word (word: words separated by punctuation or spaces)                                    
-W                   # Skip to the beginning of the next word (Word: words separated by spaces)                                       
-e                   # Jump to the end of the next word (word: words separated by punctuation or spaces)                                    
-E                   # Jump to the end of the next word (Word: words separated by spaces)                                       
-b                   # Jump to the beginning of the previous word (word: words separated by punctuation or spaces)                                    
-B                   # Jump to the beginning of the previous word (Word: words separated by spaces）                                       
-ge                  # Jump to the end of the previous word                                                     
+w                   # Move to the beginning of the next word separated by punctuation or space (w: word)                                    
+W                   # Move to the beginning of the next space-separated word (W: Word)                                       
+e                   # Move to the end of the next word separated by punctuation or space (e: end)                                    
+E                   # Move to the end of the next space separated word (E: End)
+b                   # Move to the beginning of the previous word separated by punctuation or space (b: backward)
+B                   # Move to the beginning of the previous space-separated word (B: Backward)
+ge                  # Move backward to the end of the word
+gE                  # Move backward to the end of a word separated by a whitespace
 )                   # Move forward one sentence (separated by periods)                                                
 (                   # Move backward one sentence (period separated）                                                
 }                   # Move forward one paragraph (separated by blank lines)                                                
@@ -65,16 +66,16 @@ ge                  # Jump to the end of the previous word
 H                   # Move to the upper part of the screen (H: High)                                              
 M                   # Move to the middle of the screen (M: Middle)                                            
 L                   # Move to the bottom of the screen (L: Low)                                          
-<S+Up>              # Hold down the <Shift> key and then press the <Up> arrow key to page up                                 
-<S+Down>            # Hold down the <Shift> key and then press the <Down> arrow key to page down
-<S+Left>            # Hold down the <Shift> key and press the <Left> arrow key to move one word to the left                                         
-<S+Right>           # Hold down the <Shift> key and press the <Right> arrow key to move one word to the right                                         
 gm                  # Move to the middle of the line                                                         
 gj                  # Move the cursor down one screen line (ignore automatic line wrapping)                                           
 gk                  # Move the cursor up one screen line (ignore auto-wrap)                                           
 zz                  # Adjust the cursor line to the center of the screen                                                  
 zt                  # Adjust the cursor line to the upper part of the screen                                                  
 zb                  # Adjust the cursor line to the bottom of the screen                                                  
+<S+Up>              # Hold down the <Shift> key and then press the <Up> arrow key to page up                                 
+<S+Down>            # Hold down the <Shift> key and then press the <Down> arrow key to page down
+<S+Left>            # Hold down the <Shift> key and press the <Left> arrow key to move one word to the left                                         
+<S+Right>           # Hold down the <Shift> key and press the <Right> arrow key to move one word to the right 
 ```
 
 
@@ -399,10 +400,10 @@ N                   # Search forward
 %                   # Matching bracket movement, including (), {}, []. Combining the following two commands is quite powerful for programmers (premise: you need to move the cursor to the parentheses first)                                                                                                                       
 *                   # Search down the word under the cursor                                                                                                                                                                 
 #                   # Search forward for the word under the cursor                                                                                                                                                                  
-f<char>             # Search backward for the first character of the current line as <char>, 2fv can find the second character of v                                                                                                                                      
-F<char>             # Search forward for the first character in the current line that is <char>                                                                                                                                                       
-t<char>             # Search backward before the first character in the current line that is <char>                                                                                                                                                      
-T<char>             # Search forward before the first character in the current line that is <char>                                                                                                                                                      
+f{char}             # Search backward for the first character of the current line as {char}, 2fv can find the second character of v                                                                                                                                      
+F{char}             # Search forward for the first character in the current line that is {char}                                                                                                                                                       
+t{char}             # Search backward before the first character in the current line that is {char}                                                                                                                                                      
+T{char}             # Search forward before the first character in the current line that is {char}                                                                                                                                                      
 ;                   # Repeat the last character search command (f/t command)                                                                                                                                                           
 ,                   # Reverse the direction to find the last character search command (f/t command)                                                                                                                                                       
 tx                  # Search the current line before the specified string                                                                                                                                                              
@@ -589,7 +590,7 @@ vim +/target file   # Open file and move the cursor to the first target string f
 
 ```bash                                                                                                                                                                                            
 :w                  # Write the file and save it, the time stamp of the file will be modified                                                                                                                                                   
-:w <filename>       # Save file by name                                                                                                                                                                      
+:w {filename}       # Save file by name                                                                                                                                                                      
 :w !sudo tee %      # Save the file with super user privileges, you can also do this :w !sudo tee%> /dev/null                                                                                                                                 
 :wa                 # Save all files                                                                                                                                                                       
 :wall               # Save all files                                                                                                                                                                         
@@ -599,18 +600,18 @@ vim +/target file   # Open file and move the cursor to the first target string f
 :qa！               # Abandon all file operations and force exit                                                                                                                                                                   
 :qall               # Abandon all file operations and exit                                                                                                                                                                    
 :x                  # Save the file and exit, the time stamp of the file will not be modified                                                                                                                                                       
-:edit <filename>    # Open the file and edit, abbreviate (:e file), open the file by the absolute or relative path of the file, Tab key to complete the path                                                                                                                               
+:edit {filename}    # Open the file and edit, abbreviate (:e file), open the file by the absolute or relative path of the file, Tab key to complete the path                                                                                                                               
 :edit .             # Open the file manager, abbreviate (:e.), browse the files in the current directory, select and edit                                                                                                                                            
 :Explore            # Open the file manager, abbreviate (:E), and display the directory where the active buffer is located                                                                                                                                                 
-:saveas <filename>  # Save as specified file                                                                                                                                                                        
-:o <filename>       # Open (o: open) another file in the current window                                                                                                                                                        
-:r <filename>       # Read the file and insert the content after the cursor                                                                                                                                                               
+:saveas {filename}  # Save as specified file                                                                                                                                                                        
+:o {filename}       # Open (o: open) another file in the current window                                                                                                                                                        
+:r {filename}       # Read the file and insert the content after the cursor                                                                                                                                                               
 :r !dir             # Capture and insert the output of the dir command after the cursor                                                                                                                                                         
 :on[ly]             # Close other windows except the window where the cursor is located, same as Ctrl+W o                                                                                                                                                 
 :clo[se]            # Close the file in the window where the cursor is, the same as Ctrl+W c                                                                                                                                                       
-:cd <path>          # Switch Vim current path                                                                                                                                                                  
+:cd {path}          # Switch Vim current path                                                                                                                                                                  
 :pwd                # Show Vim current path                                                                                                                                                                  
-:n <filename>       # Open a new window to edit the new file filename                                                                                                                                                       
+:n {filename}       # Open a new window to edit the new file filename                                                                                                                                                       
 :new                # Open a new window to edit a new file                                                                                                                                                                
 :enew               # Create a new file in the current window                                                                                                                                                                   
 :vnew               # Edit the new file in a new window divided into left and right                                                                                                                                                              
@@ -630,7 +631,7 @@ ZQ                  # Close the window without saving the file
 :bd                 # Delete cache                                                                                                                                                                         
 :b 1                # Switch to cache 1                                                                                                                                                                    
 :b abc              # Switch to the cache whose file name starts with abc                                                                                                                                                            
-:badd <filename>    # Add files to the cache list                                                                                                                                                                   
+:badd {filename}    # Add files to the cache list                                                                                                                                                                   
 :set hidden         # Set hidden mode (unsaved cache can be switched away or closed)                                                                                                                                                    
 :set nohidden       # Turn off the hidden mode (unsaved cache cannot be switched away or closed)                                                                                                                                                    
 n Ctrl+^            # To switch the cache, enter the numeric cache number first, then press Ctrl+6                                                                                                                                                    
@@ -643,8 +644,8 @@ n Ctrl+^            # To switch the cache, enter the numeric cache number first,
 > The split-screen window is based on the Ctrl+W shortcut key, Ctrl is the control function key, W stands for Windom, and Ctrl+W stands for control window.
 
 ```bash                                                                                                                                                                                            
-:sp <filename>      # Split the window horizontally and open the file in a new window filename                                                                                                                                            
-:vs <filename>      # Split the window vertically and open the file in a new window filename                                                                                                                                  
+:sp {filename}      # Split the window horizontally and open the file in a new window filename                                                                                                                                            
+:vs {filename}      # Split the window vertically and open the file in a new window filename                                                                                                                                  
 :split              # Copy the current window to a horizontal window, the content is synchronized, the cursor can be different                                                                                                                                                 
 :vsplit             # Copy the current window to another vertical window, the content is synchronized, the cursor can be different                                                                                                                                                 
 Ctrl+W              # Switch to the next window                                                                                                                                                             
@@ -686,7 +687,7 @@ Ctrl+W |            # Maximize the current window horizontally
 
 ```bash                                                                                                                                                                                            
 :tabs               # Show all tabs                                                                                                                                                                      
-:tabe <filename>    # Open the file filename in a new tab                                                                                                                                                          
+:tabe {filename}    # Open the file filename in a new tab                                                                                                                                                          
 :tabn               # Next tab                                                                                                                                                                       
 :tabp               # Previous tab                                                                                                                                                                       
 :tabc               # Close current tab                                                                                                                                                                      
@@ -696,7 +697,7 @@ Ctrl+W |            # Maximize the current window horizontally
 :tabfirst           # Switch to the first tab                                                                                                                                                                    
 :tablast            # Switch to the last tab                                                                                                                                                                   
 :tab help           # Open help in tab                                                                                                                                                                     
-:tab drop <file>    # If the file has been opened by other tabs and windows, skip over, otherwise open a new tab                                                                                                                                                 
+:tab drop {file}    # If the file has been opened by other tabs and windows, skip over, otherwise open a new tab                                                                                                                                                 
 :tab split          # Open the file in the current window in a new tab                                                                                                                                                            
 :tab ball           # Open all files in the cache with tabs                                                                                                                                                               
 :set showtabline=?  # Set to 0 to not display the tab page label, 1 will be displayed on demand, 2 will be permanently displayed                                                                                                                                              
@@ -728,7 +729,7 @@ ma                  # Save the current position to bookmark a, the lowercase let
 ## Help information
 
 ```bash                                                                                                                                                                                            
-:help <command>     # To display the help of related commands, you can also enter :help instead of the command. To exit the help, you need to enter :q                                                                                                                                    
+:help {command}     # To display the help of related commands, you can also enter :help instead of the command. To exit the help, you need to enter :q                                                                                                                                    
 :h tutor            # Getting started document                                                                                                                                                                         
 :h quickref         # Quick help                                                                                                                                                                         
 :h index            # Query all keyboard command definitions in Vim                                                                                                                                                              
@@ -747,7 +748,7 @@ ma                  # Save the current position to bookmark a, the lowercase let
 :h set-termcap      # See how to set the key scan code                                                                                                                                                                  
 :viusage            # Normal mode help                                                                                                                                                                  
 :exusage            # EX command help                                                                                                                                                                      
-:version            # Display the current version number and features of Vim                                                                                                                                                             
+:ve[rsion]          # Display the current version number and features of Vim                                                                                                                                                             
 ```
 
                                                                                                                                                                                                    
@@ -801,19 +802,21 @@ z=                  # Spelling suggestion
 ## Code folding
 
 ```bash                                                                                                                                                                                            
+zf{motion}          # Operator, manually define a fold (f:fold)
+:{range}fold        # Define the lines included in the range {range} as a fold
+zf                  # Create code folding                                                                                                                                                                       
+zF                  # Specify the number of rows to create a fold   
 za                  # Toggle fold                                                                                                                                                                         
 zA                  # Switch folding recursively                                                                                                                                                                       
-zc                  # Fold the code under the cursor                                                                                                                                                                      
-zC                  # Collapse all code under the cursor                                                                                                                                                                    
+zc                  # Close a fold under the cursor (c: close)                                                                                                                                                                      
+zC                  # Close all folds under the cursor (C: Close)                                                                                                                                                                   
 zd                  # Delete the fold under the cursor                                                                                                                                                                      
 zD                  # Recursively delete all folds                                                                                                                                                                     
 zE                  # Delete all folds                                                                                                                                                                       
-zf                  # Create code folding                                                                                                                                                                       
-zF                  # Specify the number of rows to create a fold                                                                                                                                                                     
 zi                  # Toggle fold                                                                                                                                                                         
 zm                  # All codes are folded one level                                                                                                                                                                     
+zM                  # Fold all code, set foldlevel=0, set foldenable  
 zr                  # All codes open one layer                                                                                                                                                                     
-zM                  # Fold all code, set foldlevel=0, set foldenable                                                                                                                                          
 zR                  # Open all code and set foldlevel to the maximum                                                                                                                                                     
 zn                  # Fold none, reset foldenable and open all codes                                                                                                                                                
 zN                  # Fold Normal, reset foldenable and restore all folds                                                                                                                                              
@@ -828,7 +831,7 @@ zO                  # Turn on all code folding under the cursor
 > The document is encrypted. When you open the file, you will be prompted to enter the password twice in the lower left corner of the screen before you can operate. After saving the file and exiting, you must enter the normal password to open the file correctly, otherwise garbled characters will be displayed.
 
 ```bash                                                                                                                                                                                            
-vim -x <filename>	# Enter the encryption password and confirm the password again. Note: Save the content without modifying it, otherwise the password setting will not take effect                                                                                                                                 
+vim -x {filename}	# Enter the encryption password and confirm the password again. Note: Save the content without modifying it, otherwise the password setting will not take effect                                                                                                                                 
 :X                  # Enter the encryption password in command mode and confirm the password again. Note: Save the content without modifying it, otherwise the password setting will not take effect                                                                                                                          
 :set key=password   # Enter the encryption password in command mode and confirm the password again. Note: Save the content without modifying it, otherwise the password setting will not take effect                                                                                                                             
 ```
@@ -935,7 +938,7 @@ Ctrl+X Ctrl+Y       # Scroll down in insert mode
 
 In command line mode                                                                                                                                                                                         
 ```bash                                                                                                                                                                                            
-:history                  # View the history of all commands entered in the command line mode                                                                                                                                                      
+:his[tory]                # View the history of all commands entered in the command line mode                                                                                                                                                      
 :history search or / or ？ # View search history                                                                                                                                                                   
 ```
 
@@ -986,7 +989,7 @@ Ctrl+r registerName    # In insert mode (no need to enter register reference sym
 > Note: Vim configuration files are available in global and user versions, and user configuration files take precedence over global system configuration files.
 
 ```bash
-:version            # Check the Vim version, and also check the priority order and location of Vim loading configuration files
+:ve[rsion]          # Check the Vim version, and also check the priority order and location of Vim loading configuration files
 :echo $MYVIMRC      # Use this command in Vim command mode to output the location of the Vim configuration file                                                                                                                                                                                       
 :edit $MYVIMRC      # Use this command to open the Vim configuration file in Vim command mode                                                                                                                                                    
 :source $MYVIMRC    # After the Vim configuration file is changed, use this command to load the new configuration options. If the vimrc file happens to be the currently active buffer, this command can be simplified to: so %.                                                                                                               
