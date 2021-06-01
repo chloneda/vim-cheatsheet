@@ -4,7 +4,7 @@
 
 > Introduction: Vim command cheat sheet, annotated vimrc configuration file, classic Vim keyboard map, practical Vim books, Markdown format, catalog search, quick and familiar use!
 
-- [Vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Gitee](https://gitee.com/chloneda/vim-cheatsheet)
+- [Vim-cheatsheet - Github](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
 - [Vim official website](https://www.vim.org/) | [Vim Github](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)  
 - [Vim custom configuration file - vimrc](../vimrc)        
 - [God-level plugin for Chrome browser - Vimium](vimium.md)
@@ -245,8 +245,59 @@ gUU                 # Convert the entire line to uppercase
 Ctrl+A              # Increase the number                                                                                                                                                                         
 Ctrl+X              # Reduce the number                                                                                                                                                                         
 ```
-
                                                                                                                                                                                                    
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+## Text object
+
+```bash                                                                                                                                                                                            
+0                   # To the beginning of the line, the number 0                                                                                                                                                                     
+^                   # To the non-blank character at the beginning of the line, you can use 0w instead of ^, which is more convenient to press                                                                                                                                                   
+$                   # To the end of the line                                                                                                                                                                          
+iw                  # The entire word Word (excluding separators)                                                                                                                                                            
+aw                  # Whole word Word (including separator)                                                                                                                                                             
+iW                  # Whole Word (excluding separators)                                                                                                                                                              
+aW                  # Whole Word (including separators)                                                                                                                                                               
+is                  # The entire sentence (s: sentence) (excluding separators)                                                                                                                                                   
+ib                  # B: brackets                                                                                                                                                            
+ab                  # Inside the parentheses (including the parentheses themselves)                                                                                                                                                                
+iB                  # big parentheses                                                                                                                                                                         
+aB                  # Inside the big parentheses (including the big parentheses themselves)                                                                                                                                                                
+i)                  # Inside parentheses                                                                                                                                                                         
+a)                  # Inside parentheses                                                                                                                                                                
+i]                  # Inside brackets                                                                                                                                                                         
+a]                  # Inside the brackets (including the brackets themselves)                                                                                                                                                                
+i}                  # big parentheses                                                                                                                                                                        
+a}                  # parentheses (including the parentheses themselves)                                                                                                                                                                
+i'                  # single quotes                                                                                                                                                                         
+a'                  # single quotes                                                                                                                                                                
+i"                  # Double quotes                                                                                                                                                                         
+a"                  # Double quotes                                                                                                                                                                
+2i)                 # Two outer parentheses                                                                                                                                                                     
+2a)                 # Two outer parentheses                                                                                                                                                            
+Nf)                 # Move to the Nth parenthesis                                                                                                                                                                     
+Nt)                 # Move to the Nth parenthesis                                                                                                                                                                     
+```
+
+
+
+## Move text
+
+```bash                                                                                                                                                                                            
+:[range]move{address}                                                                                                                                                                              
+```                                                                                                                                                                                                
+**Parameter Description**                                                                                                                                                                                          
+- [range]: Indicates the range of rows to be moved                                                                                                                                                                                
+- {address}: Indicates the target position of the movement, both of these parameters can be defaulted
+
+For example                                                                                                                                                                                                
+```bash                                                                                                                                                                                            
+:m+1                # Move down 1 line                                                                                                                                                                       
+:m-2                # Move up 1 line                                                                                                                                                                       
+:8,10m2             # Move the contents of lines 8~10 of the currently opened file to the bottom of line 2                                                                                                                                                 
+```
+
+
                                                                                                                                                                                                    
 ## Copy and paste
 
@@ -322,58 +373,7 @@ di'、di"、di( or dib、di[、di{ or diB、di<   # Delete the text content in t
 yi'、yi"、yi(、yi[、yi{、yi<                 # Copy the text content of these paired punctuation marks separately                                                                                                                                       
 vi'、vi"、vi(、vi[、vi{、vi<                 # Select the text content in these paired punctuation marks respectively                                                                                                                                       
 ```                                                                                                                                                                                                
-cit、dit、yit、vit，Operate the content between a pair of tags separately, and edit HTML and XML are easy to use! In addition, if you change the above i to a, you can operate the matching punctuation and the content in the matching punctuation at the same time.
-
-                                                                                                                                                                                                   
-                                                                                                                                                                                                   
-## Move text
-
-```bash                                                                                                                                                                                            
-:[range]move{address}                                                                                                                                                                              
-```                                                                                                                                                                                                
-**Parameter Description**                                                                                                                                                                                          
-- [range]: Indicates the range of rows to be moved                                                                                                                                                                                
-- {address}: Indicates the target position of the movement, both of these parameters can be defaulted
-
-For example                                                                                                                                                                                                
-```bash                                                                                                                                                                                            
-:m+1                # Move down 1 line                                                                                                                                                                       
-:m-2                # Move up 1 line                                                                                                                                                                       
-:8,10m2             # Move the contents of lines 8~10 of the currently opened file to the bottom of line 2                                                                                                                                                 
-```
-
-                                                                                                                                                                                                   
-                                                                                                                                                                                                   
-## Text object
-
-```bash                                                                                                                                                                                            
-0                   # To the beginning of the line, the number 0                                                                                                                                                                     
-^                   # To the non-blank character at the beginning of the line, you can use 0w instead of ^, which is more convenient to press                                                                                                                                                   
-$                   # To the end of the line                                                                                                                                                                          
-iw                  # The entire word Word (excluding separators)                                                                                                                                                            
-aw                  # Whole word Word (including separator)                                                                                                                                                             
-iW                  # Whole Word (excluding separators)                                                                                                                                                              
-aW                  # Whole Word (including separators)                                                                                                                                                               
-is                  # The entire sentence (s: sentence) (excluding separators)                                                                                                                                                   
-ib                  # B: brackets                                                                                                                                                            
-ab                  # Inside the parentheses (including the parentheses themselves)                                                                                                                                                                
-iB                  # big parentheses                                                                                                                                                                         
-aB                  # Inside the big parentheses (including the big parentheses themselves)                                                                                                                                                                
-i)                  # Inside parentheses                                                                                                                                                                         
-a)                  # Inside parentheses                                                                                                                                                                
-i]                  # Inside brackets                                                                                                                                                                         
-a]                  # Inside the brackets (including the brackets themselves)                                                                                                                                                                
-i}                  # big parentheses                                                                                                                                                                        
-a}                  # parentheses (including the parentheses themselves)                                                                                                                                                                
-i'                  # single quotes                                                                                                                                                                         
-a'                  # single quotes                                                                                                                                                                
-i"                  # Double quotes                                                                                                                                                                         
-a"                  # Double quotes                                                                                                                                                                
-2i)                 # Two outer parentheses                                                                                                                                                                     
-2a)                 # Two outer parentheses                                                                                                                                                            
-Nf)                 # Move to the Nth parenthesis                                                                                                                                                                     
-Nt)                 # Move to the Nth parenthesis                                                                                                                                                                     
-```
+cit、dit、yit、vit，Operate the content between a pair of tags separately, and edit HTML and XML are easy to use! In addition, if you change the above i to a, you can operate the matching punctuation and the content in the matching punctuation at the same time.                                                                                                                                                                                                                                                                                                                                                                                                     
 
                                                                                                                                                                                                    
                                                                                                                                                                                                    
@@ -721,68 +721,8 @@ ma                  # Save the current position to bookmark a, the lowercase let
 ]'                  # Jump to the next bookmark                                                                                                                                                                     
 '<                  # Jump to the beginning of the last visual mode selection area                                                                                                                                                              
 '>                  # Jump to the end of the last visual mode selection area                                                                                                                                                              
-```
-
-                                                                                                                                                                                                   
-                                                                                                                                                                                                   
-                                                                                                                                                                                                   
-## Help information
-
-```bash                                                                                                                                                                                            
-:help {command}     # To display the help of related commands, you can also enter :help instead of the command. To exit the help, you need to enter :q                                                                                                                                    
-:h tutor            # Getting started document                                                                                                                                                                         
-:h quickref         # Quick help                                                                                                                                                                         
-:h index            # Query all keyboard command definitions in Vim                                                                                                                                                              
-:h summary          # Help you better use the built-in help system                                                                                                                                                               
-:h Ctrl+H           # Query what Ctrl+H does in normal mode                                                                                                                                                         
-:h i_Ctrl+H         # Query what does Ctrl+H do in insert mode                                                                                                                                                         
-:h i_<Up>           # Query what is on the arrow keys in insert mode                                                                                                                                                             
-:h pattern.txt      # Regular expression help                                                                                                                                                                      
-:h eval             # Scripting help                                                                                                                                                                       
-:h function-list    # View the list of functions in VimScript                                                                                                                                                           
-:h windows.txt      # Window help                                                                                                                                                                       
-:h tabpage.txt      # Help on using tabs                                                                                                                                                                      
-:h +timers          # Show help for the +timers feature                                                                                                                                                            
-:h :!               # See how to run external commands                                                                                                                                                                   
-:h tips             # View the documentation of common techniques built into Vim                                                                                                                                                             
-:h set-termcap      # See how to set the key scan code                                                                                                                                                                  
-:viusage            # Normal mode help                                                                                                                                                                  
-:exusage            # EX command help                                                                                                                                                                      
-:ve[rsion]          # Display the current version number and features of Vim                                                                                                                                                             
-```
-
-                                                                                                                                                                                                   
-                                                                                                                                                                                                   
-## External command
-
-```bash                                                                                                                                                                                            
-:!command           # Execute a one-time Shell command, the following command: :!pwd, change the directory in the current Vim mode                                                                                                                                     
-:!!                 # Re-execute the most recently run command
-:shell              # Start an interactive Shell to execute multiple commands, the exit command exits and returns to Vim                                                                                                                                        
-:!ls                # Run the external command ls and wait for the return                                                                                                                                                              
-:r !ls              # Capture the output of the external command ls and insert it after the cursor                                                                                                                                                       
-:w !sudo tee %      # sudo saves the current file in the future, it can also be like this :w !sudo tee % > /dev/null                                                                                                                               
-:call system('ls')  # Call the ls command, but do not display the returned content                                                                                                                                                           
-:!start notepad     # Start Notepad under Windows, you can add silent at the top                                                                                                                                            
-:sil !start cmd     # Open cmd in the current directory under Windows                                                                                                                                                          
-:%!prog             # Run a text filter program, such as sorting JSON format:%!python -m json.tool                                                                                                                                  
-```
-
-                                                                                                                                                                                                   
-                                                                                                                                                                                                   
-## Quickfix window
-
-```bash                                                                                                                                                                                            
-:copen              # Open the quickfix window (view compilation, grep and other information)                                                                                                                                                
-:copen 10           # Open the quickfix window and set the height to 10                                                                                                                                                    
-:cclose             # Close the quickfix window                                                                                                                                                               
-:cfirst             # Jump to the first error message in quickfix                                                                                                                                                         
-:clast              # Jump to the last error message in quickfix                                                                                                                                                        
-:cc [nr]            # View error [nr]                                                                                                                                                                    
-:cnext              # Skip to the next error message in quickfix                                                                                                                                                         
-:cprev              # Jump to the previous error message in quickfix                                                                                                                                                         
-```
-
+```                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                                                                                                                                                                                                    
                                                                                                                                                                                                    
 ## Spell Check
@@ -1097,6 +1037,65 @@ Insert mode        # Press i to enter, the lower left corner shows --INSERT--
 Visual mode        # Press v to enter, the lower left corner shows --VISUAL--                                                                                                                                                          
 Replacement mode   # Press r or R to start, the lower left corner shows --REPLACE--                                                                                                                                                     
 Command line mode  # Press : or / or ? To start                                                                                                                                                                  
+```
+   
+
+                                                                                                                                                                                                
+## External command
+
+```bash                                                                                                                                                                                            
+:!command           # Execute a one-time Shell command, the following command: :!pwd, change the directory in the current Vim mode                                                                                                                                     
+:!!                 # Re-execute the most recently run command
+:shell              # Start an interactive Shell to execute multiple commands, the exit command exits and returns to Vim                                                                                                                                        
+:!ls                # Run the external command ls and wait for the return                                                                                                                                                              
+:r !ls              # Capture the output of the external command ls and insert it after the cursor                                                                                                                                                       
+:w !sudo tee %      # sudo saves the current file in the future, it can also be like this :w !sudo tee % > /dev/null                                                                                                                               
+:call system('ls')  # Call the ls command, but do not display the returned content                                                                                                                                                           
+:!start notepad     # Start Notepad under Windows, you can add silent at the top                                                                                                                                            
+:sil !start cmd     # Open cmd in the current directory under Windows                                                                                                                                                          
+:%!prog             # Run a text filter program, such as sorting JSON format:%!python -m json.tool                                                                                                                                  
+``` 
+
+
+
+## Quickfix window
+
+```bash                                                                                                                                                                                            
+:copen              # Open the quickfix window (view compilation, grep and other information)                                                                                                                                                
+:copen 10           # Open the quickfix window and set the height to 10                                                                                                                                                    
+:cclose             # Close the quickfix window                                                                                                                                                               
+:cfirst             # Jump to the first error message in quickfix                                                                                                                                                         
+:clast              # Jump to the last error message in quickfix                                                                                                                                                        
+:cc [nr]            # View error [nr]                                                                                                                                                                    
+:cnext              # Skip to the next error message in quickfix                                                                                                                                                         
+:cprev              # Jump to the previous error message in quickfix                                                                                                                                                         
+```
+
+
+
+## Help information
+
+```bash                                                                                                                                                                                            
+:help {command}     # To display the help of related commands, you can also enter :help instead of the command. To exit the help, you need to enter :q                                                                                                                                    
+:h tutor            # Getting started document                                                                                                                                                                         
+:h quickref         # Quick help                                                                                                                                                                         
+:h index            # Query all keyboard command definitions in Vim                                                                                                                                                              
+:h summary          # Help you better use the built-in help system                                                                                                                                                               
+:h Ctrl+H           # Query what Ctrl+H does in normal mode                                                                                                                                                         
+:h i_Ctrl+H         # Query what does Ctrl+H do in insert mode                                                                                                                                                         
+:h i_<Up>           # Query what is on the arrow keys in insert mode                                                                                                                                                             
+:h pattern.txt      # Regular expression help                                                                                                                                                                      
+:h eval             # Scripting help                                                                                                                                                                       
+:h function-list    # View the list of functions in VimScript                                                                                                                                                           
+:h windows.txt      # Window help                                                                                                                                                                       
+:h tabpage.txt      # Help on using tabs                                                                                                                                                                      
+:h +timers          # Show help for the +timers feature                                                                                                                                                            
+:h :!               # See how to run external commands                                                                                                                                                                   
+:h tips             # View the documentation of common techniques built into Vim                                                                                                                                                             
+:h set-termcap      # See how to set the key scan code                                                                                                                                                                  
+:viusage            # Normal mode help                                                                                                                                                                  
+:exusage            # EX command help                                                                                                                                                                      
+:ve[rsion]          # Display the current version number and features of Vim                                                                                                                                                             
 ```
 
                                                                                                                                                                                                    

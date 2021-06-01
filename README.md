@@ -4,7 +4,7 @@
 
 > 简介：Vim 命令速查表，注释化 vimrc 配置文件，经典 Vim 键盘图，实用 Vim 书籍，Markdown 格式，目录化检索，系统化学习，快速熟悉使用！
 
-- [Vim-cheatsheet](https://github.com/chloneda/vim-cheatsheet) | [Gitee](https://gitee.com/chloneda/vim-cheatsheet)
+- [Vim-cheatsheet - Github](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
 - [Vim 官网](https://www.vim.org/) | [Vim Github](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 - [Vim 自定义配置文件 - vimrc](./vimrc)
 - [Chrome 浏览器神级插件 - Vimium](./resources/vimium.md)
@@ -247,6 +247,57 @@ Ctrl+X              # 减少数字
 
 
 
+## 文本对象
+
+```bash
+0                   # 到行首，数字 0
+^                   # 到行首非空字符，可以使用 0w 代替 ^，按键更方便
+$                   # 到行尾
+iw                  # 整个单词 Word（不包括分隔符）
+aw                  # 整个单词 Word（包括分隔符）
+iW                  # 整个 Word（不包括分隔符）
+aW                  # 整个 Word（包括分隔符）
+is                  # 整个句子 (s: sentence)（不包括分隔符）
+ib                  # 小括号内（b: brackets）
+ab                  # 小括号内（包含小括号本身）
+iB                  # 大括号内
+aB                  # 大括号内（包含大括号本身）
+i)                  # 小括号内
+a)                  # 小括号内（包含小括号本身）
+i]                  # 中括号内
+a]                  # 中括号内（包含中括号本身）
+i}                  # 大括号内
+a}                  # 大括号内（包含大括号本身）
+i'                  # 单引号内
+a'                  # 单引号内（包含单引号本身）
+i"                  # 双引号内
+a"                  # 双引号内（包含双引号本身）
+2i)                 # 往外两层小括号内
+2a)                 # 往外两层小括号内（包含小括号本身）
+Nf)                 # 移动到第 N 个小括号处
+Nt)                 # 移动到第 N 个小括号前
+```
+
+
+
+## 移动文本
+
+```bash
+:[range]move{address}
+```
+**参数说明**
+- [range]：表示要移动的行范围。
+- {address}：表示移动的目标位置，这两个参数都可以缺省。
+
+例如：
+```bash
+:m+1                # 下移 1 行
+:m-2                # 上移 1 行
+:8,10m2             # 把当前打开文件的第 8~10 行内容移动到第 2 行下方
+```
+
+
+
 ## 复制粘贴
 
 **copy 命令的格式为**：
@@ -325,57 +376,6 @@ cit、dit、yit、vit，分别操作一对标签之间的内容，编辑 HTML、
 
 
 
-## 移动文本
-
-```bash
-:[range]move{address}
-```
-**参数说明**
-- [range]：表示要移动的行范围。
-- {address}：表示移动的目标位置，这两个参数都可以缺省。
-
-例如：
-```bash
-:m+1                # 下移 1 行
-:m-2                # 上移 1 行
-:8,10m2             # 把当前打开文件的第 8~10 行内容移动到第 2 行下方
-```
-
-
-
-## 文本对象
-
-```bash
-0                   # 到行首，数字 0
-^                   # 到行首非空字符，可以使用 0w 代替 ^，按键更方便
-$                   # 到行尾
-iw                  # 整个单词 Word（不包括分隔符）
-aw                  # 整个单词 Word（包括分隔符）
-iW                  # 整个 Word（不包括分隔符）
-aW                  # 整个 Word（包括分隔符）
-is                  # 整个句子 (s: sentence)（不包括分隔符）
-ib                  # 小括号内（b: brackets）
-ab                  # 小括号内（包含小括号本身）
-iB                  # 大括号内
-aB                  # 大括号内（包含大括号本身）
-i)                  # 小括号内
-a)                  # 小括号内（包含小括号本身）
-i]                  # 中括号内
-a]                  # 中括号内（包含中括号本身）
-i}                  # 大括号内
-a}                  # 大括号内（包含大括号本身）
-i'                  # 单引号内
-a'                  # 单引号内（包含单引号本身）
-i"                  # 双引号内
-a"                  # 双引号内（包含双引号本身）
-2i)                 # 往外两层小括号内
-2a)                 # 往外两层小括号内（包含小括号本身）
-Nf)                 # 移动到第 N 个小括号处
-Nt)                 # 移动到第 N 个小括号前
-```
-
-
-
 ## 撤销与恢复
 
 ```bash
@@ -409,7 +409,7 @@ tx                  # 搜索当前行到指定 字符串 之前
 fx                  # 搜索当前行到指定 字符串 之处
 <Esc>               # 放弃查找。例如，启动了 f 命令后发现想用的是 F 命令，<Esc> 退出键放弃查找
 ```
-Note: <Esc> 退出键可以中止大部分命令。
+Note: Esc 退出键可以中止大部分命令。
 
 **一般模式下的替换命令：** 
 
@@ -720,66 +720,6 @@ ma                  # 保存当前位置到书签 a ，书签名小写字母为�
 ]'                  # 跳转到下一个书签
 '<                  # 跳到上次可视模式选择区域的开始
 '>                  # 跳到上次可视模式选择区域的结束
-```
-
-
-
-
-## 帮助信息
-
-```bash
-:help {command}     # 显示相关命令的帮助，也可以就输入 :help 而不跟命令，退出帮助需要输入 :q
-:h tutor            # 入门文档
-:h quickref         # 快速帮助
-:h index            # 查询 Vim 所有键盘命令定义
-:h summary          # 帮助你更好的使用内置帮助系统
-:h Ctrl+H           # 查询普通模式下 Ctrl+H 是干什么的
-:h i_Ctrl+H         # 查询插入模式下 Ctrl+H 是干什么的
-:h i_<Up>           # 查询插入模式下方向键上是干什么的
-:h pattern.txt      # 正则表达式帮助
-:h eval             # 脚本编写帮助
-:h function-list    # 查看 VimScript 的函数列表 
-:h windows.txt      # 窗口使用帮助
-:h tabpage.txt      # 标签页使用帮助
-:h +timers          # 显示对 +timers 特性的帮助
-:h :!               # 查看如何运行外部命令
-:h tips             # 查看 Vim 内置的常用技巧文档
-:h set-termcap      # 查看如何设置按键扫描码
-:viusage            # Normal 模式帮助
-:exusage            # Ex 命令帮助
-:ve[rsion]          # 查看 Vim 版本，同时也查看 Vim 载入配置文件的优先顺序及所在位置
-```
-
-
-
-## 外部命令
-
-```bash
-:!command           # 执行一次性 Shell 命令，例如：:!pwd，输出当前 Vim 模式下所处目录路径
-:!!                 # 重新执行最近一次运行过的命令
-:shell              # 启动一个交互的 Shell 执行多个命令，不需要退出Vim。exit 命令退出并返回 Vim
-:!ls                # 运行外部命令 ls，并等待返回
-:r !ls              # 将外部命令 ls 的输出捕获，并插入到光标后
-:w !sudo tee %      # sudo 以后保存当前文件，也可以这样 :w !sudo tee % > /dev/null
-:call system('ls')  # 调用 ls 命令，但是不显示返回内容
-:!start notepad     # Windows 下启动 Notepad，最前面可以加 silent
-:sil !start cmd     # Windows 下当前目录打开 cmd
-:%!prog             # 运行文字过滤程序，如整理 JSON 格式 :%!python -m json.tool
-```
-
-
-
-## Quickfix 窗口
-
-```bash
-:copen              # 打开 quickfix 窗口（查看编译，grep 等信息）
-:copen 10           # 打开 quickfix 窗口，并且设置高度为 10
-:cclose             # 关闭 quickfix 窗口
-:cfirst             # 跳到 quickfix 中第一个错误信息
-:clast              # 跳到 quickfix 中最后一条错误信息
-:cc [nr]            # 查看错误 [nr]
-:cnext              # 跳到 quickfix 中下一个错误信息
-:cprev              # 跳到 quickfix 中上一个错误信息
 ```
 
 
@@ -1096,6 +1036,65 @@ Ctrl+j Ctrl+k       # 在同级目录和文件间移动，忽略子目录和子�
 可视模式            # 按 v 进入，左下角显示 --VISUAL--
 替换模式            # 按 r 或 R 开始，左下角显示 --REPLACE--
 命令行模式          # 按 : 或者 / 或者 ? 开始
+```
+
+
+
+## 外部命令
+
+```bash
+:!command           # 执行一次性 Shell 命令，例如：:!pwd，输出当前 Vim 模式下所处目录路径
+:!!                 # 重新执行最近一次运行过的命令
+:shell              # 启动一个交互的 Shell 执行多个命令，不需要退出Vim。exit 命令退出并返回 Vim
+:!ls                # 运行外部命令 ls，并等待返回
+:r !ls              # 将外部命令 ls 的输出捕获，并插入到光标后
+:w !sudo tee %      # sudo 以后保存当前文件，也可以这样 :w !sudo tee % > /dev/null
+:call system('ls')  # 调用 ls 命令，但是不显示返回内容
+:!start notepad     # Windows 下启动 Notepad，最前面可以加 silent
+:sil !start cmd     # Windows 下当前目录打开 cmd
+:%!prog             # 运行文字过滤程序，如整理 JSON 格式 :%!python -m json.tool
+```
+
+
+
+## Quickfix 窗口
+
+```bash
+:copen              # 打开 quickfix 窗口（查看编译，grep 等信息）
+:copen 10           # 打开 quickfix 窗口，并且设置高度为 10
+:cclose             # 关闭 quickfix 窗口
+:cfirst             # 跳到 quickfix 中第一个错误信息
+:clast              # 跳到 quickfix 中最后一条错误信息
+:cc [nr]            # 查看错误 [nr]
+:cnext              # 跳到 quickfix 中下一个错误信息
+:cprev              # 跳到 quickfix 中上一个错误信息
+```
+
+
+
+## 帮助信息
+
+```bash
+:help {command}     # 显示相关命令的帮助，也可以就输入 :help 而不跟命令，退出帮助需要输入 :q
+:h tutor            # 入门文档
+:h quickref         # 快速帮助
+:h index            # 查询 Vim 所有键盘命令定义
+:h summary          # 帮助你更好的使用内置帮助系统
+:h Ctrl+H           # 查询普通模式下 Ctrl+H 是干什么的
+:h i_Ctrl+H         # 查询插入模式下 Ctrl+H 是干什么的
+:h i_<Up>           # 查询插入模式下方向键上是干什么的
+:h pattern.txt      # 正则表达式帮助
+:h eval             # 脚本编写帮助
+:h function-list    # 查看 VimScript 的函数列表 
+:h windows.txt      # 窗口使用帮助
+:h tabpage.txt      # 标签页使用帮助
+:h +timers          # 显示对 +timers 特性的帮助
+:h :!               # 查看如何运行外部命令
+:h tips             # 查看 Vim 内置的常用技巧文档
+:h set-termcap      # 查看如何设置按键扫描码
+:viusage            # Normal 模式帮助
+:exusage            # Ex 命令帮助
+:ve[rsion]          # 查看 Vim 版本，同时也查看 Vim 载入配置文件的优先顺序及所在位置
 ```
 
 
