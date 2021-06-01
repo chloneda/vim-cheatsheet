@@ -601,7 +601,8 @@ vim +/target file   # Open file and move the cursor to the first target string f
 :qall               # Abandon all file operations and exit                                                                                                                                                                    
 :x                  # Save the file and exit, the time stamp of the file will not be modified                                                                                                                                                       
 :e[dit] {filename}  # Open the file and edit, open the file by the absolute or relative path of the file, Tab key to complete the path                                                                                                                               
-:e[dit] .           # Open the file manager, browse the files in the current directory, select and edit                                                                                                                                            
+:e[dit] .           # Open the file manager, browse the files in the current directory, select and edit 
+:e[dit]             # Reload current file                                                                                                                                           
 :E[xplore]          # Open the file manager, and display the directory where the active buffer is located                                                                                                                                                 
 :saveas {filename}  # Save as specified file                                                                                                                                                                        
 :o {filename}       # Open another file in the current window (o: open)                                                                                                                                                       
@@ -609,13 +610,18 @@ vim +/target file   # Open file and move the cursor to the first target string f
 :r !dir             # Capture and insert the output of the dir command after the cursor                                                                                                                                                         
 :on[ly]             # Close other windows except the window where the cursor is located, same as Ctrl+W o                                                                                                                                                 
 :clo[se]            # Close the file in the window where the cursor is, the same as Ctrl+W c                                                                                                                                                       
-:cd {path}          # Switch Vim current path                                                                                                                                                                  
+:cd {path}          # Switch Vim current path
+:cd -               # Go back to the last current directory                                                                                                                                                                  
 :pwd                # Show Vim current path                                                                                                                                                                  
-:n {filename}       # Open a new window to edit the new file filename                                                                                                                                                       
+:n[ew] {filename}   # Open a new window to edit the new file filename                                                                                                                                                       
 :new                # Open a new window to edit a new file                                                                                                                                                                
-:enew               # Create a new file in the current window                                                                                                                                                                   
+:ene[w]             # Create a new file in the current window                                                                                                                                                                   
 :vnew               # Edit the new file in a new window divided into left and right                                                                                                                                                              
-:tabnew             # Edit the new file in a new tab                                                                                                                                                                 
+:tabnew             # Edit the new file in a new tab   
+:fin[d] {file}      # Find the file {file} in path and edit it
+:f[ile]             # Display the current file name and cursor position
+:f[ile] {name}      # Set the current file name to name
+:files              # Show all alternate file names                                                                                                                                                              
 ZZ                  # Save the changed file, and close the exit window                                                                                                                                                          
 ZQ                  # Close the window without saving the file                                                                                                                                                                    
 ```
@@ -1044,9 +1050,9 @@ Command line mode  # Press : or / or ? To start
 ## External command
 
 ```bash                                                                                                                                                                                            
-:!command           # Execute a one-time Shell command, the following command: :!pwd, change the directory in the current Vim mode                                                                                                                                     
+:!{command}         # Execute a one-time Shell command, the following command: :!pwd, change the directory in the current Vim mode                                                                                                                                     
 :!!                 # Re-execute the most recently run command
-:shell              # Start an interactive Shell to execute multiple commands, the exit command exits and returns to Vim                                                                                                                                        
+:sh[ell]            # Start an interactive Shell to execute multiple commands, the exit command exits and returns to Vim                                                                                                                                        
 :!ls                # Run the external command ls and wait for the return                                                                                                                                                              
 :r !ls              # Capture the output of the external command ls and insert it after the cursor                                                                                                                                                       
 :w !sudo tee %      # sudo saves the current file in the future, it can also be like this :w !sudo tee % > /dev/null                                                                                                                               
