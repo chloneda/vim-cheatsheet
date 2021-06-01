@@ -323,15 +323,15 @@ The subscript lists some examples and uses of file copy using the abbreviation t
 :'<,'>t0            # Copy the highlighted line to the beginning of the file                                                                                                                                                               
 ```
 
-**Common copy and paste commands**：
+### Copy and paste commands
 
 ```bash                                                                                                                                                                                            
 p                   # After pasting to the cursor                                                                                                                                                                       
 P                   # Paste before the cursor                                                                                                                                                                       
-v                   # Enter visual mode                                                                                                                                                                         
-y                   # Copy marked content                                                                                                                                                                       
+v                   # Enter visual mode                                                                                                                                                                                                                                                                                                                                               
 V                   # Visual mode is marked by line                                                                                                                                                                       
-Ctrl+V              # Visual mode is marked by column                                                                                                                                                                        
+Ctrl+V              # Visual mode is marked by column 
+y                   # Copy marked content                                                                                                                                                                        
 y$                  # Copy the current position to the end of the line                                                                                                                                                               
 yy                  # Yank (copy) a line                                                                                                                                                 
 Y                   # Copy the current line, same as yy                                                                                                                                                                   
@@ -369,7 +369,7 @@ va}                 # Select the content inside the braces (including the braces
 
 ```bash                                                                                                                                                                                            
 ci'、ci"、ci(、ci[、ci{、ci<                 # Change the text content in these paired punctuation marks separately                                                                                                                              
-di'、di"、di( or dib、di[、di{ or diB、di<   # Delete the text content in these paired punctuation marks respectively                                                                                                                                        
+di'、di"、di(、dib、di[、di{、diB、di<        # Delete the text content in these paired punctuation marks respectively                                                                                                                                        
 yi'、yi"、yi(、yi[、yi{、yi<                 # Copy the text content of these paired punctuation marks separately                                                                                                                                       
 vi'、vi"、vi(、vi[、vi{、vi<                 # Select the text content in these paired punctuation marks respectively                                                                                                                                       
 ```                                                                                                                                                                                                
@@ -380,7 +380,7 @@ cit、dit、yit、vit，Operate the content between a pair of tags separately, a
 ## Revocation and restoration
 
 ```bash                                                                                                                                                                                            
-u                   # The undo command (u: undo) can be combined. For example, Nu, N is any integer, which means to undo N operations, the same below                                                                                                                               
+u                   # The undo command can be combined. For example, Nu, N is any integer, which means to undo N operations, the same below. (u: undo)                                                                                                                              
 U                   # Undo the entire operation                                                                                                                                                                       
 Ctrl+r              # Cancel the last u command (r: redo)                                                                                                                                                          
 Ctrl+R              # Rewind the previous command                                                                                                                                                                     
