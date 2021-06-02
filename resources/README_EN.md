@@ -39,7 +39,7 @@ Ctrl+d              # Move down 1/2 a screen
 Ctrl+f              # Move forward one full screen                       
 Ctrl+b              # Move back one full screen                          
 0                   # Jump to the beginning of the line, the number 0, the effect is equivalent to the <Home> key                                      
-^                   # Jump to the first non-blank character from the beginning of the line                                               
+^                   # Jump to the non-blank character at the beginning of the line, you can use 0w instead of ^, which is more convenient to press                                                
 $                   # Jump to the end of the line, the effect is equivalent to the <End> key                                            
 gg                  # Jump to the first line, the effect is equivalent to Ctrl+<Home>                                      
 G                   # Jump to the last line, the effect is equivalent to Ctrl+<End>                                       
@@ -250,34 +250,51 @@ Ctrl+X              # Reduce the number
                                                                                                                                                                                                    
 ## Text object
 
-```bash                                                                                                                                                                                            
-0                   # To the beginning of the line, the number 0                                                                                                                                                                     
-^                   # To the non-blank character at the beginning of the line, you can use 0w instead of ^, which is more convenient to press                                                                                                                                                   
-$                   # To the end of the line                                                                                                                                                                          
-iw                  # The entire word Word (excluding separators)                                                                                                                                                            
-aw                  # Whole word Word (including separator)                                                                                                                                                             
-iW                  # Whole Word (excluding separators)                                                                                                                                                              
-aW                  # Whole Word (including separators)                                                                                                                                                               
-is                  # The entire sentence (s: sentence) (excluding separators)                                                                                                                                                   
-ib                  # B: brackets                                                                                                                                                            
-ab                  # Inside the parentheses (including the parentheses themselves)                                                                                                                                                                
-iB                  # big parentheses                                                                                                                                                                         
-aB                  # Inside the big parentheses (including the big parentheses themselves)                                                                                                                                                                
-i)                  # Inside parentheses                                                                                                                                                                         
-a)                  # Inside parentheses                                                                                                                                                                
-i]                  # Inside brackets                                                                                                                                                                         
-a]                  # Inside the brackets (including the brackets themselves)                                                                                                                                                                
-i}                  # big parentheses                                                                                                                                                                        
-a}                  # parentheses (including the parentheses themselves)                                                                                                                                                                
-i'                  # single quotes                                                                                                                                                                         
-a'                  # single quotes                                                                                                                                                                
-i"                  # Double quotes                                                                                                                                                                         
-a"                  # Double quotes                                                                                                                                                                
-2i)                 # Two outer parentheses                                                                                                                                                                     
-2a)                 # Two outer parentheses                                                                                                                                                            
-Nf)                 # Move to the Nth parenthesis                                                                                                                                                                     
-Nt)                 # Move to the Nth parenthesis                                                                                                                                                                     
+Note: Only applicable to visual mode or after operator, for example: operation includes **select v, delete d, copy y, modify c**, etc.
+
+```bash
+aw                  # Operate the entire word, excluding the delimiter (aw: a word)
+aW                  # Manipulate entire words, including separators (aW: a Word)
+iw                  # Operate the entire word, excluding the separator (iw: inner word)
+iW                  # Operate the entire word, including the separator (iW: inner Word)
+is                  # Operate the entire sentence, excluding the separator (s: sentence)
+ib                  # Operation contains block, from [( to ]) (b: block)
+iB                  # Operation contains large blocks, from [{ to ]} (B: Block)
+ab                  # Operate a block, from [( to ])(b: block)
+aB                  # Operate a large block, from [{ to ]} (B: Block)
+ap                  # Operate a paragraph (p: paragraph)
+ip                  # Operation contains paragraph
+i)                  # Manipulate parentheses string
+a)                  # Manipulate the string in the parentheses, including the parentheses themselves
+i]                  # Operation bracket string
+a]                  # Operate the bracket string, including the bracket itself
+i}                  # Manipulate brace strings
+a}                  # Manipulate brace strings, including the braces themselves
+i'                  # Operation single quoted string
+a'                  # Manipulate a single quoted string, including the single quote itself
+i"                  # Manipulate double quoted strings
+a"                  # Manipulate double quoted strings, including the double quotes themselves
+a`                  # Manipulate a backtick string
+i`                  # Operation contains backquote string
+a>                  # Manipulate a <> block
+i>                  # Operation contains <> block
+at                  # Manipulate a tag block, for example from <aaa> to </aaa> (t: tag)
+it                  # The operation contains a tag block, such as from <aaa> to </aaa>
+2i)                 # Operate outside the two parentheses
+2a)                 # Operate the outer two levels of parentheses, including the parentheses themselves
+Nf)                 # Move to the Nth parenthesis
+Nt)                 # Move to the Nth parenthesis                                                                                                                                                                 
 ```
+
+**The text object can be simply summarized as:**
+
+```bash                                                                                                                                                                                            
+ci'、ci"、ci(、ci[、ci{、ci<                 # Change the text content in these paired punctuation marks separately                                                                                                                              
+di'、di"、di(、dib、di[、di{、diB、di<        # Delete the text content in these paired punctuation marks respectively                                                                                                                                        
+yi'、yi"、yi(、yi[、yi{、yi<                 # Copy the text content of these paired punctuation marks separately                                                                                                                                       
+vi'、vi"、vi(、vi[、vi{、vi<                 # Select the text content in these paired punctuation marks respectively                                                                                                                                       
+```                                                                                                                                                                                                
+cit、dit、yit、vit，Operate the content between a pair of tags separately, and edit HTML and XML are easy to use! In addition, if you change the above i to a, you can operate the matching punctuation and the content in the matching punctuation at the same time.                                                                                                                                                                                                                                                                                                                                                                                                     
 
 
 
@@ -364,16 +381,6 @@ va}                 # Select the content inside the braces (including the braces
 "_[command]         # Use [command] to delete content without copying (not polluting registers)                                                                                                                                           
 "*[command]         # Use [command] to copy the content to the system clipboard (requires the Vim version to have clipboard support)                                                                                                                             
 ```
-
-**The content in text editing, copy and paste can be summarized simply**
-
-```bash                                                                                                                                                                                            
-ci'、ci"、ci(、ci[、ci{、ci<                 # Change the text content in these paired punctuation marks separately                                                                                                                              
-di'、di"、di(、dib、di[、di{、diB、di<        # Delete the text content in these paired punctuation marks respectively                                                                                                                                        
-yi'、yi"、yi(、yi[、yi{、yi<                 # Copy the text content of these paired punctuation marks separately                                                                                                                                       
-vi'、vi"、vi(、vi[、vi{、vi<                 # Select the text content in these paired punctuation marks respectively                                                                                                                                       
-```                                                                                                                                                                                                
-cit、dit、yit、vit，Operate the content between a pair of tags separately, and edit HTML and XML are easy to use! In addition, if you change the above i to a, you can operate the matching punctuation and the content in the matching punctuation at the same time.                                                                                                                                                                                                                                                                                                                                                                                                     
 
                                                                                                                                                                                                    
                                                                                                                                                                                                    
