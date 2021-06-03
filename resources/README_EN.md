@@ -945,7 +945,7 @@ Ctrl+r registerName    # In insert mode (no need to enter register reference sym
 :ve[rsion]          # Check the Vim version, and also check the priority order and location of Vim loading configuration files
 :echo $MYVIMRC      # Use this command in Vim command mode to output the location of the Vim configuration file                                                                                                                                                                                       
 :edit $MYVIMRC      # Use this command to open the Vim configuration file in Vim command mode                                                                                                                                                    
-:source $MYVIMRC    # After the Vim configuration file is changed, use this command to load the new configuration options. If the vimrc file happens to be the currently active buffer, this command can be simplified to: so %.                                                                                                               
+:so[urce] $MYVIMRC  # After the Vim configuration file is changed, use this command to load the new configuration options. If the vimrc file happens to be the currently active buffer, this command can be simplified to: so %.                                                                                                               
 :echo $VIM          # Output the location of the global vimrc configuration file, stored in the Vim installation directory
 :echo $HOME         # Output the location of the user vimrc configuration file, stored in the user's home directory
 ```

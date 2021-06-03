@@ -945,7 +945,7 @@ Ctrl+r 寄存器名称        # 插入模式下无需输入寄存器引用符号
 :ve[rsion]          # 查看 Vim 版本，同时也查看 Vim 载入配置文件的优先顺序及所在位置
 :echo $MYVIMRC      # Vim 命令模式下使用该命令输出 Vim 配置文件的位置
 :edit $MYVIMRC      # Vim 命令模式下使用该命令打开 Vim 配置文件
-:source $MYVIMRC    # Vim 配置文件改动后，使用该命令加载新的配置选项，若 vimrc 文件恰好是当前活动的缓冲区，则此命令可简化为:so %。
+:so[urce] $MYVIMRC  # Vim 配置文件改动后，使用该命令加载新的配置选项，若 vimrc 文件恰好是当前活动的缓冲区，则此命令可简化为:so %
 :echo $VIM          # 输出全局 vimrc 配置文件位置，存放在 Vim 的安装目录中
 :echo $HOME         # 输出用户 vimrc 配置文件位置，存放在用户主目录中
 ```
