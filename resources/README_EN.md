@@ -591,11 +591,13 @@ vim -x file         # Open the file encrypted
 vim +/target file   # Open file and move the cursor to the first target string found                                                                                                                                            
 ```
 
-                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                   
-## File operations
 
-```bash                                                                                                                                                                                            
+
+## Save and exit
+
+**Note: Save and exit in normal mode.**
+
+```bash
 :w                  # Write the file and save it, the time stamp of the file will be modified                                                                                                                                                   
 :w {filename}       # Save file by name                                                                                                                                                                      
 :w !sudo tee %      # Save the file with super user privileges, you can also do this :w !sudo tee%> /dev/null                                                                                                                                 
@@ -606,7 +608,16 @@ vim +/target file   # Open file and move the cursor to the first target string f
 :q!                 # Force quit (q: quit)                                                                                                                                                                
 :qa！               # Abandon all file operations and force exit                                                                                                                                                                   
 :qall               # Abandon all file operations and exit                                                                                                                                                                    
-:x                  # Save the file and exit, the time stamp of the file will not be modified                                                                                                                                                       
+:x                  # Save the file and exit, the time stamp of the file will not be modified  
+ZZ                  # Save the changed file, and close the exit window                                                                                                                                                          
+ZQ                  # Close the window without saving the file 
+```
+
+                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                   
+## File operations
+
+```bash                                                                                                                                                                                            
 :e[dit] {filename}  # Open the file and edit, open the file by the absolute or relative path of the file, Tab key to complete the path                                                                                                                               
 :e[dit] .           # Open the file manager, browse the files in the current directory, select and edit 
 :e[dit]             # Reload current file                                                                                                                                           
@@ -629,8 +640,6 @@ vim +/target file   # Open file and move the cursor to the first target string f
 :f[ile]             # Display the current file name and cursor position
 :f[ile] {name}      # Set the current file name to name
 :files              # Show all alternate file names                                                                                                                                                              
-ZZ                  # Save the changed file, and close the exit window                                                                                                                                                          
-ZQ                  # Close the window without saving the file                                                                                                                                                                    
 ```
 
                                                                                                                                                                                                    
