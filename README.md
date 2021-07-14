@@ -663,7 +663,7 @@ N Ctrl+^            # 切换缓存，先输入数字的缓存编号，再按 Ctr
 
 ## 多窗口操作
 
-> 分屏窗口是基于 Ctrl+W 快捷键的，<Ctrl> 是控制功能键，W 是代表 Windom，Ctrl+W 代表控制窗口的意思。
+> 分屏窗口是基于 Ctrl+W 快捷键的，Ctrl 是控制功能键，W 是代表 Windom，Ctrl+W 代表控制窗口的意思。
 
 ```bash
 :sp {filename}      # 上下横向切分窗口并在新窗口打开文件 filename（sp: split）
