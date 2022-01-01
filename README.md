@@ -8,7 +8,7 @@
 - [Vim 官网](https://www.vim.org/) | [Vim Github](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 - [Vim 自定义配置文件 - vimrc](./vimrc)
 - [Chrome 浏览器神级插件 - Vimium](./resources/vimium.md)
-- [简体中文](./README.md) | [English](./resources/README_EN.md) 
+- [简体中文](./README.md) | [English](./README_EN.md) 
 
 
 
@@ -27,11 +27,11 @@ N{command}          # 重复某个命令 N 次，例如：10k，光标上移 10 
 **注意：普通（Normal）模式下，任意一个动作都可以重复。**
 
 ```bash
-h                   # 光标左移，等效于 <Left> 方向键
-j                   # 光标下移，等效于 <Down> 方向键
-k                   # 光标上移，等效于 <Up> 方向键
-l                   # 光标右移，等效于 <Right> 方向键
-Ctrl+e              # 向上滚动一行（e: extra）
+h                   # 光标左移，等效于 <Left> 方向键（h 键位于左边，按该键光标左移）
+j                   # 光标下移，等效于 <Down> 方向键（j 键有向下的突起，按该键光标下移）
+k                   # 光标上移，等效于 <Up> 方向键 （k 键与 j 键相反，按该键光标上移）
+l                   # 光标右移，等效于 <Right> 方向键（l 键位于右边，按下该键光标向右移动）
+Ctrl+e              # 向上滚动一行（e: extra line）
 Ctrl+y              # 向下滚动一行
 Ctrl+u              # 向上滚动半屏（Move up 1/2 a screen）
 Ctrl+d              # 向下滚动半屏（Move down 1/2 a screen）
@@ -303,7 +303,7 @@ cit、dit、yit、vit，分别操作一对标签之间的内容，编辑 HTML、
 ```bash
 :[range]move{address}
 ```
-**参数说明**
+参数说明
 - [range]：表示要移动的行范围。
 - {address}：表示移动的目标位置，这两个参数都可以缺省。
 
@@ -318,7 +318,7 @@ cit、dit、yit、vit，分别操作一对标签之间的内容，编辑 HTML、
 
 ## 复制粘贴
 
-**copy 命令的格式为（较少使用）**：
+**复制命令的格式（少用）**：
 
 ```bash
 :[range]copy{address}
@@ -340,7 +340,7 @@ cit、dit、yit、vit，分别操作一对标签之间的内容，编辑 HTML、
 :'<,'>t0            # 把高亮选中的行复制到文件开头
 ```
 
-### 复制粘贴命令（常用）
+**复制粘贴命令（常用）**
 
 ```bash
 p                   # 粘贴到光标后
@@ -397,7 +397,7 @@ Ctrl+R              # 回退前一个命令
 
 ## 查找替换
 
-**一般模式下的查找命令：**
+**普通（Normal）模式下的查找命令：**
 
 ```bash
 /pattern            # 从光标处向文件尾搜索 pattern
@@ -419,7 +419,7 @@ fx                  # 搜索当前行到指定 字符串 之处
 ```
 **注意**：Esc 退出键可以中止大部分命令。
 
-**一般模式下的替换命令：** 
+**普通（Normal）模式下的替换命令：** 
 
 ```bash
 :[range]s[ubstitute]/{pattern}/{string}/[flags]
@@ -636,7 +636,7 @@ ZQ                  # 不保存文件关闭窗口
 :ene[w]             # 在当前窗口创建新文件
 :vnew               # 在左右切分的新窗口中编辑新文件
 :tabnew             # 在新的标签页中编辑新文件
-:fin[d] {file}      # 在 path 当中查找文件 {file} 并编辑之
+:fin[d] {file}      # 在 path 当中查找文件 {file} 并编辑
 :f[ile]             # 显示当前文件名及光标位置
 :f[ile] {name}      # 置当前文件名为 name
 :files              # 显示所有的轮换文件名
@@ -1054,11 +1054,11 @@ Ctrl+j Ctrl+k       # 在同级目录和文件间移动，忽略子目录和子�
 ## Vim 模式
 
 ```bash
-普通模式            # 按 <Esc> 退出键或 Ctrl+[ 进入普通模式，左下角显示文件名或为空
-插入模式            # 按 i 字母键进入插入模式，左下角显示 --INSERT--
-可视模式            # 按 v 字母键进入可视模式，左下角显示 --VISUAL--
-替换模式            # 按 r 或 R 字母键开始替换模式，左下角显示 --REPLACE--
-命令行模式          # 按 : 或者 / 或者 ? 开始命令行模式，左下角无明显信息
+普通模式             # 按 <Esc> 退出键或 Ctrl+[ 进入普通模式，左下角显示文件名或为空
+插入模式             # 按 i 字母键进入插入模式，左下角显示 --INSERT--
+可视模式             # 按 v 字母键进入可视模式，左下角显示 --VISUAL--
+替换模式             # 按 r 或 R 字母键开始替换模式，左下角显示 --REPLACE--
+命令行模式           # 按 : 或者 / 或者 ? 开始命令行模式，左下角无明显信息
 ```
 
 
@@ -1098,7 +1098,7 @@ Ctrl+j Ctrl+k       # 在同级目录和文件间移动，忽略子目录和子�
 ## 帮助信息
 
 ```bash
-:help {command}     # 显示相关命令的帮助，也可以就输入 :help 而不跟命令，退出帮助需要输入 :q
+:h[elp] {command}   # 显示相关命令的帮助，也可以就输入 :help 而不跟命令，退出帮助需要输入 :q
 :h tutor            # 入门文档
 :h quickref         # 快速帮助
 :h index            # 查询 Vim 所有键盘命令定义
@@ -1115,8 +1115,8 @@ Ctrl+j Ctrl+k       # 在同级目录和文件间移动，忽略子目录和子�
 :h :!               # 查看如何运行外部命令
 :h tips             # 查看 Vim 内置的常用技巧文档
 :h set-termcap      # 查看如何设置按键扫描码
-:viusage            # Normal 模式帮助
-:exusage            # Ex 命令帮助
+:viu[sage]          # 显示普通命令的帮助。目的是为了模拟对应的 Nvi 命令
+:exu[sage]          # 显示 Ex 命令的帮助。目的是为了模拟对应的 Nvi 命令
 :ve[rsion]          # 查看 Vim 版本，同时也查看 Vim 载入配置文件的优先顺序及所在位置
 ```
 
@@ -1124,7 +1124,7 @@ Ctrl+j Ctrl+k       # 在同级目录和文件间移动，忽略子目录和子�
 
 ## 网络资源
 
-- 最新版本：https://github.com/vim/vim   
+- 最新版本 Vim：https://github.com/vim/vim   
 - Windows 版：https://github.com/vim/vim-win32-installer/releases
 - 插件浏览：http://vimawesome.com
 - 正确设置 Alt 换挡键：http://www.skywind.me/blog/archives/2021

@@ -2,36 +2,36 @@
     <h1>Vim command cheat sheet</h1>
 </div>
 
-> Introduction: Vim command cheat sheet, annotated vimrc configuration file, classic Vim keyboard map, practical Vim books, Markdown format, catalog search, quick and familiar use!
+> Introduction: Vim command lookup tables, annotated vimrc profiles, classic Vim keyboard diagrams, practical Vim books, Markdown format, directory-based search, systematic learning, quick familiarity with use!
 
 - [Vim-cheatsheet - Github](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
 - [Vim official website](https://www.vim.org/) | [Vim Github](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)  
-- [Vim custom configuration file - vimrc](../vimrc)        
-- [God-level plugin for Chrome browser - Vimium](vimium.md)
-- [Chinese](../README.md) | [English](./README_EN.md)   
+- [Vim custom configuration file - vimrc](./vimrc)        
+- [God-level plugin for Chrome browser - Vimium](./resources/vimium.md)
+- [Chinese](./README.md) | [English](./README_EN.md)   
 
 
 
 ## The power of repetition
 
 ```bash                                                          
-.                   # Decimal point, repeat the last command                               
-N{command}          # Repeat a command N times, for example: 10k, move the cursor up 10 lines                
+.                   # Repeat (Dot) command, repeats the previous command                               
+N{command}          # Repeat a command N times, e.g. 10k, cursor moves up 10 lines                
 ```
 
-**In addition, to play the power of repetition, macros and regular expressions should also be used to reduce repetitive operations.**
+**In addition, the power of repetition should also be leveraged with macros and regular expressions to reduce repetitive operations.**
 
 
 
 ## Cursor movement
 
-**Note: In normal mode, any action can be repeated.**
+**Note: In normal mode, any of the actions can be repeated.**
 
 ```bash                                                                             
-h                   # Move the cursor to the left, same as the <Left> key                                               
-j                   # Move the cursor down, same as the <Down> key                                               
-k                   # Move the cursor up, same as the <Up> key                                                 
-l                   # Move the cursor to the right, the same as the <Right> key                                              
+h                   # Move the cursor to the left, equivalent to the <Left> arrow key. (Note: the h key is on the left, press it to move the cursor left)                                               
+j                   # Move the cursor down, equivalent to the <Down> arrow key. (Note: the j key has a downward protrusion, press this key to move the cursor down)                                               
+k                   # Move the cursor up, equivalent to the <Up> arrow key. (Note: the k key is the opposite of the j key, press this key to move the cursor up)                                                 
+l                   # Move the cursor to the right, equivalent to the <Right> arrow key. (Note: the l key is on the right, press it to move the cursor to the right)                                              
 Ctrl+e              # Scroll up one line                                                        
 Ctrl+y              # Scroll down one line                                                        
 Ctrl+u              # Move up 1/2 a screen                               
@@ -324,7 +324,7 @@ For example
 :[range]copy{address}                                                                                                                                                                              
 ```
 
-**Parameter Description**：                                                                                                                                                                                          
+Parameter Description：                                                                                                                                                                                          
 - [range]：Indicates the range of lines to be copied, where copy can be abbreviated as :co or :t                                                                                                                                                          
 - {address}：Indicates the destination of the copy. Both of these parameters can be defaulted to indicate the current line where the Vim cursor is located.
 
@@ -340,7 +340,7 @@ The subscript lists some examples and uses of file copy using the abbreviation t
 :'<,'>t0            # Copy the highlighted line to the beginning of the file                                                                                                                                                               
 ```
 
-### Copy and paste commands
+**Copy and paste commands**
 
 ```bash                                                                                                                                                                                            
 p                   # After pasting to the cursor                                                                                                                                                                       
@@ -1054,11 +1054,11 @@ Ctrl+j Ctrl+k       # Move between directories and files at the same level, igno
 ## Vim mode
 
 ```bash                                                                                                                                                                                            
-Normal mode        # Press <Esc> or Ctrl+[ to enter, the file name is displayed in the lower left corner or empty                                                                                                                                                    
-Insert mode        # Press i to enter, the lower left corner shows --INSERT--                                                                                                                                                          
-Visual mode        # Press v to enter, the lower left corner shows --VISUAL--                                                                                                                                                          
-Replacement mode   # Press r or R to start, the lower left corner shows --REPLACE--                                                                                                                                                     
-Command line mode  # Press : or / or ? To start                                                                                                                                                                  
+Normal mode         # Press <Esc> or Ctrl+[ to enter, the file name is displayed in the lower left corner or empty                                                                                                                                                    
+Insert mode         # Press i to enter, the lower left corner shows --INSERT--                                                                                                                                                          
+Visual mode         # Press v to enter, the lower left corner shows --VISUAL--                                                                                                                                                          
+Replacement mode    # Press r or R to start, the lower left corner shows --REPLACE--                                                                                                                                                     
+Command line mode   # Press : or / or ? To start                                                                                                                                                                  
 ```
    
 
@@ -1098,7 +1098,7 @@ Command line mode  # Press : or / or ? To start
 ## Help information
 
 ```bash                                                                                                                                                                                            
-:help {command}     # To display the help of related commands, you can also enter :help instead of the command. To exit the help, you need to enter :q                                                                                                                                    
+:h[elp] {command}   # To display the help of related commands, you can also enter :help instead of the command. To exit the help, you need to enter :q                                                                                                                                    
 :h tutor            # Getting started document                                                                                                                                                                         
 :h quickref         # Quick help                                                                                                                                                                         
 :h index            # Query all keyboard command definitions in Vim                                                                                                                                                              
@@ -1115,16 +1115,16 @@ Command line mode  # Press : or / or ? To start
 :h :!               # See how to run external commands                                                                                                                                                                   
 :h tips             # View the documentation of common techniques built into Vim                                                                                                                                                             
 :h set-termcap      # See how to set the key scan code                                                                                                                                                                  
-:viusage            # Normal mode help                                                                                                                                                                  
-:exusage            # EX command help                                                                                                                                                                      
-:ve[rsion]          # Display the current version number and features of Vim                                                                                                                                                             
+:viu[sage]          # Displays help for common commands. The purpose is to simulate the corresponding Nvi commands                                                                                                                                                                  
+:exu[sage]          # Displays help for the Ex command. The purpose is to simulate the corresponding Nvi commands                                                                                                                                                                      
+:ve[rsion]          # View the Vim version, and also view the priority and location of the Vim load configuration file                                                                                                                                                             
 ```
 
                                                                                                                                                                                                    
                                                                                                                                                                                                    
 ## Internet resources
 
-- The latest version of：https://github.com/vim/vim                                                                                                                                                                  
+- Latest Versions of Vim：https://github.com/vim/vim                                                                                                                                                                  
 - Windows version：https://github.com/vim/vim-win32-installer/releases                                                                                                                                    
 - Plug-in browsing：http://vimawesome.com                                                                                                                                                                       
 - Set the Alt key correctly：http://www.skywind.me/blog/archives/2021                                                                                                                                              
