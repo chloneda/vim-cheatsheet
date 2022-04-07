@@ -251,12 +251,7 @@ nnoremap <Leader>0 :tablast<CR>
 nnoremap <C-Insert> :tabnew<CR>
 nnoremap <C-Delete> :tabclose<CR>
 nnoremap <silent><Tab>m :tabnew<CR>
-nnoremap <silent><Tab>e :tabclose<CR>
-nnoremap <silent><Tab>n :tabn<CR>
-nnoremap <silent><Tab>p :tabp<CR>
-nnoremap <silent><s-tab> :tabnext<CR>
-nnoremap <silent><Tab>m :tabnew<CR>
-nnoremap <silent><Tab>e :tabclose<CR>
+nnoremap <silent><Tab>c :tabclose<CR>
 nnoremap <silent><Tab>n :tabn<CR>
 nnoremap <silent><Tab>p :tabp<CR>
 nnoremap <silent><s-tab> :tabnext<CR>
@@ -333,10 +328,17 @@ imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式打开 md 预览
 nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式关闭 md 预览
 imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭 md 预览
 
-" 插件 NERDTree 按键映射
-nnoremap <Leader>n :NERDTreeFocus<CR>
-nnoremap <Leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nnoremap <Leader>N :NERDTreeClose<CR>
+" 插件 NERDTree 按键映射，NERDTree激活后，善用 Shift + ? 快速调出帮助文档
+nnoremap <Leader>n :NERDTreeToggle<CR>          " 打开/关闭目录树
+" nnoremap <Leader>n :NERDTreeFocus<CR>         " 打开目录树，同 NERDTree
+" nnoremap <Leader>N :NERDTreeClose<CR>         " 关闭目录树
+nnoremap <Leader>f :NERDTreeFind<CR>            " 打开目录树并定位到当前文件
+
+let NERDTreeShowHidden=0                        " 是否显示隐藏文件 0/1
+let NERDTreeShowLineNumbers=1                   " 显示目录树行号
+
+" 插件 Tarbar 按键映射，要善于使用 Shift + ? 查看帮助
+nnoremap <Leader>t :TagbarToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件列表
@@ -350,26 +352,46 @@ Plug 'vim-airline/vim-airline'           " Vim 状态栏提供更优秀的显示
 
 " Development
 Plug 'preservim/nerdcommenter'           " Vim 批量注释工具
-Plug 'tpope/vim-repeat'                  " 这个插件存在的意义就是重复
+Plug 'tpope/vim-repeat'                  " 解决 Vim 原生命令 . 在自定义映射或插件映射时无法重复的问题
 Plug 'tpope/vim-surround'                " 添加，修改，删除括号、引号等成对的符号，甚至是 HTML 标签
+Plug 'frazrepo/vim-rainbow'              " 彩虹括号
 
 " File manage
 Plug 'mhinz/vim-startify'                " Vim 启动插件
-Plug 'preservim/nerdtree'                " 显示 Vim 目录树插件
+Plug 'preservim/nerdtree'                " 显示 Vim 目录树插件，常与 Tarbar、Ctrlp 搭配使用
+Plug 'Xuyuanp/nerdtree-git-plugin'       " 显示 NERDTree 目录树的 Git 状态信息 
 
 " Markdown
 Plug 'iamcco/mathjax-support-for-mkdp'   " 用于 Markdown 预览数学公式
 Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
 
 " Github
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'            " Git 侧边栏插件
+Plug 'tpope/vim-fugitive'                " 在 Vim 中使用 Git 命令
 
 " Search
-Plug 'Yggdroot/LeaderF'                  " 查找文件非常方便
+" Plug 'Yggdroot/LeaderF'                " 内容、文件、缓冲区和标签模糊搜索插件，替代 Ctrlp
+Plug 'ctrlpvim/ctrlp.vim'                " 内容、文件、缓冲区和标签模糊搜索插件
+Plug 'majutsushi/tagbar'                 " 侧边栏显示文件中定义的常量、变量、函数等，善于 Shift + ? 查看帮助
 Plug 'easymotion/vim-easymotion'         " 快速定位
 
 " Initialize plugin system
 call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 插件 NERDTree-git 自定义配置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 根据后缀名指定文件类型

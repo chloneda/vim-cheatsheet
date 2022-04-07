@@ -4,8 +4,8 @@
 
 > 简介：Vim 命令速查表，注释化 vimrc 配置文件，经典 Vim 键盘图，实用 Vim 书籍，Markdown 格式，目录化检索，系统化学习，快速熟悉使用！
 
-- [Vim-cheatsheet - Github](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
-- [Vim 官网](https://www.vim.org/) | [Vim Github](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
+- [Vim-cheatsheet - GitHub](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
+- [Vim 官网](https://www.vim.org/) | [Vim GitHub](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 - [Vim 自定义配置文件 - vimrc](./vimrc)
 - [Chrome 浏览器神级插件 - Vimium](./resources/vimium.md)
 - [简体中文](./README.md) | [English](./README_EN.md) 
@@ -26,17 +26,29 @@ N{command}          # 重复某个命令 N 次，例如：10k，光标上移 10 
 
 **注意：普通（Normal）模式下，任意一个动作都可以重复。**
 
+单位级
+
 ```bash
 h                   # 光标左移，等效于 <Left> 方向键（h 键位于左边，按该键光标左移）
 j                   # 光标下移，等效于 <Down> 方向键（j 键有向下的突起，按该键光标下移）
 k                   # 光标上移，等效于 <Up> 方向键 （k 键与 j 键相反，按该键光标上移）
 l                   # 光标右移，等效于 <Right> 方向键（l 键位于右边，按下该键光标向右移动）
-Ctrl+e              # 向上滚动一行（e: extra line）
-Ctrl+y              # 向下滚动一行
-Ctrl+u              # 向上滚动半屏（Move up 1/2 a screen）
-Ctrl+d              # 向下滚动半屏（Move down 1/2 a screen）
-Ctrl+f              # 向下滚动一屏（Move forward one full screen）
-Ctrl+b              # 向上滚动一屏（Move back one full screen）
+```
+
+单词级
+
+```bash
+w                   # 移动到下一个标点或空格分隔的单词开头（w: word）
+W                   # 移动到下一个空格分隔的单词开头（W: Word）
+e                   # 移动到下一个标点或空格分隔的单词尾部（e: end）
+E                   # 移动到下一个空格分隔的单词尾部（E: End）
+b                   # 移动到上一个标点或空格分隔的单词开头（b: backward）
+B                   # 移动到上一个空格分隔的单词开头（B: Backward）
+```
+
+块级
+
+```bash
 0                   # 跳到行首，数字 0，等效于 <Home> 起始键
 ^                   # 跳到行首非空字符，可以使用 0w 代替 ^，按键更方便
 $                   # 跳到行尾，等效于 <End> 结尾键
@@ -48,12 +60,6 @@ N%                  # 移动到文件 N% 的位置，例如 10% 是移动到文�
 N|                  # 移动到当前行的 N 列
 <Enter>             # 移动到下一行首个非空字符
 N<Enter>            # 光标向下移动 N 行
-w                   # 移动到下一个标点或空格分隔的单词开头（w: word）
-W                   # 移动到下一个空格分隔的单词开头（W: Word）
-e                   # 移动到下一个标点或空格分隔的单词尾部（e: end）
-E                   # 移动到下一个空格分隔的单词尾部（E: End）
-b                   # 移动到上一个标点或空格分隔的单词开头（b: backward）
-B                   # 移动到上一个空格分隔的单词开头（B: Backward）
 ge                  # 向后移动到单词词尾
 gE                  # 向后移动到空白隔开的单词词尾
 )                   # 向前移动一个句子（句号分隔）
@@ -71,6 +77,12 @@ gk                  # 光标向上移动一个屏幕行，忽略自动换行
 zz                  # 调整光标所在行到屏幕中央
 zt                  # 调整光标所在行到屏幕上部
 zb                  # 调整光标所在行到屏幕下部
+Ctrl+e              # 向上滚动一行（e: extra line）
+Ctrl+y              # 向下滚动一行
+Ctrl+u              # 向上滚动半屏（Move up 1/2 a screen）
+Ctrl+d              # 向下滚动半屏（Move down 1/2 a screen）
+Ctrl+f              # 向下滚动一屏（Move forward one full screen）
+Ctrl+b              # 向上滚动一屏（Move back one full screen）
 <S+Up>              # 按住 <Shift> 上档键再按 <Up> 方向键，向上翻页
 <S+Down>            # 按住 <Shift> 上档键再按 <Down> 方向键，向下翻页
 <S+Left>            # 按住 <Shift> 上档键再按 <Left> 方向键，向左移动一个单词
@@ -82,9 +94,9 @@ zb                  # 调整光标所在行到屏幕下部
 ## 插入模式
 
 ```bash
-i                   # 在光标处进入插入模式
+i                   # 在光标处进入插入模式（i: insert）
 I                   # 在行首进入插入模式
-a                   # 在光标后进入插入模式
+a                   # 在光标后进入插入模式（a: append）
 A                   # 在行尾进入插入模式
 o                   # 在下一行插入新行并进入插入模式
 O                   # 在上一行插入新行并进入插入模式
@@ -176,7 +188,7 @@ Ctrl+X Ctrl+O       # 插入下 Omnifunc 补全
 ## 文本编辑
 
 ```bash
-r                   # 替换当前字符
+r                   # 替换当前字符（r: replace）
 R                   # 进入替换模式，直至按 <Esc> 退出键离开
 J                   # 删除一个换行符，将多行合并为一行
 s                   # 替换字符，删除光标处字符并进入插入模式，前可接数字
@@ -343,7 +355,7 @@ cit、dit、yit、vit，分别操作一对标签之间的内容，编辑 HTML、
 **复制粘贴命令（常用）**
 
 ```bash
-p                   # 粘贴到光标后
+p                   # 粘贴到光标后（p: paste）
 P                   # 粘贴到光标前
 v                   # 进入可视模式
 V                   # 可视模式按行标记
@@ -426,8 +438,8 @@ fx                  # 搜索当前行到指定 字符串 之处
 ```
 
 参数说明：
-- pattern：就是要被替换掉的字串，可以用 regexp 來表示。
-- string：將 pattern 由 string 所取代。
+- {pattern}：就是要被替换掉的字串，可以用 regexp 來表示。
+- {string}：將 pattern 由 string 所取代。
 - [range]：有以下一些取值。
 
 | [range]取值 | 含义                                                  |
@@ -482,7 +494,7 @@ fx                  # 搜索当前行到指定 字符串 之处
 **注意：Vim 可视模式下可以选择一块编辑区域，然后对选中的文件内容执行插入、删除、替换、改变大小写等操作。**
 
 ```bash
-v                   # 切换到面向字符的可视模式
+v                   # 切换到面向字符的可视模式（v: visual）
 V                   # 切换到面向行的可视模式
 Ctrl+V              # 切换到面向列块的可视模式
 >                   # 增加缩进
@@ -710,14 +722,14 @@ Ctrl+W |            # 横向最大化当前窗口
 ```bash
 :tabs               # 显示所有标签页
 :tabe {filename}    # 在新标签页中打开并编辑文件 filename
-:tabn               # 下一个标签页
-:tabp               # 上一个标签页
-:tabc               # 关闭当前标签页
-:tabo               # 关闭其他标签页
+:tabn[ext]          # 下一个标签页，等效于 gt
+:tabp[revious]      # 上一个标签页，等效于 gT
+:tabc[lose]         # 关闭当前标签页
+:tabo[nly]          # 关闭其他标签页
 :tabn N             # 切换到第 N 个标签页，例如：tabn 3 切换到第三个标签页
 :tabm n             # 标签移动
-:tabfirst           # 切换到第一个标签页
-:tablast            # 切换到最后一个标签页
+:tabfir[st]         # 切换到第一个标签页
+:tabl[ast]          # 切换到最后一个标签页
 :tab help           # 在标签页打开帮助
 :tab drop {file}    # 如果文件已被其他标签页和窗口打开则跳过去，否则新标签打开
 :tab split          # 在新的标签页中打开当前窗口里的文件
@@ -896,12 +908,28 @@ Ctrl+X Ctrl+Y       # 插入模式下向下滚屏
 
 
 
-## 查看历史命令
+## 历史命令
+
+历史命令格式：
+
+```bash
+:his[tory] [{name}] [{first}][, [{last}]]
+```
+
+参数说明：
+
+- {name}：指定历史记录类型。
+- {first}：指定命令历史的起始位置，默认为第一条记录。
+- {last}：指定命令历史的终止位置，默认为最后一条记录。
 
 命令行模式下：
 ```bash
 :his[tory]                # 查看所有命令行模式下输入的命令历史
+:his[tory] all            # 显示所有类型的历史记录
+:history c 1,5            # 列出第一到第五条命令行历史
 :history search 或 / 或 ？ # 查看搜索历史
+:call histdel("")         # 删除历史记录
+:help :history            # 查看 :history 命令的帮助信息
 ```
 
 普通模式下：

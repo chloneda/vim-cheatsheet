@@ -4,8 +4,8 @@
 
 > Introduction: Vim command lookup tables, annotated vimrc profiles, classic Vim keyboard diagrams, practical Vim books, Markdown format, directory-based search, systematic learning, quick familiarity with use!
 
-- [Vim-cheatsheet - Github](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
-- [Vim official website](https://www.vim.org/) | [Vim Github](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)  
+- [Vim-cheatsheet - GitHub](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
+- [Vim official website](https://www.vim.org/) | [Vim GitHub](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)  
 - [Vim custom configuration file - vimrc](./vimrc)        
 - [God-level plugin for Chrome browser - Vimium](./resources/vimium.md)
 - [Chinese](./README.md) | [English](./README_EN.md)   
@@ -27,17 +27,29 @@ N{command}          # Repeat a command N times, e.g. 10k, cursor moves up 10 lin
 
 **Note: In normal mode, any of the actions can be repeated.**
 
+unit level.
+
 ```bash                                                                             
 h                   # Move the cursor to the left, equivalent to the <Left> arrow key. (Note: the h key is on the left, press it to move the cursor left)                                               
 j                   # Move the cursor down, equivalent to the <Down> arrow key. (Note: the j key has a downward protrusion, press this key to move the cursor down)                                               
 k                   # Move the cursor up, equivalent to the <Up> arrow key. (Note: the k key is the opposite of the j key, press this key to move the cursor up)                                                 
 l                   # Move the cursor to the right, equivalent to the <Right> arrow key. (Note: the l key is on the right, press it to move the cursor to the right)                                              
-Ctrl+e              # Scroll up one line                                                        
-Ctrl+y              # Scroll down one line                                                        
-Ctrl+u              # Move up 1/2 a screen                               
-Ctrl+d              # Move down 1/2 a screen                             
-Ctrl+f              # Move forward one full screen                       
-Ctrl+b              # Move back one full screen                          
+```
+
+word level.
+
+```bash
+w                   # Move to the beginning of the next word separated by punctuation or space (w: word)                                    
+W                   # Move to the beginning of the next space-separated word (W: Word)                                       
+e                   # Move to the end of the next word separated by punctuation or space (e: end)                                    
+E                   # Move to the end of the next space separated word (E: End)
+b                   # Move to the beginning of the previous word separated by punctuation or space (b: backward)
+B                   # Move to the beginning of the previous space-separated word (B: Backward)
+```
+
+block level.
+
+```bash                         
 0                   # Jump to the beginning of the line, the number 0, the effect is equivalent to the <Home> key                                      
 ^                   # Jump to the non-blank character at the beginning of the line, you can use 0w instead of ^, which is more convenient to press                                                
 $                   # Jump to the end of the line, the effect is equivalent to the <End> key                                            
@@ -49,12 +61,6 @@ N%                  # Move to the N% position of the file, for example 10% is mo
 N|                  # Move to N columns of the current row                                                  
 <Enter>             # Move to the first non-blank character in the next line                                                  
 N<Enter>            # Move the cursor down N lines  
-w                   # Move to the beginning of the next word separated by punctuation or space (w: word)                                    
-W                   # Move to the beginning of the next space-separated word (W: Word)                                       
-e                   # Move to the end of the next word separated by punctuation or space (e: end)                                    
-E                   # Move to the end of the next space separated word (E: End)
-b                   # Move to the beginning of the previous word separated by punctuation or space (b: backward)
-B                   # Move to the beginning of the previous space-separated word (B: Backward)
 ge                  # Move backward to the end of the word
 gE                  # Move backward to the end of a word separated by a whitespace
 )                   # Move forward one sentence (separated by periods)                                                
@@ -72,6 +78,12 @@ gk                  # Move the cursor up one screen line (ignore auto-wrap)
 zz                  # Adjust the cursor line to the center of the screen                                                  
 zt                  # Adjust the cursor line to the upper part of the screen                                                  
 zb                  # Adjust the cursor line to the bottom of the screen                                                  
+Ctrl+e              # Scroll up one line                                                        
+Ctrl+y              # Scroll down one line                                                        
+Ctrl+u              # Move up 1/2 a screen                               
+Ctrl+d              # Move down 1/2 a screen                             
+Ctrl+f              # Move forward one full screen                       
+Ctrl+b              # Move back one full screen 
 <S+Up>              # Hold down the <Shift> key and then press the <Up> arrow key to page up                                 
 <S+Down>            # Hold down the <Shift> key and then press the <Down> arrow key to page down
 <S+Left>            # Hold down the <Shift> key and press the <Left> arrow key to move one word to the left                                         
@@ -710,14 +722,14 @@ Ctrl+W |            # Maximize the current window horizontally
 ```bash                                                                                                                                                                                            
 :tabs               # Show all tabs                                                                                                                                                                      
 :tabe {filename}    # Open the file filename in a new tab                                                                                                                                                          
-:tabn               # Next tab                                                                                                                                                                       
-:tabp               # Previous tab                                                                                                                                                                       
-:tabc               # Close current tab                                                                                                                                                                      
-:tabo               # Close other tabs                                                                                                                                                                      
+:tabn[ext]          # Next tab                                                                                                                                                                       
+:tabp[revious]      # Previous tab                                                                                                                                                                    
+:tabc[lose]         # Close current tab                                                                                                                                                                      
+:tabo[nly]          # Close other tabs                                                                                                                                                                      
 :tabn N             # Switch to the Nth tab page, for example: tabn 3 Switch to the third tab page                                                                                                                                              
 :tabm n             # Label move                                                                                                                                                                         
-:tabfirst           # Switch to the first tab                                                                                                                                                                    
-:tablast            # Switch to the last tab                                                                                                                                                                   
+:tabfir[st]         # Switch to the first tab                                                                                                                                                                    
+:tabl[ast]          # Switch to the last tab                                                                                                                                                                   
 :tab help           # Open help in tab                                                                                                                                                                     
 :tab drop {file}    # If the file has been opened by other tabs and windows, skip over, otherwise open a new tab                                                                                                                                                 
 :tab split          # Open the file in the current window in a new tab                                                                                                                                                            
@@ -896,15 +908,31 @@ Ctrl+X Ctrl+Y       # Scroll down in insert mode
 
                                                                                                                                                                                                    
                                                                                                                                                                                                    
-## View historical commands
+## History commands
 
-In command line mode                                                                                                                                                                                         
-```bash                                                                                                                                                                                            
-:his[tory]                # View the history of all commands entered in the command line mode                                                                                                                                                      
-:history search or / or ？ # View search history                                                                                                                                                                   
+History command format:
+
+```bash
+:his[tory] [{name}] [{first}][, [{last}]]
 ```
 
-In normal mode                                                                                                                                                                                             
+Parameter Description:
+
+- {name}：Specifies the history type.
+- {first}：Specifies the starting position of the command history, defaults to the first record.
+- {last}：Specifies where the command history ends, defaults to the last record.
+
+In command line mode.                                                                                                                                                                                         
+```bash                                                                                                                                                                                            
+:his[tory]                # View the history of all commands entered in the command line mode                                                                                                                                                      
+:his[tory] all            # Show all types of history
+:history c 1,5            # List the first to fifth command line history
+:history search or / or ？ # View search history 
+:call histdel("")         # delete history
+:help :history            # See help for the :history command                                                                                                                                                                  
+```
+
+In normal mode.                                                                                                                                                                                             
 ```bash                                                                                                                                                                                            
 q/                  # View search history used q/ entered                                                                                                                                                               
 q?                  # View usage q? Entered search history                                                                                                                                                                
