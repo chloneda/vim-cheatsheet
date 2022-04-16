@@ -19,12 +19,13 @@
 " | F2       | 打开(或关闭)显示行号
 " | F3       | 显示非可见字符
 " | F4       | 设置代码自动折行
-" | F5       | 去空行
+" | F5       | 删除所有空行
 " | F6       | 打开(或关闭) 语法高亮
 " | F7       | 自动补全代码
 " | F8       | 普通模式打开 md 预览
 " | F9       | 普通模式关闭 md 预览
 " | F10      | 新建标签页
+" | F11      | 非空行后间隔（加入空行）
 " | F12      |
 " | <Ctrl+c> | 快速推出 Vim（:qall!）
 " +----------+------------------------------------------------------
@@ -32,6 +33,7 @@
 " Notes:
 "   1、Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
 "   2、配置文件中的 <Leader> 前缀键是指 "\" 键
+"   3、本文档按功能、再按按键进行映射设置，力求分类明了，方便记忆
 " ==================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -53,7 +55,8 @@ set viminfo=<100,'100,/50,:100,h,r$TEMP:,s10
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number                      " 显示行号
 set relativenumber              " 行号以相对当前行的方式显示，方便跳转
-set showtabline=0               " 隐藏顶部标签栏
+set showtabline=2               " 显示顶部标签栏，为 0 时隐藏标签栏，1 会按需显示，2 会永久显示 
+set tabpagemax=10               " 设置最大标签页上限为10
 set guioptions-=r               " 隐藏右侧滚动条 
 set guioptions-=L               " 隐藏左侧滚动条
 set guioptions-=b               " 隐藏底部滚动条
@@ -101,6 +104,9 @@ set encoding=utf-8              " Vim 内部 buffer (缓冲区)、菜单文本�
 set termencoding=utf-8          " Vim 所工作的终端的字符编码方式
 set fileencoding=utf-8          " 当前编辑文件的字符编码方式，保存文件也使用这种编码方式
 set fileencodings=uft-8,gbk,gb2312,gb18030     " Vim 启动时逐一按顺序使用第一个匹配到的编码方式打开文件
+set fileformats=unix,dos,mac    " Vim 自动识别文件格式，回车键编码不同：dos 是回车加换行，unix 只有换行符，mac 只有回车符
+set formatoptions+=m            " 表示自动排版完成的方式。m 表示在任何值高于 255 的多字节字符上分行
+set formatoptions+=B            " B 表示在连接行时，不要在两个多字节字符之间插入空格
 set helplang=cn                 " 帮助系统设置为中文
 "set langmenu=zh_CN.UTF-8       " 显示中文菜单语言
 set langmenu=en_US.UTF-8        " 显示英文菜单语言
@@ -125,7 +131,7 @@ set foldmethod=indent           " 基于缩进进行代码折叠
 set nofoldenable                " 启动 Vim 时关闭折叠
 set selection=exclusive         " 指定在选择文本时光标所在位置也属于被选中的范围
 set selectmode=mouse,key        " 使鼠标和键盘都可以控制光标选择文本
-set ignorecase                  " 搜索忽略大小写
+set ignorecase                  " 搜索时忽略大小写
 set smartcase                   " 智能大小写敏感，只要有一个字母大写，就大小写敏感，否则不敏感
 set noexpandtab                 " 不允许用空格代替制表符
 set whichwrap+=<,>,h,l          " 允许 Backspace 和光标键跨越行边界
@@ -158,10 +164,16 @@ inoremap <Leader>p <Esc>pa      " 插入模式粘贴
 nnoremap <Leader><Leader>p "+p  " 将系统剪切板内容粘贴到 Vim
 vnoremap <Leader><Leader>y "+y  " 复制当前选中到系统剪切板
 
-nnoremap <Leader>h <C-W>h       " 切换到左边的分割窗口
-nnoremap <Leader>j <C-W>j       " 切换到下面的分割窗口
-nnoremap <Leader>k <C-W>k       " 切换到上面的分割窗口
-nnoremap <Leader>l <C-W>l       " 切换到右边的分割窗口
+nnoremap <C-h> <C-W>h       " 切换到左边的分割窗口
+nnoremap <C-j> <C-W>j       " 切换到下面的分割窗口
+nnoremap <C-k> <C-W>k       " 切换到上面的分割窗口
+nnoremap <C-l> <C-W>l       " 切换到右边的分割窗口
+
+" 插入模式中的 上下左右 按键映射
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
 
 " 分割窗口后通过前缀键 "\" 和方向键 调整窗口大小
 nnoremap <Leader><Up>    :resize +5<CR>
@@ -177,10 +189,14 @@ inoremap <C-e> <Esc>$           " 在插入模式下快速进行行尾跳转
 nnoremap gh ^                   " 在一般模式下快速进行行首跳转
 nnoremap gl $                   " 在一般模式下快速进行行尾跳转
 
+" 重置 Esc 退出键，离键盘主区域太远了
 inoremap vv <Esc>               " 插入模式下的 vv 键为 Esc 键
 vnoremap vv <Esc>               " 可视模式下的 vv 键为 Esc 键
 inoremap jj <Esc>               " 插入模式下的 jj 键为 Esc 键
 inoremap jk <Esc>               " 插入模式下的 jk 键为 Esc 键
+
+" 考虑到按键便利性，可将 ; 映射为 :，实现按 ; 键便可以从 Vim 普通模式进入命令行模式
+nnoremap ; :
 
 " 括号等自动补全
 inoremap ( ()<Esc>i
@@ -221,21 +237,16 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
-" 插入模式上下左右 按键映射
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-
 nnoremap U <C-r>                   " 取消撤销操作，减少按键操作
 nnoremap <F1> :nohls<CR>           " 取消 Vim 查找高亮显示
 nnoremap <F2> :set nu! nu?<CR>     " 普通模式下按 F2 打开(或关闭)显示行号
 nnoremap <F3> :set list! list?<CR> " 显示非可见字符，如制表符被显示为 “^I”，而行尾则标识为 “$”。
 nnoremap <F4> :set wrap! wrap?<CR> " 设置代码自动折行
-nnoremap <F5> :g/^\s*$/d<CR>       " 去空行
+nnoremap <F5> :g/^\s*$/d<CR>       " 删除所有空行
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>      " 普通模式下按 F6 打开(或关闭) 语法高亮
 inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映射语句后不能有其他字符，包括 Tab；否则按下 F3 会自动补全一些乱码
-nnoremap <F10> <Esc>:tabnew<CR>    " 指定 F10 键来新建标签页
+nnoremap <F10> <Esc>:tabnew<CR>    " 指定 F10 功能键来新建标签页
+nnoremap <F11> :g/.\n\n\@!/norm o<CR>    " 指定 F11 功能键非空行每行后加入空行，多个空行合并为一个空行
 
 " 标签页导航 按键映射
 nnoremap <Leader>1 1gt
@@ -250,18 +261,28 @@ nnoremap <Leader>9 9gt
 nnoremap <Leader>0 :tablast<CR>
 nnoremap <C-Insert> :tabnew<CR>
 nnoremap <C-Delete> :tabclose<CR>
-nnoremap <silent><Tab>m :tabnew<CR>
+nnoremap <silent><Tab>s :tabs<CR>
+nnoremap <silent><Tab>w :tabnew<CR>
+nnoremap <silent><Tab>e :tabe<CR>
+nnoremap <silent><Tab>o :tabonly<CR>
 nnoremap <silent><Tab>c :tabclose<CR>
 nnoremap <silent><Tab>n :tabn<CR>
 nnoremap <silent><Tab>p :tabp<CR>
+nnoremap <silent><Tab>r :tabr<CR>
+nnoremap <silent><Tab>h :h tabpage<CR>           " 查看标签页帮助文档
 nnoremap <silent><s-tab> :tabnext<CR>
 inoremap <silent><s-tab> <Esc>:tabnext<CR>
+
+nmap <Tab> V>                      " 普通模式下 Tab 键行首缩进文本
+nmap <s-tab> V<                    " 普通模式下 Shift + Tab 键行首反向缩进文本
+vmap <Tab> >gv                     " 可视化模式下 Tab 键行首缩进文本
+vmap <s-tab> <gv                   " 可视化模式下 Shift + Tab 键行首反向缩进文本
 
 " 缩进后依然保持选中
 xnoremap <  <gv
 xnoremap >  >gv
 
-" Using very magic mode
+" 使用 very magic 模式，规范所有特殊符号, 启用后,除了下划线 _, 大小写字母, 和数字外, 所有的字符都具有特殊含义
 nnoremap / /\v
 vnoremap / /\v
 cnoremap %s/ %s/\v
@@ -283,8 +304,12 @@ nnoremap <C-c> :qall!<CR>          " 快速退出 Vim
 nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>           " Set current directory to current file with ,cd
 nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<CR>   " open windows command prompt in the current file's directory
 nnoremap <Leader>ce :!start explorer %:p:h:8<CR>    " open explorer in the current file's directory
-nnoremap <space> za                                 " Space 空格键切换折叠
+nnoremap <Space> za                                 " Space 空格键切换折叠
+nnoremap <S-Enter> o<Esc>k                          " 普通模式下 Shift + Enter 键插入空行
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 常见操作全文档命令映射
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>    " 删除当前文件中所有的行尾多余空格
 " 一键去除全部尾部空白(\rb)
 inoremap <Leader>rb <Esc>:let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<CR>
@@ -299,6 +324,12 @@ nnoremap <Leader>rt <Esc>:retab<CR>
 " 一键清理当前代码文件(\d)
 nnoremap <Leader>d <Esc>ggVGd
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 常用宏映射
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
 " unmap <F10>                      " 取消一个映射
 " mapclear                         " 对应取消所有 :map 绑定的，慎用
 
@@ -312,7 +343,7 @@ nnoremap <Leader>sv :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，s
 autocmd BufWritePost $MYVIMRC source $MYVIMRC    " 让 vimrc 配置变更立即生效
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 插件按键映射
+" 插件 vim-plug 按键映射
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 查看、安装、更新、删除插件 按键映射
 nnoremap <Leader><Leader>s :PlugStatus<CR>      " 查看插件状态
@@ -336,9 +367,25 @@ nnoremap <Leader>f :NERDTreeFind<CR>            " 打开目录树并定位到当
 
 let NERDTreeShowHidden=0                        " 是否显示隐藏文件 0/1
 let NERDTreeShowLineNumbers=1                   " 显示目录树行号
+"autocmd vimenter * NERDTree                    " 自动开启 Nerdtree
+"let g:NERDTreeWinSize = 25                     " 设定 NERDTree 视窗大小
+let NERDTreeShowBookmarks=1                     " 开启 Nerdtree 时自动显示 Bookmarks
+" 隐藏指定文件和文件夹
+let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__'] 
+" 打开 Vim 时如果没有文件自动打开 NERDTree
+" autocmd vimenter * if !argc()|NERDTree|endif
+" 当 NERDTree 为剩下的唯一窗口时自动关闭
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endi
 
 " 插件 Tarbar 按键映射，要善于使用 Shift + ? 查看帮助
 nnoremap <Leader>t :TagbarToggle<CR>
+
+" 插件 LeaderF 按键映射
+" nnoremap <silent> <Leader>f :Leaderf file<CR>       " 文件搜索
+" nnoremap <silent> <Leader>m :Leaderf mru<CR>        " 历史打开过的文件
+" nnoremap <silent> <Leader>b :Leaderf buffer<CR>     " Buffer
+" nnoremap <silent> <Leader>F :Leaderf function<CR>   " 函数搜索（仅当前文件里）
+" nnoremap <silent> <Leader>rg :Leaderf rg<CR>        " 模糊搜索，很强大的功能，迅速秒搜
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件列表
