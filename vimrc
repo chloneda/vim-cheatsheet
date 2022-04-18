@@ -380,6 +380,9 @@ let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']
 " 插件 Tarbar 按键映射，要善于使用 Shift + ? 查看帮助
 nnoremap <Leader>t :TagbarToggle<CR>
 
+" 插件 Undotree 按键映射，要善于使用 Shift + ? 查看帮助
+nnoremap <Leader>u :UndotreeToggle<CR>
+
 " 插件 LeaderF 按键映射
 " nnoremap <silent> <Leader>f :Leaderf file<CR>       " 文件搜索
 " nnoremap <silent> <Leader>m :Leaderf mru<CR>        " 历史打开过的文件
@@ -402,6 +405,7 @@ Plug 'preservim/nerdcommenter'           " Vim 批量注释工具
 Plug 'tpope/vim-repeat'                  " 解决 Vim 原生命令 . 在自定义映射或插件映射时无法重复的问题
 Plug 'tpope/vim-surround'                " 添加，修改，删除括号、引号等成对的符号，甚至是 HTML 标签
 Plug 'frazrepo/vim-rainbow'              " 彩虹括号
+Plug 'mbbill/undotree'                   " 提供强大的撤销更改功能
 
 " File manage
 Plug 'mhinz/vim-startify'                " Vim 启动插件
@@ -411,6 +415,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'       " 显示 NERDTree 目录树的 Git 状�
 " Markdown
 Plug 'iamcco/mathjax-support-for-mkdp'   " 用于 Markdown 预览数学公式
 Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
+Plug 'plasticboy/vim-markdown'           " Markdown 语法高亮插件。提供了语法高亮，段落折叠，查看目录，段间跳转等功能
 
 " Github
 Plug 'airblade/vim-gitgutter'            " Git 侧边栏插件

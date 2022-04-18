@@ -850,7 +850,7 @@ N Ctrl+^            # 切换缓冲区，先输入缓存编号，再按 Ctrl+^
 
 查看缓冲区列表时，缓冲区状态包含以下几种：
 
-| 缓冲区状态 | 说明                                                           |
+| 缓冲区状态 | 说明                                                          |
 | :------: | --------------------------------------------------------------|
 |     +    | modified buffers，已更改的缓冲区                                 |
 |     -    | buffers with 'modifiable' off，禁用了 modifiable 选项，只读缓冲区 |
@@ -1465,6 +1465,22 @@ Ex 模式             # 按 Q 字母键进入 Ex 模式，与命令行模式类�
 
 
 
+## GUI 命令
+
+```bash
+:gui                         # UNIX 启动 GUI
+:gui {fname}                 # 同上，并编辑 fname
+:menu                        # 列出所有菜单
+:menu {mpath}                # 列出 mpath 下的所有菜单
+:menu {mpath} {rhs}          # 把 rhs 加入菜单 mpath
+:menu {pri} {mpath} {rhs}    # 同上，并带有优先权 pri
+:menu ToolBar.{name} {rhs}   # 把 rhs 加入工具栏
+:tmenu {mpath} {text}        # 为菜单 mpath 加入工具提示
+:unmenu {mpath}              # 删除菜单 mpath
+```
+
+
+
 ## 快速修复窗口
 
 > Quickfix 插件提供的功能，对编译调试程序非常有用。
@@ -1509,7 +1525,7 @@ Ex 模式             # 按 Q 字母键进入 Ex 模式，与命令行模式类�
 - encoding: Vim 内部使用的字符编码方式，包括 Vim 的缓冲区、菜单文本、消息文本等。
 - fileencoding: Vim 中当前编辑的文件的字符编码方式，Vim 保存文件时也会将文件保存为这种字符编码方式。
 - fileencodings: Vim 自动探测 fileencoding 的顺序列表，启动时会按照它所列出的字符编码方式逐一探测即将打开的文件的字符编码方式，并且将 fileencoding 设置为最终探测到的字符编码方式。因此最好将 Unicode 编码方式放到这个列表的最前面，将拉丁语系编码方式 latin1 放到最后面。
-- termencoding: Vim 所工作的终端字符编码方式。如果在终端环境下使用 Vim，需要设置 termencoding 和终端所使用的编码一致
+- termencoding: Vim 所工作的终端字符编码方式。如果在终端环境下使用 Vim，需要设置 termencoding 和终端所使用的编码一致。
 
 
 
@@ -1652,7 +1668,7 @@ Ctrl+{char}         # 作为控制字符输入的 {char}；即按住 Ctrl 键再
 
 
 
-## Vim 使用建议
+## 使用建议
 
 - 多使用 :h[elp] {command} 获取显示相关命令的帮助文档，提高相关命令的认识水平。
 - 永远不要用 Ctrl+C 代替 <Esc> 完全不同的含义，容易错误中断运行的后台脚本。
