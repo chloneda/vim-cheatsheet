@@ -184,18 +184,18 @@ Ctrl+P              # 插入模式下文字自动补全
 Ctrl+e              # 有补全列表时，终止这次补全，继续输入
 
 Ctrl+X              # 进入补全模式，注意：智能补全命令均以组合键 Ctrl+X 作为起始操作，下同
-Ctrl+X Ctrl+L       # 整行补全
-Ctrl+X Ctrl+N       # 插入模式下，根据当前文件里关键字补全
+Ctrl+X Ctrl+L       # 补全整行
+Ctrl+X Ctrl+N       # 插入模式下根据当前缓冲区关键字补全
 Ctrl+X Ctrl+K       # 根据字典补全
 Ctrl+X Ctrl+T       # 根据同义词字典补全
 Ctrl+X Ctrl+F       # 插入模式下补全文件名
 Ctrl+X Ctrl+I       # 根据头文件内关键字补全
-Ctrl+X Ctrl+]       # 根据标签补全
+Ctrl+X Ctrl+]       # 标签文件关键词补全
 Ctrl+X Ctrl+D       # 补全宏定义
 Ctrl+X Ctrl+V       # 补全 Vim 命令
 Ctrl+X Ctrl+U       # 用户自定义补全方式
 Ctrl+X Ctrl+S       # 拼写建议，例如：一个英文单词
-Ctrl+X Ctrl+O       # 插入下 Omnifunc 补全
+Ctrl+X Ctrl+O       # 插入模式下全能 Omnifunc 补全
 ```
 
 
@@ -352,7 +352,6 @@ va'、va"、va(、va[、va{、va<                # 分别选中这些配对标�
 :m-2                # 上移 1 行
 :8,10m2             # 把当前打开文件的第 8~10 行内容移动到第 2 行下方
 ```
-
 
 
 
@@ -517,10 +516,11 @@ fx                  # 搜索当前行到指定 字符串 之处
 举例：
 
 ```bash
+g&                        # 重复上一次 substitute 命令
 :s/old/new/               # 当前行的第一个 old 替换为 new
 :s/old/new/g              # 当前行的 old 全部替换为 new
 :s/old/\U&/               # 当前行的 old 替换为大写的 OLD
-:N,Ms/old/new/g           # 将第 N 到 M 行中所有 old 替换为 new
+:N,Ms/old/new/g           # 将第 N~M 行中所有的 old 全部替换为 new
 :%s/old/new/g             # 当前文件中的 old 全部替换为 new
 :%s/old/new/gc            # 将当前文件中的 old 全部替换为 new，并且每处询问你是否替换
 :%s/^/xxx/g               # 在每行行首插入 xxx，^ 表示行首，注释时非常有用
@@ -582,6 +582,7 @@ fx                  # 搜索当前行到指定 字符串 之处
 特别说明：
 - substitute 与 global 形式很相似，都是要进行查找匹配，但 substitute 执行的是替换，而 global 执行的其它命令。
 - global 命令实际上是分成两步执行：首先扫描 [range] 指定范围内的所有行，给匹配 {pattern} 的行打上标记；然后依次对打有标记的行执行 [cmd] 命令，如果被标记的行在对之前匹配行的命令操作中被删除、移动或合并，则其标记自动消失，而不对该行执行 [cmd] 命令。例子可以参考上面的奇数行、偶数行删除命令！
+
 
 
 ### 正则替换
@@ -1498,7 +1499,7 @@ Ex 模式             # 按 Q 字母键进入 Ex 模式，与命令行模式类�
 :cfir[st]           # 跳转到 Quickfix 窗口中第 1 个错误
 :cla[st]            # 跳转到 Quickfix 窗口中最后 1 个错误
 :cl[ist]            # 在 Quickfix 窗口中列出所有错误
-:cc [nr]            # 显示第 [nr] 个错误的详细信息
+:cc [N]             # 显示第 N 个错误的详细信息
 :cn[ext]            # 定位到 Quickfix 窗口中下一个错误
 :cp[rev]            # 定位到 Quickfix 窗口中上一个错误
 :cold[er]           # 到前一个旧列表
@@ -1706,7 +1707,7 @@ Ctrl+{char}         # 作为控制字符输入的 {char}；即按住 Ctrl 键再
 
 
 
-## 参考
+## 参考信息
 
 - https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt
 - http://blog.g-design.net/post/4789778607/vim-cheat-sheet

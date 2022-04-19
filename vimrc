@@ -149,12 +149,12 @@ set iskeyword+=_,$,@,%,#,-      " 带有如下符号的单词不要被换行分�
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 按键映射
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 尽量使用 nnoremap 代替 nmap，比如： :map 递归映射，可以映射的模式：normal, visual, operator-pending
+" 尽量使用 nnoremap 代替 nmap，比如 :map 递归映射，可以映射的模式：normal, visual, operator-pending
 " nmap j k                      " nmap 是递归映射，会出现不可预期的问题
 " nmap k G                      " 当按下 j 键时，实际上执行的是 G 键
 " let mapleader = ","           " 定义 <Leader> 前缀键由 "\" 变为 ","
 map Y y$                        " 复制 从光标到行尾 所在范围的文本
-nmap <C-A> ggVG                 " 全选
+nmap <C-A> ggVG                 " 全选，Ctrl+A 组合键全选
 
 " \v 从公共剪贴板粘贴。<Leader> 为用户自定义命令的名字空间，<Leader> 是前缀键即 "\"
 inoremap <Leader>v <Esc>"+p
@@ -164,16 +164,10 @@ inoremap <Leader>p <Esc>pa      " 插入模式粘贴
 nnoremap <Leader><Leader>p "+p  " 将系统剪切板内容粘贴到 Vim
 vnoremap <Leader><Leader>y "+y  " 复制当前选中到系统剪切板
 
-nnoremap <C-h> <C-W>h       " 切换到左边的分割窗口
-nnoremap <C-j> <C-W>j       " 切换到下面的分割窗口
-nnoremap <C-k> <C-W>k       " 切换到上面的分割窗口
-nnoremap <C-l> <C-W>l       " 切换到右边的分割窗口
-
-" 插入模式中的 上下左右 按键映射
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
+nnoremap <C-h> <C-W>h           " 切换到左边的分割窗口
+nnoremap <C-j> <C-W>j           " 切换到下面的分割窗口
+nnoremap <C-k> <C-W>k           " 切换到上面的分割窗口
+nnoremap <C-l> <C-W>l           " 切换到右边的分割窗口
 
 " 分割窗口后通过前缀键 "\" 和方向键 调整窗口大小
 nnoremap <Leader><Up>    :resize +5<CR>
@@ -190,6 +184,7 @@ nnoremap gh ^                   " 在一般模式下快速进行行首跳转
 nnoremap gl $                   " 在一般模式下快速进行行尾跳转
 
 " 重置 Esc 退出键，离键盘主区域太远了
+inoremap <Esc> <Nop>            " 插入模式下禁用 Esc 键退出插入模式
 inoremap vv <Esc>               " 插入模式下的 vv 键为 Esc 键
 vnoremap vv <Esc>               " 可视模式下的 vv 键为 Esc 键
 inoremap jj <Esc>               " 插入模式下的 jj 键为 Esc 键
@@ -237,6 +232,12 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
+" 重置插入模式中的 上下左右 按键映射
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
 nnoremap U <C-r>                   " 取消撤销操作，减少按键操作
 nnoremap <F1> :nohls<CR>           " 取消 Vim 查找高亮显示
 nnoremap <F2> :set nu! nu?<CR>     " 普通模式下按 F2 打开(或关闭)显示行号
@@ -263,20 +264,20 @@ nnoremap <C-Insert> :tabnew<CR>
 nnoremap <C-Delete> :tabclose<CR>
 nnoremap <silent><Tab>s :tabs<CR>
 nnoremap <silent><Tab>w :tabnew<CR>
-nnoremap <silent><Tab>e :tabe<CR>
+nnoremap <silent><Tab>e :tabedit<CR>
 nnoremap <silent><Tab>o :tabonly<CR>
 nnoremap <silent><Tab>c :tabclose<CR>
-nnoremap <silent><Tab>n :tabn<CR>
-nnoremap <silent><Tab>p :tabp<CR>
-nnoremap <silent><Tab>r :tabr<CR>
+nnoremap <silent><Tab>n :tabnext<CR>
+nnoremap <silent><Tab>p :tabprevious<CR>
+nnoremap <silent><Tab>r :tabrewind<CR>
 nnoremap <silent><Tab>h :h tabpage<CR>           " 查看标签页帮助文档
 nnoremap <silent><s-tab> :tabnext<CR>
 inoremap <silent><s-tab> <Esc>:tabnext<CR>
 
 nmap <Tab> V>                      " 普通模式下 Tab 键行首缩进文本
-nmap <s-tab> V<                    " 普通模式下 Shift + Tab 键行首反向缩进文本
+nmap <S-Tab> V<                    " 普通模式下 Shift + Tab 键行首反向缩进文本
 vmap <Tab> >gv                     " 可视化模式下 Tab 键行首缩进文本
-vmap <s-tab> <gv                   " 可视化模式下 Shift + Tab 键行首反向缩进文本
+vmap <S-Tab> <gv                   " 可视化模式下 Shift + Tab 键行首反向缩进文本
 
 " 缩进后依然保持选中
 xnoremap <  <gv
