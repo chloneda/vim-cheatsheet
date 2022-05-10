@@ -7,7 +7,7 @@
 - [Vim-cheatsheet - GitHub](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
 - [Vim 官网](https://www.vim.org/) | [Vim GitHub](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
 - [Vim 自定义配置文件 - vimrc](./vimrc)
-- [IntelliJ IDEA 插件 ideavim 自定义配置文件 - ideavimrc](./resources/ideavimrc) | [IntelliJ IDEA 的 action 列表](./resources/actionlist.vim)
+- [IntelliJ IDEA 插件 ideavim 配置文件 - ideavimrc](./resources/ideavimrc) | [IntelliJ IDEA 的 action 列表](./resources/actionlist.vim)
 - [Chrome 浏览器神级插件 - Vimium](./resources/vimium.md)
 - [简体中文](./README.md) | [English](./README_EN.md) 
 
@@ -36,7 +36,7 @@
 * [缓冲区](#缓冲区)
 * [分屏窗口](#分屏窗口)
 * [标签页](#标签页)
-* [vim书签](#vim书签)
+* [Vim书签](#vim书签)
 * [文件浏览器](#文件浏览器)
 * [拼写检查](#拼写检查)
 * [代码折叠](#代码折叠)
@@ -47,9 +47,9 @@
 * [寄存器](#寄存器)
 * [配置文件](#配置文件)
 * [常用插件](#常用插件)
-* [vim模式](#vim模式)
+* [Vim模式](#vim模式)
 * [外部命令](#外部命令)
-* [gui命令](#gui命令)
+* [GUI命令](#gui命令)
 * [快速修复窗口](#快速修复窗口)
 * [文件编码](#文件编码)
 * [帮助信息](#帮助信息)
@@ -59,7 +59,7 @@
 * [网络资源](#网络资源)
 * [使用建议](#使用建议)
 * [相关书籍](#相关书籍)
-* [vim键盘图](#vim键盘图)
+* [Vim键盘图](#vim键盘图)
 * [参考信息](#参考信息)
 
 
