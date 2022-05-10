@@ -1,0 +1,616 @@
+" ==================================================================
+" Author: chloneda <chloneda@gmail.com>
+" Repository: https://github.com/chloneda/vim-cheatsheet
+" Blog: https://www.cnblogs.com/chloneda
+" Create Date: 2022-02-01
+" Desc:  IntelliJ IDEA ideavim 插件定制化配置文件
+" License: MIT
+" ==================================================================
+" 
+" Ideavim Github: https://github.com/JetBrains/ideavim
+" IdeaVim-EasyMotion: https://github.com/AlexPl292/IdeaVim-EasyMotion
+"
+" Notes:
+"   1、Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
+"   2、本文档中的 <Leader> 前缀键是指 "\" 键，已将 Leader 键改为 Space 空格键
+"   3、本文档按功能、再按按键进行映射设置，力求分类明了，方便记忆
+"   4、插件 Ideavim 在命令模式下输入 :actionlist，查询 IDEA 中所有 action
+"   5、将本文档内容复制到 ~/.ideavimrc 完成自定义配置
+" ==================================================================
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 通用基本设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set number                      " 显示行号，缩写：set nu
+set relativenumber              " 设置相对行号，缩写：set rnu
+set highlightedyank             " yiw 的时候 短暂的高亮复制 的对象
+set textobj-indent              " 选择缩进的对象 vii vai
+set exchange                    " cx{范围} 再 cx{范围后} 交换 俩 ，或者 v 选中后 X 交换
+set ReplaceWithRegister         " 寄存器的相关操作,目前还不会 griw gri( gri" 范围替换寄存器内的东西
+set argtextobj                  " 快速选中 函数的参数
+set showmode                    " 在底部显示当前模式
+set showcmd                     " 在状态栏中显示命令
+set wrap                        " 设置代码自动折行
+set hlsearch                    " 搜索高亮显示，缩写：set hls
+set foldopen-=hor               " 设置啥时候都不可以打开折叠 hor 就是水平移动 的时候 不要打开折叠
+set ignorecase                  " 搜索时忽略大小写
+set incsearch                   " 搜索时立即高亮结果
+set shiftwidth=4                " 每次缩进是 4 个空格
+set softtabstop=4               " 每次按 Tab 键输入 4 个空格
+set smartcase                   " 有一个或以上大写字母时仍大小写敏感
+set clipboard+=unnamed          " Vim 的默认寄存器和系统剪贴板共享
+set clipboard+=ideaput
+set history=200                 " 记录 200 条历史命令，默认是 20 条
+set showtabline=2               " 总是显示状态栏
+set laststatus=2                " 总是显示状态栏
+set paste                       " 开启粘贴的模式
+set ruler                       " 显示光标当前位置
+set scrolloff=10                " 光标距离顶部和底部 10 行
+
+set encoding=utf-8              " 编码设置，缩写：set enc
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr
+set fileformats=unix,dos,mac
+set termencoding=utf-8
+set formatoptions+=m
+set formatoptions+=B
+
+set easymotion                  " Easymotion 插件
+let g:EasyMotion_do_mapping=0   " 禁用 Easymotion 默认映射
+set commentary                  " 注释插件
+set surround                    " Surround 插件
+set keep-english-in-normal      " 自动切换 输入法
+set ideavimsupport+=dialog      " 在对话框编辑器中禁用 IdeaVim
+set ideaenabledbufs+=singleline
+let g:argtextobj_pairs="(:),{:},<:>"    " 设置在(a,b) 、{a,b} 、<a,b> 这种括号里面
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" IntelliJ IDEA 特有基础设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set ideajoin                    " 智能连接字符串及控制结构等
+set ideamarks                   " 触发 IDEA 全局标签
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 通用按键映射
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 修改 Leader 前缀键为 Space 空格键，默认是"\"，该注释禁止放后面，否则不起作用
+let mapleader=' '
+
+" 重新加载ideavimrc
+nnoremap <Leader>sv :source ~/.ideavimrc<CR>
+nnoremap <Leader>rv <Action>(IdeaVim.ReloadVimRc.reload)
+
+nnoremap <C-S> :w<CR>           " 快速保存
+nnoremap <C-A> ggVG             " 全选
+
+" 在插入模式下快速到行尾和行首
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+
+" 查找到的内容居中
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+
+" Center screen when moving up and down
+nnoremap <C-u> <C-u>zz
+nnoremap <C-o> <C-d>zz
+vnoremap <C-u> <C-u>zz
+vnoremap <C-o> <C-d>zz
+nnoremap <C-d> 3<C-e>zz
+nnoremap <C-u> 3<C-y>zz
+
+vnoremap d dzz
+nnoremap dd ddzz
+nnoremap ;; <Esc>A;             " 行尾加 ; 不换行
+
+" 内部的iw
+nnoremap vn v^
+nnoremap vq v$
+
+onoremap n ^
+onoremap q $
+
+" 内部
+onoremap w iw
+onoremap , i(
+onoremap ( i(
+onoremap r i[
+onoremap m i{
+onoremap . i<
+onoremap z i'
+onoremap c i"
+
+" 外部
+onoremap aw aw
+onoremap a, a(
+onoremap ae a(
+onoremap ar a[
+onoremap am a{
+onoremap a. a<
+onoremap az a'
+onoremap ac a"
+
+" 内部
+nnoremap vw viw
+nnoremap v( vi(
+nnoremap vr vi[
+nnoremap vm vi{
+nnoremap v. vi<
+nnoremap v, vi(
+nnoremap vz vi'
+nnoremap vc vi"
+
+" 外部
+nnoremap vaw vaw
+nnoremap va, va(
+nnoremap vae va(
+nnoremap var va[
+nnoremap vam va{
+nnoremap va. va<
+nnoremap va, va(
+nnoremap vaz va'
+nnoremap vac va"
+
+nnoremap m <C-W>w               " 窗口循环切换
+noremap gp gP                   " 在块后面进行粘贴
+nnoremap gop :pu<CR>            " 在当前行的下一行粘贴
+nnoremap gip k:pu<CR>           " 在当前行的上一行粘贴
+
+" 折叠
+nnoremap zm zM
+nnoremap zr zR
+nnoremap zc zC
+
+" <Leader>+数字键 切换 Tab
+nmap <silent> \1 1gt<CR>
+nmap <silent> \2 2gt<CR>
+nmap <silent> \3 3gt<CR>
+nmap <silent> \4 4gt<CR>
+nmap <silent> \5 5gt<CR>
+nmap <silent> \6 6gt<CR>
+nmap <silent> \7 7gt<CR>
+nmap <silent> \8 8gt<CR>
+nmap <silent> \9 9gt<CR>
+nmap <silent> \0 10gt<CR>
+
+" 书签管理
+nmap mm <Action>(ToggleBookmark)
+" 显示所有书签
+nmap ma <Action>(ShowBookmarks)
+" 编辑书签
+nmap m; <Action>(Bookmarks)
+
+nmap 'a <Action>(GotoBookmarkA)
+nmap 'b <Action>(GotoBookmarkB)
+nmap 'c <Action>(GotoBookmarkC)
+nmap 'd <Action>(GotoBookmarkD)
+nmap 'e <Action>(GotoBookmarkE)
+nmap 'f <Action>(GotoBookmarkF)
+nmap 'g <Action>(GotoBookmarkG)
+nmap 'h <Action>(GotoBookmarkH)
+nmap 'i <Action>(GotoBookmarkI)
+nmap 'j <Action>(GotoBookmarkJ)
+nmap 'k <Action>(GotoBookmarkK)
+nmap 'l <Action>(GotoBookmarkL)
+nmap 'm <Action>(GotoBookmarkM)
+nmap 'n <Action>(GotoBookmarkN)
+nmap 'o <Action>(GotoBookmarkO)
+nmap 'p <Action>(GotoBookmarkP)
+nmap 'q <Action>(GotoBookmarkQ)
+nmap 'r <Action>(GotoBookmarkR)
+nmap 's <Action>(GotoBookmarkS)
+nmap 't <Action>(GotoBookmarkT)
+nmap 'u <Action>(GotoBookmarkU)
+nmap 'v <Action>(GotoBookmarkV)
+nmap 'w <Action>(GotoBookmarkW)
+nmap 'x <Action>(GotoBookmarkX)
+nmap 'y <Action>(GotoBookmarkY)
+nmap 'z <Action>(GotoBookmarkZ)
+
+"nmap ma  <Action>(ToggleBookmarkA)
+nmap mb  <Action>(ToggleBookmarkB)
+nmap mc  <Action>(ToggleBookmarkC)
+nmap md  <Action>(ToggleBookmarkD)
+nmap me  <Action>(ToggleBookmarkE)
+nmap mf  <Action>(ToggleBookmarkF)
+nmap mg  <Action>(ToggleBookmarkG)
+nmap mh  <Action>(ToggleBookmarkH)
+nmap mi  <Action>(ToggleBookmarkI)
+nmap mj  <Action>(ToggleBookmarkJ)
+nmap mk  <Action>(ToggleBookmarkK)
+nmap ml  <Action>(ToggleBookmarkL)
+"nmap mm  <Action>(ToggleBookmarkM)
+nmap mn  <Action>(ToggleBookmarkN)
+nmap mo  <Action>(ToggleBookmarkO)
+nmap mp  <Action>(ToggleBookmarkP)
+nmap mq  <Action>(ToggleBookmarkQ)
+nmap mr  <Action>(ToggleBookmarkR)
+nmap ms  <Action>(ToggleBookmarkS)
+nmap mt  <Action>(ToggleBookmarkT)
+nmap mu  <Action>(ToggleBookmarkU)
+nmap mv  <Action>(ToggleBookmarkV)
+nmap mw  <Action>(ToggleBookmarkW)
+nmap mx  <Action>(ToggleBookmarkX)
+nmap my  <Action>(ToggleBookmarkY)
+nmap mz  <Action>(ToggleBookmarkZ)
+
+vnoremap <C-C> "+y
+vnoremap <C-Insert> "+y
+vnoremap <C-V> "+P
+inoremap <C-V> <C-R>+
+nnoremap <S-Insert> "+P
+cnoremap <C-V> <C-R>+
+cnoremap <S-Insert> <C-R>+
+
+nnoremap <F1> :nohls<CR>                    " 取消 Vim 查找高亮显示
+nnoremap <F3> :set relativenumber!<CR>      " 是否显示相对行号
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" IntelliJ IDEA 特有按键映射
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <C-.> :action ShowIntentionActions<CR>            " 显示 IDEA 智能提示
+nnoremap <C-/> :action CommentByLineComment<CR>            " 单行注释
+vnoremap <C-/> :action CommentByLineComment<CR>            " 单行注释
+inoremap <C-/> <Esc>:action CommentByLineComment<CR>       " 单行注释
+
+nnoremap <A-/> :action CommentByBlockComment<CR>           " 多行注释
+vnoremap <A-/> :action CommentByBlockComment<CR>           " 多行注释
+inoremap <A-/> <Esc>:action CommentByBlockComment<CR>      " 多行注释
+
+vnoremap = :action ReformatCode<CR>                        " 选中时调用 IDEA 的格式化代码
+
+nnoremap <S-F> :action Find<CR>                            " 当前文件搜索
+nnoremap <C-R> :action Replace<CR>                         " 当前文件替换
+nnoremap / <ESC>:action Find<CR>                           " 当前文件搜索
+nnoremap ' <ESC>:action Replace<CR>                        " 当前文件替换
+
+nnoremap <C-F> :action FindInPath<CR>                      " 全局搜索
+vnoremap <C-F> :action FindInPath<CR>                      " 全局搜索
+noremap g/ <ESC>:action FindInPath<CR>                     " 全局搜索
+noremap g' <ESC>:action ReplaceInPath<CR>                  " 全局替换
+nnoremap <A-f> :action SearchEverywhere<CR>                " 搜索任何位置
+vnoremap <A-f> :action SearchEverywhere<CR>                " 搜索任何位置
+nnoremap <Leader>fe :action SearchEverywhere<CR>           " 搜索任何位置
+
+nnoremap <C-E> :action RecentFiles<CR>                     " 打开过的历史记录文件夹
+nnoremap <C-Q> :action QuickJavaDoc<CR>                    " 查看光标下的对应文档(如果有的话)
+nnoremap <C-O> :action Back<CR>                            " IDEA 自带的回退
+nnoremap <C-I> :action Forward<CR>                         " IDEA 自带的前进
+noremap gee :action ShowErrorDescription<CR>               " 显示光标下的错误信息
+noremap <C-N> :action GotoNextError<CR>                    " 下一个错误
+noremap <C-P> :action GotoPreviousError<CR>                " 上一个错误
+nnoremap <Leader>fp :action ShowFilePath<CR>               " 显示当前文件的文件路径
+
+nnoremap wt :action ActiveToolwindowGroup<CR>
+nnoremap wj :action ActivateStructureToolWindow<CR
+
+nnoremap <leader>' :action ShowBookmarks<CR>
+nnoremap ]b :action GotoNextBookmark<CR>
+nnoremap [b :action GotoPreviousBookmark<CR>
+
+"""""""""""""""""""""""""""""""""""""" 常用篇 """"""""""""""""""""""""""""""""""""""
+nnoremap fip :action FindInPath<CR>                         " 全局搜索
+nnoremap <Leader>nc :action NewClass<CR>                    " 新建类，比 nE 快
+nnoremap <Leader>nm :action NewModule<CR>                   " 新建 Module
+nnoremap <Leader>nf :action NewFile<CR>                     " 新建文件
+nnoremap <Leader>sw :action SurroundWith<CR>                " 代码环绕，如 if、try/catch 块等
+nnoremap <Leader>= :action ReformatCode<CR>                 " 格式化代码
+nnoremap <Leader>an :action Annotate<CR>                    " 查看代码 Git 作者
+nnoremap <Leader>va :action VimActions<CR>                  " Vim 配置操作
+
+nnoremap fsp :action FileStructurePopup<CR>                 " 弹出文件结构信息
+nnoremap <Leader>cip :action CheckinProject<CR>             " 提交版本控制项目
+nnoremap <Leader>fu :action FindUsages<CR>                  " 查找引用当前方法的文件信息
+nnoremap <Leader>su :action ShowUsages<CR>                  " 显示方法内使用该变量的引用信息
+nnoremap <Leader>oi :action OptimizeImports<CR>             " 优化导入，移除多余的 imports
+
+nnoremap ghc <ESC>:action CallHierarchy<CR>
+nnoremap ght <ESC>:action TypeHierarchy<CR>
+nnoremap ghm <ESC>:action MethodHierarchy<CR>
+
+"""""""""""""""""""""""""""""""""""""" 重构篇 """"""""""""""""""""""""""""""""""""""
+noremap <Leader>re :action RenameElement<CR>                " 元素名称重构
+noremap <Leader>mv :action Move<CR>                         " 移动重构
+noremap <Leader>ms :action MakeStatic<CR>                   " 成员变量转换为静态变量重构(配合移动重构有奇效)
+noremap <Leader>ci :action ConvertToInstanceMethod<CR>      " 静态变量转换为成员变量重构
+noremap <Leader>il :action Inline<CR>                       " 内联重构(合并无效变量无效方法)
+noremap <Leader>em :action ExtractMethod<CR>                " 抽取方法重构
+noremap <Leader>ei :action ExtractInterface<CR>             " 抽取接口重构
+noremap <Leader>ef :action EncapsulateFields<CR>            " 字段的访问限制
+noremap <Leader>iv :action IntroduceVariable<CR>            " 引入临时变量
+noremap <Leader>ic :action IntroduceConstant<CR>            " 引入常量
+noremap <Leader>ip :action IntroduceParameter<CR>           " 引入方法参数
+noremap <Leader>if :action IntroduceField<CR>               " 引入字段
+noremap <Leader>po :action IntroduceParameterObject<CR>     " 引入参数对象(指定参数)
+noremap <Leader>pd :action MemberPushDown<CR>               " 方法下放到子类
+noremap <Leader>pu :action MembersPullUp<CR>                " 方法上移到父类
+noremap <Leader>RF :action RenameFile<CR>                   " 文件名称重构
+noremap <Leader>cs :action ChangeSignature<CR>              " 修改方法签名
+noremap <Leader>ec :action ExtractClass<CR>                 " 抽取类
+noremap <Leader>ai :action AnonymousToInner<CR>             " 匿名类到内部类
+noremap <Leader>rmo :action ReplaceMethodWithMethodObject<CR> " 切换方法为方法对象
+
+"""""""""""""""""""""""""""""""""""""" 跳转篇 """"""""""""""""""""""""""""""""""""""
+nnoremap <Leader>ts mm`m:action GotoSymbol<CR>              " 跳转到变量的声明
+noremap <Leader>tu mm`m: action Tool.GotoRequestService<CR> " URL 地址跳转
+nnoremap <Leader>gd :action GotoDeclaration<CR>             " 跳转到定义
+nnoremap <Leader>ga mm`m:action GotoAction<CR>              " 动作跳转
+nnoremap <Leader>gf mm`m:action GotoFile<CR>                " 跳到文件搜索，经常使用
+nnoremap <Leader>gt mm`m:action GotoTest<CR>                " 测试类跳转
+nnoremap <Leader>gc mm`m:action GotoClass<CR>               " Java 类跳转
+nnoremap <Leader>fp mm`m:action FindInPath<CR>              " 文本跳转
+nnoremap <Leader>ne mm`m:action GotoNextError<CR>           " 跳转下个报错处
+nnoremap <Leader>pe mm`m:action GotoPreviousError<CR>       " 跳转上个报错处
+nnoremap <Leader>gs mm`m:action GotoSuperMethod<CR>         " 从子类方法跳到父类的方法
+nnoremap <Leader>gi mm`m:action GotoImplementation<CR>      " 跳转到方法实现
+nnoremap <Leader>g, mm`m:action JumpToLastChange<CR>        " 跳转到下个改动处
+nnoremap <Leader>g; mm`m:action JumpToNextChange<CR>        " 跳转到上个改动处
+nnoremap <Leader>rf mm`m:action RecentFiles<CR>             " 最近查看文件间相互跳转
+nnoremap <Leader>rF mm`m:action RecentChangedFiles<CR>      " 最近改动文件间相互跳转
+nnoremap <Leader>nw :action NextProjectWindow<CR>           " 项目之间的跳转(上一个)
+nnoremap <Leader>pw :action PreviousProjectWindow<CR>       " 项目之间的跳转(下一个)
+
+" 跳转，需要安装 AceJump 插件
+noremap <Leader>tj mm`m:action AceWordAction<CR>
+noremap <Leader>jp mm`m:action AceDeclarationAction<CR>
+noremap <Leader><Leader> mm`m:action AceAction<CR>           " 简化跳转
+
+""""""""""""""""""""""""""""""""""""" Generate """""""""""""""""""""""""""""""""""""
+" 代码生成 Generate，前缀为 <Leader>g，后面均增加 2 个字母
+nnoremap <Leader>G :action Generate<CR>
+nnoremap <Leader>gtm :action GenerateTestMethod<CR>
+nnoremap <Leader>gsm :action GenerateSetUpMethod<CR>
+nnoremap <Leader>gge :action GenerateGetter<CR>
+nnoremap <Leader>gse :action GenerateSetter<CR>
+nnoremap <Leader>ggs :action GenerateGetterAndSetter<CR>
+nnoremap <Leader>geq :action GenerateEquals<CR>
+nnoremap <Leader>gco :action GenerateConstructor<CR>
+nnoremap <Leader>gts :action Actions.ActionsPlugin.GenerateToString<CR>
+
+"""""""""""""""""""""""""""""""""""""" SQL 篇 """"""""""""""""""""""""""""""""""""""
+noremap <Leader>sc :action Console.Transaction.Commit<CR>   " SQL 提交
+noremap <Leader>sr :action Console.Transaction.Rollback<CR> " SQL 回滚
+noremap <Leader>se :action Console.Jdbc.Execute<CR>         " SQL 执行
+noremap <Leader>ep :action Console.Jdbc.ExplainPlan<CR>     " SQL 执行计划
+noremap <Leader>EP :action Console.Jdbc.ExplainPlan.Raw<CR> " Sql-raw 执行计划
+
+" 打开数据库日志窗口，前提安装了 MyBatis Log Plugin 插件
+noremap <Leader>sl :action TailMyBatisLog0<CR>
+noremap <Leader>SL :action ActivateMyBatisLogToolWindow<CR>
+noremap <Leader>AL :action TailMyBatisLog0<CR>:action ActivateMyBatisLogToolWindow<CR>
+
+"""""""""""""""""""""""""""""""""""""" 运行篇 """"""""""""""""""""""""""""""""""""""
+nnoremap <Leader>rc :action RunConfiguration<CR>            " 设置运行配置
+noremap <Leader>rer <Esc>:action Rerun<CR>                  " 重新运行上次运行的类
+noremap <Leader>rr :action Run<CR>                          " 运行上次运行的类
+noremap <Leader>rn :action RunClass<CR>                     " 运行当前(now)类
+noremap <Leader>dd :action Debug<CR>                        " Debug 上次运行的类
+noremap <Leader>dn :action DebugClass<CR>                   " Debug 当前(now)类
+noremap <Leader>cc :action Coverage<CR>                     " 统计单元测试覆盖率运行上个类
+noremap <Leader>cn :action RunCoverage<CR>                  " 统计单元测试覆盖率运行当前(now)类
+noremap <Leader>sp :action Stop<CR>                         " 项目停止运行
+
+"""""""""""""""""""""""""""""""""""""" Debug 篇 """"""""""""""""""""""""""""""""""""""
+noremap <Leader>bp :action ToggleLineBreakpoint<CR>         " 设置断点，即开启或关闭当前行断点
+noremap <Leader>mb :action XDebugger.MuteBreakpoints<CR>    " 禁用断点
+noremap <Leader>rab :action Debugger.RemoveAllBreakpointsInFile<CR> " 去除所有断点在当前文件中
+noremap <Leader>raB :action Debugger.RemoveAllBreakpoints<CR> " 去除所有断点
+noremap <Leader>qe :action QuickEvaluateExpression<CR>      " Debug 时快速计算表达式
+noremap <Leader>ee :action EvaluateExpression<CR>           " Debug 计算器
+noremap <Leader>fr :action Debugger.ForceEarlyReturn<CR>    " Debug 强制返回
+noremap <Leader>so <ESC>:action StepOver<CR>                " step over
+noremap <Leader>si <ESC>:action SmartStepInto<CR>           " step into
+noremap <Leader>daw :action Debugger.AddToWatch<CR>         " 添加新的 Debug 观察
+noremap <Leader>fc :action ForceRunToCursor<CR>             " Debug 强制运行到光标处
+noremap <Leader>hs :action Hotswap<CR>                      " 安装了 JRebel 且在 JRebel Debug 下才生效，热更新
+noremap <Leader>DD :action JRebel Debug<CR>                 " 安装了 JRebel 的 Debug 运行
+noremap <Leader>df :action Debugger.PopFrame<CR>            " 弹出帧
+noremap <Leader>pp :action ShowExecutionPoint<CR>           " 显示当前断点位置
+noremap <Leader>ds :action StreamTracerAction<CR>           " 流追踪技术
+noremap <Leader>eb :action EditBreakpoint<CR>               " 条件断点编辑
+
+"""""""""""""""""""""""""""""""""""""" Maven 篇 """""""""""""""""""""""""""""""""""""
+" Maven 篇，前缀均为 <Leader>m，后面均增加 1 个字母
+" Maven 依赖重新导入
+nnoremap <Leader>mr :action Maven.Reimport<CR>
+" 运行 Maven 命令，该注释不放后面，避免界面乱码
+nnoremap <Leader>me :action Maven.ExecuteGoal<CR>
+" 激活 Maven 窗口
+nnoremap <Leader>mw :action ActivateMavenToolWindow<CR>
+
+"""""""""""""""""""""""""""""""""""""" 版本控制篇 """"""""""""""""""""""""""""""""""""
+	" version control actions
+" nnoremap ]v :action VcsShowNextChangeMarker<CR>
+" nnoremap [v :action VcsShowPrevChangeMarker<CR>
+" nnoremap <Leader>vd :action VcsShowCurrentChangeMarker<CR>
+" nnoremap <Leader>vr :action Vcs.RollbackChangedLines<CR>
+nnoremap <Leader>vu :action Vcs.UpdateProject<CR>
+nnoremap <Leader>vp :action Vcs.Push<CR>
+nnoremap <Leader>vc :action Vcs.QuickListPopupAction<CR>
+
+nnoremap <Leader>vm :action Git.Menu<CR>
+nnoremap <Leader>vb :action Git.Branches<CR>
+nnoremap <Leader>vgp :action Git.Pull<CR>
+nnoremap <Leader>vgf :action Git.Fetch<CR>
+nnoremap <Leader>vgm :action Git.Merge<CR>
+nnoremap <Leader>vgr :action Git.Rebase<CR>
+nnoremap <Leader>vgl :action Git.Log<CR>
+nnoremap <Leader>vgt :action Git.CreateNewTag<CR>
+nnoremap <Leader>vgc :action Git.CompareWithBranch<CR>
+
+nnoremap <Leader>vv :action ActivateVersionControlToolWindow<CR>
+nnoremap <Leader>va :set norelativenumber<CR>:action Annotate<CR>
+
+nnoremap <Leader>vpr <Action>(Github.View.Pull.Request)
+nnoremap <Leader>vlc <Action>(Vcs.Show.Local.Changes)
+nnoremap <Leader>vre <Action>(Compare.Selected)
+nnoremap <Leader>vhs <Action>(Vcs.ShowHistoryForBlock)
+nnoremap <Leader>vhf <Action>(Vcs.ShowTabbedFileHistory)
+
+"""""""""""""""""""""""""""""""""""""" 标签页篇 """"""""""""""""""""""""""""""""""""""
+nnoremap <Leader>co :action CloseAllEditorsButActive<CR>    " 关闭其他所有 Tab
+nnoremap <Leader>cr :action CloseAllToTheRight<CR>          " 关闭右侧的 Tab
+nnoremap <Leader>cl :action CloseAllToTheLeft<CR>           " 关闭左侧的 Tab
+nnoremap <Leader>ca :action CloseActiveTab<CR>
+nnoremap <S-j> :action PreviousTab<CR>
+nnoremap <S-k> :action NextTab<CR>
+
+"""""""""""""""""""""""""""""""""""""" 窗口篇 """"""""""""""""""""""""""""""""""""""
+noremap <Leader>AM :action ActivateMavenToolWindow<CR>      " 激活 Maven 窗口
+noremap <Leader>AD :action ActivateDatabaseToolWindow<CR>   " 激活 Database 窗口
+noremap <Leader>AT :action ActivateTODOToolWindow<CR>       " 激活 Todo 的窗口
+noremap <Leader>AW :action ActivateTerminalToolWindow<CR>   " 激活终端窗口
+noremap <Leader>AF :action ActivateFavoritesToolWindow<CR>  " 激活 Favorites 的窗口
+noremap <Leader>AP :action ActivateProjectToolWindow<CR>    " 激活 Project 的窗口
+noremap <Leader>AG :action ActivateVersionControlToolWindow<CR> " 激活 Git 的窗口
+noremap <Leader>AS :action ActivateServicesToolWindow<CR>   " 激活 Git 的窗口
+noremap <Leader>AB :action ViewBreakpoints<CR>              " 激活 Breakpoints 的窗口
+noremap <Leader>AR :action ActivateRestServicesToolWindow<CR> " 激活 Rest 的窗口(需要安装插件)
+nnoremap <Leader>wd :action ActivateDebugToolWindow<CR>     " 激活 Debug 的运行窗口
+nnoremap <Leader>wr :action ActivateRunToolWindow<CR>       " 激活 Run 的运行窗口
+nnoremap <Leader>wh :action HideActiveWindow<CR>            " 隐藏窗口(windows hide)
+nnoremap <Leader>mm :action MaximizeToolWindow<CR>          " 窗口最大化 Windows max
+noremap <Leader>ha :action HideAllWindows<CR>               " 隐藏所有窗口
+noremap <Leader>siv :action SelectInProjectView<CR>         " 激活窗口，选中当前位置
+
+"""""""""""""""""""""""""""""""""""""" 信息篇 """"""""""""""""""""""""""""""""""""""
+noremap <Leader>ed :action ShowErrorDescription<CR>         " 弹出警告信息
+noremap <Leader>ti :action ExpressionTypeInfo<CR>           " 弹出类型信息
+noremap <Leader>pi :action ParameterInfo<CR>                " 弹出参数信息
+noremap <Leader>jd :action QuickJavaDoc<CR>                 " 快速显示当前方法信息
+noremap <Leader>fs mm`m:action FileStructurePopup<CR>       " 弹出文件结构信息
+noremap <Leader>sd :action ShowUmlDiagram<CR>               " 显示 Maven 的依赖层级信息
+noremap <Leader>ch :action CallHierarchy<CR>                " 弹出方法调用层级信息
+noremap <Leader>mh :action MethodHierarchy<CR>              " 弹出方法结构信息
+noremap <Leader>th :action TypeHierarchy<CR>                " 弹出类的继承结构信息
+noremap <Leader>ss :action ShowSettings<CR>                 " 弹出设置信息
+noremap <Leader>ps :action ShowProjectStructureSettings<CR> " 弹出项目结构信息
+
+"""""""""""""""""""""""""""""""""""""" 项目篇 """"""""""""""""""""""""""""""""""""""
+noremap <Leader>cp :action CloseProject<CR>                 " 关闭项目
+noremap <Leader>CP :action CloseProject<CR>                 " 关闭项目
+
+noremap <Leader>op :action OpenFile<CR>                     " 打开项目
+noremap <Leader>OP :action OpenFile<CR>                     " 打开项目
+noremap <Leader>of :action OpenFile<CR>                     " 打开项目
+noremap <Leader>OF :action OpenFile<CR>                     " 打开项目
+
+noremap <Leader>np :action NewProject<CR>                   " 新建项目
+noremap <Leader>NP :action NewProject<CR>                   " 新建项目
+
+"""""""""""""""""""""""""""""""""""""" 实用工具篇 """"""""""""""""""""""""""""""""
+noremap <Leader>sm :action ShowPopupMenu<CR>                " 弹出菜单
+noremap <Leader>st :action SaveAsTemplate<CR>               " 保存模板
+noremap <Leader>cap :action CopyAbsolutePath<CR>            " 复制当前文件的绝对路径
+noremap <Leader>ccp :action CopyContentRootPath<CR>         " 复制当前文件名
+nnoremap <Leader>cv :action ChangeView<CR>                  " 改变视图
+noremap <Leader>ag :action antlr.Generate<CR>:action antlr.Generate<CR> " g4 文件生成代码(需要安装 anltr4 插件)
+noremap <Leader>TR :action antlr.TestRule<CR>
+noremap <Leader>bc :action ByteCodeViewer<CR>               " 显示字节码
+noremap <Leader>qq :action $TranslateTextComponent<CR>      " 快速翻译(需要安装翻译插件)
+noremap <Leader>tr :action $TranslateAndReplaceAction<CR>   " 替换翻译(需要安装翻译插件)
+noremap <Leader>gfu :action GenerateFullRestUrl<CR>
+noremap <Leader>atf :action AddToFavorites<CR>              " 添加到收藏文件
+noremap <Leader>cE :action CopyElement<CR>                  " 复制文件元素
+noremap <Leader>nE :action NewElement<CR>                   " 新建文件元素
+noremap <Leader>de :action SafeDelete<CR>                   " 删除当前文件元素
+nnoremap <CR><CR> :action ShowIntentionActions<CR>          " IDEA 智能提示
+nnoremap <Leader><CR> :action GotoNextError<CR>             " 跳转下个报错处(与 IDEA 智能提示配起来)
+noremap <Leader>ps :action ShowProjectStructureSettings<CR> " 打开项目设置
+noremap <Leader>ri :action RevealIn<CR>                     " 露出文件夹
+noremap <Leader>cu :action CloseAllUnmodifiedEditors<CR>    " 删除未修改的 Tab
+noremap <Leader>oc :action OpenCodotaSearch<CR>             " Codota 查找类似代码，需要提前安装 Codota 插件
+noremap <Leader>AC :action ActivateCodotaToolWindow<CR>     " Codota 激活窗口，需要提前安装 Codota 插件
+noremap <Leader>cs :action CodotaLeanSearchCrossRefAction<CR> " Codota 激活窗口，需要提前安装 Codota 插件
+noremap <Leader>csdn :action SearchByCSDN<CR>               " CSDN 万能工具，需要提前安装 CSDN 插件
+noremap <Leader>rp :action ReplaceInPath<CR>                " 替换
+noremap <Leader>dl :action DatabaseView.OpenDdlInConsole<CR> " 打开 DDL 语句
+noremap <Leader>ot :action Terminal.OpenInTerminal<CR>      " 打开 Terminal 窗口
+noremap <Leader>sf :action SonarLint.AnalyzeFiles<CR>       " 需要安装代码扫描插件 SonarLint
+noremap <Leader>lv :action Compare.LastVersion<CR>          " 比较最新版本的区别
+noremap <Leader>bd :action CompileProject<CR>               " 编译项目
+noremap <Leader>sa :action SonarLint.AnalyzeAllFiles<CR>    " 分析所有项目
+noremap <Leader>uu :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR> " 大小写，驼峰，下划线，中划线转换
+
+" 分析改变的所有文件
+noremap <Leader>SC :action SonarLint.AnalyzeChangedFiles<CR>
+noremap <Leader>lcw :action leetcode.OpenInWebAction<CR>
+noremap <Leader>lcs :action leetcode.OpenSolutionAction<CR>
+noremap <Leader>lcn :action leetcode.editor.note<CR>
+noremap <Leader>lcr :action leetcode.editor.RunCodeAction<CR>
+
+noremap <Leader>rs :action RestfulTool.action.OptionForEditor-NavigationServiceTreeAction<CR>
+noremap <CR><Leader> :action copilot.openCopilot<CR>
+noremap <Leader>ir :action IdeaVim.ReloadVimRc.group<CR>
+imap <C-i> <CR>:action copilot.applyInlays<CR>
+
+"""""""""""""""""""""""""""""""""""""" 其它篇 """"""""""""""""""""""""""""""""""""""
+" 复制别处单词替换当前单词
+noremap giw :action emacsIDEAs.AceJumpObtainThenReplace.Word<CR>
+noremap gic :action emacsIDEAs.AceJumpObtainThenReplace.Quote<CR>
+noremap giz :action emacsIDEAs.AceJumpObtainThenReplace.Quote<CR>
+noremap gim :action emacsIDEAs.AceJumpObtainThenReplace.Block<CR>
+noremap gie :action emacsIDEAs.AceJumpObtainThenReplace.Block<CR>
+noremap gir :action emacsIDEAs.AceJumpObtainThenReplace.Block<CR>
+noremap gi, :action emacsIDEAs.AceJumpObtainThenReplace.Block<CR>
+noremap gii :action emacsIDEAs.AceJumpObtainThenReplace.Line<CR>
+noremap gil :action emacsIDEAs.AceJumpObtainThenReplace.Line<CR>
+
+" 复制别处单词到当前光标
+noremap gyw a<Esc>:action emacsIDEAs.AceJumpCopy.Word<CR>
+imap <A-I> <C-O>:action emacsIDEAs.AceJumpCopy.Word<CR>
+noremap gyc a<Esc>:action emacsIDEAs.AceJumpCopy.Quote<CR>
+noremap gyz a<Esc>:action emacsIDEAs.AceJumpCopy.Quote<CR>
+noremap gym a<Esc>:action emacsIDEAs.AceJumpCopy.Block<CR>
+noremap gye a<Esc>:action emacsIDEAs.AceJumpCopy.Block<CR>
+noremap gy, a<Esc>:action emacsIDEAs.AceJumpCopy.Block<CR>
+noremap gyy a<Esc>:action emacsIDEAs.AceJumpCopy.Line<CR>
+noremap gyl a<Esc>:action emacsIDEAs.AceJumpCopy.Line<CR>
+
+" 移动别处单词到当前光标
+noremap gmw a<Esc>:action emacsIDEAs.AceJumpMove.Word<CR>
+noremap gmc a<Esc>:action emacsIDEAs.AceJumpMove.Quote<CR>
+noremap gmz a<Esc>:action emacsIDEAs.AceJumpMove.Quote<CR>
+noremap gmm a<Esc>:action emacsIDEAs.AceJumpMove.Block<CR>
+noremap gme a<Esc>:action emacsIDEAs.AceJumpMove.Block<CR>
+noremap gm, a<Esc>:action emacsIDEAs.AceJumpMove.Block<CR>
+noremap gmy a<Esc>:action emacsIDEAs.AceJumpMove.Line<CR>
+noremap gml a<Esc>:action emacsIDEAs.AceJumpMove.Line<CR>
+
+" 复制当前单词替换别处单词
+noremap gow :action emacsIDEAs.AceJumpAndReplace.Word<CR>
+noremap goc :action emacsIDEAs.AceJumpAndReplace.Quote<CR>
+noremap goz :action emacsIDEAs.AceJumpAndReplace.Quote<CR>
+noremap gom :action emacsIDEAs.AceJumpAndReplace.Block<CR>
+noremap goe :action emacsIDEAs.AceJumpAndReplace.Block<CR>
+noremap gor :action emacsIDEAs.AceJumpAndReplace.Block<CR>
+noremap go, :action emacsIDEAs.AceJumpAndReplace.Block<CR>
+noremap goo :action emacsIDEAs.AceJumpAndReplace.Line<CR>
+noremap gol :action emacsIDEAs.AceJumpAndReplace.Line<CR>
+
+" Visual 模式下 按 * 号搜索光标选中的内容(对已选中的内容进行查找)
+vmap * "ry/<C-R>r<CR>N
+vmap # "ry/<C-R>r<CR>n
+
+" 跳转到 vue 的 Props (搜索之类)
+unmap s
+nnoremap sp /props:<CR>:noh<CR>zt5j
+nnoremap sd /data:<CR>:noh<CR>zt5j
+nnoremap sc /computed:<CR>:noh<CR>zt5j
+nnoremap sw /watch:<CR>:noh<CR>zt5j
+nnoremap sm /methods:<CR>:noh<CR>zt5j
+nnoremap sr /return \(<CR>:noh<CR>zt5j
+nnoremap sf /a-form<CR>:noh<CR>zt5j
+nnoremap st /a-table<CR>:noh<CR>zt5j
+nnoremap ss /render() {<CR>/\<Sm<CR>:noh<CR>zt
+nnoremap se /useEffect<CR>n:noh<CR>zz
+nnoremap sa /render() {<CR>/\<a\-
+nnoremap s, /\<
+
+"""""""""""""""""""""""""""""""""""""" END """"""""""""""""""""""""""""""""""""""

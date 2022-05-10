@@ -184,7 +184,7 @@ nnoremap gh ^                   " 在一般模式下快速进行行首跳转
 nnoremap gl $                   " 在一般模式下快速进行行尾跳转
 
 " 重置 Esc 退出键，离键盘主区域太远了
-inoremap <Esc> <Nop>            " 插入模式下禁用 Esc 键退出插入模式
+" inoremap <Esc> <Nop>          " 插入模式下禁用 Esc 键退出插入模式
 inoremap vv <Esc>               " 插入模式下的 vv 键为 Esc 键
 vnoremap vv <Esc>               " 可视模式下的 vv 键为 Esc 键
 inoremap jj <Esc>               " 插入模式下的 jj 键为 Esc 键
@@ -306,7 +306,7 @@ nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>           " Set current directory to c
 nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<CR>   " open windows command prompt in the current file's directory
 nnoremap <Leader>ce :!start explorer %:p:h:8<CR>    " open explorer in the current file's directory
 nnoremap <Space> za                                 " Space 空格键切换折叠
-nnoremap <S-Enter> o<Esc>k                          " 普通模式下 Shift + Enter 键插入空行
+nnoremap <Shift-Enter> o<Esc>k                      " 普通模式下 Shift + Enter 键插入空行
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 常见操作全文档命令映射
@@ -416,7 +416,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'       " 显示 NERDTree 目录树的 Git 状�
 " Markdown
 Plug 'iamcco/mathjax-support-for-mkdp'   " 用于 Markdown 预览数学公式
 Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
-Plug 'plasticboy/vim-markdown'           " Markdown 语法高亮插件。提供了语法高亮，段落折叠，查看目录，段间跳转等功能
+Plug 'plasticboy/vim-markdown'           " Markdown 语法高亮插件。提供了语法高亮，段落折叠，查看目录(:Toc)，段间跳转等功能
 
 " Github
 Plug 'airblade/vim-gitgutter'            " Git 侧边栏插件
