@@ -1,0 +1,3 @@
+- [IntelliJ IDEA 插件 ideavim 配置文件 - ideavimrc](./ideavimrc)
+- [IntelliJ IDEA 的 action 列表](./actionlist.vim)
+- [Chrome 浏览器神级插件 - Vimium](./vimium.md)

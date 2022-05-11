@@ -1,11 +1,11 @@
-" ==================================================================
+" ================================================================================
 " Author: chloneda <chloneda@gmail.com>
 " Repository: https://github.com/chloneda/vim-cheatsheet
 " Blog: https://www.cnblogs.com/chloneda
 " Create Date: 2022-02-01
 " Desc:  IntelliJ IDEA ideavim 插件定制化配置文件
 " License: MIT
-" ==================================================================
+" ================================================================================
 " 
 " Ideavim Github: https://github.com/JetBrains/ideavim
 " IdeaVim-EasyMotion: https://github.com/AlexPl292/IdeaVim-EasyMotion
@@ -16,11 +16,11 @@
 "   3、本文档按功能、再按按键进行映射设置，力求分类明了，方便记忆
 "   4、插件 Ideavim 在命令模式下输入 :actionlist，查询 IDEA 中所有 action
 "   5、将本文档内容复制到 ~/.ideavimrc 完成自定义配置
-" ==================================================================
+" ================================================================================
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用基本设置
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number                      " 显示行号，缩写：set nu
 set relativenumber              " 设置相对行号，缩写：set rnu
 set highlightedyank             " yiw 的时候 短暂的高亮复制 的对象
@@ -63,15 +63,15 @@ set ideavimsupport+=dialog      " 在对话框编辑器中禁用 IdeaVim
 set ideaenabledbufs+=singleline
 let g:argtextobj_pairs="(:),{:},<:>"    " 设置在(a,b) 、{a,b} 、<a,b> 这种括号里面
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " IntelliJ IDEA 特有基础设置
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ideajoin                    " 智能连接字符串及控制结构等
 set ideamarks                   " 触发 IDEA 全局标签
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用按键映射
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 修改 Leader 前缀键为 Space 空格键，默认是"\"，该注释禁止放后面，否则不起作用
 let mapleader=' '
 
@@ -251,9 +251,9 @@ cnoremap <S-Insert> <C-R>+
 nnoremap <F1> :nohls<CR>                    " 取消 Vim 查找高亮显示
 nnoremap <F3> :set relativenumber!<CR>      " 是否显示相对行号
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " IntelliJ IDEA 特有按键映射
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <C-.> :action ShowIntentionActions<CR>            " 显示 IDEA 智能提示
 nnoremap <C-/> :action CommentByLineComment<CR>            " 单行注释
 vnoremap <C-/> :action CommentByLineComment<CR>            " 单行注释
@@ -294,7 +294,7 @@ nnoremap <leader>' :action ShowBookmarks<CR>
 nnoremap ]b :action GotoNextBookmark<CR>
 nnoremap [b :action GotoPreviousBookmark<CR>
 
-"""""""""""""""""""""""""""""""""""""" 常用篇 """"""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" 常用篇 """""""""""""""""""""""""""""""""""""
 nnoremap fip :action FindInPath<CR>                         " 全局搜索
 nnoremap <Leader>nc :action NewClass<CR>                    " 新建类，比 nE 快
 nnoremap <Leader>nm :action NewModule<CR>                   " 新建 Module
@@ -314,7 +314,7 @@ nnoremap ghc <ESC>:action CallHierarchy<CR>
 nnoremap ght <ESC>:action TypeHierarchy<CR>
 nnoremap ghm <ESC>:action MethodHierarchy<CR>
 
-"""""""""""""""""""""""""""""""""""""" 重构篇 """"""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" 重构篇 """""""""""""""""""""""""""""""""""""
 noremap <Leader>re :action RenameElement<CR>                " 元素名称重构
 noremap <Leader>mv :action Move<CR>                         " 移动重构
 noremap <Leader>ms :action MakeStatic<CR>                   " 成员变量转换为静态变量重构(配合移动重构有奇效)
@@ -336,7 +336,7 @@ noremap <Leader>ec :action ExtractClass<CR>                 " 抽取类
 noremap <Leader>ai :action AnonymousToInner<CR>             " 匿名类到内部类
 noremap <Leader>rmo :action ReplaceMethodWithMethodObject<CR> " 切换方法为方法对象
 
-"""""""""""""""""""""""""""""""""""""" 跳转篇 """"""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" 跳转篇 """""""""""""""""""""""""""""""""""""
 nnoremap <Leader>ts mm`m:action GotoSymbol<CR>              " 跳转到变量的声明
 noremap <Leader>tu mm`m: action Tool.GotoRequestService<CR> " URL 地址跳转
 nnoremap <Leader>gd :action GotoDeclaration<CR>             " 跳转到定义
@@ -361,7 +361,7 @@ noremap <Leader>tj mm`m:action AceWordAction<CR>
 noremap <Leader>jp mm`m:action AceDeclarationAction<CR>
 noremap <Leader><Leader> mm`m:action AceAction<CR>           " 简化跳转
 
-""""""""""""""""""""""""""""""""""""" Generate """""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""" Generate """"""""""""""""""""""""""""""""""""
 " 代码生成 Generate，前缀为 <Leader>g，后面均增加 2 个字母
 nnoremap <Leader>G :action Generate<CR>
 nnoremap <Leader>gtm :action GenerateTestMethod<CR>
@@ -373,7 +373,7 @@ nnoremap <Leader>geq :action GenerateEquals<CR>
 nnoremap <Leader>gco :action GenerateConstructor<CR>
 nnoremap <Leader>gts :action Actions.ActionsPlugin.GenerateToString<CR>
 
-"""""""""""""""""""""""""""""""""""""" SQL 篇 """"""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" SQL 篇 """""""""""""""""""""""""""""""""""""
 noremap <Leader>sc :action Console.Transaction.Commit<CR>   " SQL 提交
 noremap <Leader>sr :action Console.Transaction.Rollback<CR> " SQL 回滚
 noremap <Leader>se :action Console.Jdbc.Execute<CR>         " SQL 执行
@@ -385,7 +385,7 @@ noremap <Leader>sl :action TailMyBatisLog0<CR>
 noremap <Leader>SL :action ActivateMyBatisLogToolWindow<CR>
 noremap <Leader>AL :action TailMyBatisLog0<CR>:action ActivateMyBatisLogToolWindow<CR>
 
-"""""""""""""""""""""""""""""""""""""" 运行篇 """"""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" 运行篇 """""""""""""""""""""""""""""""""""""
 nnoremap <Leader>rc :action RunConfiguration<CR>            " 设置运行配置
 noremap <Leader>rer <Esc>:action Rerun<CR>                  " 重新运行上次运行的类
 noremap <Leader>rr :action Run<CR>                          " 运行上次运行的类
@@ -396,7 +396,7 @@ noremap <Leader>cc :action Coverage<CR>                     " 统计单元测试
 noremap <Leader>cn :action RunCoverage<CR>                  " 统计单元测试覆盖率运行当前(now)类
 noremap <Leader>sp :action Stop<CR>                         " 项目停止运行
 
-"""""""""""""""""""""""""""""""""""""" Debug 篇 """"""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""" Debug 篇 """"""""""""""""""""""""""""""""""""
 noremap <Leader>bp :action ToggleLineBreakpoint<CR>         " 设置断点，即开启或关闭当前行断点
 noremap <Leader>mb :action XDebugger.MuteBreakpoints<CR>    " 禁用断点
 noremap <Leader>rab :action Debugger.RemoveAllBreakpointsInFile<CR> " 去除所有断点在当前文件中
@@ -415,7 +415,7 @@ noremap <Leader>pp :action ShowExecutionPoint<CR>           " 显示当前断点
 noremap <Leader>ds :action StreamTracerAction<CR>           " 流追踪技术
 noremap <Leader>eb :action EditBreakpoint<CR>               " 条件断点编辑
 
-"""""""""""""""""""""""""""""""""""""" Maven 篇 """""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" Maven 篇 """""""""""""""""""""""""""""""""""
 " Maven 篇，前缀均为 <Leader>m，后面均增加 1 个字母
 " Maven 依赖重新导入
 nnoremap <Leader>mr :action Maven.Reimport<CR>
@@ -424,7 +424,7 @@ nnoremap <Leader>me :action Maven.ExecuteGoal<CR>
 " 激活 Maven 窗口
 nnoremap <Leader>mw :action ActivateMavenToolWindow<CR>
 
-"""""""""""""""""""""""""""""""""""""" 版本控制篇 """"""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""" 版本控制篇 """"""""""""""""""""""""""""""""""
 	" version control actions
 " nnoremap ]v :action VcsShowNextChangeMarker<CR>
 " nnoremap [v :action VcsShowPrevChangeMarker<CR>
@@ -453,7 +453,7 @@ nnoremap <Leader>vre <Action>(Compare.Selected)
 nnoremap <Leader>vhs <Action>(Vcs.ShowHistoryForBlock)
 nnoremap <Leader>vhf <Action>(Vcs.ShowTabbedFileHistory)
 
-"""""""""""""""""""""""""""""""""""""" 标签页篇 """"""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""" 标签页篇 """"""""""""""""""""""""""""""""""""
 nnoremap <Leader>co :action CloseAllEditorsButActive<CR>    " 关闭其他所有 Tab
 nnoremap <Leader>cr :action CloseAllToTheRight<CR>          " 关闭右侧的 Tab
 nnoremap <Leader>cl :action CloseAllToTheLeft<CR>           " 关闭左侧的 Tab
@@ -461,7 +461,7 @@ nnoremap <Leader>ca :action CloseActiveTab<CR>
 nnoremap <S-j> :action PreviousTab<CR>
 nnoremap <S-k> :action NextTab<CR>
 
-"""""""""""""""""""""""""""""""""""""" 窗口篇 """"""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" 窗口篇 """""""""""""""""""""""""""""""""""""
 noremap <Leader>AM :action ActivateMavenToolWindow<CR>      " 激活 Maven 窗口
 noremap <Leader>AD :action ActivateDatabaseToolWindow<CR>   " 激活 Database 窗口
 noremap <Leader>AT :action ActivateTODOToolWindow<CR>       " 激活 Todo 的窗口
@@ -479,7 +479,7 @@ nnoremap <Leader>mm :action MaximizeToolWindow<CR>          " 窗口最大化 Wi
 noremap <Leader>ha :action HideAllWindows<CR>               " 隐藏所有窗口
 noremap <Leader>siv :action SelectInProjectView<CR>         " 激活窗口，选中当前位置
 
-"""""""""""""""""""""""""""""""""""""" 信息篇 """"""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" 信息篇 """""""""""""""""""""""""""""""""""""
 noremap <Leader>ed :action ShowErrorDescription<CR>         " 弹出警告信息
 noremap <Leader>ti :action ExpressionTypeInfo<CR>           " 弹出类型信息
 noremap <Leader>pi :action ParameterInfo<CR>                " 弹出参数信息
@@ -492,7 +492,7 @@ noremap <Leader>th :action TypeHierarchy<CR>                " 弹出类的继承
 noremap <Leader>ss :action ShowSettings<CR>                 " 弹出设置信息
 noremap <Leader>ps :action ShowProjectStructureSettings<CR> " 弹出项目结构信息
 
-"""""""""""""""""""""""""""""""""""""" 项目篇 """"""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" 项目篇 """""""""""""""""""""""""""""""""""""
 noremap <Leader>cp :action CloseProject<CR>                 " 关闭项目
 noremap <Leader>CP :action CloseProject<CR>                 " 关闭项目
 
@@ -504,7 +504,7 @@ noremap <Leader>OF :action OpenFile<CR>                     " 打开项目
 noremap <Leader>np :action NewProject<CR>                   " 新建项目
 noremap <Leader>NP :action NewProject<CR>                   " 新建项目
 
-"""""""""""""""""""""""""""""""""""""" 实用工具篇 """"""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" 实用工具篇 """""""""""""""""""""""""""""""""
 noremap <Leader>sm :action ShowPopupMenu<CR>                " 弹出菜单
 noremap <Leader>st :action SaveAsTemplate<CR>               " 保存模板
 noremap <Leader>cap :action CopyAbsolutePath<CR>            " 复制当前文件的绝对路径
@@ -550,7 +550,7 @@ noremap <CR><Leader> :action copilot.openCopilot<CR>
 noremap <Leader>ir :action IdeaVim.ReloadVimRc.group<CR>
 imap <C-i> <CR>:action copilot.applyInlays<CR>
 
-"""""""""""""""""""""""""""""""""""""" 其它篇 """"""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""" 其它篇 """""""""""""""""""""""""""""""""""""
 " 复制别处单词替换当前单词
 noremap giw :action emacsIDEAs.AceJumpObtainThenReplace.Word<CR>
 noremap gic :action emacsIDEAs.AceJumpObtainThenReplace.Quote<CR>
@@ -613,4 +613,4 @@ nnoremap se /useEffect<CR>n:noh<CR>zz
 nnoremap sa /render() {<CR>/\<a\-
 nnoremap s, /\<
 
-"""""""""""""""""""""""""""""""""""""" END """"""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""" END """""""""""""""""""""""""""""""""""""""

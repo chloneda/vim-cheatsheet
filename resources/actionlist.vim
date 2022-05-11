@@ -1,11 +1,11 @@
-" ==================================================================
+" ================================================================================
 " Author: chloneda <chloneda@gmail.com>
 " Repository: https://github.com/chloneda/vim-cheatsheet
 " Blog: https://www.cnblogs.com/chloneda
 " Create Date: 2022-05-01
 " Desc:  本文档是 IntelliJ IDEA 对应的所有 action 列表，便于 ideavim 按键映射
 " License: MIT
-" ==================================================================
+" ================================================================================
 
 --- Actions ---
 $ChooseTranslatorAction                            <C-S-S>
