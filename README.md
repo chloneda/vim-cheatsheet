@@ -14,7 +14,7 @@
 
 - [Vim-cheatsheet - GitHub](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
 - [Vim 官网](https://www.vim.org/) | [Vim GitHub](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
-- [Vim 自定义配置文件 - vimrc](./vimrc) | [Vim 体系化工具集](./resources/RESOURCES.md)
+- [Vim 自定义配置文件 vimrc](./vimrc) | [Vim 体系化工具集](./resources/RESOURCES.md)
 
 
 
