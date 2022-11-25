@@ -1,5 +1,5 @@
 " ================================================================================
-" Author: chloneda <chloneda@gmail.com>
+" Author: chloneda <chloneda@163.com>
 " Repository: https://github.com/chloneda/vim-cheatsheet
 " Blog: https://www.cnblogs.com/chloneda
 " Create Date: 2022-05-01

@@ -2,60 +2,56 @@
     <h1>Vim command cheat sheet</h1>
 </div>
 
+<p align="center">
+    <a href="./README.md">Chinese</a>
+    ·
+    <a href="./README_EN.md">English</a>
+</p>
+
+
 > Introduction: Vim command lookup tables, annotated vimrc profiles, classic Vim keyboard diagrams, practical Vim books, Markdown format, directory-based search, systematic learning, quick familiarity with use!
 
 - [Vim-cheatsheet - GitHub](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
 - [Vim official website](https://www.vim.org/) | [Vim GitHub](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)
 - [Vim custom configuration file - vimrc](./vimrc)
-- [God-level plugin for Chrome browser - Vimium](./resources/vimium.md)
-- [Chinese](./README.md) | [English](./README_EN.md)
 
 
 
-## The power of repetition
+## Repeats
 
 ```bash
 .                   # Repeat (Dot) command, repeats the previous command
 N{command}          # Repeat a command N times, e.g. 10k, cursor moves up 10 lines
 ```
 
-**In addition, the power of repetition should also be leveraged with macros and regular expressions to reduce repetitive operations.**
+The use of macros and regular expressions can also be used to reduce the number of repetitive operations.
 
 
 
-## Cursor movement
+## Cursor motions
 
-**Note: In normal mode, any of the actions can be repeated.**
-
-unit level.
+> **Note: In normal mode, any of the actions can be repeated.**
 
 ```bash
-h                   # Move the cursor to the left, equivalent to the <Left> arrow key. (Note: the h key is on the left, press it to move the cursor left)
-j                   # Move the cursor down, equivalent to the <Down> arrow key. (Note: the j key has a downward protrusion, press this key to move the cursor down)
-k                   # Move the cursor up, equivalent to the <Up> arrow key. (Note: the k key is the opposite of the j key, press this key to move the cursor up)
-l                   # Move the cursor to the right, equivalent to the <Right> arrow key. (Note: the l key is on the right, press it to move the cursor to the right)
-```
-
-word level.
-
-```bash
-w                   # Move to the beginning of the next word separated by punctuation or space (w: word)
-W                   # Move to the beginning of the next space-separated word (W: Word)
-e                   # Move to the end of the next word separated by punctuation or space (e: end)
-E                   # Move to the end of the next space separated word (E: End)
-b                   # Move to the beginning of the previous word separated by punctuation or space (b: backward)
-B                   # Move to the beginning of the previous space-separated word (B: Backward)
-```
-
-block level.
-
-```bash
-0                   # Jump to the beginning of the line, the number 0, the effect is equivalent to the <Home> key
-^                   # Jump to the non-blank character at the beginning of the line, you can use 0w instead of ^, which is more convenient to press
-$                   # Jump to the end of the line, the effect is equivalent to the <End> key
-gg                  # Jump to the first line, the effect is equivalent to Ctrl+<Home>
-G                   # Jump to the last line, the effect is equivalent to Ctrl+<End>
-NG                  # Jump to the Nth row, for example 10G is to move to the tenth row
+                    # -------------------- Unit level cursor movement --------------------
+h                   # The cursor moves to the left of the character
+j                   # Move the cursor down one line
+k                   # Move the cursor up one line
+l                   # The cursor moves to the right of the character
+                    # -------------------- Word-level cursor movement --------------------
+w                   # [count] words forward. exclusive motion
+W                   # [count] WORDS forward. exclusive motion
+e                   # Forward to the end of word [count] inclusive
+E                   # Forward to the end of WORD [count] inclusive
+b                   # [count] words backward. exclusive motion
+B                   # [count] WORDS backward. exclusive motion
+                    # -------------------- Block level cursor movement -------------------
+0                   # To the first character of the line
+^                   # To the first non-blank character of the line. exclusive motion. Any count is ignored
+$                   # To the end of the line
+gg                  # Goto line [count], default first line, on the first non-blank character line
+G                   # Goto line [count], default last line, on the first non-blank character line
+[N]G                # Jump to the Nth row, for example 10G is to move to the tenth row
 :N                  # Jump to the Nth line, for example: 10<Enter> is to move to the tenth line
 N%                  # Move to the N% position of the file, for example 10% is moved to the 10% position of the file
 N|                  # Move to N columns of the current row
@@ -75,6 +71,13 @@ L                   # Move to the bottom of the screen (L: Low)
 gm                  # Move to the middle of the line
 gj                  # Move the cursor down one screen line (ignore automatic line wrapping)
 gk                  # Move the cursor up one screen line (ignore auto-wrap)
+<S+Up>              # Hold down the <Shift> key and then press the <Up> arrow key to page up
+<S+Down>            # Hold down the <Shift> key and then press the <Down> arrow key to page down
+<S+Left>            # Hold down the <Shift> key and press the <Left> arrow key to move one word to the left
+<S+Right>           # Hold down the <Shift> key and press the <Right> arrow key to move one word to the right
+:ju[mps]            # Print the jump list
+:cle[arjumps]       # Clear the jump list of the current window
+                    # ------------------ Screen-level cursor movement -------------------
 zz                  # Adjust the cursor line to the center of the screen
 zt                  # Adjust the cursor line to the upper part of the screen
 zb                  # Adjust the cursor line to the bottom of the screen
@@ -83,16 +86,33 @@ Ctrl+y              # Scroll down one line
 Ctrl+u              # Move up 1/2 a screen
 Ctrl+d              # Move down 1/2 a screen
 Ctrl+f              # Move forward one full screen
-Ctrl+b              # Move back one full screen 
-<S+Up>              # Hold down the <Shift> key and then press the <Up> arrow key to page up
-<S+Down>            # Hold down the <Shift> key and then press the <Down> arrow key to page down
-<S+Left>            # Hold down the <Shift> key and press the <Left> arrow key to move one word to the left
-<S+Right>           # Hold down the <Shift> key and press the <Right> arrow key to move one word to the right
+Ctrl+b              # Move back one full screen
+                    # ------------------ Programming assistance level cursor movement ---
+%                   # Match jump to the corresponding {} () []
+gd                  # Jump to the local definition (the definition of the word under the cursor)
+gD                  # Jump to the global definition (the definition of the word under the cursor)
+gf                  # Open the file whose name is the file name under the cursor
+[[                  # Jump to the previous top-level function
+]]                  # Jump to the next top-level function
+[m                  # Jump to the previous member function
+]m                  # Jump to the next member function
+[{                  # Jump to the previous unmatched {
+]}                  # Jump to the next unmatched }
+[(                  # Jump to the previous unmatched (
+])                  # Jump to the next unmatched )
+[c                  # The last difference (when diffing)
+]c                  # The next difference (when diffing)
+[/                  # Jump to the beginning of the C comment
+]/                  # Jump to the end of the C comment
+``                  # Go back to the last jumped position
+''                  # Go back to the last jumped position
+`.                  # Back to the last edited position
+'.                  # Back to the last edited position
 ```
 
 
 
-## Insert mode
+## Insert mode  
 
 ```bash
 i                   # Enter insert mode at the cursor
@@ -158,18 +178,12 @@ Ctrl+K {ch1} {ch2}  # Insert digraph (see :h digraph), quickly enter Japanese or
 
 ## Autocomplete
 
-In insert mode, the most commonly used completion.
-
 ```bash
-Ctrl+n              # Automatic text completion in insert mode
+Ctrl+n              # Automatic text completion in insert mode, the most commonly used completion
 Ctrl+P              # Automatic text completion in insert mode
 Ctrl+e              # When there is a completion list, terminate this completion and continue typing
-```
 
-**Smart completion commands all start with the key combination Ctrl+X.**
-
-```bash
-Ctrl+X              # Enter completion mode
+Ctrl+X              # Enter completion mode.Smart completion commands all start with the key combination Ctrl+X
 Ctrl+X Ctrl+L       # Whole line completion
 Ctrl+X Ctrl+N       # In insert mode, complete according to keywords in the current file
 Ctrl+X Ctrl+K       # Completion according to dictionary
@@ -186,14 +200,16 @@ Ctrl+X Ctrl+O       # Insert Omnifunc completion
 
 
 
-## Text Editor
+## Text editor
 
 ```bash
 r                   # Replace the current character
 R                   # Enter replacement mode until you press <Esc> to leave
-J                   # Delete a newline character and merge multiple lines into one line 
-s                   # Replace character (delete the character at the cursor and enter the insert mode, the number can be connected in front)
-S                   # Replace line (delete the current line and enter the insert mode, the number can be accessed before)
+[N]s                # Delete [count] characters and start insert
+[N]S                # Delete [count] lines and start insert
+[N]x                # Delete [count] characters under and after the cursor.Does the same as "dl"
+[N]X                # Delete [count] characters before the cursor. Does the same as "dh"
+
 cc                  # Rewrite the current line (delete the current line and enter insert mode), same as S
 cw                  # Overwrite the current word at the beginning of the cursor
 ciw                 # Rewrite the word under the cursor
@@ -215,8 +231,7 @@ cit                 # Rewrite the content in the XML tag
 cis                 # Rewrite the current sentence
 c2w                 # Write two words instead
 ct(                 # Rewrite before the parentheses
-x                   # Delete the current character, you can receive a number in front, 3x means delete three characters
-X                   # Delete characters forward
+
 dd                  # Delete (cut) a line
 d0                  # Delete (cut) to the beginning of the line
 d^                  # Delete (cut) to the beginning of the line (the first non-zero character)
@@ -245,6 +260,7 @@ d{                  # Delete the previous paragraph
 Nd                  # Delete N lines from the beginning of the current line
 :Nd                 # Delete line N
 :1,10d              # Delete 1~10 lines
+
 ~                   # Replace case
 g~iw                # Replace the case of the current word
 gUiw                # Convert words to uppercase
@@ -316,14 +332,39 @@ cit、dit、yit、vit，Operate the content between a pair of tags separately, a
 :[range]m[ove]{address}
 ```
 **Parameter Description**
-- [range]: Indicates the range of rows to be moved
-- {address}: Indicates the target position of the movement, both of these parameters can be defaulted
+- [range]: Indicates the range of rows to be moved.
+- {address}: Indicates the target position of the movement, both of these parameters can be defaulted.
 
 For example
 ```bash
 :m+1                # Move down 1 line
 :m-2                # Move up 1 line
 :8,10m2             # Move the contents of lines 8~10 of the currently opened file to the bottom of line 2
+```
+
+
+
+## Formatting text
+
+```bash
+[N]>>                     # Shift [count] lines one 'shiftwidth' rightwards
+[N]<<                     # Shift [range] lines one 'shiftwidth' left
+:ce[nter]                 # Set the text of the bank to be centered
+:le[ft]                   # Set the text of the bank to the left
+:ri[ght]                  # Set the text of the bank to the right
+:[range]ce[nter] [width]  # Center lines in [range] between [width] columns
+:[range]le[ft] [indent]   # Left-align lines in [range].  Sets the indent in the lines to [indent]
+:[range]ri[ght] [width]   # Right-align lines in [range] at [width] columns
+gq                        # Format the current line
+gqq                       # Format the current line. With a count format that many lines
+gq[N]q                    # Format [count] lines
+gqap                      # Format the current paragraph
+gq[N]ap                   # Format [count] paragraphs
+gq[N]j                    # Format the current line and the following [count] lines
+gqQ                       # Format before the paragraph to the end of the text
+J                         # Join [count] lines, with a minimum of two lines
+gj                        # [count] display lines downward
+==                        # Filter [count] lines like with ={motion}
 ```
 
 
@@ -464,7 +505,6 @@ Note that all the above representation methods for range can be used to set the 
 
 - [flags] has the following values:
 
-
 | [flags]value | Description                                 |
 | ----------- | -------------------------------------------- |
 | g           | Replace all matches (global) in the specified range |
@@ -551,36 +591,6 @@ d                   # Press the d key to uncomment all
 
 :%s/^/#/g           # Annotate the entire document, this method is faster
 :%s/^#//g           # Uncomment the entire document
-```
-
-
-
-## Position movement
-
-```bash
-Ctrl+O              # Jump to the previous position
-Ctrl+I              # Jump to the next position
-Ctrl+^              # Jump to alternate file (the previous file in the current window)
-%                   # Match jump to the corresponding {} () []
-gd                  # Jump to the local definition (the definition of the word under the cursor)
-gD                  # Jump to the global definition (the definition of the word under the cursor)
-gf                  # Open the file whose name is the file name under the cursor
-[[                  # Jump to the previous top-level function
-]]                  # Jump to the next top-level function
-[m                  # Jump to the previous member function
-]m                  # Jump to the next member function
-[{                  # Jump to the previous unmatched {
-]}                  # Jump to the next unmatched }
-[(                  # Jump to the previous unmatched (
-])                  # Jump to the next unmatched )
-[c                  # The last difference (when diffing)
-]c                  # The next difference (when diffing)
-[/                  # Jump to the beginning of the C comment
-]/                  # Jump to the end of the C comment
-``                  # Go back to the last jumped position
-''                  # Go back to the last jumped position
-`.                  # Back to the last edited position
-'.                  # Back to the last edited position
 ```
 
 
@@ -989,6 +999,7 @@ Ctrl+r registerName    # In insert mode (no need to enter register reference sym
 ```
 
 **Vim configuration instructions, please refer to [vimrc configuration file](../vimrc) for details. Note: Vim configuration can be set individually in command mode and only takes effect in the current window！**
+
 ```bash
 syntax              # List the defined grammar items
 syntax clear        # Clear defined grammar rules
@@ -1219,6 +1230,5 @@ Command line mode   # Press : or / or ? To start
 
 
 ---
-
 
 
