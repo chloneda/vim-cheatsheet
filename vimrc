@@ -6,6 +6,8 @@
 " Desc:  Vim 定制化配置文件
 " License: MIT
 " ===============================================================================
+
+" Config Notes {{{
 "
 " To use it, copy it to
 "     for Unix and OS/2:  ~/.vimrc
@@ -34,20 +36,37 @@
 "   1、Vim 脚本注释是以 " 开头的，只存在行注释，不存在块注释
 "   2、配置文件中的 <Leader> 前缀键是指 "\" 键
 "   3、本文档按功能、再按按键进行映射设置，力求分类明了，方便记忆
+"   4、本配置文件尽量做到全平台适用，达到一次编写，跨平台使用
+"
+" Tips:
+"   1、本配置文件使用系统 标志折叠（marker）即 {{{和}}}，使配置文件看起来更简洁。详见命令：
+"       za         打开或关闭当前折叠
+"       zc         折叠
+"       zo         展开折叠
+"       zM         关闭所有折叠
+"       zR         打开所有折叠
 " ===============================================================================
 
+" 定义 自动命令组 折叠，使用 Vim 默认 标志折叠（marker）即 {{{和}}} 来折叠代码
+augroup ft_vim
+    autocmd!
+    au FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
+
+
+" Global Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 环境设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible                " 必须先设定的选项，关闭兼容 vi 模式，使用 Vim 自身的
-set shell=/bin/bash             " Vim 需要一个符合 Posix 的 Shell
 set viminfo=<100,'100,/50,:100,h,r$TEMP:,s10
-"           |    |    |   |    | |       + 不保存超过10KB寄存器
-"           |    |    |   |    | + 不保存TEMP目录下文件的相关信息
-"           |    |    |   |    + 载入viminfo文件时关闭hlsearch高亮
+"           |    |    |   |    | |       + 不保存超过 10 KB 寄存器
+"           |    |    |   |    | + 不保存 TEMP 目录下文件的相关信息
+"           |    |    |   |    + 载入 viminfo 文件时关闭 hlsearch 高亮
 "           |    |    |   + 保存命令历史条数
 "           |    |    + 保存搜索历史条数
-"           |    + 保存最近100个文件中的标记
+"           |    + 保存最近 100 个文件中的标记
 "           + 每个寄存器中保存的行数
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -63,7 +82,6 @@ set guioptions-=b               " 隐藏底部滚动条
 set cursorline                  " 突出显示当前行
 set cursorcolumn                " 突出显示当前列
 set shortmess=atI               " 启动的时候不显示那个援助乌干达儿童的提示
-set go=                         " 不要图形按钮
 set background=dark             " Theme 主题
 set t_Co=256                    " 指定配色方案是 256 色
 
@@ -95,7 +113,6 @@ set showmode                    " 显示我们当前所处的模式
 set matchtime=1                 " 匹配括号高亮的时间（单位是十分之一秒） 
 set autoread                    " 设置当文件被改动时自动载入
 set autowrite                   " 自动保存
-set guitablabel=%N%t%M          " 标签页显示 Number+文件名和+符号，不显示完整路径+文件名，方便切换标签页
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 编码方式及菜单设置
@@ -110,14 +127,11 @@ set fileencodings=uft-8,chinese,cp936,gbk,gb2312,big5
 
 set formatoptions+=m            " 表示自动排版完成的方式。m 表示在任何值高于 255 的多字节字符上分行
 set formatoptions+=B            " B 表示在连接行时，不要在两个多字节字符之间插入空格
-set helplang=cn                 " 帮助系统设置为中文
-"set langmenu=zh_CN.UTF-8       " 显示中文菜单语言
-set langmenu=en_US.UTF-8        " 显示英文菜单语言
-"language messages zh_CN.utf-8  " 设置提示信息为中文，解决 consle 输出乱码
-language messages en_US.UTF-8   " 设置提示信息为英文
-source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单。注意：该两行代码，千万不能放到配置文件的上面
-source $VIMRUNTIME/menu.vim     " 导入正常的菜单脚本
+" }}}
 
+
+
+" Other Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 其他配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -148,7 +162,11 @@ set splitright                  " 竖直 split 时，在右边开启
 set splitbelow                  " 水平 split 时，在下边开启
 set viminfo+=!                  " 保存全局变量
 set iskeyword+=_,$,@,%,#,-      " 带有如下符号的单词不要被换行分割
+" }}}
 
+
+
+" Common Maps {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 按键映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -158,7 +176,8 @@ set iskeyword+=_,$,@,%,#,-      " 带有如下符号的单词不要被换行分�
 " nmap k G                      " 当按下 j 键时，实际上执行的是 G 键
 " let mapleader = ","           " 定义 <Leader> 前缀键由 "\" 变为 ","
 map Y y$                        " 复制 从光标到行尾 所在范围的文本
-nmap <C-A> ggVG                 " 全选，Ctrl+A 组合键全选
+nmap <C-A> ggVGY                " 全选+复制，Ctrl+A 组合键
+nmap <Leader>d <Esc>ggVGd       " 一键清理当前代码文件(\d)
 
 " \v 从公共剪贴板粘贴。<Leader> 为用户自定义命令的名字空间，<Leader> 是前缀键即 "\"
 inoremap <Leader>v <Esc>"+p     " 插入模式下粘贴
@@ -202,7 +221,7 @@ inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 inoremap { {}<Esc>i
 inoremap < <><Esc>i
-inoremap " ""<Esc>i
+" inoremap " ""<Esc>i           " 取消该行映射，避免 单词用双引号包围 的映射失效
 inoremap ' ''<Esc>i
 inoremap ` ``<ESC>i
 
@@ -253,17 +272,30 @@ inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映
 nnoremap <F10> <Esc>:tabnew<CR>    " 指定 F10 功能键来新建标签页
 nnoremap <F11> :g/.\n\n\@!/norm o<CR>    " 指定 F11 功能键非空行每行后加入空行，多个空行合并为一个空行
 
+" 缓冲区 Buffer 按键映射
+nnoremap <Leader>b :ls<CR>
+" 映射 <Leader>num 到 num buffer
+nnoremap <Leader>1 :b 1<CR>
+nnoremap <Leader>2 :b 2<CR>
+nnoremap <Leader>3 :b 3<CR>
+nnoremap <Leader>4 :b 4<CR>
+nnoremap <Leader>5 :b 5<CR>
+nnoremap <Leader>6 :b 6<CR>
+nnoremap <Leader>7 :b 7<CR>
+nnoremap <Leader>8 :b 8<CR>
+nnoremap <Leader>9 :b 9<CR>
+
 " 普通模式下，标签页导航 按键映射
-nnoremap <Leader>1 1gt                           " 切换到第 1 个标签页
-nnoremap <Leader>2 2gt                           " 切换到第 2 个标签页
-nnoremap <Leader>3 3gt                           " 切换到第 3 个标签页
-nnoremap <Leader>4 4gt                           " 切换到第 4 个标签页
-nnoremap <Leader>5 5gt                           " 切换到第 5 个标签页
-nnoremap <Leader>6 6gt                           " 切换到第 6 个标签页
-nnoremap <Leader>7 7gt                           " 切换到第 7 个标签页
-nnoremap <Leader>8 8gt                           " 切换到第 8 个标签页
-nnoremap <Leader>9 9gt                           " 切换到第 9 个标签页
-nnoremap <Leader>0 :tablast<CR>                  " 切换到最后一个标签页
+nnoremap <Tab>1 1gt                              " 切换到第 1 个标签页
+nnoremap <Tab>2 2gt                              " 切换到第 2 个标签页
+nnoremap <Tab>3 3gt                              " 切换到第 3 个标签页
+nnoremap <Tab>4 4gt                              " 切换到第 4 个标签页
+nnoremap <Tab>5 5gt                              " 切换到第 5 个标签页
+nnoremap <Tab>6 6gt                              " 切换到第 6 个标签页
+nnoremap <Tab>7 7gt                              " 切换到第 7 个标签页
+nnoremap <Tab>8 8gt                              " 切换到第 8 个标签页
+nnoremap <Tab>9 9gt                              " 切换到第 9 个标签页
+nnoremap <Tab>0 :tablast<CR>                     " 切换到最后一个标签页
 nnoremap <C-Insert> :tabnew<CR>                  " 新建标签页
 nnoremap <C-Delete> :tabclose<CR>                " 关闭当前的标签页
 nnoremap <silent><Tab>s :tabs<CR>                " 查看所有打开的标签页
@@ -311,7 +343,11 @@ nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<CR>   " open windows command promp
 nnoremap <Leader>ce :!start explorer %:p:h:8<CR>    " open explorer in the current file's directory
 nnoremap <Space> za                                 " Space 空格键切换折叠
 nnoremap <Shift-Enter> o<Esc>k                      " 普通模式下 Shift + Enter 键插入空行
+" }}}
 
+
+
+" Complicated Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 常见操作全文档命令映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -326,8 +362,8 @@ nnoremap <Leader>rm :%s/<c-v><c-m>//g<CR>
 vnoremap <Leader>rm <Esc>:%s/<c-v><c-m>//g<CR>
 " 一键替换全部 Tab 为空格(\rt)
 nnoremap <Leader>rt <Esc>:retab<CR>
-" 一键清理当前代码文件(\d)
-nnoremap <Leader>d <Esc>ggVGd
+" 移动光标至单词，输入 <Leader>"，Vim 将那个单词用双引号包围
+nnoremap <Leader>" viw<esc>a"<esc>hbi"<esc>lel
 
 " 当前行高亮（请参阅 :h cursorline）功能，该设置会让效果出现在当前窗口，但在插入模式中关闭这个效果
 autocmd InsertLeave,WinEnter * set cursorline
@@ -336,7 +372,7 @@ autocmd InsertEnter,WinLeave * set nocursorline
 " Vim 重新打开文件时，回到上次历史所编辑文件的位置
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 " 设置在状态行显示的信息
-" set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
+set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 其他映射
@@ -352,7 +388,11 @@ nnoremap <Leader>e <Esc>:edit $MYVIMRC<CR>       " 当前窗口编辑配置文�
 nnoremap <Leader>ev :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
 nnoremap <Leader>sv :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，source 可缩写为 so
 autocmd BufWritePost $MYVIMRC source $MYVIMRC    " 让 vimrc 配置变更立即生效
+" }}}
 
+
+
+" Vim Plugins Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件 vim-plug 按键映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -400,7 +440,11 @@ nnoremap <Leader>u :UndotreeToggle<CR>
 " nnoremap <silent> <Leader>b :Leaderf buffer<CR>     " Buffer
 " nnoremap <silent> <Leader>F :Leaderf function<CR>   " 函数搜索（仅当前文件里）
 " nnoremap <silent> <Leader>rg :Leaderf rg<CR>        " 模糊搜索，很强大的功能，迅速秒搜
+" }}}
 
+
+
+" Vim Plugin {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件列表
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -440,6 +484,90 @@ Plug 'easymotion/vim-easymotion'         " 快速定位
 
 " Initialize plugin system
 call plug#end()
+" }}}
+
+
+
+" Custom Functions {{{
+" ===============================================================================
+" 以下配置为 自定义函数 模块                                                      =
+" ===============================================================================
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GVim 启动时窗口自动居中
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function WindowCenterInScreen()
+    set lines=9999 columns=9999
+  " 系统窗口边框的大小, 像素为单位
+    let g:windowsSizeFixX = 58
+    let g:windowsSizeFixY = 118
+  " 单个字符的平均宽高, 像素为单位
+    let g:windowsScaleX = 7.75
+    let g:windowsScaleY = 17.0
+    let g:windowsPosOldX = getwinposx()
+    let g:windowsPosOldY = getwinposy()
+    let g:windowsScreenWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsPosOldX + g:windowsSizeFixX
+    let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsPosOldY + g:windowsSizeFixY
+    " 设置窗口显示的行数和列数
+    set lines=45 columns=148
+    let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
+    let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
+    let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
+    let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
+    exec ':winpos ' . g:windowsPosX . ' ' . g:windowsPosY
+endfunc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 新建 .sh，.java 结尾的文件，自动插入文件头
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+func SetTitle()                          " 定义函数 SetTitle，自动插入文件头
+  " 如果文件类型为 .sh 文件
+  if &filetype == 'sh'
+    call setline(1, "\#!/usr/bin/env bash")
+    call append(line("."),   "")
+    call append(line(".")+1, "\#########################################################################")
+    call append(line(".")+2, "\# File Name: ".expand("%"))
+    call append(line(".")+3, "\# Author: chloneda <chloneda@163.com>")
+    call append(line(".")+4, "\# Created Time: ".strftime("%c"))
+    call append(line(".")+5, "\#########################################################################")
+    call append(line(".")+6, "")
+  endif
+  if &filetype == 'java'
+    call append(line(".")+6,"public class ".expand("%:r"))
+    call append(line(".")+7,"")
+  endif
+  " 新建文件后，自动定位到文件末尾
+  autocmd BufNewFile * normal G
+endfunc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 重新定义宏
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" A. 常规使用宏的流程：
+"   1. qm 进入宏录制
+"   2. 录制宏内容
+"   3. q 退出宏录制
+"   4. @m 使用字母指定的宏
+"   5. @@ 重复最近使用过宏
+"
+" B. 重新定义宏的流程：
+"   1. XXXXXX
+" -------------------------------------------------------------------------------
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 插件 NERDTree-git 自定义配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 根据后缀名指定文件类型
@@ -479,10 +607,14 @@ func SetFileType()
     " 输出提示信息
     :echo ""
 endfunc
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 跨平台 全局自定义函数 统一调用入口
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" Global Functions {{{
+" ===============================================================================
+" 跨平台 全局自定义函数 统一调用入口                                              =
+" ===============================================================================
 if 1    " Global function
     " 新建 .sh，.java 结尾的文件，自动插入文件头
     autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
@@ -492,115 +624,54 @@ if 1    " Global function
 
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 判断操作系统是否是 Windows 还是 Linux，并执行自定义函数入口
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:iswindows = 0
-let g:islinux = 0
+" ===============================================================================
+" 判断操作系统是否是 Windows 还是 Linux，并执行自定义函数入口                      =
+" ===============================================================================
+let g:iswindows = 0             " 标识 Windows 系统变量
+let g:islinux = 0               " 标识 Linux 系统变量
+
+" 若操作系统是 Windows 系统，设置该系统的 Vim 配置，并执行特有的自定义函数
 if(has("win32") || has("win64") || has("win95") || has("win16"))
     let g:iswindows = 1
+
+    " 若 GVim 程序存在且运行，执行自定义函数
+    if has("gui_running")
+        let g:isGUI = 1
+
+        " 设置 Vim 字体，字体名称和尺寸是以冒号（:）分隔的；字体尺寸以字母 h 为前缀
+        set guifont=fixedsys:h14,Consolas:h11,Courier_New:h11:cGB2312:qDRAFT
+        color desert                    " 配置 GVim 自定义配色主题；:h colo[rscheme]
+        set guitablabel=%N%t%M          " 标签页显示 Number+文件名和+符号，不显示完整路径+文件名，方便切换标签页
+        set helplang=cn                 " 帮助系统设置为中文
+        set langmenu=zh_CN.UTF-8        " 显示中文菜单语言
+        language messages zh_CN.utf-8   " 设置提示信息为中文，解决 consle 输出乱码
+        source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单
+        source $VIMRUNTIME/menu.vim     " 导入正常的菜单脚本
+
+        " GVim 启动时窗口自动居中
+        au GUIEnter * call WindowCenterInScreen()
+
+    else
+        " This is console Vim.
+        let g:isGUI = 0
+        set guifont=MiscFixed\ Semi-Condensed\ 10   " 设置 Vim 字体
+
+    endif
 else
+    " 若操作系统是 Linux 系统，设置该系统的 Vim 配置，并执行特有的自定义函数
     let g:islinux = 1
+
+    set nocompatible                " 必须先设定的选项，关闭兼容 vi 模式，使用 Vim 自身的
+    set shell=/bin/bash             " Vim 需要一个符合 Posix 的 Shell
+    set go=                         " 不要图形按钮
+    set langmenu=en_US.UTF-8        " 显示英文菜单语言
+    language messages en_US.UTF-8   " 设置提示信息为英文
+
 endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 判断是终端还是 GVim，并执行自定义函数入口
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("gui_running")
-    let g:isGUI = 1
-
-    " GVim 启动时窗口自动居中
-    au GUIEnter * call WindowCenterInScreen()
-else
-    let g:isGUI = 0
-endif
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GVim 启动时窗口自动居中
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function WindowCenterInScreen()
-    set lines=9999 columns=9999
-  " 系统窗口边框的大小, 像素为单位
-    let g:windowsSizeFixX = 58
-    let g:windowsSizeFixY = 118
-  " 单个字符的平均宽高, 像素为单位
-    let g:windowsScaleX = 7.75
-    let g:windowsScaleY = 17.0
-    let g:windowsPosOldX = getwinposx()
-    let g:windowsPosOldY = getwinposy()
-    let g:windowsScreenWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsPosOldX + g:windowsSizeFixX
-    let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsPosOldY + g:windowsSizeFixY
-    " 设置窗口显示的行数和列数
-    set lines=45 columns=148
-    let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
-    let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
-    let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
-    let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
-    exec ':winpos ' . g:windowsPosX . ' ' . g:windowsPosY
-endfunc
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 新建 .sh，.java 结尾的文件，自动插入文件头
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-func SetTitle()                          " 定义函数 SetTitle，自动插入文件头
-  " 如果文件类型为 .sh 文件
-  if &filetype == 'sh'
-    call setline(1, "\#!/usr/bin/env bash")
-    call append(line("."),   "")
-    call append(line(".")+1, "\#########################################################################")
-    call append(line(".")+2, "\# File Name: ".expand("%"))
-    call append(line(".")+3, "\# Author: chloneda <chloneda@163.com>")
-    call append(line(".")+4, "\# Created Time: ".strftime("%c"))
-    call append(line(".")+5, "\#########################################################################")
-    call append(line(".")+6, "")
-  endif
-  if &filetype == 'java'
-    call append(line(".")+6,"public class ".expand("%:r"))
-    call append(line(".")+7,"")
-  endif
-  " 新建文件后，自动定位到文件末尾
-  autocmd BufNewFile * normal G
-endfunc
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 重新定义宏
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" A. 常规使用宏的流程：
-"   1. qm 进入宏录制
-"   2. 录制宏内容
-"   3. q 退出宏录制
-"   4. @m 使用字母指定的宏
-"   5. @@ 重复最近使用过宏
-"
-" B. 重新定义宏的流程：
-"   1. XXXXXX
-" -------------------------------------------------------------------------------
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 插件 NERDTree-git 自定义配置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
-    \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " End
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
 
 

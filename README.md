@@ -1110,12 +1110,13 @@ z=                  # 拼写建议
 ## 代码折叠
 
 ```bash
+:h[elp] z           # 查看 折叠 帮助文档
 zf{motion}          # 手动定义一个折叠（f:fold）
 :{range}fold        # 将范围 {range} 包括的行定义为一个折叠
 z=                  # 给出拼写建议
 zf                  # 创建代码折叠
 zF                  # 指定行数 N 创建折叠
-za                  # 切换折叠
+za                  # 打开或关闭当前折叠
 zA                  # 递归切换折叠，即递归打开一个关闭的折叠或关闭一个打开的折叠
 zi                  # 切换折叠，切换 foldenable（i: invert）
 zc                  # 关闭光标下的一个折叠（c: close）
@@ -1505,6 +1506,50 @@ Ex 模式             # 按 Q 字母键进入 Ex 模式，与命令行模式类�
 :tmenu {mpath} {text}        # 为菜单 mpath 加入工具提示
 :unmenu {mpath}              # 删除菜单 mpath
 ```
+
+
+## 自动命令
+
+> 自动命令，是在指定事件发生时自动执行的命令。利用自动命令可以将重复的手工操作自动化，以提高编辑效率并减少人为操作的差错。
+
+自动命令语法格式。
+
+```bash
+:au[tocmd] [group] {event} {aupat} [++once] [++nested] {command}
+```
+
+参数说明：
+
+- group：组名是可选项，用于分组管理多条自动命令。
+- event：[事件参数](resources/vim-events-type.jpg)，用于指明触发命令的一个或多个事件。
+- pattern：限定针对符合匹配模式的文件执行命令。
+- nested：嵌套标记是可选项，用于允许嵌套自动命令。
+- command：指明需要执行的命令、函数或脚本。
+
+```bash
+:au[tocmd]                   # 查看所有自动命令，既包括 vimrc 文件中自定义的自动命令，也包括了各种插件定义的自动命令
+:au[tocmd]!                  # 删除所有自动命令；此操作也将删除插件所定义的自动命令，请谨慎操作
+:help autocommand-events     # 查看 自动命令事件 帮助文档
+:help autocmd-patterns       # 查看匹配模式帮助文档
+```
+
+自动命令组
+
+```bash
+:h[elp] aug[roup]            # 查看自动命令组的帮助文档
+```
+
+> 通过 :augroup 命令，可以将多个相关联的自动命令分组管理，以便于按组来查看或删除自动命令。例如以下命令，将 C 语言开发的相关自动命令，组织在 “cprogram” 组内。详情亦见 **[vimrc 配置文件](./vimrc)** 中的自动代码折叠。
+
+```bash
+:augroup cprograms
+:    autocmd!
+:    autocmd FileReadPost *.c :set cindent
+:    autocmd FileReadPost *.cpp :set cindent
+:augroup END
+```
+
+如果我们针对同样的文件和同样的事件定义了多条自动命令，那么当满足触发条件时将分别执行多条自动命令。因此，建议在自动命令组的开头增加 :autocmd! 命令，以确保没有重复的自动命令存在。
 
 
 
