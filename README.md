@@ -801,7 +801,7 @@ vim -x {file}             # 以加密方式打开文件
 vim -p {files}            # 打开多个文件，每个文件占用一个标签页
 vim -o {files}            # 在水平分割的多个窗口中编辑多个文件
 vim -O {files}            # 在垂直分割的多个窗口中编辑多个文件
-vim -c cmd {file}         # 在打开文件 file 前，先执行指定命令 cmd
+vim -c cmd {file}         # 在打开文件 file 前，先执行指定命令 cmd；vim file.txt -c "e ++enc=UTF-8"：以指定的编码打开 file.txt 文件
 vim +{cmd} {file}         # 在打开文件 file 后，再执行命令 cmd
 vim +/string {file}       # 打开文件 file，并将光标停留在第一个匹配的 string 上
 vim -d {file1} {file2}    # 同时打开 file1 和 file2 文件并 diff 两个文件的差异
@@ -1431,6 +1431,7 @@ set nopaste         # 关闭粘贴模式
 set spell           # 允许拼写检查
 set hlsearch        # 开启高亮查找
 set nohlsearch      # 关闭高亮查找
+set termguicolors   # Vim 开启真彩色
 set ruler           # 总是显示光标位置
 set nocompatible    # 设置不兼容原始 vi 模式，该设置必须在最开头
 set incsearch       # 查找输入时动态增量显示查找结果
@@ -1454,58 +1455,9 @@ nnoremap gl $       # 普通模式下按 gl 键进行行尾跳转，代替数字
 
 ## 常用插件
 
-**[vim-commentary](https://github.com/tpope/vim-commentary)** 插件是批量注释工具，可以注释多行和去除多行注释。
-
-```bash
-gcc                 # 注释当前行
-gc{motion}          # 注释 {motion} 所标注的区域，例如 gcap 注释整段
-gci{                # 注释大括号内的内容
-gc                  # 在 Visual Mode 下面按 gc 注释选中区域
-:7,17Commentary     # 注释 7 到 17 行
-```
-
-
-
-**[NERDTree](https://github.com/preservim/nerdtree)** 插件用于列出当前路径的目录树。
-
-```bash
-?                   # 快速查看 NERDTree 插件的帮助文档
-o                   # 打开一个目录或者打开文件，创建的是 Buffer，也可以用来打开书签
-go                  # 打开一个文件，但是光标仍然留在 NERDTree，创建的是 buffer
-t                   # 打开一个文件，创建的是 Tab，对书签同样生效
-T                   # 打开一个文件，但是光标仍然留在 NERDTree，创建的是 Tab，对书签同样生效
-i                   # 水平分割创建文件的窗口，创建的是 buffer
-gi                  # 水平分割创建文件的窗口，但是光标仍然留在 NERDTree
-s                   # 垂直分割创建文件的窗口，创建的是 buffer
-gs                  # 和 gi，go 类似
-x                   # 收起当前打开的目录
-X                   # 收起所有打开的目录
-e                   # 以文件管理的方式打开选中的目录
-D                   # 删除书签
-P                   # 大写，跳转到当前根路径
-p                   # 小写，跳转到光标所在的上一级路径
-K                   # 跳转到第一个子路径
-J                   # 跳转到最后一个子路径
-C                   # 将根路径设置为光标所在的目录
-u                   # 设置上级目录为根路径
-U                   # 设置上级目录为跟路径，但是维持原来目录打开的状态
-r                   # 刷新光标所在的目录
-R                   # 刷新当前根路径
-I                   # 显示或者不显示隐藏文件
-f                   # 打开和关闭文件过滤器
-q                   # 关闭 NERDTree
-A                   # 全屏显示 NERDTree，或者关闭全屏
-Ctrl+j Ctrl+k       # 在同级目录和文件间移动，忽略子目录和子文件
-```
-
-
-
-**[asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)** 插件使用 Vim 8、NeoVim 的异步机制，让你在后台运行 Shell 命令，并将结果实时显示到 Vim 的 Quickfix 窗口中。
-
-```bash
-:AsyncRun ls        # 异步运行命令 ls 结果输出到 Quickfix 窗口使用 :copen 查看
-:AsyncRun -raw ls   # 异步运行命令 ls 结果不匹配 errorformat
-```
+- [vim-commentary](https://github.com/tpope/vim-commentary)：批量注释工具，可以注释多行和去除多行注释。
+- [NERDTree](https://github.com/preservim/nerdtree)：插件用于列出当前路径的目录树。
+- [asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)：插件使用 Vim 8、NeoVim 的异步机制，让你在后台运行 Shell 命令，并将结果实时显示到 Vim 的 Quickfix 窗口中。
 
 
 
@@ -1593,15 +1545,26 @@ Ex 模式             # 按 Q 字母键进入 Ex 模式，与命令行模式类�
 :set fileencoding=UTF-8      # 当前编辑的文件字符编码修改
 :set fileencodings           # 查看 Vim 自动探测 fileencoding 的顺序列表          
 :set fileencodings=UTF-8     # 修改 Vim 自动探测 fileencoding 的顺序列表
+:h[elp] mbyte-options        # 查看 文件编码 帮助文档
+
 ```
 
 文件编码说明。
 
-- encoding: Vim 内部使用的字符编码方式，包括 Vim 的缓冲区、菜单文本、消息文本等。
-- fileencoding: Vim 中当前编辑的文件的字符编码方式，Vim 保存文件时也会将文件保存为这种字符编码方式。
-- fileencodings: Vim 自动探测 fileencoding 的顺序列表，启动时会按照它所列出的字符编码方式逐一探测即将打开的文件的字符编码方式，并且将 fileencoding 设置为最终探测到的字符编码方式。因此最好将 Unicode 编码方式放到这个列表的最前面，将拉丁语系编码方式 latin1 放到最后面。
-- termencoding: Vim 所工作的终端字符编码方式。如果在终端环境下使用 Vim，需要设置 termencoding 和终端所使用的编码一致。
+- encoding（缩写：enc）: Vim 内部使用的字符编码方式，包括 Vim 的缓冲区、菜单文本、消息文本等。这个值一般用户不要设置，另外打开 Vim 之后再设置这个值也是没有意义的。大家可以将这个值看作是 Vim 程序自己的变量，如果在工作中遇到文件的编码问题，和 encoding 这个变量是万万没有关系的。
+- fileencoding（缩写：fenc）: Vim 中当前编辑的文件的字符编码方式，Vim 保存文件时也会将文件保存为这种字符编码方式。
+- fileencodings（缩写：fencs）: Vim 自动探测 fileencodings 的顺序列表，启动时会按照它所列出的字符编码方式 从前到后，逐一探测 即将打开的文件的字符编码方式，并且将 fileencoding 设置为最终探测到的字符编码方式。因此最好将 Unicode 编码方式放到这个列表的最前面，将拉丁语系编码方式 latin1 放到最后面。
+- termencoding（缩写：tenc）: Vim 所工作的终端字符编码方式。如果在终端环境下使用 Vim，需要设置 termencoding 和终端所使用的编码一致。
 
+文件编码种类。
+
+- ucs-bom：非常严格的编码，非该编码的文件几乎没有可能被误判为 ucs-bom，因此一般放在第一位。
+- utf-8：相当严格的编码，除了很短的文件之外也是几乎不可能被误判的，因此一般放在第二位。
+- chinese：相对宽松的编码，在 Unix 里表示 GB2312，在 Windows 里表示 cp936，也就是 GBK 的别名。
+- cp936：相对宽松的编码，cp936 是 GBK 的别名，是 GB2312 的超集，可以支持繁体汉字，也避免出现删除半个汉字的情况。
+- latin1：最为宽松的编码，则放在列表的最后。
+
+> 如果编码被误判了，解码后的结果就会显示为无法识别的乱码了。此时，如果你知道这个文件的正确编码，可以把 fileencodings 改成只有这一种编码，阻止任何 fall-back 发生，然后重新打开这个文件。
 
 
 ## 帮助信息
@@ -1752,7 +1715,7 @@ Ctrl+{char}         # 作为控制字符输入的 {char}；即按住 Ctrl 键再
 - 某些终端中使用 NeoVim 如看到奇怪字符，使用 :set guicursor= 解决。
 - 多使用 ciw, ci[, ci", ci( 以及 diw, di[, di", di( 命令来快速改写/删除文本。
 - 在行内左右移动光标时，多使用 w b e 或 W B E，而不是 h l 或方向键，这样会快很多。
-- <Shift> 上档键相当于移动加速键， w b e 移动光标很慢，但是 W B E 走的很快。
+- Shift 上档键相当于移动加速键， w b e 移动光标很慢，但是 W B E 走的很快。
 - 自己要善于总结新技巧，例如移动到行首非空字符时用 0w 命令比 ^ 命令更容易输入。
 - 在空白行使用 dip 命令可以删除所有临近的空白行，viw 可以选择连续空白。
 - 缩进时使用 >8j >} <ap >ap =i} == 会方便很多；文档以 常规、6、9 个空格间隔缩进。

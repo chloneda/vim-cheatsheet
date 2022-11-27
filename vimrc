@@ -78,7 +78,6 @@ set showcmd                     " 输入的命令显示出来
 set hlsearch                    " 高亮搜索的字符串
 set incsearch                   " 即时搜索
 set wrap                        " 设置代码自动折行
-set fileformat=unix             " 设置以 UNIX 的格式保存文件
 set cindent                     " 设置 C 样式的缩进格式
 set tabstop=4                   " Tab 显示多少个空格，默认 8
 set softtabstop=4               " 统一缩进为 4
@@ -101,19 +100,22 @@ set guitablabel=%N%t%M          " 标签页显示 Number+文件名和+符号，�
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 编码方式及菜单设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set encoding=utf-8              " Vim 内部 buffer (缓冲区)、菜单文本等使用的编码方式
+set encoding=utf-8              " Vim 内部 buffer (缓冲区)、菜单文本等使用的编码方式，以下统一使用 UTF-8, 减少编码问题
 set termencoding=utf-8          " Vim 所工作的终端的字符编码方式
+set fileformats=unix,dos,mac    " Vim 自动识别文件格式，缩写：se ff；回车键编码不同：dos 是回车加换行，unix 只有换行符，mac 只有回车符
+set fileformat=unix             " 设置以 UNIX 的格式保存文件，尽量通用
 set fileencoding=utf-8          " 当前编辑文件的字符编码方式，保存文件也使用这种编码方式
-set fileencodings=uft-8,gbk,gb2312,gb18030     " Vim 启动时逐一按顺序使用第一个匹配到的编码方式打开文件
-set fileformats=unix,dos,mac    " Vim 自动识别文件格式，回车键编码不同：dos 是回车加换行，unix 只有换行符，mac 只有回车符
+" Vim 启动时逐一按顺序使用第一个匹配到的编码方式打开文件；chinese 是别名，在 Unix 里表示 GB2312，在 Windows 里表示 cp936；cp936 是 GBK 的别名，是 GB2312 的超集，可以支持繁体汉字，也避免删除半个汉字
+set fileencodings=uft-8,chinese,cp936,gbk,gb2312,big5
+
 set formatoptions+=m            " 表示自动排版完成的方式。m 表示在任何值高于 255 的多字节字符上分行
 set formatoptions+=B            " B 表示在连接行时，不要在两个多字节字符之间插入空格
 set helplang=cn                 " 帮助系统设置为中文
 "set langmenu=zh_CN.UTF-8       " 显示中文菜单语言
 set langmenu=en_US.UTF-8        " 显示英文菜单语言
-"language messages zh_CN.utf-8  " 设置提示信息为中文
+"language messages zh_CN.utf-8  " 设置提示信息为中文，解决 consle 输出乱码
 language messages en_US.UTF-8   " 设置提示信息为英文
-source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单
+source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单。注意：该两行代码，千万不能放到配置文件的上面
 source $VIMRUNTIME/menu.vim     " 导入正常的菜单脚本
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -150,6 +152,7 @@ set iskeyword+=_,$,@,%,#,-      " 带有如下符号的单词不要被换行分�
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 按键映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 使用 :h[elp] map-modes 查看映射适用的模式，配置自定义的需求
 " 尽量使用 nnoremap 代替 nmap，比如 :map 递归映射，可以映射的模式：normal, visual, operator-pending
 " nmap j k                      " nmap 是递归映射，会出现不可预期的问题
 " nmap k G                      " 当按下 j 键时，实际上执行的是 G 键
@@ -221,23 +224,23 @@ nnoremap ][  ][zz               " 跳转到下一个第一列的 } 并居中显�
 nnoremap <C-e> 3<C-e>           " 向上滚动 3 行
 nnoremap <C-y> 3<C-y>           " 向下滚动 3 行
 
-" 戒掉使用方向键的习惯，善用 h j k l 移动光标
-nnoremap <Up> <Nop>             " 普通模式下，禁用向上方向键
-nnoremap <Down> <Nop>           " 普通模式下，禁用向下方向键
-nnoremap <Left> <Nop>           " 普通模式下，禁用向左方向键
-nnoremap <Right> <Nop>          " 普通模式下，禁用向右方向键
+" 戒掉使用方向键的习惯，善用 h j k l 移动光标；重置方向键映射 的后面不加注释，引发粘贴字符错误
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
 
 " 插入模式禁用方向键，解决办法呢？ 1、退出插入模式使用 h j k l； 2、重新映射方向键，如下
-inoremap <Up> <Nop>             " 插入模式下，禁用向上方向键
-inoremap <Down> <Nop>           " 插入模式下，禁用向下方向键
-inoremap <Left> <Nop>           " 插入模式下，禁用向左方向键
-inoremap <Right> <Nop>          " 插入模式下，禁用向右方向键
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
 
-" 重置插入模式中的 上下左右 按键映射
-inoremap <C-h> <Left>           " 插入模式下，Ctrl + h 组合键 映射为向左方向键
-inoremap <C-j> <Down>           " 插入模式下，Ctrl + j 组合键 映射为向下方向键
-inoremap <C-k> <Up>             " 插入模式下，Ctrl + k 组合键 映射为向上方向键
-inoremap <C-l> <Right>          " 插入模式下，Ctrl + l 组合键 映射为向右方向键
+" 插入模式 上下左右 方向键按键重新映射，采用 Ctrl + hjkl 组合键
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
 
 nnoremap U <C-r>                   " 取消撤销操作，减少按键操作
 nnoremap <F1> :nohls<CR>           " 取消 Vim 查找高亮显示
@@ -296,7 +299,7 @@ nnoremap :g/ :g/\v
 :command Wq wq
 " :W 以超级用户权限保存文件
 command W w !sudo tee % > /dev/null
-:command Q q
+" :command Q q
 :command Qa qa
 :command QA qa                     " 快速退出 Vim，避免大写转换小写
 nnoremap <Leader>q :q!<CR>         " Quickly close the current window
@@ -326,12 +329,18 @@ nnoremap <Leader>rt <Esc>:retab<CR>
 " 一键清理当前代码文件(\d)
 nnoremap <Leader>d <Esc>ggVGd
 
+" 当前行高亮（请参阅 :h cursorline）功能，该设置会让效果出现在当前窗口，但在插入模式中关闭这个效果
+autocmd InsertLeave,WinEnter * set cursorline
+autocmd InsertEnter,WinLeave * set nocursorline
+
+" Vim 重新打开文件时，回到上次历史所编辑文件的位置
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+" 设置在状态行显示的信息
+" set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 常用宏映射
+" 其他映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
 " unmap <F10>                      " 取消一个映射
 " mapclear                         " 对应取消所有 :map 绑定的，慎用
 
@@ -433,6 +442,149 @@ Plug 'easymotion/vim-easymotion'         " 快速定位
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 根据后缀名指定文件类型
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+func SetFileType()
+    " autocmd BufNewFile,BufReadPost *.md set filetype=markdown                         " 自动识别 Markdown 文件
+    au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown   " 自动识别 Markdown 文件
+    au BufRead,BufNewFile *.{go}   set filetype=go
+    au BufRead,BufNewFile *.{js}   set filetype=javascript
+
+    au BufRead,BufNewFile *.h        set ft=c
+    au BufRead,BufNewFile *.i        set ft=c
+    au BufRead,BufNewFile *.m        set ft=objc
+    au BufRead,BufNewFile *.di       set ft=d
+    au BufRead,BufNewFile *.ss       set ft=scheme
+    au BufRead,BufNewFile *.cl       set ft=lisp
+    au BufRead,BufNewFile *.phpt     set ft=php
+    au BufRead,BufNewFile *.inc      set ft=php
+    au BufRead,BufNewFile *.cson     set ft=coffee
+
+    au BufRead,BufNewFile *.sql      set ft=mysql
+    au BufRead,BufNewFile *.tpl      set ft=smarty
+    au BufRead,BufNewFile *.txt      set ft=txt
+    au BufRead,BufNewFile *.log      set ft=conf
+    au BufRead,BufNewFile hosts      set ft=conf
+    au BufRead,BufNewFile *.conf     set ft=dosini
+    au BufRead,BufNewFile http*.conf set ft=apache
+    au BufRead,BufNewFile *.ini      set ft=dosini
+
+    au BufRead,BufNewFile */nginx/*.conf        set ft=nginx
+    au BufRead,BufNewFile */nginx/**/*.conf     set ft=nginx
+    au BufRead,BufNewFile */openresty/*.conf    set ft=nginx
+    au BufRead,BufNewFile */openresty/**/*.conf set ft=nginx
+    au BufRead,BufNewFile *.yml.bak      set ft=yaml
+    au BufRead,BufNewFile *.yml.default  set ft=yaml
+    au BufRead,BufNewFile *.yml.example  set ft=yaml
+    " 输出提示信息
+    :echo ""
+endfunc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 跨平台 全局自定义函数 统一调用入口
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if 1    " Global function
+    " 新建 .sh，.java 结尾的文件，自动插入文件头
+    autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
+
+    " 调用 根据后缀名指定文件类型 函数，过程调用
+    :call  SetFileType()
+
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 判断操作系统是否是 Windows 还是 Linux，并执行自定义函数入口
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:iswindows = 0
+let g:islinux = 0
+if(has("win32") || has("win64") || has("win95") || has("win16"))
+    let g:iswindows = 1
+else
+    let g:islinux = 1
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 判断是终端还是 GVim，并执行自定义函数入口
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("gui_running")
+    let g:isGUI = 1
+
+    " GVim 启动时窗口自动居中
+    au GUIEnter * call WindowCenterInScreen()
+else
+    let g:isGUI = 0
+endif
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GVim 启动时窗口自动居中
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function WindowCenterInScreen()
+    set lines=9999 columns=9999
+  " 系统窗口边框的大小, 像素为单位
+    let g:windowsSizeFixX = 58
+    let g:windowsSizeFixY = 118
+  " 单个字符的平均宽高, 像素为单位
+    let g:windowsScaleX = 7.75
+    let g:windowsScaleY = 17.0
+    let g:windowsPosOldX = getwinposx()
+    let g:windowsPosOldY = getwinposy()
+    let g:windowsScreenWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsPosOldX + g:windowsSizeFixX
+    let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsPosOldY + g:windowsSizeFixY
+    " 设置窗口显示的行数和列数
+    set lines=45 columns=148
+    let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
+    let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
+    let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
+    let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
+    exec ':winpos ' . g:windowsPosX . ' ' . g:windowsPosY
+endfunc
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 新建 .sh，.java 结尾的文件，自动插入文件头
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+func SetTitle()                          " 定义函数 SetTitle，自动插入文件头
+  " 如果文件类型为 .sh 文件
+  if &filetype == 'sh'
+    call setline(1, "\#!/usr/bin/env bash")
+    call append(line("."),   "")
+    call append(line(".")+1, "\#########################################################################")
+    call append(line(".")+2, "\# File Name: ".expand("%"))
+    call append(line(".")+3, "\# Author: chloneda <chloneda@163.com>")
+    call append(line(".")+4, "\# Created Time: ".strftime("%c"))
+    call append(line(".")+5, "\#########################################################################")
+    call append(line(".")+6, "")
+  endif
+  if &filetype == 'java'
+    call append(line(".")+6,"public class ".expand("%:r"))
+    call append(line(".")+7,"")
+  endif
+  " 新建文件后，自动定位到文件末尾
+  autocmd BufNewFile * normal G
+endfunc
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 重新定义宏
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" A. 常规使用宏的流程：
+"   1. qm 进入宏录制
+"   2. 录制宏内容
+"   3. q 退出宏录制
+"   4. @m 使用字母指定的宏
+"   5. @@ 重复最近使用过宏
+"
+" B. 重新定义宏的流程：
+"   1. XXXXXX
+" -------------------------------------------------------------------------------
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件 NERDTree-git 自定义配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeGitStatusIndicatorMapCustom = {
@@ -446,74 +598,6 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Clean"     : "✔︎",
     \ "Unknown"   : "?"
     \ }
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 根据后缀名指定文件类型
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" autocmd BufNewFile,BufReadPost *.md set filetype=markdown                         " 自动识别 Markdown 文件
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown   " 自动识别 Markdown 文件
-au BufRead,BufNewFile *.{go}   set filetype=go
-au BufRead,BufNewFile *.{js}   set filetype=javascript
-
-au BufRead,BufNewFile *.h        set ft=c
-au BufRead,BufNewFile *.i        set ft=c
-au BufRead,BufNewFile *.m        set ft=objc
-au BufRead,BufNewFile *.di       set ft=d
-au BufRead,BufNewFile *.ss       set ft=scheme
-au BufRead,BufNewFile *.cl       set ft=lisp
-au BufRead,BufNewFile *.phpt     set ft=php
-au BufRead,BufNewFile *.inc      set ft=php
-au BufRead,BufNewFile *.cson     set ft=coffee
-
-au BufRead,BufNewFile *.sql      set ft=mysql
-au BufRead,BufNewFile *.tpl      set ft=smarty
-au BufRead,BufNewFile *.txt      set ft=txt
-au BufRead,BufNewFile *.log      set ft=conf
-au BufRead,BufNewFile hosts      set ft=conf
-au BufRead,BufNewFile *.conf     set ft=dosini
-au BufRead,BufNewFile http*.conf set ft=apache
-au BufRead,BufNewFile *.ini      set ft=dosini
-
-au BufRead,BufNewFile */nginx/*.conf        set ft=nginx
-au BufRead,BufNewFile */nginx/**/*.conf     set ft=nginx
-au BufRead,BufNewFile */openresty/*.conf    set ft=nginx
-au BufRead,BufNewFile */openresty/**/*.conf set ft=nginx
-au BufRead,BufNewFile *.yml.bak      set ft=yaml
-au BufRead,BufNewFile *.yml.default  set ft=yaml
-au BufRead,BufNewFile *.yml.example  set ft=yaml
-
-" 当前行高亮（请参阅 :h cursorline）功能，该设置会让效果出现在当前窗口，但在插入模式中关闭这个效果
-autocmd InsertLeave,WinEnter * set cursorline
-autocmd InsertEnter,WinLeave * set nocursorline
-
-" Vim 重新打开文件时，回到上次历史所编辑文件的位置
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-" 设置在状态行显示的信息
-" set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 自定义函数
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 新建 .sh，.java 文件，自动插入文件头
-autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
-func SetTitle()                          " 定义函数 SetTitle，自动插入文件头
-	" 如果文件类型为 .sh 文件
-	if &filetype == 'sh'
-		call setline(1,          "\#########################################################################")
-		call append(line("."),   "\# File Name: ".expand("%"))
-		call append(line(".")+1, "\# Author: chloneda <chloneda@gmail.com>")
-		call append(line(".")+2, "\# Created Time: ".strftime("%c"))
-		call append(line(".")+3, "\#########################################################################")
-		call append(line(".")+4, "\#!/usr/bin/env bash")
-		call append(line(".")+5, "")
-	endif
-	if &filetype == 'java'
-		call append(line(".")+6,"public class ".expand("%:r"))
-		call append(line(".")+7,"")
-	endif
-	" 新建文件后，自动定位到文件末尾
-	autocmd BufNewFile * normal G
-endfunc
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " End
