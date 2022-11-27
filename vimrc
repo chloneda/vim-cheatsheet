@@ -648,6 +648,8 @@ if(has("win32") || has("win64") || has("win95") || has("win16"))
         source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单
         source $VIMRUNTIME/menu.vim     " 导入正常的菜单脚本
 
+        " GVim 启动时最大化
+        "autocmd GUIEnter * simalt ~x
         " GVim 启动时窗口自动居中
         au GUIEnter * call WindowCenterInScreen()
 
@@ -655,6 +657,13 @@ if(has("win32") || has("win64") || has("win95") || has("win16"))
         " This is console Vim.
         let g:isGUI = 0
         set guifont=MiscFixed\ Semi-Condensed\ 10   " 设置 Vim 字体
+
+        if exists("+lines")
+            set lines=45
+        endif
+        if exists("+columns")
+            set columns=148
+        endif
 
     endif
 else
