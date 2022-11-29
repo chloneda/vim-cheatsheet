@@ -3,7 +3,7 @@
 " Repository: https://github.com/chloneda/vim-cheatsheet
 " Blog: https://www.cnblogs.com/chloneda
 " Create Date: 2020-02-01
-" Desc:  Vim 定制化配置文件
+" Desc:  Vim 定制化配置文件(vimrc for Unix/Linux/Windows/Mac, GUI/Console)
 " License: MIT
 " ===============================================================================
 "
@@ -22,8 +22,8 @@
 " | F5       | 删除所有空行
 " | F6       | 打开(或关闭) 语法高亮
 " | F7       | 自动补全代码
-" | F8       | 普通模式打开 md 预览
-" | F9       | 普通模式关闭 md 预览
+" | F8       | 普通或插入模式下打开或关闭 Markdown 预览
+" | F9       |
 " | F10      | 新建标签页
 " | F11      | 非空行后间隔（加入空行）
 " | F12      |
@@ -84,8 +84,7 @@ set tabpagemax=10               " 设置最大标签页上限为 10
 set cursorline                  " 突出显示当前行
 set cursorcolumn                " 突出显示当前列
 set shortmess=atI               " 启动的时候不显示那个援助乌干达儿童的提示
-set background=dark             " Theme 主题
-set t_Co=256                    " 指定配色方案是 256 色
+set background=dark             " 设置 Theme 主题
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 主要配置
@@ -125,7 +124,7 @@ set fileformats=unix,dos,mac    " Vim 自动识别文件格式，缩写：se ff�
 set fileformat=unix             " 设置以 UNIX 的格式保存文件，尽量通用
 set fileencoding=utf-8          " 当前编辑文件的字符编码方式，保存文件也使用这种编码方式
 " Vim 启动时逐一按顺序使用第一个匹配到的编码方式打开文件；chinese 是别名，在 Unix 里表示 GB2312，在 Windows 里表示 cp936；cp936 是 GBK 的别名，是 GB2312 的超集，可以支持繁体汉字，也避免删除半个汉字
-" set fileencodings=uft-8,chinese,cp936,gbk,gb2312,big5
+set fileencodings=ucs-bom,uft-8,default
 
 set formatoptions+=m            " 表示自动排版完成的方式。m 表示在任何值高于 255 的多字节字符上分行
 set formatoptions+=B            " B 表示在连接行时，不要在两个多字节字符之间插入空格
@@ -137,10 +136,7 @@ set formatoptions+=B            " B 表示在连接行时，不要在两个多�
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 其他配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype on                     " 检测文件类型
-filetype indent on              " 为特定文件类型载入相关缩进文件
-filetype plugin on              " 允许载入文件类型插件
-filetype plugin indent on       " Vim 对不同类型的文件进行补全时，设置不同文件类型的补全函数，需要打开文件类型检测
+filetype plugin indent on       " 设置多个 filetype 选项：允许载入文件类型插件；为特定文件类型载入相关缩进文件；打开文件类型检测
 set completeopt=longest,menu    " 打开预览窗口会导致下拉菜单抖动，一般都去掉预览窗口的显示
 set mouse=a                     " 启用鼠标
 set noeb                        " 去掉输入错误的提示声音
@@ -164,6 +160,7 @@ set splitright                  " 竖直 split 时，在右边开启
 set splitbelow                  " 水平 split 时，在下边开启
 set viminfo+=!                  " 保存全局变量
 set iskeyword+=_,$,@,%,#,-      " 带有如下符号的单词不要被换行分割
+set autochdir                   " 自动切换工作目录为当前文件所在的目录，修改或者添加文件的时候，特别有用
 " }}}
 
 
@@ -415,10 +412,12 @@ nnoremap <Leader><Leader>d :PlugDiff<CR>        " 查看插件的变化状态，
 nnoremap <Leader><Leader>c :PlugClean<CR>       " 删除插件
 
 " 预览插件 Markdown-preview 按键映射
-nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式打开 md 预览
-imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式打开 md 预览
-nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式关闭 md 预览
-imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭 md 预览
+" nmap <silent><F8> <Plug>MarkdownPreview       " 普通模式打开 Markdown 预览
+" imap <silent><F8> <Plug>MarkdownPreview       " 插入模式打开 Markdown 预览
+" nmap <silent><F9> <Plug>StopMarkdownPreview   " 普通模式关闭 Markdown 预览
+" imap <silent><F9> <Plug>StopMarkdownPreview   " 插入模式关闭 Markdown 预览
+nmap <silent><F8> <Plug>MarkdownPreviewTroggle  " 普通模式打开或关闭 Markdown 预览
+imap <silent><F8> <Plug>MarkdownPreviewTroggle  " 插入模式打开或关闭 Markdown 预览
 
 " 插件 NERDTree 按键映射，NERDTree激活后，善用 Shift + ? 快速调出帮助文档
 nnoremap <Leader>n :NERDTreeToggle<CR>          " 打开/关闭目录树
@@ -428,8 +427,8 @@ nnoremap <Leader>f :NERDTreeFind<CR>            " 打开目录树并定位到当
 
 let NERDTreeShowHidden=0                        " 是否显示隐藏文件 0/1
 let NERDTreeShowLineNumbers=1                   " 显示目录树行号
-"autocmd vimenter * NERDTree                    " 自动开启 Nerdtree
-"let g:NERDTreeWinSize = 25                     " 设定 NERDTree 视窗大小
+" autocmd vimenter * NERDTree                   " 自动开启 Nerdtree
+" let g:NERDTreeWinSize = 25                    " 设定 NERDTree 视窗大小
 let NERDTreeShowBookmarks=1                     " 开启 Nerdtree 时自动显示 Bookmarks
 " 隐藏指定文件和文件夹
 let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__'] 
@@ -659,6 +658,7 @@ if(has("win32") || has("win64") || has("win95") || has("win16"))
         set guioptions-=b               " 隐藏底部滚动条 (Bottom scrollbar)
         set helplang=cn                 " 帮助系统设置为中文
         set langmenu=zh_CN.UTF-8        " 显示中文菜单语言
+        set t_Co=256                    " 指定配色方案是 256 色
         language messages zh_CN.utf-8   " 设置提示信息为中文，解决 consle 输出乱码
         source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单
         source $VIMRUNTIME/menu.vim     " 导入正常的菜单脚本
