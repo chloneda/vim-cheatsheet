@@ -124,7 +124,7 @@ set fileformats=unix,dos,mac    " Vim 自动识别文件格式，缩写：se ff�
 set fileformat=unix             " 设置以 UNIX 的格式保存文件，尽量通用
 set fileencoding=utf-8          " 当前编辑文件的字符编码方式，保存文件也使用这种编码方式
 " Vim 启动时逐一按顺序使用第一个匹配到的编码方式打开文件；chinese 是别名，在 Unix 里表示 GB2312，在 Windows 里表示 cp936；cp936 是 GBK 的别名，是 GB2312 的超集，可以支持繁体汉字，也避免删除半个汉字
-set fileencodings=ucs-bom,uft-8,default
+" set fileencodings=ucs-bom,uft-8,default
 
 set formatoptions+=m            " 表示自动排版完成的方式。m 表示在任何值高于 255 的多字节字符上分行
 set formatoptions+=B            " B 表示在连接行时，不要在两个多字节字符之间插入空格
@@ -136,7 +136,8 @@ set formatoptions+=B            " B 表示在连接行时，不要在两个多�
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 其他配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin indent on       " 设置多个 filetype 选项：允许载入文件类型插件；为特定文件类型载入相关缩进文件；打开文件类型检测
+filetype on                     " 检测文件类型
+filetype plugin indent on       " 设置多个 filetype 选项：载入文件类型插件；为特定文件类型载入相关缩进文件
 set completeopt=longest,menu    " 打开预览窗口会导致下拉菜单抖动，一般都去掉预览窗口的显示
 set mouse=a                     " 启用鼠标
 set noeb                        " 去掉输入错误的提示声音
@@ -499,7 +500,7 @@ call plug#end()
 
 " 自定义函数 (Custom Functions) {{{
 " ===============================================================================
-" 以下配置为 自定义函数 模块                                                      =
+" 以下配置为 自定义函数 模块
 " ===============================================================================
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -524,12 +525,12 @@ function WindowCenterInScreen()
     let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
     let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
     exec ':winpos ' . g:windowsPosX . ' ' . g:windowsPosY
-endfunc
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 新建 .sh，.java 结尾的文件，自动插入文件头
+" 自定义 SetTitle 函数，自动插入指定文件头
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-func SetTitle()                          " 定义函数 SetTitle，自动插入文件头
+function SetTitle()
   " 如果文件类型为 .sh 文件
   if &filetype == 'sh'
     call setline(1, "\#!/usr/bin/env bash")
@@ -547,7 +548,7 @@ func SetTitle()                          " 定义函数 SetTitle，自动插入�
   endif
   " 新建文件后，自动定位到文件末尾
   autocmd BufNewFile * normal G
-endfunc
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 重新定义宏
@@ -582,37 +583,37 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 " 根据后缀名指定文件类型
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 func SetFileType()
-    " autocmd BufNewFile,BufReadPost *.md set filetype=markdown                         " 自动识别 Markdown 文件
-    au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown   " 自动识别 Markdown 文件
-    au BufRead,BufNewFile *.{go}   set filetype=go
-    au BufRead,BufNewFile *.{js}   set filetype=javascript
+    " 自动识别 Markdown 文件
+    autocmd BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}  set filetype=markdown
+    autocmd BufRead,BufNewFile *.{go}     set filetype=go
+    autocmd BufRead,BufNewFile *.{js}     set filetype=javascript
 
-    au BufRead,BufNewFile *.h        set ft=c
-    au BufRead,BufNewFile *.i        set ft=c
-    au BufRead,BufNewFile *.m        set ft=objc
-    au BufRead,BufNewFile *.di       set ft=d
-    au BufRead,BufNewFile *.ss       set ft=scheme
-    au BufRead,BufNewFile *.cl       set ft=lisp
-    au BufRead,BufNewFile *.phpt     set ft=php
-    au BufRead,BufNewFile *.inc      set ft=php
-    au BufRead,BufNewFile *.cson     set ft=coffee
+    autocmd BufRead,BufNewFile *.h        set ft=c
+    autocmd BufRead,BufNewFile *.i        set ft=c
+    autocmd BufRead,BufNewFile *.m        set ft=objc
+    autocmd BufRead,BufNewFile *.di       set ft=d
+    autocmd BufRead,BufNewFile *.ss       set ft=scheme
+    autocmd BufRead,BufNewFile *.cl       set ft=lisp
+    autocmd BufRead,BufNewFile *.phpt     set ft=php
+    autocmd BufRead,BufNewFile *.inc      set ft=php
+    autocmd BufRead,BufNewFile *.cson     set ft=coffee
 
-    au BufRead,BufNewFile *.sql      set ft=mysql
-    au BufRead,BufNewFile *.tpl      set ft=smarty
-    au BufRead,BufNewFile *.txt      set ft=txt
-    au BufRead,BufNewFile *.log      set ft=conf
-    au BufRead,BufNewFile hosts      set ft=conf
-    au BufRead,BufNewFile *.conf     set ft=dosini
-    au BufRead,BufNewFile http*.conf set ft=apache
-    au BufRead,BufNewFile *.ini      set ft=dosini
+    autocmd BufRead,BufNewFile *.sql      set ft=mysql
+    autocmd BufRead,BufNewFile *.tpl      set ft=smarty
+    autocmd BufRead,BufNewFile *.txt      set ft=txt
+    autocmd BufRead,BufNewFile *.log      set ft=conf
+    autocmd BufRead,BufNewFile hosts      set ft=conf
+    autocmd BufRead,BufNewFile *.conf     set ft=dosini
+    autocmd BufRead,BufNewFile http*.conf set ft=apache
+    autocmd BufRead,BufNewFile *.ini      set ft=dosini
 
-    au BufRead,BufNewFile */nginx/*.conf        set ft=nginx
-    au BufRead,BufNewFile */nginx/**/*.conf     set ft=nginx
-    au BufRead,BufNewFile */openresty/*.conf    set ft=nginx
-    au BufRead,BufNewFile */openresty/**/*.conf set ft=nginx
-    au BufRead,BufNewFile *.yml.bak      set ft=yaml
-    au BufRead,BufNewFile *.yml.default  set ft=yaml
-    au BufRead,BufNewFile *.yml.example  set ft=yaml
+    autocmd BufRead,BufNewFile */nginx/*.conf        set ft=nginx
+    autocmd BufRead,BufNewFile */nginx/**/*.conf     set ft=nginx
+    autocmd BufRead,BufNewFile */openresty/*.conf    set ft=nginx
+    autocmd BufRead,BufNewFile */openresty/**/*.conf set ft=nginx
+    autocmd BufRead,BufNewFile *.yml.bak             set ft=yaml
+    autocmd BufRead,BufNewFile *.yml.default         set ft=yaml
+    autocmd BufRead,BufNewFile *.yml.example         set ft=yaml
     " 输出提示信息
     :echo ""
 endfunc
@@ -622,75 +623,78 @@ endfunc
 
 " 跨平台函数统一调用入口 (Global Functions) {{{
 " ===============================================================================
-" 跨平台 全局自定义函数 统一调用入口                                              =
+" 跨平台 全局自定义函数 统一调用入口
 " ===============================================================================
 if 1    " Global function
     " 新建 .sh，.java 结尾的文件，自动插入文件头
     autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
-
     " 调用 根据后缀名指定文件类型 函数，过程调用
     :call  SetFileType()
-
 endif
 
 " ===============================================================================
-" 判断操作系统是否是 Windows 还是 Linux，并执行自定义函数入口                      =
+" 判断操作系统是否是 Windows 还是 Unix，并执行自定义函数入口
 " ===============================================================================
-let g:iswindows = 0             " 标识 Windows 系统变量
-let g:islinux = 0               " 标识 Linux 系统变量
+let g:is_windows = 0             " 声明全局 Windows 系统标识变量
+let g:is_mac = 0                 " 声明全局 mac 系统标识变量
+let g:is_unix = 0                " 声明全局 unix 系统标识变量
+let g:is_gui = 0                 " 声明全局 gui 图形界面标识变量
 
-" 若操作系统是 Windows 系统，设置该系统的 Vim 配置，并执行特有的自定义函数
+" 若操作系统是 Windows 系统，设置该系统的 Vim 配置，并执行独有的自定义函数
 if(has("win32") || has("win64") || has("win95") || has("win16"))
-    let g:iswindows = 1
-
-    " 若 GVim 程序存在且运行，执行自定义函数
-    if has("gui_running")
-        let g:isGUI = 1
-
-        " 设置 Vim 字体，字体名称和尺寸是以冒号（:）分隔的；字体尺寸以字母 h 为前缀
-        set guifont=fixedsys:h14,Consolas:h11,Courier_New:h11:cGB2312:qDRAFT
-        colorscheme desert              " 配置 GVim 自定义配色主题；:h colo[rscheme]
-        set guitablabel=%N%t%M          " 标签页显示 Number+文件名和+符号，不显示完整路径+文件名，方便切换标签页
-        set guioptions+=m               " 显示菜单栏 (Menu)
-        set guioptions-=T               " 隐藏工具栏 (Tool bar)
-        set guioptions-=r               " 隐藏右侧滚动条 (Right scrollbar)
-        set guioptions-=L               " 隐藏左侧滚动条 (Left scrollbar)
-        set guioptions-=b               " 隐藏底部滚动条 (Bottom scrollbar)
-        set helplang=cn                 " 帮助系统设置为中文
-        set langmenu=zh_CN.UTF-8        " 显示中文菜单语言
-        set t_Co=256                    " 指定配色方案是 256 色
-        language messages zh_CN.utf-8   " 设置提示信息为中文，解决 consle 输出乱码
-        source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单
-        source $VIMRUNTIME/menu.vim     " 导入正常的菜单脚本
-
-        " GVim 启动时最大化
-        "autocmd GUIEnter * simalt ~x
-        " GVim 启动时窗口自动居中
-        au GUIEnter * call WindowCenterInScreen()
-
-    else
-        " This is console Vim.
-        let g:isGUI = 0
-        set guifont=MiscFixed\ Semi-Condensed\ 10   " 设置 Vim 字体
-
-        if exists("+lines")
-            set lines=45
-        endif
-        if exists("+columns")
-            set columns=148
-        endif
-
-    endif
+    let g:is_windows = 1
 else
-    " 若操作系统是 Linux 系统，设置该系统的 Vim 配置，并执行特有的自定义函数
-    let g:islinux = 1
-
+    " 若操作系统是 Unix 系统，设置该系统的 Vim 配置，并执行独有的自定义函数
+    let g:is_unix = 1
     set nocompatible                " 必须先设定的选项，关闭兼容 vi 模式，使用 Vim 自身的
     set shell=/bin/bash             " Vim 需要一个符合 Posix 的 Shell
     set go=                         " 不要图形按钮
     set langmenu=en_US.UTF-8        " 显示英文菜单语言
     language messages en_US.UTF-8   " 设置提示信息为英文
 
+    " 若操作系统是 Mac 系统，设置该系统的 Vim 配置，并执行独有的自定义函数
+    if has("mac")
+        let g:is_mac = 1
+    endif
+endif
+
+" ===============================================================================
+" 判断是 终端 还是 GUI，并执行独有自定义函数
+" ===============================================================================
+" 若 GVim 程序存在且运行，执行自定义函数
+if has("gui_running")
+    let g:is_gui = 1
+
+    " 设置 Vim 字体，字体名称和尺寸是以冒号（:）分隔的；字体尺寸以字母 h 为前缀
+    set guifont=fixedsys:h14,Consolas:h11,Courier_New:h11:cGB2312:qDRAFT
+    colorscheme desert              " 配置 GVim 自定义配色主题；:h colo[rscheme]
+    set guitablabel=%N.%t%M         " 标签页显示 Number+文件名和+符号，不显示完整路径+文件名，方便切换标签页
+    set guioptions+=m               " 显示菜单栏 (Menu)
+    set guioptions-=T               " 隐藏工具栏 (Tool bar)
+    set guioptions-=r               " 隐藏右侧滚动条 (Right scrollbar)
+    set guioptions-=L               " 隐藏左侧滚动条 (Left scrollbar)
+    set guioptions-=b               " 隐藏底部滚动条 (Bottom scrollbar)
+    set helplang=cn                 " 帮助系统设置为中文
+    set langmenu=zh_CN.UTF-8        " 显示中文菜单语言
+    set t_Co=256                    " 指定配色方案是 256 色
+    language messages zh_CN.utf-8   " 设置提示信息为中文，解决 consle 输出乱码
+    source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单
+    source $VIMRUNTIME/menu.vim     " 导入正常的菜单脚本
+
+    " GVim 启动时最大化
+    autocmd GUIEnter * simalt ~x
+    " GVim 启动时窗口自动居中
+    " au GUIEnter * call WindowCenterInScreen()
+else
+    " This is console Vim.
+    set guifont=MiscFixed\ Semi-Condensed\ 10   " 设置 Vim 字体
+
+    if exists("+lines")
+        set lines=45
+    endif
+    if exists("+columns")
+        set columns=148
+    endif
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

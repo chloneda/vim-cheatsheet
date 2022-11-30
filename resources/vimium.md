@@ -181,7 +181,7 @@ Shift+/              # 显示命令的帮助提示
 
 ## 快捷键对照表
 
-![vimium.png](vimium.png)
+![vimium.png](images/vimium.png)
 
 
 
