@@ -14,7 +14,7 @@
 
 - [Vim-cheatsheet - GitHub](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
 - [Vim 官网](https://www.vim.org/) | [Vim GitHub](https://github.com/vim/vim) | [Vim 中文文档](http://vimcdoc.sourceforge.net/doc/help.html)
-- [Vim 自定义配置文件 vimrc](./vimrc) | [Vim 体系化工具集](./resources/RESOURCES.md)
+- [Vim 自定义配置文件 vimrc](./vimrc) | [Vim 体系化工具集](resources/vim-tools.md)
 
 
 
@@ -1242,7 +1242,7 @@ Ctrl+X Ctrl+Y       # 插入模式下向下滚屏
 :his[tory]                # 查看所有命令行模式下输入的命令历史
 :his[tory] all            # 查看所有类型的历史记录
 :history c 1,5            # 查看第一到第五条命令行历史
-:history search 或 / 或 ？ # 查看搜索历史
+:history search 或 / 或 ? # 查看搜索历史
 :call histdel("")         # 删除历史记录
 :help :history            # 查看 :history 命令的帮助信息
 ```
@@ -1250,7 +1250,7 @@ Ctrl+X Ctrl+Y       # 插入模式下向下滚屏
 在普通模式下。
 ```bash
 q/                        # 查看使用 q/ 输入的搜索历史
-q?                        # 查看使用 q？输入的搜索历史
+q?                        # 查看使用 q? 输入的搜索历史
 q:                        # 查看命令行历史
 ```
 
@@ -1523,7 +1523,7 @@ Ex 模式             # 按 Q 字母键进入 Ex 模式，与命令行模式类�
 参数说明：
 
 - group：组名是可选项，用于分组管理多条自动命令。
-- event：[事件参数](resources/vim-events-type.jpg)，用于指明触发命令的一个或多个事件。
+- event：[事件参数](resources/images/vim-events-type.jpg)，用于指明触发命令的一个或多个事件。
 - pattern：限定针对符合匹配模式的文件执行命令。
 - nested：嵌套标记是可选项，用于允许嵌套自动命令。
 - command：指明需要执行的命令、函数或脚本。
@@ -1637,6 +1637,9 @@ Ex 模式             # 按 Q 字母键进入 Ex 模式，与命令行模式类�
 :viu[sage]          # 显示普通命令的帮助。目的是为了模拟对应的 Nvi 命令
 :exu[sage]          # 显示 Ex 命令的帮助。目的是为了模拟对应的 Nvi 命令
 :ve[rsion]          # 查看 Vim 版本，同时也查看 Vim 载入配置文件的优先顺序及所在位置
+                        # -------------------- 常用帮助信息 --------------------
+:h aug[roup]            # 查看自动命令组的帮助文档
+:h internal-variables   # 获取更多变量作用域的帮助信息
 ```
 
 

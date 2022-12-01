@@ -508,10 +508,10 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function WindowCenterInScreen()
     set lines=9999 columns=9999
-  " 系统窗口边框的大小, 像素为单位
+    " 系统窗口边框的大小, 像素为单位
     let g:windowsSizeFixX = 58
     let g:windowsSizeFixY = 118
-  " 单个字符的平均宽高, 像素为单位
+    " 单个字符的平均宽高, 像素为单位
     let g:windowsScaleX = 7.75
     let g:windowsScaleY = 17.0
     let g:windowsPosOldX = getwinposx()
@@ -686,8 +686,9 @@ if has("gui_running")
     " GVim 启动时窗口自动居中
     " au GUIEnter * call WindowCenterInScreen()
 else
-    " This is console Vim.
-    set guifont=MiscFixed\ Semi-Condensed\ 10   " 设置 Vim 字体
+    " This is console Vim. (NeoVim)
+    " set guifont=MiscFixed\ Semi-Condensed\ 10   " 设置 Vim 字体
+    colorscheme default             " 配置自定义配色主题
 
     if exists("+lines")
         set lines=45
