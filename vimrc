@@ -23,7 +23,7 @@
 " | F6       | 打开(或关闭) 语法高亮
 " | F7       | 自动补全代码
 " | F8       | 普通或插入模式下打开或关闭 Markdown 预览
-" | F9       |
+" | F9       | 新标签页打开终端 terminal，方便执行外部命令
 " | F10      | 新建标签页
 " | F11      | 非空行后间隔（加入空行）
 " | F12      |
@@ -221,6 +221,15 @@ inoremap jk <Esc>               " 插入模式下的 jk 键为 Esc 键
 
 " 考虑到按键便利性，可将 ; 映射为 :，实现按 ; 键便可以从 Vim 普通模式进入命令行模式
 nnoremap ; :
+" Vim 行首、行尾光标移动按键映射
+nnoremap H ^
+nnoremap L $
+" Vim 位置标记与跳转
+nnoremap ' `
+nnoremap ` '
+nnoremap U <C-r>                   " 取消撤销操作，减少按键操作
+" 普通模式使用 z 键实现 Backspace 的功能
+nnoremap z i<BS><Esc>l
 
 " 插入模式下，常用标点符号自动补全
 inoremap ( ()<Esc>i
@@ -267,7 +276,6 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 
-nnoremap U <C-r>                   " 取消撤销操作，减少按键操作
 nnoremap <F1> :nohls<CR>           " 取消 Vim 查找高亮显示
 nnoremap <F2> :set nu! nu?<CR>     " 普通模式下按 F2 打开(或关闭)显示行号
 nnoremap <F3> :set list! list?<CR> " 显示非可见字符，如制表符被显示为 “^I”，而行尾则标识为 “$”。
@@ -275,6 +283,7 @@ nnoremap <F4> :set wrap! wrap?<CR> " 设置代码自动折行
 nnoremap <F5> :g/^\s*$/d<CR>       " 删除所有空行
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>      " 普通模式下按 F6 打开(或关闭) 语法高亮
 inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映射语句后不能有其他字符，包括 Tab；否则按下 F3 会自动补全一些乱码
+nnoremap <F9> :tab terminal<CR>    " 新标签页打开终端 terminal，避免退出 Vim 来执行外部命令，退出终端请键入 exit，然后按下 Return 键
 nnoremap <F10> <Esc>:tabnew<CR>    " 指定 F10 功能键来新建标签页
 nnoremap <F11> :g/.\n\n\@!/norm o<CR>    " 指定 F11 功能键非空行每行后加入空行，多个空行合并为一个空行
 
@@ -334,12 +343,10 @@ cnoremap %s/ %s/\v
 nnoremap :g/ :g/\v
 
 " 文件保存退出命令映射
-" :command W w!                    " 映射为 为超级用户权限保存文件
+:command W w!                      " 映射为 为超级用户权限保存文件
 :command WQ wq                     " 文件保存退出保存，避免大写转换小写
 :command Wq wq
-" :W 以超级用户权限保存文件
-command W w !sudo tee % > /dev/null
-" :command Q q
+:command Q q!
 :command Qa qa
 :command QA qa                     " 快速退出 Vim，避免大写转换小写
 nnoremap <Leader>q :q!<CR>         " Quickly close the current window
@@ -652,6 +659,10 @@ else
     set langmenu=en_US.UTF-8        " 显示英文菜单语言
     language messages en_US.UTF-8   " 设置提示信息为英文
 
+    " :W 或 \W 以超级用户权限保存文件
+    command W w !sudo tee % > /dev/null
+    nnoremap <Leader>W :w !sudo tee > /dev/null<CR>
+
     " 若操作系统是 Mac 系统，设置该系统的 Vim 配置，并执行独有的自定义函数
     if has("mac")
         let g:is_mac = 1
@@ -685,6 +696,13 @@ if has("gui_running")
     autocmd GUIEnter * simalt ~x
     " GVim 启动时窗口自动居中
     " au GUIEnter * call WindowCenterInScreen()
+
+    if has("gui_macvim")    " OS X
+        set guifont=Monaco:h10
+    elseif has("gui_gtk")   " Linux
+        let g:NERDTreeDirArrowExpandable = '+'
+        let g:NERDTreeDirArrowCollapsible = '~'
+    endif
 else
     " This is console Vim. (NeoVim)
     " set guifont=MiscFixed\ Semi-Condensed\ 10   " 设置 Vim 字体

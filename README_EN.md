@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="./README.md">Chinese</a>
-    ·
+    •
     <a href="./README_EN.md">English</a>
 </p>
 
