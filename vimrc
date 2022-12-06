@@ -3,7 +3,7 @@
 " Repository: https://github.com/chloneda/vim-cheatsheet
 " Blog: https://www.cnblogs.com/chloneda
 " Create Date: 2020-02-01
-" Desc:  Vim 定制化配置文件(vimrc for Unix/Linux/Windows/Mac, GUI/Console)
+" Desc:  Vim 定制化配置文件❤(vimrc for Unix/Linux/Windows/Mac, GUI/Console)
 " License: MIT
 " ===============================================================================
 "
@@ -175,8 +175,8 @@ set autochdir                   " 自动切换工作目录为当前文件所在�
 " nmap j k                      " nmap 是递归映射，会出现不可预期的问题
 " nmap k G                      " 当按下 j 键时，实际上执行的是 G 键
 " let mapleader = ","           " 定义 <Leader> 前缀键由 "\" 变为 ","
-map Y y$                        " 复制 从光标到行尾 所在范围的文本
-nmap <C-A> ggVGY                " 全选+复制，Ctrl+A 组合键
+nmap Y y$                       " 复制 从光标到行尾 所在范围的文本
+nmap <C-a> ggVG                 " 全选，Ctrl+A 组合键
 nmap <Leader>d <Esc>ggVGd       " 一键清理当前代码文件(\d)
 
 " \v 从公共剪贴板粘贴。<Leader> 为用户自定义命令的名字空间，<Leader> 是前缀键即 "\"
@@ -343,10 +343,10 @@ cnoremap %s/ %s/\v
 nnoremap :g/ :g/\v
 
 " 文件保存退出命令映射
-:command W w!                      " 映射为 为超级用户权限保存文件
+" :command W w!                    " 映射为 为超级用户权限保存文件
 :command WQ wq                     " 文件保存退出保存，避免大写转换小写
 :command Wq wq
-:command Q q!
+" :command Q q!
 :command Qa qa
 :command QA qa                     " 快速退出 Vim，避免大写转换小写
 nnoremap <Leader>q :q!<CR>         " Quickly close the current window
@@ -358,6 +358,12 @@ nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<CR>   " open windows command promp
 nnoremap <Leader>ce :!start explorer %:p:h:8<CR>    " open explorer in the current file's directory
 nnoremap <Space> za                                 " Space 空格键切换折叠
 nnoremap <Shift-Enter> o<Esc>k                      " 普通模式下 Shift + Enter 键插入空行
+
+nnoremap <leader>m :messages<CR>   " 查看所有历史信息
+nnoremap <Leader>e :edit!<CR>      " 放弃修改，重新回到文件打开时的状态
+" 以指定字符编码重新打开当前文件
+nnoremap <Leader>eg :e ++enc=gbk<CR>
+nnoremap <Leader>eu :e ++enc=utf8<CR>
 " }}}
 
 
@@ -378,9 +384,9 @@ vnoremap <Leader>rm <Esc>:%s/<c-v><c-m>//g<CR>
 " 一键替换全部 Tab 为空格(\rt)
 nnoremap <Leader>rt <Esc>:retab<CR>
 " 移动光标至单词，输入 <Leader>"，Vim 将那个单词用双引号包围
-nnoremap <Leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <Leader>" viw<Esc>a"<Esc>hbi"<Esc>lel
 
-" 当前行高亮（请参阅 :h cursorline）功能，该设置会让效果出现在当前窗口，但在插入模式中关闭这个效果
+" 当前行高亮功能，该设置会让效果出现在当前窗口，但在插入模式中关闭这个效果
 autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
 
@@ -398,9 +404,9 @@ set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vimrc 配置文件按键映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <Leader>tv :tabe $MYVIMRC<CR>  " 新标签页编辑配置文件
-nnoremap <Leader>e <Esc>:edit $MYVIMRC<CR>       " 当前窗口编辑配置文件
-nnoremap <Leader>ev :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
+nnoremap <Leader>tv :tabe $MYVIMRC<CR>           " 新标签页编辑配置文件
+nnoremap <Leader>ev <Esc>:edit $MYVIMRC<CR>      " 当前窗口编辑配置文件
+nnoremap <Leader>vv :vsp $MYVIMRC<CR>            " 纵向分屏编辑配置文件
 nnoremap <Leader>sv :source $MYVIMRC<CR>         " 重新加载 vimrc 文件，source 可缩写为 so
 autocmd BufWritePost $MYVIMRC source $MYVIMRC    " 让 vimrc 配置变更立即生效
 " }}}
@@ -470,7 +476,7 @@ call plug#begin('~/.vim/plugged')
 
 " Apperance
 Plug 'morhetz/gruvbox'                   " 界面配色方案
-Plug 'vim-airline/vim-airline'           " Vim 状态栏提供更优秀的显示功能
+Plug 'vim-airline/vim-airline'           " Vim 状态栏，提供更优秀的显示功能
 
 " Development
 Plug 'preservim/nerdcommenter'           " Vim 批量注释工具
@@ -650,6 +656,7 @@ let g:is_gui = 0                 " 声明全局 gui 图形界面标识变量
 " 若操作系统是 Windows 系统，设置该系统的 Vim 配置，并执行独有的自定义函数
 if(has("win32") || has("win64") || has("win95") || has("win16"))
     let g:is_windows = 1
+    set shell=cmd.exe
 else
     " 若操作系统是 Unix 系统，设置该系统的 Vim 配置，并执行独有的自定义函数
     let g:is_unix = 1
@@ -704,7 +711,7 @@ if has("gui_running")
         let g:NERDTreeDirArrowCollapsible = '~'
     endif
 else
-    " This is console Vim. (NeoVim)
+    " This is console Vim.
     " set guifont=MiscFixed\ Semi-Condensed\ 10   " 设置 Vim 字体
     colorscheme default             " 配置自定义配色主题
 
@@ -714,6 +721,14 @@ else
     if exists("+columns")
         set columns=148
     endif
+endif
+
+if has('nvim')                     " Use floating windows to complete the commond, only neovim support
+    set wildoptions=pum
+    set termguicolors              " With out this settings, transparable float-win will not work normally
+    set pumblend=30                " Let floatingwindow to be transparable
+else
+    set wildmode=list:longest,full " Set list to show completeopt, however it will lead to disfunc for floating windows
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

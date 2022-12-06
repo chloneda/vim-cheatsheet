@@ -9,7 +9,7 @@
 </p>
 
 
-> Introduction: Vim command lookup tables, annotated vimrc profiles, classic Vim keyboard diagrams, practical Vim books, Markdown format, directory-based search, systematic learning, quick familiarity with use!
+> Introduction: Vim command lookup tables, annotated vimrc profiles, classic Vim keyboard diagrams, practical Vim books, Markdown format, directory-based search, systematic learning, quick familiarity with use! 📚
 
 - [Vim-cheatsheet - GitHub](https://github.com/chloneda/vim-cheatsheet) | [Vim-cheatsheet - Gitee](https://gitee.com/chloneda/vim-cheatsheet)
 - [Vim official website](https://www.vim.org/) | [Vim GitHub](https://github.com/vim/vim) | [Vim Chinese Document](http://vimcdoc.sourceforge.net/doc/help.html)

@@ -2,7 +2,7 @@
     <h1>Chrome 神级插件 Vimium</h1>
 </div>
 
-> [Vimium](https://github.com/philc/vimium) 是 Chrome 浏览器的效率插件，它继承了 Vim 中的常用操作，让你在使用 Chrome 浏览器过程中，无论是浏览网页、切换标签或是其它任何操作，都可以通过键盘快速完成。
+> [Vimium](https://github.com/philc/vimium) 是 Chrome 浏览器的效率插件，它继承了 Vim 中的常用操作，让你在使用 Chrome 浏览器过程中，无论是浏览网页、切换标签或是其它任何操作，都可以通过键盘快速完成。🚀
 
 
 
