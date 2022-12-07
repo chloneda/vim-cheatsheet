@@ -175,6 +175,16 @@ set autochdir                   " 自动切换工作目录为当前文件所在�
 " nmap j k                      " nmap 是递归映射，会出现不可预期的问题
 " nmap k G                      " 当按下 j 键时，实际上执行的是 G 键
 " let mapleader = ","           " 定义 <Leader> 前缀键由 "\" 变为 ","
+
+" 考虑到按键便利性，可将 ; 映射为 :，实现按 ; 键便可以从 Vim 普通模式进入命令行模式
+nnoremap ; :
+" Vim 位置标记与跳转
+nnoremap ' `
+nnoremap ` '
+nnoremap U <C-r>                   " 取消撤销操作，减少按键操作
+" 普通模式使用 z 键实现 Backspace 的功能
+nnoremap z i<BS><Esc>l
+
 nmap Y y$                       " 复制 从光标到行尾 所在范围的文本
 nmap <C-a> ggVG                 " 全选，Ctrl+A 组合键
 nmap <Leader>d <Esc>ggVGd       " 一键删除（剪切）当前文件所有内容，其剪切内容放入默认寄存器，可重新粘贴
@@ -213,10 +223,14 @@ nnoremap <Leader><Left>  :vertical resize -5<CR>   " 多窗口时，将当前窗
 " 无论是 Normal/Insert 模式，按 Ctrl+s 保存文件
 nnoremap <C-s> :wq!<CR>         " Normal 模式，按 Ctrl+s 保存文件并退出
 inoremap <C-s> <Esc>:w<CR>a     " Insert 模式，按 Ctrl+s 保存文件并重新进入插入模式
-inoremap <C-f> <Esc>^           " 在插入模式下快速进行行首跳转
-inoremap <C-e> <Esc>$           " 在插入模式下快速进行行尾跳转
-nnoremap gh ^                   " 在普通模式下快速进行行首跳转
-nnoremap gl $                   " 在普通模式下快速进行行尾跳转
+
+" 行首/行尾光标移动按键映射；注意：行尾不要出现任何多余字符，否则行首/行尾光标移动不生效
+inoremap <C-f> <Esc>^
+inoremap <C-e> <Esc>$
+nnoremap gh ^
+nnoremap gl $
+nnoremap H ^
+nnoremap L $
 
 " 重置 Esc 退出键，离键盘主区域太远了
 " inoremap <Esc> <Nop>          " 插入模式下禁用 Esc 键退出插入模式
@@ -224,18 +238,6 @@ inoremap vv <Esc>               " 插入模式下的 vv 键为 Esc 键
 vnoremap vv <Esc>               " 可视模式下的 vv 键为 Esc 键
 inoremap jj <Esc>               " 插入模式下的 jj 键为 Esc 键
 inoremap jk <Esc>               " 插入模式下的 jk 键为 Esc 键
-
-" 考虑到按键便利性，可将 ; 映射为 :，实现按 ; 键便可以从 Vim 普通模式进入命令行模式
-nnoremap ; :
-" Vim 行首、行尾光标移动按键映射
-nnoremap H ^
-nnoremap L $
-" Vim 位置标记与跳转
-nnoremap ' `
-nnoremap ` '
-nnoremap U <C-r>                   " 取消撤销操作，减少按键操作
-" 普通模式使用 z 键实现 Backspace 的功能
-nnoremap z i<BS><Esc>l
 
 " 插入模式下，常用标点符号自动补全
 inoremap ( ()<Esc>i
@@ -366,7 +368,7 @@ nnoremap <Leader>ce :!start explorer %:p:h:8<CR>    " open explorer in the curre
 nnoremap <Space> za                                 " Space 空格键切换折叠
 nnoremap <Shift-Enter> o<Esc>k                      " 普通模式下 Shift + Enter 键插入空行
 
-nnoremap <leader>m :messages<CR>   " 查看所有历史信息
+nnoremap <Leader>m :messages<CR>   " 查看所有历史信息
 nnoremap <Leader>e :edit!<CR>      " 放弃修改，重新回到文件打开时的状态
 " 以指定字符编码重新打开当前文件
 nnoremap <Leader>eg :e ++enc=gbk<CR>
