@@ -177,7 +177,13 @@ set autochdir                   " 自动切换工作目录为当前文件所在�
 " let mapleader = ","           " 定义 <Leader> 前缀键由 "\" 变为 ","
 nmap Y y$                       " 复制 从光标到行尾 所在范围的文本
 nmap <C-a> ggVG                 " 全选，Ctrl+A 组合键
-nmap <Leader>d <Esc>ggVGd       " 一键清理当前代码文件(\d)
+nmap <Leader>d <Esc>ggVGd       " 一键删除（剪切）当前文件所有内容，其剪切内容放入默认寄存器，可重新粘贴
+
+" 删除（不剪切），不将其剪切内容放入默认寄存器，而是直接丢进黑洞寄存器
+" nnoremap x "_x
+" nnoremap d "_d
+" nnoremap D "_D
+" vnoremap d "_d
 
 " \v 从公共剪贴板粘贴。<Leader> 为用户自定义命令的名字空间，<Leader> 是前缀键即 "\"
 inoremap <Leader>v <Esc>"+p     " 插入模式下粘贴
@@ -283,7 +289,8 @@ nnoremap <F4> :set wrap! wrap?<CR> " 设置代码自动折行
 nnoremap <F5> :g/^\s*$/d<CR>       " 删除所有空行
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>      " 普通模式下按 F6 打开(或关闭) 语法高亮
 inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映射语句后不能有其他字符，包括 Tab；否则按下 F3 会自动补全一些乱码
-nnoremap <F9> :tab terminal<CR>    " 新标签页打开终端 terminal，避免退出 Vim 来执行外部命令，退出终端请键入 exit，然后按下 Return 键
+" 新标签页打开终端 terminal，避免退出 Vim 来执行外部命令，退出终端请键入 exit，然后按下 Return 键
+nnoremap <F9> :tab terminal<CR>
 nnoremap <F10> <Esc>:tabnew<CR>    " 指定 F10 功能键来新建标签页
 nnoremap <F11> :g/.\n\n\@!/norm o<CR>    " 指定 F11 功能键非空行每行后加入空行，多个空行合并为一个空行
 
@@ -324,8 +331,8 @@ nnoremap <silent><Tab>n :tabnext<CR>             " 移动到后一个标签页
 nnoremap <silent><Tab>p :tabprevious<CR>         " 移动到前一个标签页
 nnoremap <silent><Tab>r :tabrewind<CR>           " 切换到第一个标签页
 nnoremap <silent><Tab>h :h tabpage<CR>           " 查看标签页帮助文档
-nnoremap <silent><s-tab> :tabnext<CR>            " 按 Shift + Tab 组合键，移动到后一个标签页
-inoremap <silent><s-tab> <Esc>:tabnext<CR>       " 按 Shift + Tab 组合键，退出插入模式并移动到后一个标签页
+" nnoremap <silent><S-Tab> :tabnext<CR>          " 按 Shift + Tab 组合键，移动到后一个标签页
+" inoremap <silent><S-Tab> <Esc>:tabnext<CR>     " 按 Shift + Tab 组合键，退出插入模式并移动到后一个标签页
 
 nmap <Tab> V>                      " 普通模式下 Tab 键行首缩进文本
 nmap <S-Tab> V<                    " 普通模式下 Shift + Tab 键行首反向缩进文本
@@ -413,60 +420,6 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC    " 让 vimrc 配置变更立即�
 
 
 
-" Vim 插件设置 (Vim Plugins Settings) {{{
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 插件 vim-plug 按键映射
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 查看、安装、更新、删除插件 按键映射
-nnoremap <Leader><Leader>s :PlugStatus<CR>      " 查看插件状态
-nnoremap <Leader><Leader>i :PlugInstall<CR>     " 安装在配置文件中声明的插件
-nnoremap <Leader><Leader>u :PlugUpdate<CR>      " 更新插件
-nnoremap <Leader><Leader>g :PlugUpgrade<CR>     " 升级 vim-plug 本身
-nnoremap <Leader><Leader>d :PlugDiff<CR>        " 查看插件的变化状态，简单地回滚有问题的插件
-nnoremap <Leader><Leader>c :PlugClean<CR>       " 删除插件
-
-" 预览插件 Markdown-preview 按键映射
-" nmap <silent><F8> <Plug>MarkdownPreview       " 普通模式打开 Markdown 预览
-" imap <silent><F8> <Plug>MarkdownPreview       " 插入模式打开 Markdown 预览
-" nmap <silent><F9> <Plug>StopMarkdownPreview   " 普通模式关闭 Markdown 预览
-" imap <silent><F9> <Plug>StopMarkdownPreview   " 插入模式关闭 Markdown 预览
-nmap <silent><F8> <Plug>MarkdownPreviewTroggle  " 普通模式打开或关闭 Markdown 预览
-imap <silent><F8> <Plug>MarkdownPreviewTroggle  " 插入模式打开或关闭 Markdown 预览
-
-" 插件 NERDTree 按键映射，NERDTree激活后，善用 Shift + ? 快速调出帮助文档
-nnoremap <Leader>n :NERDTreeToggle<CR>          " 打开/关闭目录树
-" nnoremap <Leader>n :NERDTreeFocus<CR>         " 打开目录树，同 NERDTree
-" nnoremap <Leader>N :NERDTreeClose<CR>         " 关闭目录树
-nnoremap <Leader>f :NERDTreeFind<CR>            " 打开目录树并定位到当前文件
-
-let NERDTreeShowHidden=0                        " 是否显示隐藏文件 0/1
-let NERDTreeShowLineNumbers=1                   " 显示目录树行号
-" autocmd vimenter * NERDTree                   " 自动开启 Nerdtree
-" let g:NERDTreeWinSize = 25                    " 设定 NERDTree 视窗大小
-let NERDTreeShowBookmarks=1                     " 开启 Nerdtree 时自动显示 Bookmarks
-" 隐藏指定文件和文件夹
-let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__'] 
-" 打开 Vim 时如果没有文件自动打开 NERDTree
-" autocmd vimenter * if !argc()|NERDTree|endif
-" 当 NERDTree 为剩下的唯一窗口时自动关闭
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endi
-
-" 插件 Tarbar 按键映射，要善于使用 Shift + ? 查看帮助
-nnoremap <Leader>t :TagbarToggle<CR>
-
-" 插件 Undotree 按键映射，要善于使用 Shift + ? 查看帮助
-nnoremap <Leader>u :UndotreeToggle<CR>
-
-" 插件 LeaderF 按键映射
-" nnoremap <silent> <Leader>f :Leaderf file<CR>       " 文件搜索
-" nnoremap <silent> <Leader>m :Leaderf mru<CR>        " 历史打开过的文件
-" nnoremap <silent> <Leader>b :Leaderf buffer<CR>     " Buffer
-" nnoremap <silent> <Leader>F :Leaderf function<CR>   " 函数搜索（仅当前文件里）
-" nnoremap <silent> <Leader>rg :Leaderf rg<CR>        " 模糊搜索，很强大的功能，迅速秒搜
-" }}}
-
-
-
 " Vim 插件 (Vim Plugins) {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件列表
@@ -511,71 +464,56 @@ call plug#end()
 
 
 
-" 自定义函数 (Custom Functions) {{{
-" ===============================================================================
-" 以下配置为 自定义函数 模块
-" ===============================================================================
+" Vim 插件设置 (Vim Plugins Settings) {{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 插件 vim-plug 按键映射
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 查看、安装、更新、删除插件 按键映射
+nnoremap <Leader><Leader>s :PlugStatus<CR>      " 查看插件状态
+nnoremap <Leader><Leader>i :PlugInstall<CR>     " 安装在配置文件中声明的插件
+nnoremap <Leader><Leader>u :PlugUpdate<CR>      " 更新插件
+nnoremap <Leader><Leader>g :PlugUpgrade<CR>     " 升级 vim-plug 本身
+nnoremap <Leader><Leader>d :PlugDiff<CR>        " 查看插件的变化状态，简单地回滚有问题的插件
+nnoremap <Leader><Leader>c :PlugClean<CR>       " 删除插件
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GVim 启动时窗口自动居中
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function WindowCenterInScreen()
-    set lines=9999 columns=9999
-    " 系统窗口边框的大小, 像素为单位
-    let g:windowsSizeFixX = 58
-    let g:windowsSizeFixY = 118
-    " 单个字符的平均宽高, 像素为单位
-    let g:windowsScaleX = 7.75
-    let g:windowsScaleY = 17.0
-    let g:windowsPosOldX = getwinposx()
-    let g:windowsPosOldY = getwinposy()
-    let g:windowsScreenWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsPosOldX + g:windowsSizeFixX
-    let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsPosOldY + g:windowsSizeFixY
-    " 设置窗口显示的行数和列数
-    set lines=45 columns=148
-    let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
-    let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
-    let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
-    let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
-    exec ':winpos ' . g:windowsPosX . ' ' . g:windowsPosY
-endfunction
+" 预览插件 Markdown-preview 按键映射
+" nmap <silent><F8> <Plug>MarkdownPreview       " 普通模式打开 Markdown 预览
+" imap <silent><F8> <Plug>MarkdownPreview       " 插入模式打开 Markdown 预览
+" nmap <silent><F9> <Plug>StopMarkdownPreview   " 普通模式关闭 Markdown 预览
+" imap <silent><F9> <Plug>StopMarkdownPreview   " 插入模式关闭 Markdown 预览
+nmap <silent><F8> <Plug>MarkdownPreviewTroggle  " 普通模式打开或关闭 Markdown 预览
+imap <silent><F8> <Plug>MarkdownPreviewTroggle  " 插入模式打开或关闭 Markdown 预览
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 自定义 SetTitle 函数，自动插入指定文件头
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function SetTitle()
-  " 如果文件类型为 .sh 文件
-  if &filetype == 'sh'
-    call setline(1, "\#!/usr/bin/env bash")
-    call append(line("."),   "")
-    call append(line(".")+1, "\#########################################################################")
-    call append(line(".")+2, "\# File Name: ".expand("%"))
-    call append(line(".")+3, "\# Author: chloneda <chloneda@163.com>")
-    call append(line(".")+4, "\# Created Time: ".strftime("%c"))
-    call append(line(".")+5, "\#########################################################################")
-    call append(line(".")+6, "")
-  endif
-  if &filetype == 'java'
-    call append(line(".")+6,"public class ".expand("%:r"))
-    call append(line(".")+7,"")
-  endif
-  " 新建文件后，自动定位到文件末尾
-  autocmd BufNewFile * normal G
-endfunction
+" 插件 NERDTree 按键映射，NERDTree激活后，善用 Shift + ? 快速调出帮助文档
+nnoremap <Leader>n :NERDTreeToggle<CR>          " 打开/关闭目录树
+" nnoremap <Leader>n :NERDTreeFocus<CR>         " 打开目录树，同 NERDTree
+" nnoremap <Leader>N :NERDTreeClose<CR>         " 关闭目录树
+nnoremap <Leader>f :NERDTreeFind<CR>            " 打开目录树并定位到当前文件
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 重新定义宏
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" A. 常规使用宏的流程：
-"   1. qm 进入宏录制
-"   2. 录制宏内容
-"   3. q 退出宏录制
-"   4. @m 使用字母指定的宏
-"   5. @@ 重复最近使用过宏
-"
-" B. 重新定义宏的流程：
-"   1. XXXXXX
-" -------------------------------------------------------------------------------
+let NERDTreeShowHidden=0                        " 是否显示隐藏文件 0/1
+let NERDTreeShowLineNumbers=1                   " 显示目录树行号
+" autocmd vimenter * NERDTree                   " 自动开启 Nerdtree
+" let g:NERDTreeWinSize = 25                    " 设定 NERDTree 视窗大小
+let NERDTreeShowBookmarks=1                     " 开启 Nerdtree 时自动显示 Bookmarks
+" 隐藏指定文件和文件夹
+let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']
+" 打开 Vim 时如果没有文件自动打开 NERDTree
+" autocmd vimenter * if !argc()|NERDTree|endif
+" 当 NERDTree 为剩下的唯一窗口时自动关闭
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endi
+
+" 插件 Tarbar 按键映射，要善于使用 Shift + ? 查看帮助
+nnoremap <Leader>t :TagbarToggle<CR>
+
+" 插件 Undotree 按键映射，要善于使用 Shift + ? 查看帮助
+nnoremap <Leader>u :UndotreeToggle<CR>
+
+" 插件 LeaderF 按键映射
+" nnoremap <silent><Leader>f :Leaderf file<CR>       " 文件搜索
+" nnoremap <silent><Leader>m :Leaderf mru<CR>        " 历史打开过的文件
+" nnoremap <silent><Leader>b :Leaderf buffer<CR>     " Buffer
+" nnoremap <silent><Leader>F :Leaderf function<CR>   " 函数搜索（仅当前文件里）
+" nnoremap <silent><Leader>rg :Leaderf rg<CR>        " 模糊搜索，很强大的功能，迅速秒搜
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件 NERDTree-git 自定义配置
@@ -591,6 +529,76 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Clean"     : "✔︎",
     \ "Unknown"   : "?"
     \ }
+" ===============================================================================
+" }}}
+
+
+
+" 自定义函数 (Custom Functions) {{{
+" ===============================================================================
+" 以下配置为 自定义函数 模块
+" ===============================================================================
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GVim 启动时窗口自动居中
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function WindowCenterInScreen()
+    set lines = 9999 columns = 9999
+    " 系统窗口边框的大小, 像素为单位
+    let g:windowsSizeFixX = 58
+    let g:windowsSizeFixY = 118
+    " 单个字符的平均宽高, 像素为单位
+    let g:windowsScaleX = 7.75
+    let g:windowsScaleY = 17.0
+    let g:windowsPosOldX = getwinposx()
+    let g:windowsPosOldY = getwinposy()
+    let g:windowsScreenWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsPosOldX + g:windowsSizeFixX
+    let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsPosOldY + g:windowsSizeFixY
+    " 设置窗口显示的行数和列数
+    set lines = 45 columns = 148
+    let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
+    let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
+    let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
+    let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
+    exec ':winpos ' . g:windowsPosX . ' ' . g:windowsPosY
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 自定义 SetTitle 函数，自动插入指定文件头
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function SetTitle()
+    " 如果文件类型为 .sh 文件
+    if &filetype == 'sh'
+        call setline(1, "\#!/usr/bin/env bash")
+        call append(line("."),   "")
+        call append(line(".")+1, "\#########################################################################")
+        call append(line(".")+2, "\# File Name: ".expand("%"))
+        call append(line(".")+3, "\# Author: chloneda <chloneda@163.com>")
+        call append(line(".")+4, "\# Created Time: ".strftime("%c"))
+        call append(line(".")+5, "\#########################################################################")
+        call append(line(".")+6, "")
+    endif
+    if &filetype == 'java'
+        call append(line(".")+6,"public class ".expand("%:r"))
+        call append(line(".")+7,"")
+    endif
+    " 新建文件后，自动定位到文件末尾
+    autocmd BufNewFile * normal G
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 重新定义宏
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" A. 常规使用宏的流程：
+"   1. qm 进入宏录制
+"   2. 录制宏内容
+"   3. q 退出宏录制
+"   4. @m 使用字母指定的宏
+"   5. @@ 重复最近使用过宏
+"
+" B. 重新定义宏的流程：
+"   1. XXXXXX
+" -------------------------------------------------------------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 根据后缀名指定文件类型
