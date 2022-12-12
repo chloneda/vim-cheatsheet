@@ -16,17 +16,17 @@
 " | Key      | Function
 " +----------+-------------------------------------------------------------------
 " | F1       | 取消 Vim 查找高亮显示
-" | F2       | 打开(或关闭)显示行号
-" | F3       | 显示非可见字符
+" | F2       | 重命名文件。注：使用是请评估 rm 命令的风险
+" | F3       | 打开或关闭显示行号
 " | F4       | 设置代码自动折行
 " | F5       | 删除所有空行
-" | F6       | 打开(或关闭) 语法高亮
+" | F6       | 打开或关闭语法高亮
 " | F7       | 自动补全代码
 " | F8       | 普通或插入模式下打开或关闭 Markdown 预览
 " | F9       | 新标签页打开终端 terminal，方便执行外部命令
 " | F10      | 新建标签页
 " | F11      | 非空行后间隔（加入空行）
-" | F12      |
+" | F12      | 显示非可见字符
 " | <Ctrl+c> | 快速推出 Vim（:qall!）
 " +----------+-------------------------------------------------------------------
 "
@@ -143,7 +143,7 @@ set mouse=a                     " 启用鼠标
 set noeb                        " 去掉输入错误的提示声音
 set ruler                       " 显示光标当前位置
 set title                       " Show file in titlebar
-set foldmethod=indent           " 基于缩进进行代码折叠
+set foldmethod=indent           " 基于缩进进行代码折叠，fdm 是 foldmethod 的缩写
 set nofoldenable                " 启动 Vim 时关闭折叠
 set selection=exclusive         " 指定在选择文本时光标所在位置也属于被选中的范围
 set selectmode=mouse,key        " 使鼠标和键盘都可以控制光标选择文本
@@ -284,22 +284,14 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 
-nnoremap <F1> :nohls<CR>           " 取消 Vim 查找高亮显示
-nnoremap <F2> :set nu! nu?<CR>     " 普通模式下按 F2 打开(或关闭)显示行号
-nnoremap <F3> :set list! list?<CR> " 显示非可见字符，如制表符被显示为 “^I”，而行尾则标识为 “$”。
-nnoremap <F4> :set wrap! wrap?<CR> " 设置代码自动折行
-nnoremap <F5> :g/^\s*$/d<CR>       " 删除所有空行
-nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>      " 普通模式下按 F6 打开(或关闭) 语法高亮
-inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映射语句后不能有其他字符，包括 Tab；否则按下 F3 会自动补全一些乱码
-" 新标签页打开终端 terminal，避免退出 Vim 来执行外部命令，退出终端请键入 exit，然后按下 Return 键
-nnoremap <F9> :tab terminal<CR>
-nnoremap <F10> <Esc>:tabnew<CR>    " 指定 F10 功能键来新建标签页
-nnoremap <F11> :g/.\n\n\@!/norm o<CR>    " 指定 F11 功能键非空行每行后加入空行，多个空行合并为一个空行
-
 " 缓冲区 Buffer 按键映射
 nnoremap <Leader>b :ls<CR>
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
+" Save the current buffer
+nnoremap <Leader>s :update<CR>
+" Save all buffers
+nnoremap <Leader>S :bufdo update<CR>
 " 映射 <Leader>num 到 num buffer
 nnoremap <Leader>1 :b 1<CR>
 nnoremap <Leader>2 :b 2<CR>
@@ -335,15 +327,22 @@ nnoremap <silent><Tab>r :tabrewind<CR>           " 切换到第一个标签页
 nnoremap <silent><Tab>h :h tabpage<CR>           " 查看标签页帮助文档
 " nnoremap <silent><S-Tab> :tabnext<CR>          " 按 Shift + Tab 组合键，移动到后一个标签页
 " inoremap <silent><S-Tab> <Esc>:tabnext<CR>     " 按 Shift + Tab 组合键，退出插入模式并移动到后一个标签页
+" Open a new tab with the current buffer's path,Useful when editing files in the same directory
+nnoremap <Leader>tt :tabedit <C-R>=expand("%:p:h")<CR>/
+" Move tabs position
+nnoremap <Leader>tr :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <Leader>ty :execute 'silent! tabmove ' . tabpagenr()<CR>
 
-nmap <Tab> V>                      " 普通模式下 Tab 键行首缩进文本
-nmap <S-Tab> V<                    " 普通模式下 Shift + Tab 键行首反向缩进文本
-vmap <Tab> >gv                     " 可视化模式下 Tab 键行首缩进文本
-vmap <S-Tab> <gv                   " 可视化模式下 Shift + Tab 键行首反向缩进文本
+nnoremap <Tab> >>                  " 普通模式下 Tab 键行首缩进文本
+nnoremap <S-Tab> <<                " 普通模式下 Shift + Tab 键行首反向缩进文本
+vnoremap <Tab> >gv                 " 可视化模式下 Tab 键行首缩进文本
+vnoremap <S-Tab> <gv               " 可视化模式下 Shift + Tab 键行首反向缩进文本
+inoremap <Tab> <C-i>
+inoremap <S-Tab> <C-d>
 
 " 缩进后依然保持选中
-xnoremap <  <gv
-xnoremap >  >gv
+xnoremap < <gv
+xnoremap > >gv
 
 " 使用 very magic 模式，规范所有特殊符号，启用后，除了下划线 _，大小写字母，和数字外，所有的字符都具有特殊含义
 nnoremap / /\v
@@ -363,8 +362,6 @@ nnoremap <Leader>w :w!<CR>         " Quickly save the current file
 nnoremap <C-c> :qall!<CR>          " 快速退出 Vim
 
 nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>           " Set current directory to current file with,cd
-nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<CR>   " open windows command prompt in the current file's directory
-nnoremap <Leader>ce :!start explorer %:p:h:8<CR>    " open explorer in the current file's directory
 nnoremap <Space> za                                 " Space 空格键切换折叠
 nnoremap <Shift-Enter> o<Esc>k                      " 普通模式下 Shift + Enter 键插入空行
 
@@ -373,6 +370,20 @@ nnoremap <Leader>e :edit!<CR>      " 放弃修改，重新回到文件打开时�
 " 以指定字符编码重新打开当前文件
 nnoremap <Leader>eg :e ++enc=gbk<CR>
 nnoremap <Leader>eu :e ++enc=utf8<CR>
+
+nnoremap <F1> :nohls<CR>           " 取消 Vim 查找高亮显示
+" 功能键 F2 键重命名当前文件，并保留原来的文件
+nnoremap <F2> :call <SID>RenameFile()<CR>
+nnoremap <F3> :set nu! nu?<CR>     " 普通模式下按 F3 打开或关闭显示行号
+nnoremap <F4> :set wrap! wrap?<CR> " 设置代码自动折行
+nnoremap <F5> :g/^\s*$/d<CR>       " 删除所有空行
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>      " 普通模式下按 F6 打开(或关闭) 语法高亮
+inoremap <F7> <C-X><C-O>           " 按下 F7 自动补全代码，注意该映射语句后不能有其他字符，包括 Tab；否则按下 F3 会自动补全一些乱码
+" 新标签页打开终端 terminal，避免退出 Vim 来执行外部命令，退出终端请键入 exit，然后按下 Return 键
+nnoremap <F9> :tab terminal<CR>
+nnoremap <F10> <Esc>:tabnew<CR>    " 指定 F10 功能键来新建标签页
+nnoremap <F11> :g/.\n\n\@!/norm o<CR>    " 指定 F11 功能键非空行每行后加入空行，多个空行合并为一个空行
+nnoremap <F12> :set list! list?<CR>      " 显示非可见字符，如制表符被显示为 “^I”，而行尾则标识为 “$”
 " }}}
 
 
@@ -399,6 +410,8 @@ nnoremap <Leader>" viw<Esc>a"<Esc>hbi"<Esc>lel
 autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
 
+" 使用 :Rename newFile.txt 命令 重命名为 newFile.txt，同时不保留原来的文件。说明：自定义命令必须以大写字母开头，总觉得别扭！
+:command! -nargs=1 Rename let tpname = expand('%:t') | saveas <args> | edit <args> | call delete(expand(tpname))
 " Vim 重新打开文件时，回到上次历史所编辑文件的位置
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 " 设置在状态行显示的信息
@@ -517,6 +530,16 @@ nnoremap <Leader>u :UndotreeToggle<CR>
 " nnoremap <silent><Leader>F :Leaderf function<CR>   " 函数搜索（仅当前文件里）
 " nnoremap <silent><Leader>rg :Leaderf rg<CR>        " 模糊搜索，很强大的功能，迅速秒搜
 
+" 插件 vim-fugitive 按键映射
+nnoremap <silent><Leader>gs :Git status<CR>
+nnoremap <silent><Leader>gd :Git diff<CR>
+nnoremap <silent><Leader>gc :Git commit -m""
+nnoremap <silent><Leader>gb :Git blame<CR>
+nnoremap <silent><Leader>gl :Git log
+nnoremap <silent><Leader>gp :Git push<CR>
+nnoremap <silent><Leader>gpp :Git pull<CR>
+nnoremap <silent><Leader>gm :call <SID>showGitMessage()<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件 NERDTree-git 自定义配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -528,7 +551,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Unmerged"  : "═",
     \ "Deleted"   : "✖",
     \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
+    \ "Clean"     : "✔",
     \ "Unknown"   : "?"
     \ }
 " ===============================================================================
@@ -640,6 +663,20 @@ func SetFileType()
     " 输出提示信息
     :echo ""
 endfunc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 重命名文件
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:RenameFile()
+    let l:old_name = expand('%')
+    let l:new_name = input('New file name: ', expand('%'), 'file')
+    if l:new_name !=# '' && l:new_name !=# l:old_name
+        exec ':saveas ' . l:new_name
+        " 评估 rm 命令风险存在的风险
+        exec ':silent !rm ' . l:old_name
+        redraw!
+    endif
+endfunction
 " }}}
 
 
@@ -652,7 +689,7 @@ if 1    " Global function
     " 新建 .sh，.java 结尾的文件，自动插入文件头
     autocmd BufNewFile *.sh,*.java exec ":call SetTitle()"
     " 调用 根据后缀名指定文件类型 函数，过程调用
-    :call  SetFileType()
+    :call SetFileType()
 endif
 
 " ===============================================================================
@@ -678,6 +715,7 @@ else
 
     " :W 或 \W 以超级用户权限保存文件
     command W w !sudo tee % > /dev/null
+    cnoremap WW w !sudo tee > /dev/null %
     nnoremap <Leader>W :w !sudo tee > /dev/null<CR>
 
     " 若操作系统是 Mac 系统，设置该系统的 Vim 配置，并执行独有的自定义函数
@@ -708,6 +746,9 @@ if has("gui_running")
     language messages zh_CN.utf-8   " 设置提示信息为中文，解决 consle 输出乱码
     source $VIMRUNTIME/delmenu.vim  " 导入删除菜单脚本，删除乱码的菜单
     source $VIMRUNTIME/menu.vim     " 导入正常的菜单脚本
+
+    nnoremap <Leader>cc :!start cmd /k cd %:p:h:8<CR>   " open windows command prompt in the current file's directory
+    nnoremap <Leader>ce :!start explorer %:p:h:8<CR>    " open explorer in the current file's directory
 
     " GVim 启动时最大化
     autocmd GUIEnter * simalt ~x
