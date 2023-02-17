@@ -1211,7 +1211,7 @@ Command line mode   # Press : or / or ? To start
 
 ## Vim keyboard diagram
 
-![vim keyboard diagram](vim-commands_EN.png)
+![vim keyboard diagram](resources/vim-commands_EN.png)
 
 
 
