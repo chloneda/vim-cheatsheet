@@ -210,9 +210,9 @@ Ctrl+C              # 退出插入模式，等价于 <Esc> 和 Ctrl+[，但不�
 <Backspace>         # 退格键 <Backspace> 向后删除字符
 <Home>              # 光标跳转行首
 <End>               # 光标跳转行尾
-Ctrl+d              # 减少缩进
-Ctrl+f              # 减少缩进
-Ctrl+t              # 增加缩进
+Ctrl+d              # 减少缩进光标所在行
+Ctrl+f              # 自动缩进光标所在行（相当于普通模式下的 `==` ）
+Ctrl+t              # 增加缩进光标所在行
 Ctrl+h              # 删除前一个字符，等价于 <Backspace> 退格键
 Ctrl+o              # 临时退出插入模式，执行单条命令又返回插入模式
 Ctrl+u              # 当前行删除到行首所有字符
